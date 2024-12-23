@@ -14,6 +14,16 @@ const theme = {
         "color-text": "#474747",
         "background-200": "#E8E8EF",
         "theme-white": "#fff",
+        primary: "#223F99",
+        'grey-400':'#818181',
+        header: "#353535",
+        'pri-light': "#E9EFFF",
+        secondary: "#2A3342",
+        body:"#5D5D5D",
+        tertiary: "#2F2F2F",
+        "theme-text": "#393939",
+        'gray-500':'#585858',
+
       },
     },
     dark: {
