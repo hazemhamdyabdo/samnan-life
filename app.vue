@@ -5,8 +5,3 @@
     </NuxtLayout>
   </v-locale-provider>
 </template>
-<style>
-html {
-  scroll-behavior: smooth;
-}
-</style>
