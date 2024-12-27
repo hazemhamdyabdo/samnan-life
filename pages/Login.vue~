@@ -7,7 +7,7 @@ const isPasswordShow = ref(false)
 
 <template>
   <v-container fluid >
-    <v-row class="justify-space-around ga-md-15 align-center">
+    <v-row class="justify-space-around ga-md-16 align-center">
       <v-col cols="12" sm="12" md="4">
         <SvgIcon name="samnan-panner" class=" rounded-xl cursor-auto" :style="`max-height: 90vh; ${mobile ? 'width: 100%' : ''}`"/>
       </v-col>
@@ -61,7 +61,7 @@ const isPasswordShow = ref(false)
               </v-text-field>
             </v-col>
             <v-col cols="12" sm="12" class="pt-0">
-              <NuxtLink to="/forget-password" class="text-primary font-weight-bold">
+              <NuxtLink to="/ForgetPassword" class="text-primary font-weight-bold">
                 نسيت كلمة المرور ؟
               </NuxtLink>
             </v-col>

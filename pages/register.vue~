@@ -31,6 +31,8 @@ const steps = ref([
                    @change:step-one="currentStep = 1"
                    @change:step-two="currentStep = 0"
         />
+        <!--        <StepOne/>-->
+        <!--        <StepTwo title="توثيق حسابك" @change:step-two="currentStep = 2"/>-->
       </v-col>
     </v-row>
   </v-container>
