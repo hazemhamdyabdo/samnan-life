@@ -1,24 +1,15 @@
 <template>
   <v-container fluid class="py-4">
-    <v-main class="d-flex flex-column ga-16">
+    <v-main class="d-flex flex-column">
       <!-- Navigation -->
-      <nav class="d-flex align-center justify-space-between">
-        <div class="d-flex ga-2 align-center">
-          <SvgIcon
-              name="logo"
-              class="text-primary"
-              style="height: 42px; width: 37px"
-          />
-          <SvgIcon
-              name="title"
-              class="text-primary"
-              style="height: 38px; width: 97px"
-          />
-        </div>
+      <v-row class="align-center justify-space-between" no-gutters>
+        <v-col cols="12" md="6" class="d-flex align-center">
+          <SvgIcon name="logo" class="text-primary mr-2" style="height: 42px; width: 37px" />
+          <SvgIcon name="title" class="text-primary" style="height: 38px; width: 97px" />
+        </v-col>
 
-        <div class="d-flex ga-12 align-center">
-          <!-- Navigation links -->
-          <div class="d-flex ga-12 text-gray-400">
+        <v-col cols="12" md="6" class="d-flex justify-end align-center">
+          <div class="d-flex ga-12 text-gray-400 hidden-sm-and-down">
             <a href="#header" class="text-primary font-weight-bold">الرئيسية</a>
             <a href="#about-us" class="font-weight-medium">عن سمنان</a>
             <a href="#services" class="font-weight-medium">خدماتنا</a>
@@ -28,314 +19,68 @@
           <v-btn color="primary" class="rounded-lg px-8" size="large">
             اشتراك
           </v-btn>
-        </div>
-      </nav>
+        </v-col>
+      </v-row>
 
       <!-- Header Section -->
-      <section id="header" class="d-flex justify-space-between align-center">
-        <div class="text-right text-header d-flex flex-column ga-4 w-50">
-          <h2 style="font-size: 45px">
+      <v-row class="align-center">
+        <v-col cols="12" md="6" class="text-right">
+          <h2 class="text-h4 text-sm-h5">
             جميع اعمال
             <span class="text-primary"> الصيانة</span>
             و
             <span class="text-primary"> التركيب</span>
             من منتجات سمنان بين يديك
           </h2>
-          <p class="text-gray-gray-500 w-75" style="font-size: 18px">
-            الآن يمكنك طلب تركيب جديد او طلب فني لصيانة منتجك من خلال تطبيق
-            سمنان ومتابعة جميع التفاصيل
-          </p>
-          <p class="text-header">حمل التطبيق الآن</p>
+          <p class="text-gray-gray-500" style="font-size: 18px">الآن يمكنك طلب...</p>
           <div class="d-flex ga-4">
             <PlayStoreIcon />
             <AppStoreIcon />
           </div>
-        </div>
-        <div>
+        </v-col>
+
+        <v-col cols="12" md="6" class="text-center">
           <MobileAppIcon />
-        </div>
-      </section>
+        </v-col>
+      </v-row>
 
       <!-- About Us -->
-      <section
-          id="about-us"
-          class="d-flex justify-space-between align-center text-right"
-      >
-        <div class="d-flex flex-column ga-4 w-50">
-          <!-- Replacing UBadge with v-chip for "عن سمنان" -->
-          <div>
-            <v-chip
-                pill
-                color="primary"
-                variant="tonal"
-                class="text-primary bg-pri-light font-weight-medium"
-            >
-              <span> عن سمنان </span>
-            </v-chip>
-          </div>
+      <v-row id="about-us" class="align-center">
+        <v-col cols="12" md="6" class="d-flex flex-column ga-4 text-right">
+          <v-chip pill color="primary" variant="tonal" class="bg-pri-light">عن سمنان</v-chip>
+          <h3 class="text-secondary font-weight-medium text-h5">سمنان لحلول...</h3>
+          <p class="text-body py-2">شركة سمنان لحلول المياه ...</p>
+        </v-col>
 
-          <h3 class="text-secondary font-weight-medium" style="font-size: 45px">
-            سمنان لحلول المياه - ريادة في تقديم حلول متكاملة للمياه
-          </h3>
-          <span class="text-body">
-            شركة سمنان لحلول المياه، تأسست عام 2016 ككيان مستقل لتقديم حلول
-            متكاملة ومبتكرة في مجال المياه. نقدم مجموعة واسعة من المنتجات
-            والخدمات تشمل أجهزة ومحطات تحلية المياه، مضخات المياه المنزلية
-            والزراعية، الغطاسات، المحركات الكهربائية، وحلول رفع المياه.
-          </span>
-          <span class="text-body">
-            نفخر بخدمتنا الممتدة عبر 60 فرعاً ومركز صيانة في جميع أنحاء المملكة،
-            حيث نعمل على تلبية احتياجات عملائنا من خلال فريق متخصص من مهندسي
-            المبيعات ذوي الخبرة والكفاءة العالية، لضمان تقديم أفضل الحلول التي
-            تتناسب مع متطلباتكم.
-          </span>
-        </div>
-
-        <div>
+        <v-col cols="12" md="6" class="text-center">
           <EngagedUserIcon />
-        </div>
-      </section>
+        </v-col>
+      </v-row>
 
-      <!-- Flow -->
-      <section class="d-flex justify-center align-center">
+      <!-- Flow Section -->
+      <v-row class="align-center justify-center">
         <ServiceWorkflowIcon />
-      </section>
+      </v-row>
 
       <!-- Services -->
-      <section id="services">
-        <div
-            class="text-center d-flex justify-center align-center flex-column ga-3"
-        >
-          <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
-          >
-            عن خدماتنا
-          </v-chip>
-
-          <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
-            اهم خدمات تطبيقنا
-          </h4>
-          <p class="text-color-text">
-            في سمنان نهتم بكل التفاصيل و كل ما تحتاج لراحتك و خدمتك
-          </p>
-        </div>
-
-        <section class="mx-auto d-flex align-center justify-space-between">
-          <div class="text-right d-flex flex-column ga-16">
-            <div>
-              <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
-              >
-                صيانة دورية
-              </h3>
-              <p class="text-body">
-                يمكنك طلب في القيام بصيانة دورية واستمرار للحفاظ على أجهزتك من
-                التلف.
-              </p>
-            </div>
-            <div>
-              <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
-              >
-                الدعم & الدفع الإلكتروني
-              </h3>
-              <p class="text-body">
-                يقوم فريقنا بدعم العملاء بتقنيات قوية بالإضافة لإمكانية الدفع
-                الرقمي في قطع الغيار وسعر الصيانة.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <AppCapabilitiesIcon />
-          </div>
-
-          <div class="text-right d-flex flex-column ga-16">
-            <div>
-              <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
-              >
-                تركيب جديد
-              </h3>
-              <p class="text-body">
-                عند شرائك لمنتجاتنا لأول مرة تستطيع طلب في ليقوم بتركيب الجهاز.
-              </p>
-            </div>
-            <div>
-              <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
-              >
-                صيانة عاجلة
-              </h3>
-              <p class="text-body">
-                حين حدوث تلف مفاجئ في جهازك تستطيع طلب في ليحضر مختص لحل المشكلة
-                بسرعة ووقت قياسي.
-              </p>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <!-- Store -->
-      <section
-          id="store"
-          class="d-flex justify-space-between align-center text-right"
-      >
-        <div class="d-flex flex-column ga-4 w-50">
-          <div>
-            <v-chip
-                pill
-                color="primary"
-                variant="tonal"
-                class="text-primary bg-pri-light font-weight-medium"
-            >
-              عن متجرنا الاكتروني
-            </v-chip>
-          </div>
-
-          <h4 class="text-secondary text-3xl font-medium">
-            يمكنك تصفح و شراء منتجاتنا من مكانك
-          </h4>
-          <p class="text-color-text">
-            نوفر لك تجربة تسوق متكاملة عبر متجرنا الإلكتروني، حيث يمكنك استكشاف
-            جميع منتجات سمنان لحلول المياه بكل سهولة. تصفح خياراتنا المتنوعة من
-            أجهزة ومحطات تحلية المياه، مضخات المياه، الغطاسات، وغيرها، واطلب ما
-            تحتاجه مباشرة من أي مكان وفي أي وقت
-          </p>
-
-          <div>
-            <v-btn color="primary" class="rounded-lg w-50" size="large">
-              تصفح المتجر
-            </v-btn>
-          </div>
-        </div>
-
-        <div>
-          <MobileOverviewIcon />
-        </div>
-      </section>
-
-      <!-- Branches -->
-      <section id="branches">
-        <div
-            class="text-center d-flex justify-center align-center flex-column ga-3"
-        >
-          <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
-          >
-            فروعنا
-          </v-chip>
-          <h4 class="text-secondary font-weight-bold" style="font-size: 32px">
-            نقوم بتغطيه المملكة بالكامل
-          </h4>
-          <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
-        </div>
-        <div class="d-flex justify-center align-center">
-          <SaudiIcon />
-        </div>
-      </section>
-
-      <!-- App -->
-      <section
-          class="d-flex justify-space-between align-center text-right pb-0"
-      >
-        <div class="d-flex flex-column ga-4 w-50">
-          <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
-            جميع منتجاتنا و خدماتنا و اجهزتك بين يديك لضمان راحتك
-          </h4>
-          <p class="text-header">حمل التطبيق الآن</p>
-          <div class="d-flex ga-4">
-            <PlayStoreIcon />
-            <AppStoreIcon />
-          </div>
-        </div>
-        <OrderInterfaceIcon />
-      </section>
+      <v-row id="services">
+        <v-col cols="12" class="text-center">
+          <v-chip pill color="primary" variant="tonal" class="bg-pri-light my-3">عن خدماتنا</v-chip>
+          <h4 class="text-h6">نص خدماتنا المميز</h4>
+        </v-col>
+      </v-row>
     </v-main>
   </v-container>
-
-  <!-- Footer -->
-  <footer
-      class="py-10 d-flex flex-column align-center ga-6 mt-n4"
-      style="border-top: 1px solid #223f99"
-  >
-    <div class="d-flex justify-center align-center ga-2">
-      <SvgIcon
-          name="logo"
-          class="text-primary"
-          style="height: 42px; width: 37px"
-      />
-
-      <SvgIcon
-          name="title"
-          class="text-primary"
-          style="height: 38px; width: 97px"
-      />
-    </div>
-    <nav
-        class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
-    >
-      <a href="#header">الرئيسية</a>
-      <a href="#about-us">من نحن</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#store">متجرنا الإلكتروني</a>
-      <a href="#branches">فروعنا</a>
-      <a href="#">الشروط و الأحكام</a>
-      <a href="#">سياسة الخصوصية</a>
-    </nav>
-    <div class="d-flex ga-4">
-      <PlayStoreIcon />
-      <AppStoreIcon />
-    </div>
-  </footer>
-
-  <!-- Bottom bar -->
-  <div class="border-t py-12">
-    <v-container fluid class="py-4 d-flex align-center justify-space-between">
-      <p class="text-secondary">جميع الحقوق محفوطة</p>
-      <div class="d-flex align-center ga-4">
-        <SvgIcon
-            name="facebook"
-            class="text-gray-900"
-            style="height: 17px; width: 20px"
-        />
-        <SvgIcon
-            name="linkedin"
-            class="text-gray-900"
-            style="height: 17px; width: 20px"
-        />
-        <SvgIcon
-            name="twitter"
-            class="text-gray-900"
-            style="height: 17px; width: 20px"
-        />
-        <SvgIcon
-            name="instagram"
-            class="text-gray-900"
-            style="height: 17px; width: 20px"
-        />
-      </div>
-    </v-container>
-  </div>
 </template>
 
 <style scoped>
-a {
-  text-decoration: none;
-  color: #818181;
-
-  &:hover {
-    color: #000;
-  }
+/* Adjust typography for different screen sizes */
+.text-h4 {
+  font-size: clamp(24px, 3vw, 45px);
+}
+.text-body {
+  font-size: clamp(16px, 2vw, 18px);
 }
 </style>
+<script setup lang="ts">
+</script>
