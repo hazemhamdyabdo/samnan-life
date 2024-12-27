@@ -289,10 +289,18 @@
     <v-container fluid class="py-4 d-flex align-center justify-space-between">
       <p class="text-secondary">جميع الحقوق محفوطة</p>
       <div class="d-flex align-center ga-4">
-        <SvgIcon name="facebook"/>
-        <SvgIcon name="linkedin"/>
-        <SvgIcon name="twitter"/>
-        <SvgIcon name="instagram"/>
+        <SvgIcon
+            name="facebook"
+        />
+        <SvgIcon
+            name="linkedin"
+        />
+        <SvgIcon
+            name="twitter"
+        />
+        <SvgIcon
+            name="instagram"
+        />
       </div>
     </v-container>
   </div>

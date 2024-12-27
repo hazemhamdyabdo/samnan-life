@@ -20,6 +20,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fill: {
+    type: String,
+  },
 })
 
 const hovering = ref(false)

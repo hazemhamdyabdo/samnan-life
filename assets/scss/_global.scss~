@@ -50,7 +50,12 @@ h2.heading {
   text-align: center;
 }
 
-a{
+.router-link-active {
+color: #000 !important;
   text-decoration: none;
-  color: inherit;
+}
+
+.router-link-exact-active{
+  color: #000 !important;
+  text-decoration: underline;
 }
