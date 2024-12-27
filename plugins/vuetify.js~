@@ -22,7 +22,8 @@ const theme = {
         body:"#5D5D5D",
         tertiary: "#2F2F2F",
         "theme-text": "#393939",
-        'gray-400':'#616161h'
+        'gray-500':'#585858',
+
       },
     },
     dark: {

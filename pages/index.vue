@@ -62,7 +62,6 @@
           class="d-flex justify-space-between align-center text-right"
       >
         <div class="d-flex flex-column ga-4 w-50">
-          <!-- Replacing UBadge with v-chip for "عن سمنان" -->
           <div>
             <v-chip
                 pill
