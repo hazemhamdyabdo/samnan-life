@@ -58,7 +58,7 @@
       <!-- About Us -->
       <section id="about-us" class="flex justify-space-between align-center text-right">
         <div>
-          <v-icon size="48">EngagedUserIcon</v-icon>
+          <EngagedUserIcon />
         </div>
 
         <div class="flex flex-col gap-4 w-5/12">
