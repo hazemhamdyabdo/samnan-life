@@ -1,31 +1,31 @@
+<script setup>
+import NavigationMobile from "~/components/home/NavigationMobile.vue";
+import DesktopNavigation from "~/components/home/DesktopNavigation.vue";
+import { useDisplay } from "vuetify";
+const { mobile } = useDisplay();
+
+</script>
+
 <template>
-  <v-container fluid class="py-4">
+  <v-container fluid class="py-4 wrapper">
     <v-main class="d-flex flex-column ga-16">
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
         <div class="d-flex ga-2 align-center">
-          <SvgIcon name="logo" />
-          <SvgIcon name="title" />
+          <SvgIcon name="logo"/>
+          <SvgIcon name="title"/>
         </div>
 
-        <div class="d-flex ga-12 align-center">
-          <!-- Navigation links -->
-          <div class="d-flex ga-12 text-gray-400">
-            <a href="#header" class="text-primary font-weight-bold">الرئيسية</a>
-            <a href="#about-us" class="font-weight-medium">عن سمنان</a>
-            <a href="#services" class="font-weight-medium">خدماتنا</a>
-            <a href="#store" class="font-weight-medium">متجرنا الالكتروني</a>
-            <a href="#branches" class="font-weight-medium">فروعنا</a>
-          </div>
-          <v-btn color="primary" class="rounded-lg px-8" size="large">
-            اشتراك
-          </v-btn>
-        </div>
+        <NavigationMobile v-if="mobile"/>
+        <DesktopNavigation v-else />
       </nav>
 
       <!-- Header Section -->
-      <section id="header" class="d-flex justify-space-between align-center">
-        <div class="text-right text-header d-flex flex-column ga-4 w-50">
+      <v-row
+          id="header" class="d-flex justify-space-between align-center ga-16"
+          no-gutters
+      >
+        <v-col  lg="6" md="12" sm="12" xs="12" class="text-right text-header d-flex flex-column ga-4 w-50">
           <h2 style="font-size: 45px">
             جميع اعمال
             <span class="text-primary"> الصيانة</span>
@@ -39,27 +39,28 @@
           </p>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4">
-            <PlayStoreIcon />
-            <AppStoreIcon />
+            <PlayStoreIcon/>
+            <AppStoreIcon/>
           </div>
-        </div>
-        <div>
-          <MobileAppIcon />
-        </div>
-      </section>
+        </v-col>
+        <v-col  lg="5"  md="12" sm="12" xs="12">
+          <MobileAppIcon/>
+        </v-col>
+      </v-row>
 
       <!-- About Us -->
-      <section
-        id="about-us"
-        class="d-flex justify-space-between align-center text-right"
+      <v-row
+          id="about-us"
+          class="d-flex justify-space-between align-center text-right  ga-16"
+          no-gutters
       >
-        <div class="d-flex flex-column ga-4 w-50">
+        <v-col  lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
           <div>
             <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
+                pill
+                color="primary"
+                variant="tonal"
+                class="text-primary bg-pri-light font-weight-medium"
             >
               <span> عن سمنان </span>
             </v-chip>
@@ -80,28 +81,28 @@
             المبيعات ذوي الخبرة والكفاءة العالية، لضمان تقديم أفضل الحلول التي
             تتناسب مع متطلباتكم.
           </span>
-        </div>
+        </v-col>
 
-        <div>
-          <EngagedUserIcon />
-        </div>
-      </section>
+        <v-col  lg="5" md="12" sm="12" xs="12">
+          <EngagedUserIcon/>
+        </v-col>
+      </v-row>
 
       <!-- Flow -->
-      <section class="d-flex justify-center align-center">
-        <ServiceWorkflowIcon />
-      </section>
+      <v-row  class="d-flex justify-center align-center  ga-16">
+        <ServiceWorkflowIcon/>
+      </v-row>
 
       <!-- Services -->
-      <section id="services">
-        <div
-          class="text-center d-flex justify-center align-center flex-column ga-3"
+      <v-row id="services">
+        <v-col  cols="12"
+            class="text-center d-flex justify-center align-center flex-column ga-3"
         >
           <v-chip
-            pill
-            color="primary"
-            variant="tonal"
-            class="text-primary bg-pri-light font-weight-medium"
+              pill
+              color="primary"
+              variant="tonal"
+              class="text-primary bg-pri-light font-weight-medium"
           >
             عن خدماتنا
           </v-chip>
@@ -112,14 +113,16 @@
           <p class="text-color-text">
             في سمنان نهتم بكل التفاصيل و كل ما تحتاج لراحتك و خدمتك
           </p>
-        </div>
+        </v-col>
 
-        <section class="mx-auto d-flex align-center justify-space-between">
-          <div class="text-right d-flex flex-column ga-16">
+        <v-row class="mx-auto d-flex align-center justify-space-between"
+               :class="mobile ? 'ga-16' : ''"
+        >
+          <v-col lg="3"  md="12" sm="12" xs="12" class="text-right d-flex flex-column ga-16">
             <div>
               <h3
-                class="text-gray-800 font-weight-meduim"
-                style="font-size: 20px"
+                  class="text-gray-800 font-weight-meduim"
+                  style="font-size: 20px"
               >
                 صيانة دورية
               </h3>
@@ -130,8 +133,8 @@
             </div>
             <div>
               <h3
-                class="text-gray-800 font-weight-meduim"
-                style="font-size: 20px"
+                  class="text-gray-800 font-weight-meduim"
+                  style="font-size: 20px"
               >
                 الدعم & الدفع الإلكتروني
               </h3>
@@ -140,17 +143,17 @@
                 الرقمي في قطع الغيار وسعر الصيانة.
               </p>
             </div>
-          </div>
+          </v-col>
 
-          <div>
-            <AppCapabilitiesIcon />
-          </div>
+          <v-col lg="6"   :style="` ${mobile ? ' margin-right: -5rem; padding: 0; width: 90%; ' : ''}`">
+            <AppCapabilitiesIcon/>
+          </v-col>
 
-          <div class="text-right d-flex flex-column ga-16">
+          <v-col lg="3"  md="12" sm="12" xs="12" class="text-right d-flex flex-column ga-16">
             <div>
               <h3
-                class="text-gray-800 font-weight-meduim"
-                style="font-size: 20px"
+                  class="text-gray-800 font-weight-meduim"
+                  style="font-size: 20px"
               >
                 تركيب جديد
               </h3>
@@ -160,8 +163,8 @@
             </div>
             <div>
               <h3
-                class="text-gray-800 font-weight-meduim"
-                style="font-size: 20px"
+                  class="text-gray-800 font-weight-meduim"
+                  style="font-size: 20px"
               >
                 صيانة عاجلة
               </h3>
@@ -170,22 +173,22 @@
                 بسرعة ووقت قياسي.
               </p>
             </div>
-          </div>
-        </section>
-      </section>
+          </v-col>
+        </v-row>
+      </v-row>
 
       <!-- Store -->
-      <section
-        id="store"
-        class="d-flex justify-space-between align-center text-right"
+      <v-row
+          id="store"
+          class="d-flex justify-space-between align-center text-right  ga-16"
       >
-        <div class="d-flex flex-column ga-4 w-50">
+        <v-col  lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
           <div>
             <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
+                pill
+                color="primary"
+                variant="tonal"
+                class="text-primary bg-pri-light font-weight-medium"
             >
               عن متجرنا الاكتروني
             </v-chip>
@@ -206,23 +209,24 @@
               تصفح المتجر
             </v-btn>
           </div>
-        </div>
+        </v-col>
 
-        <div>
-          <MobileOverviewIcon />
-        </div>
-      </section>
+        <v-col  lg="5" md="12" sm="12" xs="12">
+          <MobileOverviewIcon/>
+        </v-col>
+      </v-row>
 
       <!-- Branches -->
-      <section id="branches">
-        <div
-          class="text-center d-flex justify-center align-center flex-column ga-3"
+      <v-row id="branches" >
+        <v-col
+            cols="12"
+            class="text-center d-flex justify-center align-center flex-column ga-3"
         >
           <v-chip
-            pill
-            color="primary"
-            variant="tonal"
-            class="text-primary bg-pri-light font-weight-medium"
+              pill
+              color="primary"
+              variant="tonal"
+              class="text-primary bg-pri-light font-weight-medium"
           >
             فروعنا
           </v-chip>
@@ -230,43 +234,43 @@
             نقوم بتغطيه المملكة بالكامل
           </h4>
           <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
-        </div>
-        <div class="d-flex justify-center align-center">
-          <SaudiIcon />
-        </div>
-      </section>
+        </v-col>
+        <v-col cols="12" class="d-flex justify-center align-center">
+          <SaudiIcon/>
+        </v-col>
+      </v-row>
 
       <!-- App -->
-      <section
-        class="d-flex justify-space-between align-center text-right pb-0"
+      <v-row
+          class="d-flex justify-space-between align-center text-right pb-0  ga-16"
       >
-        <div class="d-flex flex-column ga-4 w-50">
+        <v-col   lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
             جميع منتجاتنا و خدماتنا و اجهزتك بين يديك لضمان راحتك
           </h4>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4">
-            <PlayStoreIcon />
-            <AppStoreIcon />
+            <PlayStoreIcon/>
+            <AppStoreIcon/>
           </div>
-        </div>
-        <OrderInterfaceIcon />
-      </section>
+        </v-col>
+        <OrderInterfaceIcon/>
+      </v-row>
     </v-main>
   </v-container>
 
   <!-- Footer -->
   <footer
-    class="py-10 d-flex flex-column align-center ga-6 mt-n4"
-    style="border-top: 1px solid #223f99"
+      class="py-10 d-flex flex-column align-center ga-6 mt-n4"
+      style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
-      <SvgIcon name="logo" />
+      <SvgIcon name="logo"/>
 
-      <SvgIcon name="title" />
+      <SvgIcon name="title"/>
     </div>
     <nav
-      class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
+        class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
     >
       <a href="#header">الرئيسية</a>
       <a href="#about-us">من نحن</a>
@@ -276,9 +280,9 @@
       <a href="#">الشروط و الأحكام</a>
       <a href="#">سياسة الخصوصية</a>
     </nav>
-    <div class="d-flex ga-4">
-      <PlayStoreIcon />
-      <AppStoreIcon />
+    <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
+      <PlayStoreIcon/>
+      <AppStoreIcon/>
     </div>
   </footer>
 
@@ -287,11 +291,16 @@
     <v-container fluid class="py-4 d-flex align-center justify-space-between">
       <p class="text-secondary">جميع الحقوق محفوطة</p>
       <div class="d-flex align-center ga-4">
-        <SvgIcon name="facebook" />
-        <SvgIcon name="linkedin" />
-        <SvgIcon name="twitter" />
-        <SvgIcon name="instagram" />
+        <SvgIcon name="facebook"/>
+        <SvgIcon name="linkedin"/>
+        <SvgIcon name="twitter"/>
+        <SvgIcon name="instagram"/>
       </div>
     </v-container>
   </div>
 </template>
+<style scoped lang="scss">
+.wrapper{
+  overflow-x: hidden ;
+}
+</style>
