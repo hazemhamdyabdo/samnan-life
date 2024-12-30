@@ -7,6 +7,13 @@ const { mobile } = useDisplay();
 
 const currentStep = ref(0);
 const steps = ref([StepOne, StepTwo]);
+
+const { data, status } = await useAPI("/customer/register", {
+  method: "POST",
+  body: {
+    w: "sss",
+  },
+});
 </script>
 
 <template>

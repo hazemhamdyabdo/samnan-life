@@ -37,7 +37,6 @@ const theme = {
     },
   },
   treeShake: true,
-
   rtl: true,
 };
 export default defineNuxtPlugin((app) => {
@@ -47,6 +46,13 @@ export default defineNuxtPlugin((app) => {
     theme,
     components,
     directives,
+    defaults: {
+      VTextField: {
+        minHeight: "60px",
+        rounded: "lg",
+        variant: "outlined",
+      },
+    },
   });
   app.vueApp.use(vuetify);
 });

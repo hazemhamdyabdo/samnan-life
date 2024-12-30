@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 const emits = defineEmits(["change:step-three"]);
 
 const isInputOneShow = ref(false);
