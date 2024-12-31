@@ -2,7 +2,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   const api = $fetch.create({
     baseURL: "https://app.rezeqstore.com/api/v1/",
     onRequest({ request, options, error }) {
-      options.headers.set("Accept", "application/json");
+      options.headers = {
+        ...options.headers,
+        Accept: "application/json",
+      };
       // options.headers.set("Accept", "application/json");
       // if (session.value?.token) {
       //   // note that this relies on ofetch >= 1.4.0 - you may need to refresh your lockfile
@@ -10,9 +13,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       // }
     },
     async onResponseError({ response }) {
-      // if (response.status === 401) {
-      //   await nuxtApp.runWithContext(() => navigateTo("/login"));
-      // }
+      if (response.status === 401) {
+        await nuxtApp.runWithContext(() => navigateTo("/login"));
+      }
     },
   });
 

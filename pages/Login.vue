@@ -3,6 +3,19 @@ import { useDisplay } from "vuetify";
 
 const { mobile } = useDisplay();
 const isPasswordShow = ref(false);
+
+const loginDetails = reactive({
+  phone: "597875665",
+  password: "12345678",
+});
+
+const login = async () => {
+  const { data, status } = await useAPI("/customer/login", {
+    method: "POST",
+    body: loginDetails,
+  });
+  console.log(data.value);
+};
 </script>
 
 <template>
@@ -41,6 +54,7 @@ const isPasswordShow = ref(false);
                   <p>+966</p>
                 </v-card>
                 <v-text-field
+                  v-model="loginDetails.phone"
                   label=""
                   rounded="lg"
                   variant="outlined"
@@ -57,6 +71,7 @@ const isPasswordShow = ref(false);
                 :type="isPasswordShow ? 'text' : 'password'"
                 rounded="lg"
                 base-color="border-light"
+                v-model="loginDetails.password"
                 variant="outlined"
                 density="comfortable"
                 placeholder="كلمة المرور"
@@ -84,7 +99,13 @@ const isPasswordShow = ref(false);
               </NuxtLink>
             </v-col>
             <v-col cols="12" sm="12" class="pt-0">
-              <v-btn color="primary" round block size="50" rounded="lg"
+              <v-btn
+                @click="login"
+                color="primary"
+                round
+                block
+                size="50"
+                rounded="lg"
                 >تسجيل الدخول</v-btn
               >
             </v-col>

@@ -8,12 +8,33 @@ const { mobile } = useDisplay();
 const currentStep = ref(0);
 const steps = ref([StepOne, StepTwo]);
 
-const { data, status } = await useAPI("/customer/register", {
-  method: "POST",
-  body: {
-    w: "sss",
-  },
+const registerDetails = reactive({
+  first_name: "Ahmed",
+  last_name: "Salem",
+  phone: "597875665",
+  password: "12345678",
+  confirm_password: "12345678",
 });
+
+const register = async () => {
+  const { data, error } = await useAPI("/customer/register", {
+    method: "POST",
+    body: registerDetails,
+  });
+
+  if (error.value) {
+    throw new Error(error.value.message);
+  }
+};
+
+const handleStepOne = async () => {
+  try {
+    await register();
+    currentStep.value = 1;
+  } catch (error) {
+    // handle UI changes
+  }
+};
 </script>
 
 <template>
@@ -35,7 +56,8 @@ const { data, status } = await useAPI("/customer/register", {
         <component
           :is="steps[currentStep]"
           title="توثيق حسابك"
-          @change:step-one="currentStep = 1"
+          v-model:registerDetails="registerDetails"
+          @change:step-one="handleStepOne"
           @change:step-two="currentStep = 0"
         />
       </v-col>

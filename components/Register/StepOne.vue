@@ -2,6 +2,8 @@
 const emits = defineEmits(["change:step-one"]);
 const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
+
+const registerDetails = defineModel("registerDetails");
 </script>
 
 <template>
@@ -19,12 +21,14 @@ const isInputTwoShow = ref(false);
             hide-details
             base-color="border-light"
             density="comfortable"
+            v-model="registerDetails.first_name"
           />
           <v-text-field
             placeholder="الاسم الاحير"
             base-color="border-light"
             density="comfortable"
             hide-details
+            v-model="registerDetails.last_name"
           />
         </v-col>
         <v-col cols="6" sm="12">
@@ -47,7 +51,8 @@ const isInputTwoShow = ref(false);
               base-color="border-light"
               density="comfortable"
               placeholder="رقم الهاتف"
-              hide-detailss
+              hide-details
+              v-model="registerDetails.phone"
             />
           </div>
         </v-col>
@@ -58,6 +63,7 @@ const isInputTwoShow = ref(false);
             hide-details
             base-color="border-light"
             density="comfortable"
+            v-model="registerDetails.password"
           >
             <template #append-inner>
               <div
@@ -79,6 +85,7 @@ const isInputTwoShow = ref(false);
             hide-details
             base-color="border-light"
             density="comfortable"
+            v-model="registerDetails.confirm_password"
           >
             <template #append-inner>
               <div
