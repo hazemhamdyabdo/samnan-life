@@ -6,32 +6,49 @@ const isInputTwoShow = ref(false);
 
 <template>
   <div>
-    <div>
-      <h3>انشاء حساب جديد</h3>
+    <div class="mb-4">
+      <h3 class="font-weight-medium">انشاء حساب جديد</h3>
       <span>الامر يجتاج من خطوتين فقط!</span>
     </div>
     <v-form>
       <v-row>
-        <v-col cols="6" sm="12" class="pt-0 d-flex ga-4">
+        <v-col cols="6" sm="12" class="d-flex ga-4">
           <v-text-field
             variant="outlined"
             placeholder="الاسم الاول"
             hide-details
-          ></v-text-field>
-          <v-text-field placeholder="الاسم الاحير" hide-details></v-text-field>
+            base-color="border-light"
+            density="comfortable"
+          />
+          <v-text-field
+            placeholder="الاسم الاحير"
+            base-color="border-light"
+            density="comfortable"
+            hide-details
+          />
         </v-col>
         <v-col cols="6" sm="12">
           <div class="d-flex ga-2">
             <v-card
               rounded="lg"
+              border="sm gray-800"
               color="transparent"
               elevation="0"
+              height="50"
               class="d-flex align-center border border-opacity-25 ga-2 px-4 cursor-auto"
             >
               <SvgIcon name="SA" />
               <p>+966</p>
             </v-card>
-            <v-text-field placeholder="رقم الهاتف" hide-details />
+            <v-text-field
+              label=""
+              rounded="lg"
+              variant="outlined"
+              base-color="border-light"
+              density="comfortable"
+              placeholder="رقم الهاتف"
+              hide-detailss
+            />
           </div>
         </v-col>
         <v-col cols="6" sm="12" class="pt-0">
@@ -39,14 +56,18 @@ const isInputTwoShow = ref(false);
             :type="isInputOneShow ? 'text' : 'password'"
             placeholder="كلمة المرور الجديدة"
             hide-details
+            base-color="border-light"
+            density="comfortable"
           >
             <template #append-inner>
               <div
                 class="cursor-pointer"
                 @click="isInputOneShow = !isInputOneShow"
               >
-                <v-icon v-if="!isInputOneShow">mdi-eye-off</v-icon>
-                <v-icon v-else>mdi-eye</v-icon>
+                <v-icon color="border-light" v-if="!isInputOneShow"
+                  >mdi-eye-off</v-icon
+                >
+                <v-icon color="border-light" v-else>mdi-eye</v-icon>
               </div>
             </template>
           </v-text-field>
@@ -56,14 +77,18 @@ const isInputTwoShow = ref(false);
             :type="isInputTwoShow ? 'text' : 'password'"
             placeholder="كلمة المرور مجددا"
             hide-details
+            base-color="border-light"
+            density="comfortable"
           >
             <template #append-inner>
               <div
                 class="cursor-pointer"
                 @click="isInputTwoShow = !isInputTwoShow"
               >
-                <v-icon v-if="!isInputTwoShow">mdi-eye-off</v-icon>
-                <v-icon v-else>mdi-eye</v-icon>
+                <v-icon color="border-light" v-if="!isInputTwoShow"
+                  >mdi-eye-off</v-icon
+                >
+                <v-icon color="border-light" v-else>mdi-eye</v-icon>
               </div>
             </template>
           </v-text-field>

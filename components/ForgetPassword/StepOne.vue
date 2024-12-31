@@ -4,7 +4,7 @@ const emits = defineEmits(["change:step-one"]);
 
 <template>
   <div>
-    <h3>نسيت كلمة السر</h3>
+    <h3 class="font-weight-medium">نسيت كلمة السر</h3>
     <span>قم بادخال بريدك الالكتروني لاستعادة الحساب</span>
   </div>
   <v-form>
@@ -14,8 +14,9 @@ const emits = defineEmits(["change:step-one"]);
           <v-card
             rounded="lg"
             color="transparent"
-            style="border: 1px solid #8e8e8e"
+            border="sm  gray-800"
             elevation="0"
+            height="50"
             class="d-flex align-center ga-2 px-4 cursor-auto"
           >
             <SvgIcon name="SA" />
@@ -25,7 +26,8 @@ const emits = defineEmits(["change:step-one"]);
             label=""
             rounded="lg"
             variant="outlined"
-            density="compact"
+            base-color="border-light"
+            density="comfortable"
             placeholder="رقم الهاتف"
             hide-details
           />

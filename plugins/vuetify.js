@@ -25,6 +25,7 @@ const theme = {
         "gray-500": "#585858",
         "gray-800": "#616161",
         "gray-900": "#A7A7A7",
+        "border-light": "#B2B2B2",
       },
     },
     dark: {

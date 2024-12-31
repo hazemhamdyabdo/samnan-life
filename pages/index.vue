@@ -3,7 +3,6 @@ import NavigationMobile from "~/components/home/NavigationMobile.vue";
 import DesktopNavigation from "~/components/home/DesktopNavigation.vue";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
-
 </script>
 
 <template>
@@ -12,20 +11,27 @@ const { mobile } = useDisplay();
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
         <div class="d-flex ga-2 align-center">
-          <SvgIcon name="logo"/>
-          <SvgIcon name="title"/>
+          <SvgIcon name="logo" />
+          <SvgIcon name="title" />
         </div>
 
-        <NavigationMobile v-if="mobile"/>
+        <NavigationMobile v-if="mobile" />
         <DesktopNavigation v-else />
       </nav>
 
       <!-- Header Section -->
       <v-row
-          id="header" class="d-flex justify-space-between align-center ga-16"
-          no-gutters
+        id="header"
+        class="d-flex justify-space-between align-center ga-16"
+        no-gutters
       >
-        <v-col  lg="6" md="12" sm="12" xs="12" class="text-right text-header d-flex flex-column ga-4 w-50">
+        <v-col
+          lg="6"
+          md="12"
+          sm="12"
+          xs="12"
+          class="text-right text-header d-flex flex-column ga-4 w-50"
+        >
           <h2 style="font-size: 45px">
             جميع اعمال
             <span class="text-primary"> الصيانة</span>
@@ -39,28 +45,34 @@ const { mobile } = useDisplay();
           </p>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4">
-            <PlayStoreIcon/>
-            <AppStoreIcon/>
+            <PlayStoreIcon />
+            <AppStoreIcon />
           </div>
         </v-col>
-        <v-col  lg="5"  md="12" sm="12" xs="12">
-          <MobileAppIcon/>
+        <v-col lg="5" md="12" sm="12" xs="12">
+          <MobileAppIcon />
         </v-col>
       </v-row>
 
       <!-- About Us -->
       <v-row
-          id="about-us"
-          class="d-flex justify-space-between align-center text-right  ga-16"
-          no-gutters
+        id="about-us"
+        class="d-flex justify-space-between align-center text-right ga-16"
+        no-gutters
       >
-        <v-col  lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
+        <v-col
+          lg="6"
+          md="12"
+          sm="12"
+          xs="12"
+          class="d-flex flex-column ga-4 w-50"
+        >
           <div>
             <v-chip
-                pill
-                color="primary"
-                variant="tonal"
-                class="text-primary bg-pri-light font-weight-medium"
+              pill
+              color="primary"
+              variant="tonal"
+              class="text-primary bg-pri-light font-weight-medium"
             >
               <span> عن سمنان </span>
             </v-chip>
@@ -83,26 +95,28 @@ const { mobile } = useDisplay();
           </span>
         </v-col>
 
-        <v-col  lg="5" md="12" sm="12" xs="12">
-          <EngagedUserIcon/>
+        <v-col lg="5" md="12" sm="12" xs="12">
+          <EngagedUserIcon />
         </v-col>
       </v-row>
 
       <!-- Flow -->
-      <v-row  class="d-flex justify-center align-center  ga-16">
-        <ServiceWorkflowIcon/>
+      <v-row class="d-flex justify-center align-center ga-16">
+        <!-- <ServiceWorkflowIcon /> -->
+        <HomeServiceWorkflow />
       </v-row>
 
       <!-- Services -->
       <v-row id="services">
-        <v-col  cols="12"
-            class="text-center d-flex justify-center align-center flex-column ga-3"
+        <v-col
+          cols="12"
+          class="text-center d-flex justify-center align-center flex-column ga-3"
         >
           <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
+            pill
+            color="primary"
+            variant="tonal"
+            class="text-primary bg-pri-light font-weight-medium"
           >
             عن خدماتنا
           </v-chip>
@@ -115,14 +129,21 @@ const { mobile } = useDisplay();
           </p>
         </v-col>
 
-        <v-row class="mx-auto d-flex align-center justify-space-between"
-               :class="mobile ? 'ga-16' : ''"
+        <v-row
+          class="mx-auto d-flex align-center justify-space-between"
+          :class="mobile ? 'ga-16' : ''"
         >
-          <v-col lg="3"  md="12" sm="12" xs="12" class="text-right d-flex flex-column ga-16">
+          <v-col
+            lg="3"
+            md="12"
+            sm="12"
+            xs="12"
+            class="text-right d-flex flex-column ga-16"
+          >
             <div>
               <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
+                class="text-gray-800 font-weight-meduim"
+                style="font-size: 20px"
               >
                 صيانة دورية
               </h3>
@@ -133,8 +154,8 @@ const { mobile } = useDisplay();
             </div>
             <div>
               <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
+                class="text-gray-800 font-weight-meduim"
+                style="font-size: 20px"
               >
                 الدعم & الدفع الإلكتروني
               </h3>
@@ -145,15 +166,26 @@ const { mobile } = useDisplay();
             </div>
           </v-col>
 
-          <v-col lg="6"   :style="` ${mobile ? ' margin-right: -5rem; padding: 0; width: 90%; ' : ''}`">
-            <AppCapabilitiesIcon/>
+          <v-col
+            lg="6"
+            :style="` ${
+              mobile ? ' margin-right: -5rem; padding: 0; width: 90%; ' : ''
+            }`"
+          >
+            <AppCapabilitiesIcon />
           </v-col>
 
-          <v-col lg="3"  md="12" sm="12" xs="12" class="text-right d-flex flex-column ga-16">
+          <v-col
+            lg="3"
+            md="12"
+            sm="12"
+            xs="12"
+            class="text-right d-flex flex-column ga-16"
+          >
             <div>
               <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
+                class="text-gray-800 font-weight-meduim"
+                style="font-size: 20px"
               >
                 تركيب جديد
               </h3>
@@ -163,8 +195,8 @@ const { mobile } = useDisplay();
             </div>
             <div>
               <h3
-                  class="text-gray-800 font-weight-meduim"
-                  style="font-size: 20px"
+                class="text-gray-800 font-weight-meduim"
+                style="font-size: 20px"
               >
                 صيانة عاجلة
               </h3>
@@ -179,16 +211,22 @@ const { mobile } = useDisplay();
 
       <!-- Store -->
       <v-row
-          id="store"
-          class="d-flex justify-space-between align-center text-right  ga-16"
+        id="store"
+        class="d-flex justify-space-between align-center text-right ga-16"
       >
-        <v-col  lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
+        <v-col
+          lg="6"
+          md="12"
+          sm="12"
+          xs="12"
+          class="d-flex flex-column ga-4 w-50"
+        >
           <div>
             <v-chip
-                pill
-                color="primary"
-                variant="tonal"
-                class="text-primary bg-pri-light font-weight-medium"
+              pill
+              color="primary"
+              variant="tonal"
+              class="text-primary bg-pri-light font-weight-medium"
             >
               عن متجرنا الاكتروني
             </v-chip>
@@ -211,22 +249,22 @@ const { mobile } = useDisplay();
           </div>
         </v-col>
 
-        <v-col  lg="5" md="12" sm="12" xs="12">
-          <MobileOverviewIcon/>
+        <v-col lg="5" md="12" sm="12" xs="12">
+          <MobileOverviewIcon />
         </v-col>
       </v-row>
 
       <!-- Branches -->
-      <v-row id="branches" >
+      <v-row id="branches">
         <v-col
-            cols="12"
-            class="text-center d-flex justify-center align-center flex-column ga-3"
+          cols="12"
+          class="text-center d-flex justify-center align-center flex-column ga-3"
         >
           <v-chip
-              pill
-              color="primary"
-              variant="tonal"
-              class="text-primary bg-pri-light font-weight-medium"
+            pill
+            color="primary"
+            variant="tonal"
+            class="text-primary bg-pri-light font-weight-medium"
           >
             فروعنا
           </v-chip>
@@ -236,41 +274,41 @@ const { mobile } = useDisplay();
           <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
-          <SaudiIcon/>
+          <SaudiIcon />
         </v-col>
       </v-row>
 
       <!-- App -->
       <v-row
-          class="d-flex justify-space-between align-center text-right pb-0  ga-16"
+        class="d-flex justify-space-between align-center text-right pb-0 ga-16"
       >
-        <v-col   lg="6" md="12" sm="12" xs="12" class="d-flex flex-column ga-4 w-50">
+        <v-col xs="12" class="d-flex flex-column ga-4 w-50">
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
             جميع منتجاتنا و خدماتنا و اجهزتك بين يديك لضمان راحتك
           </h4>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4">
-            <PlayStoreIcon/>
-            <AppStoreIcon/>
+            <PlayStoreIcon />
+            <AppStoreIcon />
           </div>
         </v-col>
-        <OrderInterfaceIcon/>
+        <OrderInterfaceIcon />
       </v-row>
     </v-main>
   </v-container>
 
   <!-- Footer -->
   <footer
-      class="py-10 d-flex flex-column align-center ga-6 mt-n4"
-      style="border-top: 1px solid #223f99"
+    class="py-10 d-flex flex-column align-center ga-6 mt-n1"
+    style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
-      <SvgIcon name="logo"/>
+      <SvgIcon name="logo" />
 
-      <SvgIcon name="title"/>
+      <SvgIcon name="title" />
     </div>
     <nav
-        class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
+      class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
     >
       <a href="#header">الرئيسية</a>
       <a href="#about-us">من نحن</a>
@@ -281,8 +319,8 @@ const { mobile } = useDisplay();
       <a href="#">سياسة الخصوصية</a>
     </nav>
     <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
-      <PlayStoreIcon/>
-      <AppStoreIcon/>
+      <PlayStoreIcon />
+      <AppStoreIcon />
     </div>
   </footer>
 
@@ -291,16 +329,16 @@ const { mobile } = useDisplay();
     <v-container fluid class="py-4 d-flex align-center justify-space-between">
       <p class="text-secondary">جميع الحقوق محفوطة</p>
       <div class="d-flex align-center ga-4">
-        <SvgIcon name="facebook"/>
-        <SvgIcon name="linkedin"/>
-        <SvgIcon name="twitter"/>
-        <SvgIcon name="instagram"/>
+        <SvgIcon name="facebook" />
+        <SvgIcon name="linkedin" />
+        <SvgIcon name="twitter" />
+        <SvgIcon name="instagram" />
       </div>
     </v-container>
   </div>
 </template>
 <style scoped lang="scss">
-.wrapper{
-  overflow-x: hidden ;
+.wrapper {
+  overflow-x: hidden;
 }
 </style>

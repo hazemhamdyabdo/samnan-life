@@ -7,21 +7,22 @@ const isPasswordShow = ref(false);
 
 <template>
   <v-container fluid>
-    <v-row class="justify-space-around ga-md-16 align-center">
+    <v-row class="justify-space-between align-center">
       <v-col cols="12" sm="12" md="4">
-        <SvgIcon
-          name="samnan-panner"
-          class="rounded-xl cursor-auto"
-          :style="`max-height: 90vh; ${mobile ? 'width: 100%' : ''}`"
+        <img
+          class="rounded-xl"
+          src="../assets/imgs/image 3.png"
+          :width="mobile ? '100%' : '600'"
+          :height="mobile ? '100%' : '620'"
         />
       </v-col>
-      <v-col cols="12" sm="6" md="4" class="d-flex flex-column ga-4">
+      <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
           <SvgIcon name="logo" />
           <SvgIcon name="title" />
         </div>
         <div>
-          <h3>تسجيل الدخول</h3>
+          <h3 class="font-weight-medium">تسجيل الدخول</h3>
           <span>مرحبا بعودتك!</span>
         </div>
         <v-form>
@@ -31,8 +32,9 @@ const isPasswordShow = ref(false);
                 <v-card
                   rounded="lg"
                   color="transparent"
-                  style="border: 1px solid #8e8e8e"
+                  border="sm gray-800"
                   elevation="0"
+                  height="50"
                   class="d-flex align-center ga-2 px-4 cursor-auto"
                 >
                   <SvgIcon name="SA" />
@@ -42,7 +44,8 @@ const isPasswordShow = ref(false);
                   label=""
                   rounded="lg"
                   variant="outlined"
-                  density="compact"
+                  base-color="border-light"
+                  density="comfortable"
                   placeholder="رقم الهاتف"
                   hide-details
                 />
@@ -53,8 +56,9 @@ const isPasswordShow = ref(false);
                 label=""
                 :type="isPasswordShow ? 'text' : 'password'"
                 rounded="lg"
+                base-color="border-light"
                 variant="outlined"
-                density="compact"
+                density="comfortable"
                 placeholder="كلمة المرور"
                 hide-details
               >
@@ -63,8 +67,10 @@ const isPasswordShow = ref(false);
                     class="cursor-pointer"
                     @click="isPasswordShow = !isPasswordShow"
                   >
-                    <v-icon v-if="!isPasswordShow">mdi-eye-off</v-icon>
-                    <v-icon v-else>mdi-eye</v-icon>
+                    <v-icon color="border-light" v-if="!isPasswordShow"
+                      >mdi-eye-off</v-icon
+                    >
+                    <v-icon color="border-light" v-else>mdi-eye</v-icon>
                   </div>
                 </template>
               </v-text-field>

@@ -18,15 +18,16 @@ const { data, status } = await useAPI("/customer/register", {
 
 <template>
   <v-container fluid>
-    <v-row class="justify-space-around ga-md-16 align-center">
+    <v-row class="justify-space-between align-center">
       <v-col cols="12" sm="12" md="4">
-        <SvgIcon
-          name="samnan-panner"
-          class="rounded-xl cursor-auto"
-          :style="`max-height: 90vh; ${mobile ? 'width: 100%' : ''}`"
+        <img
+          class="rounded-xl"
+          src="../assets/imgs/image 3.png"
+          :width="mobile ? '100%' : '600'"
+          :height="mobile ? '100%' : '620'"
         />
       </v-col>
-      <v-col cols="12" sm="6" md="4" class="d-flex flex-column ga-4">
+      <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
           <SvgIcon name="logo" />
           <SvgIcon name="title" />
