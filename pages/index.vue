@@ -307,7 +307,7 @@ const { mobile } = useDisplay();
             <img src="../assets/icons/app-store.svg" alt="app-store btn" />
           </div>
         </v-col>
-        <v-col xl="4" lg="4" md="4" sm="12" xs="12" class="pb-0 mb-0">
+        <v-col xl="4" lg="6" md="6" sm="12" xs="12" class="pb-0 mb-0">
           <img
             src="../assets/icons/mobile-interface.svg"
             alt="mobile interface"
