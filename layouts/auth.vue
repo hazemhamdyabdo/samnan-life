@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <!--    <common-nav-bar />-->
     <v-main>
-      this is default layout
       <slot></slot>
     </v-main>
   </v-app>

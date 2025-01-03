@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  layout: "auth",
+});
+
 const { login } = useAuthStore();
 const { formRef, rules, validate } = useFormValidation();
 const { showSuccess } = useAlertStore();

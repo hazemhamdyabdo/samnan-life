@@ -1,7 +1,12 @@
 <script setup>
+definePageMeta({
+  layout: "auth",
+});
+
 import NavigationMobile from "~/components/home/NavigationMobile.vue";
 import DesktopNavigation from "~/components/home/DesktopNavigation.vue";
 import { useDisplay } from "vuetify";
+
 const { mobile } = useDisplay();
 </script>
 
@@ -11,8 +16,8 @@ const { mobile } = useDisplay();
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
         <div class="d-flex ga-2 align-center">
-          <SvgIcon name="logo" />
-          <SvgIcon name="title" />
+          <AppSvgIcon name="logo" />
+          <AppSvgIcon name="title" />
         </div>
 
         <NavigationMobile v-if="mobile" />
@@ -323,8 +328,8 @@ const { mobile } = useDisplay();
     style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
-      <SvgIcon name="logo" />
-      <SvgIcon name="title" />
+      <AppSvgIcon name="logo" />
+      <AppSvgIcon name="title" />
     </div>
     <nav
       class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
@@ -348,10 +353,10 @@ const { mobile } = useDisplay();
     <v-container fluid class="py-4 d-flex align-center justify-space-between">
       <p class="text-secondary">جميع الحقوق محفوطة</p>
       <div class="d-flex align-center ga-4">
-        <SvgIcon name="facebook" />
-        <SvgIcon name="linkedin" />
-        <SvgIcon name="twitter" />
-        <SvgIcon name="instagram" />
+        <AppSvgIcon name="facebook" />
+        <AppSvgIcon name="linkedin" />
+        <AppSvgIcon name="twitter" />
+        <AppSvgIcon name="instagram" />
       </div>
     </v-container>
   </div>

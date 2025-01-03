@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: "auth",
+});
+
 import StepOne from "~/components/ForgetPassword/StepOne.vue";
 import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 import StepThree from "~/components/ForgetPassword/StepThree.vue";
