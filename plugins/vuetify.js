@@ -15,6 +15,7 @@ const theme = {
         "background-200": "#E8E8EF",
         "theme-white": "#fff",
         primary: "#223F99",
+        "grey-300": "#959595",
         "grey-400": "#818181",
         header: "#353535",
         "pri-light": "#E9EFFF",
