@@ -6,7 +6,7 @@ const { mobile } = useDisplay();
 </script>
 
 <template>
-  <v-container fluid class="py-4 wrapper">
+  <v-container fluid :class="`py-4 ${mobile ? 'px-0' : ''} wrapper`">
     <v-main class="d-flex flex-column ga-16">
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
@@ -44,13 +44,13 @@ const { mobile } = useDisplay();
             سمنان ومتابعة جميع التفاصيل
           </p>
           <p class="text-header">حمل التطبيق الآن</p>
-          <div class="d-flex ga-4">
-            <PlayStoreIcon />
-            <AppStoreIcon />
+          <div class="d-flex ga-4 flex-wrap">
+            <img src="../assets/icons/play-store.svg" alt="play-store btn" />
+            <img src="../assets/icons/app-store.svg" alt="app-store btn" />
           </div>
         </v-col>
         <v-col lg="5" md="12" sm="12" xs="12">
-          <MobileAppIcon />
+          <img src="../assets/icons/mobile-app-hero.svg" alt="app image" />
         </v-col>
       </v-row>
 
@@ -96,13 +96,15 @@ const { mobile } = useDisplay();
         </v-col>
 
         <v-col lg="5" md="12" sm="12" xs="12">
-          <EngagedUserIcon />
+          <img
+            src="../assets/icons/engaged-user.svg"
+            alt="engaged user image"
+          />
         </v-col>
       </v-row>
 
       <!-- Flow -->
       <v-row class="d-flex justify-center align-center ga-16">
-        <!-- <ServiceWorkflowIcon /> -->
         <HomeServiceWorkflow />
       </v-row>
 
@@ -172,7 +174,7 @@ const { mobile } = useDisplay();
               mobile ? ' margin-right: -5rem; padding: 0; width: 90%; ' : ''
             }`"
           >
-            <AppCapabilitiesIcon />
+            <img src="../assets/icons/app-capabillities.svg" alt=" app image" />
           </v-col>
 
           <v-col
@@ -250,7 +252,10 @@ const { mobile } = useDisplay();
         </v-col>
 
         <v-col lg="5" md="12" sm="12" xs="12">
-          <MobileOverviewIcon />
+          <img
+            src="../assets/icons/mobile-overview.svg"
+            alt="mobile overview image"
+          />
         </v-col>
       </v-row>
 
@@ -274,37 +279,50 @@ const { mobile } = useDisplay();
           <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
-          <SaudiIcon />
+          <img
+            src="../assets/icons/sa-map.svg"
+            alt="sa map image"
+            class="w-100"
+          />
         </v-col>
       </v-row>
 
       <!-- App -->
-      <v-row
-        class="d-flex justify-space-between align-center text-right pb-0 ga-16"
-      >
-        <v-col xs="12" class="d-flex flex-column ga-4 w-50">
+      <v-row class="d-flex justify-space-between align-center text-right pb-0">
+        <v-col
+          xl="6"
+          lg="6"
+          md="6"
+          sm="12"
+          xs="12"
+          class="d-flex flex-column ga-4 w-50"
+        >
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
             جميع منتجاتنا و خدماتنا و اجهزتك بين يديك لضمان راحتك
           </h4>
           <p class="text-header">حمل التطبيق الآن</p>
-          <div class="d-flex ga-4">
-            <PlayStoreIcon />
-            <AppStoreIcon />
+          <div class="d-flex ga-4 flex-wrap">
+            <img src="../assets/icons/play-store.svg" alt="play-store btn" />
+            <img src="../assets/icons/app-store.svg" alt="app-store btn" />
           </div>
         </v-col>
-        <OrderInterfaceIcon />
+        <v-col xl="6" lg="6" md="6" sm="12" xs="12" class="pb-0 mb-0">
+          <img
+            src="../assets/icons/mobile-interface.svg"
+            alt="mobile interface"
+          />
+        </v-col>
       </v-row>
     </v-main>
   </v-container>
 
   <!-- Footer -->
   <footer
-    class="py-10 d-flex flex-column align-center ga-6 mt-n1"
+    class="py-10 d-flex flex-column align-center ga-6 mt-n3"
     style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
       <SvgIcon name="logo" />
-
       <SvgIcon name="title" />
     </div>
     <nav
@@ -319,8 +337,8 @@ const { mobile } = useDisplay();
       <a href="#">سياسة الخصوصية</a>
     </nav>
     <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
-      <PlayStoreIcon />
-      <AppStoreIcon />
+      <img src="../assets/icons/play-store.svg" alt="play-store btn" />
+      <img src="../assets/icons/app-store.svg" alt="app-store btn" />
     </div>
   </footer>
 

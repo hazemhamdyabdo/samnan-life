@@ -7,6 +7,23 @@ const { mobile } = useDisplay();
 <template>
   <v-container class="pa-8 bg-pri-light rounded-lg" fluid>
     <v-row justify="center" align="center" class="text-center">
+      <v-col
+        v-if="mobile"
+        cols="12"
+        md="4"
+        class="d-flex flex-column align-center mb-6 ga-2 position-relative"
+      >
+        <SvgIcon v-if="!mobile" name="arrow-up" class="arrow-up" />
+        <div class="mb-1">
+          <span class="text-white bg-primary py-2 px-4 rounded-circle">1</span>
+        </div>
+        <h3 class="text-tertiary font-weight-medium">طلب سريع وسهل</h3>
+        <p class="text-body font-weight-medium">
+          نوفر تطبيقاً بسيطاً وسهل الاستخدام يتيح لك طلب في خطوات قليلة وفي وقت
+          قياسي.
+        </p>
+      </v-col>
+
       <v-col cols="12" md="4" class="d-flex flex-column align-center mb-6 ga-2">
         <div class="mb-1">
           <span class="text-white bg-primary py-2 px-4 rounded-circle">2</span>
@@ -19,6 +36,7 @@ const { mobile } = useDisplay();
 
       <v-row justify="space-between" align="center" class="steps-lower">
         <v-col
+          v-if="!mobile"
           cols="12"
           md="4"
           class="d-flex flex-column align-center mt-6 ga-2 position-relative"
