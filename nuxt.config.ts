@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   css: ["~/assets/scss/main.scss"],
   modules: [
     "@nuxtjs/i18n",
+    "@pinia/nuxt",
     "nuxt-svgo",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {

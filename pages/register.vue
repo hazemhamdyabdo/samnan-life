@@ -1,14 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { useDisplay } from "vuetify";
+import type { UserRegistrationDetails } from "~/types";
 import StepOne from "~/components/Register/StepOne.vue";
 import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 
 const { mobile } = useDisplay();
-
+const { register, verifyOTP } = useAuthStore();
 const currentStep = ref(0);
 const steps = ref([StepOne, StepTwo]);
+const isLoading = ref(false);
 
-const registerDetails = reactive({
+const registerDetails = reactive<UserRegistrationDetails>({
   first_name: "Ahmed",
   last_name: "Salem",
   phone: "597875665",
@@ -16,50 +18,30 @@ const registerDetails = reactive({
   confirm_password: "12345678",
 });
 
-const register = async () => {
-  const { data, error } = await useAPI("/customer/register", {
-    method: "POST",
-    body: registerDetails,
-    watch: false,
-  });
-
-  if (error.value) {
-    throw new Error(error.value.message);
-  }
-};
-
 const handleRegisterStep = async () => {
+  isLoading.value = true;
   try {
-    await register();
+    await register(registerDetails);
     currentStep.value = 1;
   } catch (error) {
-    // handle UI changes ex snackbar
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
 const otp = ref("");
-const verifyOTP = async () => {
-  const { data, error } = await useAPI("/customer/verify-otp", {
-    method: "POST",
-    body: {
-      phone: registerDetails.phone,
-      otp: otp.value,
-    },
-    watch: false,
-  });
-
-  if (error.value) {
-    throw new Error(error.value.message);
-  }
-};
-
 const handleOTPStep = async () => {
+  isLoading.value = true;
   try {
-    await verifyOTP();
-    alert("OTP Verified");
-    // @TODO: navigate to dashboard
+    await verifyOTP(otp.value, registerDetails.phone);
+    navigateTo("/dashboard");
   } catch (error) {
-    // handle UI changes ex snackbar
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -86,6 +68,7 @@ const handleResendOTP = async () => {
         </div>
         <component
           :is="steps[currentStep]"
+          :isLoading="isLoading"
           title="توثيق حسابك"
           v-model:registerDetails="registerDetails"
           v-model:otp="otp"

@@ -1,4 +1,5 @@
 <template>
+  <AppAlert />
   <v-locale-provider rtl>
     <NuxtLayout>
       <NuxtPage />

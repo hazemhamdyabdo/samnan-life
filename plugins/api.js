@@ -1,4 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
+  const { showError } = useAlertStore();
+  const token = useCookie("token");
   const api = $fetch.create({
     baseURL: "https://app.rezeqstore.com/api/v1/",
     onRequest({ request, options, error }) {
@@ -6,16 +8,18 @@ export default defineNuxtPlugin((nuxtApp) => {
         ...options.headers,
         Accept: "application/json",
       };
-      // options.headers.set("Accept", "application/json");
-      // if (session.value?.token) {
-      //   // note that this relies on ofetch >= 1.4.0 - you may need to refresh your lockfile
-      //   // options.headers.set("Authorization", `Bearer ${session.value?.token}`);
-      // }
+      if (token.value) {
+        options.headers = {
+          ...options.headers,
+          Authorization: `Bearer ${token.value}`,
+        };
+      }
     },
     async onResponseError({ response }) {
       if (response.status === 401) {
         await nuxtApp.runWithContext(() => navigateTo("/login"));
       }
+      showError(response._data.message);
     },
   });
 

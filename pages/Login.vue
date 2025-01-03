@@ -1,20 +1,30 @@
 <script setup>
 import { useDisplay } from "vuetify";
 
+const { login } = useAuthStore();
+const { formRef, rules, validate } = useFormValidation();
+const { showSuccess } = useAlertStore();
 const { mobile } = useDisplay();
 const isPasswordShow = ref(false);
+const isLoading = ref(false);
 
 const loginDetails = reactive({
   phone: "597875665",
   password: "12345678",
 });
 
-const login = async () => {
-  const { data, status } = await useAPI("/customer/login", {
-    method: "POST",
-    body: loginDetails,
-  });
-  console.log(data.value);
+const handleLogin = async () => {
+  isLoading.value = true;
+  try {
+    await validate();
+    await login(loginDetails);
+    showSuccess("تم تسجيل الدخول بنجاح");
+    navigateTo("/dashboard");
+  } catch (error) {
+    // handle ui changes
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
@@ -38,7 +48,7 @@ const login = async () => {
           <h3 class="font-weight-medium">تسجيل الدخول</h3>
           <span>مرحبا بعودتك!</span>
         </div>
-        <v-form>
+        <v-form fast-fail ref="formRef" @submit.prevent>
           <v-row>
             <v-col cols="6" sm="12">
               <div class="d-flex ga-2">
@@ -55,13 +65,15 @@ const login = async () => {
                 </v-card>
                 <v-text-field
                   v-model="loginDetails.phone"
+                  type="number"
+                  :rules="[rules.required, rules.phoneNumber]"
                   label=""
                   rounded="lg"
                   variant="outlined"
                   base-color="border-light"
                   density="comfortable"
                   placeholder="رقم الهاتف"
-                  hide-details
+                  hide-spin-buttons
                 />
               </div>
             </v-col>
@@ -69,13 +81,13 @@ const login = async () => {
               <v-text-field
                 label=""
                 :type="isPasswordShow ? 'text' : 'password'"
+                :rules="[rules.required, rules.minLength(8)]"
                 rounded="lg"
                 base-color="border-light"
                 v-model="loginDetails.password"
                 variant="outlined"
                 density="comfortable"
                 placeholder="كلمة المرور"
-                hide-details
               >
                 <template #append-inner>
                   <div
@@ -100,8 +112,10 @@ const login = async () => {
             </v-col>
             <v-col cols="12" sm="12" class="pt-0">
               <v-btn
-                @click="login"
+                @click="handleLogin"
                 color="primary"
+                :loading="isLoading"
+                type="submit"
                 round
                 block
                 size="50"

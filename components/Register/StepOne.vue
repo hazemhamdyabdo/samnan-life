@@ -1,27 +1,17 @@
 <script setup>
+import { useFormValidation } from "~/composables/useFormValidation";
+
 const emits = defineEmits(["change:step-one"]);
+defineProps({
+  isLoading: Boolean,
+});
+
+const { formRef, rules, validate } = useFormValidation();
 const registerDetails = defineModel("registerDetails");
+
 const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
-const formRef = ref(null);
-const rules = {
-  required: (value) => !!value || "هذا الحقل مطلوب.",
-  minLength: (length) => (value) =>
-    value?.length >= length || `يجب أن يكون ${length} أحرف على الأقل.`,
-  phoneNumber: (value) => /^[0-9]{9,10}$/.test(value) || "رقم الهاتف غير صحيح.",
-  // passwordStrength: (value) =>
-  //   /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W_]).{8,}$/.test(value) ||
-  //   "كلمة المرور ضعيفة. يجب أن تحتوي على 8 أحرف على الأقل بما في ذلك حرف كبير وحرف صغير ورقم ورمز.",
-  confirmPassword: (value) =>
-    value === registerDetails.value.password || "كلمتا المرور غير متطابقتين.",
-};
 
-const validate = async () => {
-  const { valid } = await formRef.value.validate();
-  if (!valid) {
-    throw new Error("Form is invalid");
-  }
-};
 const handleSubmit = async () => {
   try {
     await validate();
@@ -109,7 +99,13 @@ const handleSubmit = async () => {
             :type="isInputTwoShow ? 'text' : 'password'"
             placeholder="كلمة المرور مجددا"
             base-color="border-light"
-            :rules="[rules.required, rules.confirmPassword]"
+            :rules="[
+              rules.required,
+              rules.confirmPassword(
+                registerDetails.confirm_password,
+                registerDetails.password
+              ),
+            ]"
             density="comfortable"
             v-model="registerDetails.confirm_password"
           >
@@ -129,6 +125,7 @@ const handleSubmit = async () => {
         <v-col cols="12" sm="12">
           <v-btn
             @click="handleSubmit"
+            :loading="isLoading"
             color="primary"
             type="submit"
             round

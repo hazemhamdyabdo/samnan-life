@@ -1,12 +1,75 @@
-<script setup>
+<script setup lang="ts">
 import { useDisplay } from "vuetify";
 import StepOne from "~/components/ForgetPassword/StepOne.vue";
-import StepTwo from "~/components/ForgetPassword/StepTwo";
+import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 import StepThree from "~/components/ForgetPassword/StepThree.vue";
 
 const { mobile } = useDisplay();
-const currentStep = ref(0);
+const { verifyOTP, resetPassword, handleForgetPassword } = useAuthStore();
+
 const forgetPasswordSteps = ref([StepOne, StepTwo, StepThree]);
+const phoneNumber = ref("");
+const currentStep = ref(0);
+const isLoading = ref(false);
+
+const goToNextStep = () => {
+  currentStep.value += 1;
+};
+
+const handlePhoneNumStep = async () => {
+  isLoading.value = true;
+  try {
+    await handleForgetPassword(phoneNumber.value);
+    goToNextStep();
+  } catch (error) {
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const otp = ref("");
+const handleOTPStep = async () => {
+  isLoading.value = true;
+  try {
+    await verifyOTP(otp.value, phoneNumber.value);
+    goToNextStep();
+  } catch (error) {
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const passwordUpdates = ref({
+  password: "",
+  confirm_password: "",
+});
+
+const handlePasswordStep = async () => {
+  // @TODO: make sure about the flow with backend
+  isLoading.value = true;
+  try {
+    await resetPassword({
+      phoneNumber: phoneNumber.value,
+      otp: otp.value,
+      passwordUpdates: passwordUpdates.value,
+    });
+    alert("Password Updated");
+    // @TODO: navigate to login page
+  } catch (error) {
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const handleResendOTP = () => {
+  // @TODO: Ask for resend OTP api
+};
 </script>
 
 <template>
@@ -27,9 +90,14 @@ const forgetPasswordSteps = ref([StepOne, StepTwo, StepThree]);
         </div>
         <component
           :is="forgetPasswordSteps[currentStep]"
-          @change:step-one="currentStep = 1"
-          @change:step-two="currentStep = 2"
-          @change:step-three="currentStep = 0"
+          :isLoading="isLoading"
+          v-model:phoneNumber="phoneNumber"
+          v-model:otp="otp"
+          v-model:passwordUpdates="passwordUpdates"
+          @change:step-one="handlePhoneNumStep"
+          @verify:otp="handleOTPStep"
+          @change:step-three="handlePasswordStep"
+          @resend:otp="handleResendOTP"
         ></component>
       </v-col>
     </v-row>

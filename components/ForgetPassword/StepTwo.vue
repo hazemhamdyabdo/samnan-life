@@ -1,10 +1,8 @@
 <script setup lang="ts">
-defineProps({
-  title: {
-    type: String,
-    default: "استعادة الحساب",
-  },
-});
+defineProps<{
+  title: string;
+  isLoading: boolean;
+}>();
 const emits = defineEmits(["resend:otp", "verify:otp"]);
 const countdownLimit = 60;
 
@@ -54,6 +52,7 @@ onMounted(() => {
     <v-col cols="12" sm="12" class="pt-0">
       <v-btn
         @click="emits('resend:otp')"
+        :loading="isLoading"
         color="primary"
         round
         block
