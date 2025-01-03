@@ -6,7 +6,7 @@ const { mobile } = useDisplay();
 </script>
 
 <template>
-  <v-container fluid :class="`py-4 ${mobile ? 'px-0' : ''} wrapper`">
+  <v-container fluid :class="`py-4 ${mobile ? 'px-0 mx-2' : ''} wrapper`">
     <v-main class="d-flex flex-column ga-16">
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
@@ -49,7 +49,7 @@ const { mobile } = useDisplay();
             <img src="../assets/icons/app-store.svg" alt="app-store btn" />
           </div>
         </v-col>
-        <v-col lg="5" md="12" sm="12" xs="12">
+        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
           <img src="../assets/icons/mobile-app-hero.svg" alt="app image" />
         </v-col>
       </v-row>
@@ -95,7 +95,7 @@ const { mobile } = useDisplay();
           </span>
         </v-col>
 
-        <v-col lg="5" md="12" sm="12" xs="12">
+        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
           <img
             src="../assets/icons/engaged-user.svg"
             alt="engaged user image"
@@ -169,9 +169,10 @@ const { mobile } = useDisplay();
           </v-col>
 
           <v-col
+            xl="4"
             lg="6"
             :style="` ${
-              mobile ? ' margin-right: -5rem; padding: 0; width: 90%; ' : ''
+              mobile ? ' margin-right: -2rem; padding: 0; width: 90%; ' : ''
             }`"
           >
             <img src="../assets/icons/app-capabillities.svg" alt=" app image" />
@@ -251,7 +252,7 @@ const { mobile } = useDisplay();
           </div>
         </v-col>
 
-        <v-col lg="5" md="12" sm="12" xs="12">
+        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
           <img
             src="../assets/icons/mobile-overview.svg"
             alt="mobile overview image"
@@ -306,7 +307,7 @@ const { mobile } = useDisplay();
             <img src="../assets/icons/app-store.svg" alt="app-store btn" />
           </div>
         </v-col>
-        <v-col xl="6" lg="6" md="6" sm="12" xs="12" class="pb-0 mb-0">
+        <v-col xl="4" lg="4" md="4" sm="12" xs="12" class="pb-0 mb-0">
           <img
             src="../assets/icons/mobile-interface.svg"
             alt="mobile interface"
