@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useDisplay } from "vuetify";
 import type { UserRegistrationDetails } from "~/types";
 import StepOne from "~/components/Register/StepOne.vue";
 import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 
-const { mobile } = useDisplay();
 const { register, verifyOTP } = useAuthStore();
 const currentStep = ref(0);
 const steps = ref([StepOne, StepTwo]);
@@ -54,11 +52,13 @@ const handleResendOTP = async () => {
   <v-container fluid>
     <v-row class="justify-space-between align-center">
       <v-col cols="12" sm="12" md="4">
-        <img
-          class="rounded-xl"
+        <v-img
           src="../assets/imgs/image 3.png"
-          :width="mobile ? '100%' : '600'"
-          :height="mobile ? '100%' : '620'"
+          alt="Responsive Image"
+          class="rounded-xl"
+          min-width="40vw"
+          min-height="90vh"
+          contain
         />
       </v-col>
       <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">

@@ -1,10 +1,8 @@
 <script setup>
-import { useDisplay } from "vuetify";
-
 const { login } = useAuthStore();
 const { formRef, rules, validate } = useFormValidation();
 const { showSuccess } = useAlertStore();
-const { mobile } = useDisplay();
+
 const isPasswordShow = ref(false);
 const isLoading = ref(false);
 
@@ -32,11 +30,13 @@ const handleLogin = async () => {
   <v-container fluid>
     <v-row class="justify-space-between align-center">
       <v-col cols="12" sm="12" md="4">
-        <img
-          class="rounded-xl"
+        <v-img
           src="../assets/imgs/image 3.png"
-          :width="mobile ? '100%' : '600'"
-          :height="mobile ? '100%' : '620'"
+          alt="Responsive Image"
+          class="rounded-xl"
+          min-width="40vw"
+          min-height="90vh"
+          contain
         />
       </v-col>
       <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
