@@ -4,5 +4,3 @@
     <h1>operations</h1>
   </div>
 </template>
-
-<style scoped></style>

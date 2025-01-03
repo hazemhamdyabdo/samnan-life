@@ -9,27 +9,60 @@
         height="100%"
         class="d-flex flex-column ga-8 py-8"
       >
-        <NuxtLink
-          to="/dashboard"
-          class="d-flex flex-column ga-1 justify-center align-center"
-        >
-          <AppSvgIcon name="home-nav" />
-          <p class="text-grey-300">الرئيسية</p>
-        </NuxtLink>
-        <NuxtLink
-          to="/dashboard/operations"
-          class="d-flex flex-column ga-1 justify-center align-center"
-        >
-          <AppSvgIcon name="operations-nav" />
-          <p class="text-grey-300">العمليات</p>
-        </NuxtLink>
-        <NuxtLink
-          to="/dashboard/settings"
-          class="d-flex flex-column ga-1 justify-center align-center"
-        >
-          <AppSvgIcon name="setting-nav" />
-          <p class="text-grey-300">الاعدادات</p>
-        </NuxtLink>
+        <div class="d-flex flex-column ga-1 justify-center align-center">
+          <NuxtLink
+            to="/dashboard"
+            class="px-3 py-3 rounded-circle"
+            active-class="bg-pri-light"
+          >
+            <AppSvgIcon name="home-nav" />
+          </NuxtLink>
+          <p
+            :class="`${
+              $route.path === '/dashboard'
+                ? 'text-primary font-weight-bold'
+                : 'text-grey-300'
+            }`"
+          >
+            الرئيسية
+          </p>
+        </div>
+        <div class="d-flex flex-column ga-1 justify-center align-center">
+          <NuxtLink
+            to="/dashboard/operations"
+            class="px-3 py-3 rounded-circle"
+            active-class="bg-pri-light"
+          >
+            <AppSvgIcon name="operations-nav" />
+          </NuxtLink>
+          <p
+            :class="`${
+              $route.path === '/dashboard/operations'
+                ? 'text-primary font-weight-bold'
+                : 'text-grey-300'
+            }`"
+          >
+            العمليات
+          </p>
+        </div>
+        <div class="d-flex flex-column ga-1 justify-center align-center">
+          <NuxtLink
+            to="/dashboard/settings"
+            class="px-3 py-3 rounded-circle"
+            active-class="bg-pri-light"
+          >
+            <AppSvgIcon name="setting-nav" />
+          </NuxtLink>
+          <p
+            :class="`${
+              $route.path === '/dashboard/settings'
+                ? 'text-primary font-weight-bold'
+                : 'text-grey-300'
+            }`"
+          >
+            الاعدادات
+          </p>
+        </div>
       </v-list>
     </v-card>
     <v-main style="height: calc(100vh - 150px)" class="mt-5 ms-6">

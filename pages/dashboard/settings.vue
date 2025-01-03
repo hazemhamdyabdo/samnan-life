@@ -4,5 +4,3 @@
     <h1>settings</h1>
   </div>
 </template>
-
-<style scoped></style>
