@@ -1,4 +1,7 @@
 <script setup lang="ts"></script>
 <template>
-  <h1>dashboard</h1>
+  <img
+    src="../../assets/icons/dashboard-banner.svg"
+    style="width: calc(100%)"
+  />
 </template>

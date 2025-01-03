@@ -2,7 +2,7 @@
 
 <template>
   <v-layout>
-    <v-card width="100" elevation="2" class="mt-4 mb-4 rounded-xl" app>
+    <v-card min-width="100" elevation="2" class="mt-4 mb-4 rounded-xl" app>
       <v-list
         density="compact"
         nav
@@ -65,10 +65,8 @@
         </div>
       </v-list>
     </v-card>
-    <v-main style="height: calc(100vh - 150px)" class="mt-5 ms-6">
+    <v-container fluid style="height: calc(100vh - 150px)" class="mt-3">
       <slot></slot>
-    </v-main>
+    </v-container>
   </v-layout>
 </template>
-
-<style scoped></style>
