@@ -1,9 +1,35 @@
 <script setup>
 const emits = defineEmits(["change:step-one"]);
+const registerDetails = defineModel("registerDetails");
 const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
+const formRef = ref(null);
+const rules = {
+  required: (value) => !!value || "هذا الحقل مطلوب.",
+  minLength: (length) => (value) =>
+    value?.length >= length || `يجب أن يكون ${length} أحرف على الأقل.`,
+  phoneNumber: (value) => /^[0-9]{9,10}$/.test(value) || "رقم الهاتف غير صحيح.",
+  // passwordStrength: (value) =>
+  //   /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W_]).{8,}$/.test(value) ||
+  //   "كلمة المرور ضعيفة. يجب أن تحتوي على 8 أحرف على الأقل بما في ذلك حرف كبير وحرف صغير ورقم ورمز.",
+  confirmPassword: (value) =>
+    value === registerDetails.value.password || "كلمتا المرور غير متطابقتين.",
+};
 
-const registerDetails = defineModel("registerDetails");
+const validate = async () => {
+  const { valid } = await formRef.value.validate();
+  if (!valid) {
+    throw new Error("Form is invalid");
+  }
+};
+const handleSubmit = async () => {
+  try {
+    await validate();
+    emits("change:step-one");
+  } catch (error) {
+    alert(error);
+  }
+};
 </script>
 
 <template>
@@ -12,13 +38,13 @@ const registerDetails = defineModel("registerDetails");
       <h3 class="font-weight-medium">انشاء حساب جديد</h3>
       <span>الامر يجتاج من خطوتين فقط!</span>
     </div>
-    <v-form>
+    <v-form fast-fail ref="formRef" @submit.prevent>
       <v-row>
-        <v-col cols="6" sm="12" class="d-flex ga-4">
+        <v-col cols="6" sm="12" class="d-flex ga-4 pb-0">
           <v-text-field
             variant="outlined"
             placeholder="الاسم الاول"
-            hide-details
+            :rules="[rules.required, rules.minLength(3)]"
             base-color="border-light"
             density="comfortable"
             v-model="registerDetails.first_name"
@@ -27,11 +53,11 @@ const registerDetails = defineModel("registerDetails");
             placeholder="الاسم الاحير"
             base-color="border-light"
             density="comfortable"
-            hide-details
+            :rules="[rules.required, rules.minLength(3)]"
             v-model="registerDetails.last_name"
           />
         </v-col>
-        <v-col cols="6" sm="12">
+        <v-col cols="6" sm="12" class="pb-0">
           <div class="d-flex ga-2">
             <v-card
               rounded="lg"
@@ -47,20 +73,20 @@ const registerDetails = defineModel("registerDetails");
             <v-text-field
               label=""
               rounded="lg"
+              :rules="[rules.required, rules.phoneNumber]"
               variant="outlined"
               base-color="border-light"
               density="comfortable"
               placeholder="رقم الهاتف"
-              hide-details
               v-model="registerDetails.phone"
             />
           </div>
         </v-col>
-        <v-col cols="6" sm="12" class="pt-0">
+        <v-col cols="6" sm="12" class="pb-0">
           <v-text-field
             :type="isInputOneShow ? 'text' : 'password'"
             placeholder="كلمة المرور الجديدة"
-            hide-details
+            :rules="[rules.required, rules.minLength(8)]"
             base-color="border-light"
             density="comfortable"
             v-model="registerDetails.password"
@@ -78,12 +104,12 @@ const registerDetails = defineModel("registerDetails");
             </template>
           </v-text-field>
         </v-col>
-        <v-col cols="6" sm="12" class="pt-0">
+        <v-col cols="6" sm="12" class="pb-0">
           <v-text-field
             :type="isInputTwoShow ? 'text' : 'password'"
             placeholder="كلمة المرور مجددا"
-            hide-details
             base-color="border-light"
+            :rules="[rules.required, rules.confirmPassword]"
             density="comfortable"
             v-model="registerDetails.confirm_password"
           >
@@ -100,10 +126,11 @@ const registerDetails = defineModel("registerDetails");
             </template>
           </v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" class="pt-0">
+        <v-col cols="12" sm="12">
           <v-btn
-            @click="emits('change:step-one')"
+            @click="handleSubmit"
             color="primary"
+            type="submit"
             round
             block
             size="50"

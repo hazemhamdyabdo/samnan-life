@@ -5,11 +5,14 @@ defineProps({
     default: "استعادة الحساب",
   },
 });
-const emits = defineEmits(["change:step-two"]);
+const emits = defineEmits(["resend:otp", "verify:otp"]);
 const countdownLimit = 60;
 
 const timeLeft = ref(countdownLimit);
-
+const otp = defineModel("otp", {
+  type: String,
+  required: true,
+});
 const countdown = computed(() => {
   const minutes = Math.floor(timeLeft.value / 60);
   const seconds = timeLeft.value % 60;
@@ -39,12 +42,18 @@ onMounted(() => {
   </div>
   <v-row>
     <v-col cols="6" sm="12">
-      <v-otp-input :length="4" rounded="xl"></v-otp-input>
+      <v-otp-input
+        dir="ltr"
+        :length="4"
+        rounded="xl"
+        @finish="emits('verify:otp')"
+        v-model="otp"
+      ></v-otp-input>
       <p class="text-primary text-center font-weight-bold">{{ countdown }}</p>
     </v-col>
     <v-col cols="12" sm="12" class="pt-0">
       <v-btn
-        @click="emits('change:step-two')"
+        @click="emits('resend:otp')"
         color="primary"
         round
         block
