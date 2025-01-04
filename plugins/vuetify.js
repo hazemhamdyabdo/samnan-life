@@ -27,6 +27,9 @@ const theme = {
         "gray-800": "#616161",
         "gray-900": "#A7A7A7",
         "border-light": "#B2B2B2",
+        "border-light-200": "#CECECE",
+        "light-gray": "#C3C3C3",
+        "light-gray-2": "#454545",
       },
     },
     dark: {
