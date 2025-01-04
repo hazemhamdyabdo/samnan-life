@@ -16,6 +16,51 @@ const cards = [
     image: "regular-maintenance",
   },
 ];
+
+const operationLogs = [
+  {
+    title: "صيانة عاجلة",
+    created_at: Date.now() + 10000,
+    status: "ناجحه",
+    icon: "sm-urgent-maintenance",
+  },
+  {
+    title: "صيانة دورية",
+    created_at: Date.now() + 20000,
+    status: "ناجحه",
+    icon: "sm-urgent-maintenance",
+  },
+  {
+    title: "صيانة عاجلة",
+    created_at: Date.now() + 30000,
+    status: "ناجحه",
+    icon: "sm-urgent-maintenance",
+  },
+  {
+    title: "صيانة دورية",
+    created_at: Date.now() + 40000,
+    status: "ناجحه",
+    icon: "sm-urgent-maintenance",
+  },
+  {
+    title: "صيانة دورية",
+    created_at: Date.now() + 50000,
+    status: "ناجحه",
+    icon: "sm-urgent-maintenance",
+  },
+];
+
+const formattedDate = (date: number) => {
+  const d = new Date(date);
+  return d.toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
 </script>
 <template>
   <header>
@@ -59,10 +104,45 @@ const cards = [
     </v-card>
   </section>
   <div class="d-flex align-center">
-    <p class="text-light-gray-2 font-weight-medium" style="font-size: 24px">
-      سجل العمليات
-    </p>
+    <p class="text-light-gray-2 font-weight-medium">سجل العمليات</p>
     <v-spacer />
-    <p class="text-grey-300" style="font-size: 18px">عرض الكل</p>
+    <p class="text-grey-300" style="font-size: 12px">عرض الكل</p>
   </div>
+  <section class="py-3">
+    <v-expansion-panels v-for="log in operationLogs" elevation="0">
+      <v-expansion-panel class="mb-4" rounded="xl">
+        <v-expansion-panel-title>
+          <template v-slot:actions>
+            <v-icon color="primary" icon="mdi-chevron-down"></v-icon>
+          </template>
+          <img
+            :src="`/images/${log.icon}.svg`"
+            :alt="`${log.title} image`"
+            class="me-2"
+          />
+          <div class="d-flex flex-column ga-2">
+            <h5 style="font-size: 14px" class="text-light-gray-2">
+              {{ log.title }}
+            </h5>
+            <p class="text-grey-300" style="font-size: 12px">
+              {{ formattedDate(log.created_at) }}
+            </p>
+          </div>
+          <v-spacer />
+          <v-chip color="success" class="me-4">
+            <v-icon
+              start
+              size="x-small"
+              :color="log.status === 'ناجحه' ? 'success' : 'error'"
+              >mdi-circle</v-icon
+            >
+            <span class="font-weight-medium">
+              {{ log.status }}
+            </span>
+          </v-chip>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text> Some content </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </section>
 </template>
