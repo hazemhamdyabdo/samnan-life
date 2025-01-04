@@ -10,7 +10,9 @@
     </div>
     <v-spacer />
     <div class="d-flex justify-center align-center ga-6">
-      <AppSvgIcon name="bell" />
+      <NuxtLink to="/dashboard/notifications">
+        <AppSvgIcon name="bell" />
+      </NuxtLink>
       <v-btn color="primary" class="px-4 rounded-lg" size="large">
         <v-icon class="me-1">mdi-calendar-outline</v-icon>
         حجز موعد جديد
@@ -18,13 +20,3 @@
     </div>
   </v-card>
 </template>
-
-<script setup></script>
-
-<style lang="scss" scoped>
-.nav {
-  .nav-link {
-    width: 160px;
-  }
-}
-</style>

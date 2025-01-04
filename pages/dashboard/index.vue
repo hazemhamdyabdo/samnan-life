@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { getFormattedDate } = useFormatDate();
+
 const cards = [
   {
     title: "تركيب جهاز جديد",
@@ -49,18 +51,6 @@ const operationLogs = [
     icon: "sm-urgent-maintenance",
   },
 ];
-
-const formattedDate = (date: number) => {
-  const d = new Date(date);
-  return d.toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-};
 </script>
 <template>
   <header>
@@ -125,7 +115,7 @@ const formattedDate = (date: number) => {
               {{ log.title }}
             </h5>
             <p class="text-grey-300" style="font-size: 12px">
-              {{ formattedDate(log.created_at) }}
+              {{ getFormattedDate(log.created_at) }}
             </p>
           </div>
           <v-spacer />
