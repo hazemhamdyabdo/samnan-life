@@ -1,5 +1,5 @@
-<script setup >
-import { defineAsyncComponent,ref, computed } from 'vue'
+<script setup>
+import { defineAsyncComponent, ref, computed } from "vue";
 
 const props = defineProps({
   name: {
@@ -8,7 +8,7 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default:'lg',
+    default: "lg",
   },
   color: {
     type: String,
@@ -20,27 +20,27 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-})
+});
 
-const hovering = ref(false)
+const hovering = ref(false);
 
 const componentStyle = computed(() => ({
-  display: 'block',
-  cursor: props.readOnly? 'not-allowed' : 'pointer',
-}))
+  display: "block",
+  cursor: props.readOnly ? "not-allowed" : "pointer",
+}));
 
-const dynamicComponent = defineAsyncComponent(
-    () => import(`~/assets/icons/${props.name}.svg`)
-)
+const dynamicComponent = defineAsyncComponent(() =>
+  import(`~/public/icons/${props.name}.svg`)
+);
 </script>
 
 <template>
   <component
-      :is="dynamicComponent"
-      :style="componentStyle"
-      filled
-      :fontControlled="false"
-      @mouseover="hovering = true"
-      @mouseleave="hovering = false"
+    :is="dynamicComponent"
+    :style="componentStyle"
+    filled
+    :fontControlled="false"
+    @mouseover="hovering = true"
+    @mouseleave="hovering = false"
   />
 </template>

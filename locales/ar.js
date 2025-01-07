@@ -165,6 +165,15 @@ export default {
     settings: {
       card: {
         title: "الإعدادات",
+        items: {
+          language: "اللغة",
+          profile: "الملف الشخصي",
+          addresses: "العناوين",
+          products: "منتجاتى",
+          support_help: "الدعم والمساعدة",
+          notifications: "استقبال الإشعارات",
+          logout: "تسجيل الخروج",
+        },
       },
     },
   },
