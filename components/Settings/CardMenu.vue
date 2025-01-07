@@ -37,9 +37,9 @@ const items = [
     name: "logout",
   },
 ];
-const selectedCard = ref();
+const selectedCard = defineModel("selectedCard", { type: String });
 const selectCard = (item: { name: string; title: string; icon: string }) => {
-  selectedCard.value = item;
+  selectedCard.value = item.name;
 };
 </script>
 
@@ -49,7 +49,6 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
     elevation="2"
     rounded="xl"
     border="sm black"
-    width="300"
     style="height: calc(100vh - 150px)"
   >
     <v-card-title>
@@ -66,7 +65,7 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
         :key="item.title"
         class="py-0"
         :class="
-          selectedCard?.name === item.name
+          selectedCard === item.name
             ? 'bg-pri-light text-primary font-weight-medium rounded-lg'
             : 'text-grey-400'
         "

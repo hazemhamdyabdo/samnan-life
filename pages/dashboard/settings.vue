@@ -1,13 +1,41 @@
 <script setup lang="ts">
 import CardMenu from "@/components/Settings/CardMenu.vue";
+import Profile from "~/components/Settings/Profile.vue";
+import Language from "~/components/Settings/Language.vue";
+import Addresses from "~/components/Settings/Addresses.vue";
+import Support from "~/components/Settings/Support.vue";
+import Products from "~/components/Settings/Products.vue";
+import Notifications from "~/components/Settings/Notifications.vue";
+import Logout from "~/components/Settings/Logout.vue";
+
+const selectedComponent = ref("profile");
+
+const currentComponent = computed(() => {
+  const components = {
+    profile: Profile,
+    language: Language,
+    addresses: Addresses,
+    support: Support,
+    products: Products,
+    notifications: Notifications,
+    logout: Logout,
+  };
+
+  // @ts-ignore
+  return components[selectedComponent.value];
+});
 </script>
 <template>
   <section class="py-0">
     <v-row>
-      <v-col cols="3" class="pa-0 pt-0 h-100">
-        <CardMenu />
+      <v-col cols="3" class="pt-0">
+        <CardMenu v-model:selectedCard="selectedComponent" />
+      </v-col>
+      <v-col cols="9" class="pt-0">
+        <v-card rounded="xl" height="100%" class="pa-4">
+          <component :is="currentComponent" />
+        </v-card>
       </v-col>
     </v-row>
-    <!-- <h1>settings</h1> -->
   </section>
 </template>
