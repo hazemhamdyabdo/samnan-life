@@ -162,6 +162,11 @@ export default {
       operations_logs: "سجل العمليات",
       show_all: "عرض الكل",
     },
+    settings: {
+      card: {
+        title: "الإعدادات",
+      },
+    },
   },
   buttons: {
     subscribe_now: "اشترك الآن",

@@ -1,0 +1,26 @@
+$text-classes: (
+  property: font-size,
+  class: text,
+  values: (
+    12: 12px,
+    14: 14px,
+    16: 16px,
+    20: 20px,
+    24: 24px,
+    40: 40px
+  )
+);
+
+@mixin generate-classes($config) {
+  $property: map-get($config, property);
+  $class-prefix: map-get($config, class);
+  $values: map-get($config, values);
+
+  @each $key, $value in $values {
+    .#{$class-prefix}-#{$key} {
+      #{$property}: $value;
+    }
+  }
+}
+
+@include generate-classes($text-classes);
