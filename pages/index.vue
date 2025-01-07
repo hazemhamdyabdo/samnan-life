@@ -27,14 +27,12 @@ const { mobile } = useDisplay();
       <!-- Header Section -->
       <v-row
         id="header"
-        class="d-flex justify-space-between align-center ga-16"
+        class="d-flex justify-space-between align-center ga-8"
         no-gutters
       >
         <v-col
-          lg="6"
-          md="12"
-          sm="12"
-          xs="12"
+          cols="12"
+          md="6"
           class="text-right text-header d-flex flex-column ga-4 w-50"
         >
           <h2 style="font-size: 45px">
@@ -50,20 +48,22 @@ const { mobile } = useDisplay();
           </p>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4 flex-wrap">
-            <img
+            <v-img
               src="../assets/icons/play-store.svg"
               alt="play-store btn"
               class="cursor-pointer"
+              max-width="150"
             />
-            <img
+            <v-img
               src="../assets/icons/app-store.svg"
               alt="app-store btn"
               class="cursor-pointer"
+              max-width="150"
             />
           </div>
         </v-col>
-        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
-          <img src="../assets/icons/mobile-app-hero.svg" alt="app image" />
+        <v-col cols="12" md="5">
+          <v-img src="../assets/icons/mobile-app-hero.svg" alt="app image" />
         </v-col>
       </v-row>
 
@@ -73,13 +73,7 @@ const { mobile } = useDisplay();
         class="d-flex justify-space-between align-center text-right ga-16"
         no-gutters
       >
-        <v-col
-          lg="6"
-          md="12"
-          sm="12"
-          xs="12"
-          class="d-flex flex-column ga-4 w-50"
-        >
+        <v-col cols="12" md="6" sm="12" class="d-flex flex-column ga-4 w-50">
           <div>
             <v-chip
               pill
@@ -108,8 +102,8 @@ const { mobile } = useDisplay();
           </span>
         </v-col>
 
-        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
-          <img
+        <v-col cols="12" md="5" sm="12">
+          <v-img
             src="../assets/icons/engaged-user.svg"
             alt="engaged user image"
           />
@@ -125,7 +119,7 @@ const { mobile } = useDisplay();
       <v-row id="services">
         <v-col
           cols="12"
-          class="text-center d-flex justify-center align-center flex-column ga-3"
+          class="text-center d-flex justify-center align-center flex-column ga-3 mb-4"
         >
           <v-chip
             pill
@@ -265,10 +259,11 @@ const { mobile } = useDisplay();
           </div>
         </v-col>
 
-        <v-col xl="4" lg="5" md="12" sm="12" xs="12">
-          <img
+        <v-col cols="12" md="5" sm="12">
+          <v-img
             src="../assets/icons/mobile-overview.svg"
             alt="mobile overview image"
+            aspect-ratio="16/9"
           />
         </v-col>
       </v-row>
@@ -293,7 +288,7 @@ const { mobile } = useDisplay();
           <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
-          <img
+          <v-img
             src="../assets/icons/sa-map.svg"
             alt="sa map image"
             class="w-100"
@@ -316,20 +311,22 @@ const { mobile } = useDisplay();
           </h4>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4 flex-wrap">
-            <img
+            <v-img
               src="../assets/icons/play-store.svg"
               alt="play-store btn"
               class="cursor-pointer"
+              max-width="150"
             />
-            <img
+            <v-img
               src="../assets/icons/app-store.svg"
               alt="app-store btn"
               class="cursor-pointer"
+              max-width="150"
             />
           </div>
         </v-col>
-        <v-col xl="4" lg="6" md="6" sm="12" xs="12" class="pb-0 mb-0">
-          <img
+        <v-col cols="12" md="5" sm="12" class="pb-0 mb-0">
+          <v-img
             src="../assets/icons/mobile-interface.svg"
             alt="mobile interface"
           />
@@ -340,7 +337,7 @@ const { mobile } = useDisplay();
 
   <!-- Footer -->
   <footer
-    class="py-10 d-flex flex-column align-center ga-6 mt-n3"
+    class="py-10 d-flex flex-column align-center ga-6 mt-n1"
     style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
