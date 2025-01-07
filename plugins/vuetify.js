@@ -57,6 +57,9 @@ export default defineNuxtPlugin((app) => {
         rounded: "lg",
         variant: "outlined",
       },
+      VBtn: {
+        elevation: 0,
+      },
     },
   });
   app.vueApp.use(vuetify);

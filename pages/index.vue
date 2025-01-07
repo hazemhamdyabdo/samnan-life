@@ -50,8 +50,16 @@ const { mobile } = useDisplay();
           </p>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4 flex-wrap">
-            <img src="../assets/icons/play-store.svg" alt="play-store btn" />
-            <img src="../assets/icons/app-store.svg" alt="app-store btn" />
+            <img
+              src="../assets/icons/play-store.svg"
+              alt="play-store btn"
+              class="cursor-pointer"
+            />
+            <img
+              src="../assets/icons/app-store.svg"
+              alt="app-store btn"
+              class="cursor-pointer"
+            />
           </div>
         </v-col>
         <v-col xl="4" lg="5" md="12" sm="12" xs="12">
@@ -308,8 +316,16 @@ const { mobile } = useDisplay();
           </h4>
           <p class="text-header">حمل التطبيق الآن</p>
           <div class="d-flex ga-4 flex-wrap">
-            <img src="../assets/icons/play-store.svg" alt="play-store btn" />
-            <img src="../assets/icons/app-store.svg" alt="app-store btn" />
+            <img
+              src="../assets/icons/play-store.svg"
+              alt="play-store btn"
+              class="cursor-pointer"
+            />
+            <img
+              src="../assets/icons/app-store.svg"
+              alt="app-store btn"
+              class="cursor-pointer"
+            />
           </div>
         </v-col>
         <v-col xl="4" lg="6" md="6" sm="12" xs="12" class="pb-0 mb-0">
