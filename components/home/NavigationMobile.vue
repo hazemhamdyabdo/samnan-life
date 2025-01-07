@@ -17,18 +17,28 @@ const goToLogin = () => {
     temporary
   >
     <div class="d-flex flex-column pa-4 ga-12 text-gray-400">
-      <a href="#header" class="text-primary font-weight-bold">الرئيسية</a>
-      <a href="#about-us" class="font-weight-medium">عن سمنان</a>
-      <a href="#services" class="font-weight-medium">خدماتنا</a>
-      <a href="#store" class="font-weight-medium">متجرنا الالكتروني</a>
-      <a href="#branches" class="font-weight-medium">فروعنا</a>
+      <a href="#header" class="text-primary font-weight-bold">{{
+        $t("landing.nav.home")
+      }}</a>
+      <a href="#about-us" class="font-weight-medium">{{
+        $t("landing.nav.about_us")
+      }}</a>
+      <a href="#services" class="font-weight-medium">{{
+        $t("landing.nav.services")
+      }}</a>
+      <a href="#store" class="font-weight-medium">{{
+        $t("landing.nav.store")
+      }}</a>
+      <a href="#branches" class="font-weight-medium">{{
+        $t("landing.nav.branches")
+      }}</a>
       <v-btn
         @click="goToLogin"
         color="primary"
         class="rounded-lg px-8"
         size="large"
       >
-        اشتراك
+        {{ $t("landing.nav.subscribe") }}
       </v-btn>
     </div>
   </v-navigation-drawer>

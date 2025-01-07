@@ -1,5 +1,8 @@
 export default {
   welcome: "hello",
+  landing: {
+    nav: {},
+  },
   buttons: {
     subscribe_now: "اشترك الآن",
     read_my_story: "اقرأ قصتي",

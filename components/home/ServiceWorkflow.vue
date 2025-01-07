@@ -16,10 +16,11 @@ const { mobile } = useDisplay();
         <div class="mb-1">
           <span class="text-white bg-primary py-2 px-4 rounded-circle">1</span>
         </div>
-        <h3 class="text-tertiary font-weight-medium">طلب سريع وسهل</h3>
+        <h3 class="text-tertiary font-weight-medium">
+          {{ $t("landing.workflow.items.easy_request.title") }}
+        </h3>
         <p class="text-body font-weight-medium">
-          نوفر تطبيقاً بسيطاً وسهل الاستخدام يتيح لك طلب في خطوات قليلة وفي وقت
-          قياسي.
+          {{ $t("landing.workflow.items.easy_request.description") }}
         </p>
       </v-col>
 
@@ -27,9 +28,11 @@ const { mobile } = useDisplay();
         <div class="mb-1">
           <span class="text-white bg-primary py-2 px-4 rounded-circle">2</span>
         </div>
-        <h3 class="text-tertiary font-weight-medium">خدمة عالية الجودة</h3>
+        <h3 class="text-tertiary font-weight-medium">
+          {{ $t("landing.workflow.items.high_quality_service.title") }}
+        </h3>
         <p class="text-body font-weight-medium">
-          نلتزم بتقديم أفضل الحلول من خلال فريق فنيين محترفين لضمان رضا عملائنا.
+          {{ $t("landing.workflow.items.high_quality_service.description") }}
         </p>
       </v-col>
 
@@ -46,10 +49,11 @@ const { mobile } = useDisplay();
               >1</span
             >
           </div>
-          <h3 class="text-tertiary font-weight-medium">طلب سريع وسهل</h3>
+          <h3 class="text-tertiary font-weight-medium">
+            {{ $t("landing.workflow.items.easy_request.title") }}
+          </h3>
           <p class="text-body font-weight-medium">
-            نوفر تطبيقاً بسيطاً وسهل الاستخدام يتيح لك طلب في خطوات قليلة وفي
-            وقت قياسي.
+            {{ $t("landing.workflow.items.easy_request.description") }}
           </p>
         </v-col>
 
@@ -65,10 +69,11 @@ const { mobile } = useDisplay();
               >3</span
             >
           </div>
-          <h3 class="text-tertiary font-weight-medium">تواصل ودعم مستمر</h3>
+          <h3 class="text-tertiary font-weight-medium">
+            {{ $t("landing.workflow.items.continuous_support.title") }}
+          </h3>
           <p class="text-body font-weight-medium">
-            نحن بجانبك دائماً عبر قنوات تواصل متعددة لتلبية احتياجاتك والإجابة
-            على استفساراتك.
+            {{ $t("landing.workflow.items.continuous_support.description") }}
           </p>
         </v-col>
       </v-row>

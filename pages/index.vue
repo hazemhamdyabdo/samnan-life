@@ -35,18 +35,13 @@ const { mobile } = useDisplay();
           md="6"
           class="text-right text-header d-flex flex-column ga-4 w-50"
         >
-          <h2 style="font-size: 45px">
-            جميع اعمال
-            <span class="text-primary"> الصيانة</span>
-            و
-            <span class="text-primary"> التركيب</span>
-            من منتجات سمنان بين يديك
-          </h2>
+          <h2 v-html="$t('landing.header.title')" style="font-size: 45px"></h2>
           <p class="text-gray-gray-500 w-75" style="font-size: 18px">
-            الآن يمكنك طلب تركيب جديد او طلب فني لصيانة منتجك من خلال تطبيق
-            سمنان ومتابعة جميع التفاصيل
+            {{ $t("landing.header.description") }}
           </p>
-          <p class="text-header">حمل التطبيق الآن</p>
+          <p class="text-header">
+            {{ $t("landing.header.download_prompt") }}
+          </p>
           <div class="d-flex ga-4 flex-wrap">
             <v-img
               src="../assets/icons/play-store.svg"
@@ -81,24 +76,18 @@ const { mobile } = useDisplay();
               variant="tonal"
               class="text-primary bg-pri-light font-weight-medium"
             >
-              <span> عن سمنان </span>
+              <span> {{ $t("landing.about_us.chip") }}</span>
             </v-chip>
           </div>
 
           <h3 class="text-secondary font-weight-medium" style="font-size: 45px">
-            سمنان لحلول المياه - ريادة في تقديم حلول متكاملة للمياه
+            {{ $t("landing.about_us.title") }}
           </h3>
           <span class="text-body">
-            شركة سمنان لحلول المياه، تأسست عام 2016 ككيان مستقل لتقديم حلول
-            متكاملة ومبتكرة في مجال المياه. نقدم مجموعة واسعة من المنتجات
-            والخدمات تشمل أجهزة ومحطات تحلية المياه، مضخات المياه المنزلية
-            والزراعية، الغطاسات، المحركات الكهربائية، وحلول رفع المياه.
+            {{ $t("landing.about_us.description1") }}
           </span>
           <span class="text-body">
-            نفخر بخدمتنا الممتدة عبر 60 فرعاً ومركز صيانة في جميع أنحاء المملكة،
-            حيث نعمل على تلبية احتياجات عملائنا من خلال فريق متخصص من مهندسي
-            المبيعات ذوي الخبرة والكفاءة العالية، لضمان تقديم أفضل الحلول التي
-            تتناسب مع متطلباتكم.
+            {{ $t("landing.about_us.description2") }}
           </span>
         </v-col>
 
@@ -127,14 +116,14 @@ const { mobile } = useDisplay();
             variant="tonal"
             class="text-primary bg-pri-light font-weight-medium"
           >
-            عن خدماتنا
+            {{ $t("landing.services.chip") }}
           </v-chip>
 
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
-            اهم خدمات تطبيقنا
+            {{ $t("landing.services.title") }}
           </h4>
           <p class="text-color-text">
-            في سمنان نهتم بكل التفاصيل و كل ما تحتاج لراحتك و خدمتك
+            {{ $t("landing.services.description") }}
           </p>
         </v-col>
 
@@ -154,11 +143,12 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                صيانة دورية
+                {{ $t("landing.services.items.periodic_maintenance.title") }}
               </h3>
               <p class="text-body">
-                يمكنك طلب في القيام بصيانة دورية واستمرار للحفاظ على أجهزتك من
-                التلف.
+                {{
+                  $t("landing.services.items.periodic_maintenance.description")
+                }}
               </p>
             </div>
             <div>
@@ -166,11 +156,10 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                الدعم & الدفع الإلكتروني
+                {{ $t("landing.services.items.support_payment.title") }}
               </h3>
               <p class="text-body">
-                يقوم فريقنا بدعم العملاء بتقنيات قوية بالإضافة لإمكانية الدفع
-                الرقمي في قطع الغيار وسعر الصيانة.
+                {{ $t("landing.services.items.support_payment.description") }}
               </p>
             </div>
           </v-col>
@@ -197,10 +186,10 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                تركيب جديد
+                {{ $t("landing.services.items.new_installation.title") }}
               </h3>
               <p class="text-body">
-                عند شرائك لمنتجاتنا لأول مرة تستطيع طلب في ليقوم بتركيب الجهاز.
+                {{ $t("landing.services.items.new_installation.description") }}
               </p>
             </div>
             <div>
@@ -208,11 +197,12 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                صيانة عاجلة
+                {{ $t("landing.services.items.urgent_maintenance.title") }}
               </h3>
               <p class="text-body">
-                حين حدوث تلف مفاجئ في جهازك تستطيع طلب في ليحضر مختص لحل المشكلة
-                بسرعة ووقت قياسي.
+                {{
+                  $t("landing.services.items.urgent_maintenance.description")
+                }}
               </p>
             </div>
           </v-col>
@@ -238,23 +228,20 @@ const { mobile } = useDisplay();
               variant="tonal"
               class="text-primary bg-pri-light font-weight-medium"
             >
-              عن متجرنا الاكتروني
+              {{ $t("landing.store.chip") }}
             </v-chip>
           </div>
 
           <h4 class="text-secondary text-3xl font-medium">
-            يمكنك تصفح و شراء منتجاتنا من مكانك
+            {{ $t("landing.store.title") }}
           </h4>
           <p class="text-color-text">
-            نوفر لك تجربة تسوق متكاملة عبر متجرنا الإلكتروني، حيث يمكنك استكشاف
-            جميع منتجات سمنان لحلول المياه بكل سهولة. تصفح خياراتنا المتنوعة من
-            أجهزة ومحطات تحلية المياه، مضخات المياه، الغطاسات، وغيرها، واطلب ما
-            تحتاجه مباشرة من أي مكان وفي أي وقت
+            {{ $t("landing.store.description") }}
           </p>
 
           <div>
             <v-btn color="primary" class="rounded-lg w-50" size="large">
-              تصفح المتجر
+              {{ $t("landing.store.button") }}
             </v-btn>
           </div>
         </v-col>
@@ -280,12 +267,14 @@ const { mobile } = useDisplay();
             variant="tonal"
             class="text-primary bg-pri-light font-weight-medium"
           >
-            فروعنا
+            {{ $t("landing.branches.chip") }}
           </v-chip>
           <h4 class="text-secondary font-weight-bold" style="font-size: 32px">
-            نقوم بتغطيه المملكة بالكامل
+            {{ $t("landing.branches.title") }}
           </h4>
-          <p class="text-color-text">تعرف على فروعنا و منافذ الخدمة عندنا</p>
+          <p class="text-color-text">
+            {{ $t("landing.branches.description") }}
+          </p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
           <v-img
@@ -307,9 +296,9 @@ const { mobile } = useDisplay();
           class="d-flex flex-column ga-4 w-50"
         >
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
-            جميع منتجاتنا و خدماتنا و اجهزتك بين يديك لضمان راحتك
+            {{ $t("landing.app.title") }}
           </h4>
-          <p class="text-header">حمل التطبيق الآن</p>
+          <p class="text-header">{{ $t("landing.app.download_prompt") }}</p>
           <div class="d-flex ga-4 flex-wrap">
             <v-img
               src="../assets/icons/play-store.svg"
@@ -347,24 +336,32 @@ const { mobile } = useDisplay();
     <nav
       class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"
     >
-      <a href="#header">الرئيسية</a>
-      <a href="#about-us">من نحن</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#store">متجرنا الإلكتروني</a>
-      <a href="#branches">فروعنا</a>
-      <a href="#">الشروط و الأحكام</a>
-      <a href="#">سياسة الخصوصية</a>
+      <a href="#header">{{ $t("landing.footer.links.home") }}</a>
+      <a href="#about-us">{{ $t("landing.footer.links.about_us") }}</a>
+      <a href="#services">{{ $t("landing.footer.links.services") }}</a>
+      <a href="#store">{{ $t("landing.footer.links.store") }}</a>
+      <a href="#branches">{{ $t("landing.footer.links.branches") }}</a>
+      <a href="#">{{ $t("landing.footer.links.terms") }}</a>
+      <a href="#">{{ $t("landing.footer.links.privacy") }}</a>
     </nav>
     <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
-      <img src="../assets/icons/play-store.svg" alt="play-store btn" />
-      <img src="../assets/icons/app-store.svg" alt="app-store btn" />
+      <img
+        src="../assets/icons/play-store.svg"
+        alt="play-store btn"
+        class="cursor-pointer"
+      />
+      <img
+        src="../assets/icons/app-store.svg"
+        alt="app-store btn"
+        class="cursor-pointer"
+      />
     </div>
   </footer>
 
   <!-- Bottom bar -->
   <div class="border-t py-12">
     <v-container fluid class="py-4 d-flex align-center justify-space-between">
-      <p class="text-secondary">جميع الحقوق محفوطة</p>
+      <p class="text-secondary">{{ $t("landing.rights") }}</p>
       <div class="d-flex align-center ga-4">
         <AppSvgIcon name="facebook" />
         <AppSvgIcon name="linkedin" />
