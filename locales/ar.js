@@ -140,6 +140,29 @@ export default {
     no_account: "ليس لديك حساب ؟",
     login: "تسجيل الدخول",
   },
+  dashboard: {
+    nav: {
+      button: "حجز موعد جديد",
+    },
+    sidebar: {
+      home: "الرئيسية",
+      operations: "العمليات",
+      settings: "الاعدادات",
+    },
+    home: {
+      cards: {
+        new_device: "تركيب جهاز جديد",
+        urgent_maintenance: "صيانة عاجلة",
+        regular_maintenance: "صيانة دورية",
+      },
+      notifications: {
+        title: "الإشعارات",
+        button: "تميز الكل كمقروئة",
+      },
+      operations_logs: "سجل العمليات",
+      show_all: "عرض الكل",
+    },
+  },
   buttons: {
     subscribe_now: "اشترك الآن",
     read_my_story: "اقرأ قصتي",

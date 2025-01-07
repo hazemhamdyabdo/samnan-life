@@ -5,6 +5,7 @@
     <v-card
       style="height: calc(100vh - 150px)"
       elevation="2"
+      min-width="100"
       class="mt-4 mb-4 rounded-xl"
       app
     >
@@ -29,7 +30,7 @@
                 : 'text-grey-300'
             }`"
           >
-            الرئيسية
+            {{ $t("dashboard.sidebar.home") }}
           </p>
         </div>
         <div class="d-flex flex-column ga-1 justify-center align-center">
@@ -47,7 +48,7 @@
                 : 'text-grey-300'
             }`"
           >
-            العمليات
+            {{ $t("dashboard.sidebar.operations") }}
           </p>
         </div>
         <div class="d-flex flex-column ga-1 justify-center align-center">
@@ -65,7 +66,7 @@
                 : 'text-grey-300'
             }`"
           >
-            الاعدادات
+            {{ $t("dashboard.sidebar.settings") }}
           </p>
         </div>
       </v-list>

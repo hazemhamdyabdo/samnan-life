@@ -1,19 +1,20 @@
 <script setup lang="ts">
+const { t } = useI18n();
 const { getFormattedDate } = useFormatDate();
 
 const cards = [
   {
-    title: "تركيب جهاز جديد",
+    title: t("dashboard.home.cards.new_device"),
     link: "/new-device",
     image: "new-device",
   },
   {
-    title: "صيانة عاجلة",
+    title: t("dashboard.home.cards.urgent_maintenance"),
     link: "/",
     image: "urgent-maintenance",
   },
   {
-    title: "صيانة دورية",
+    title: t("dashboard.home.cards.regular_maintenance"),
     link: "/",
     image: "regular-maintenance",
   },
@@ -79,7 +80,7 @@ const operationLogs = [
     <v-card
       v-for="card in cards"
       class="d-flex align-center justify-space-between ga-4 flex-grow-1 cursor-pointer"
-      border="md border-light-200"
+      border="sm black"
       rounded="lg"
       elevation="0"
     >
@@ -94,13 +95,17 @@ const operationLogs = [
     </v-card>
   </section>
   <div class="d-flex align-center">
-    <p class="text-light-gray-2 font-weight-medium">سجل العمليات</p>
+    <p class="text-light-gray-2 font-weight-medium">
+      {{ t("dashboard.home.operations_logs") }}
+    </p>
     <v-spacer />
-    <p class="text-grey-300" style="font-size: 12px">عرض الكل</p>
+    <p class="text-grey-300" style="font-size: 12px">
+      {{ t("dashboard.home.show_all") }}
+    </p>
   </div>
   <section class="py-3">
     <v-expansion-panels v-for="log in operationLogs" elevation="0">
-      <v-expansion-panel class="mb-4" rounded="xl">
+      <v-expansion-panel class="mb-4 border-sm" rounded="xl">
         <v-expansion-panel-title>
           <template v-slot:actions>
             <v-icon color="primary" icon="mdi-chevron-down"></v-icon>

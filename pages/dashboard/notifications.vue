@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { getFormattedDate } = useFormatDate();
+const { t } = useI18n();
 
 const notificationCards = [
   {
@@ -28,11 +29,11 @@ const notificationCards = [
   <main>
     <section class="d-flex justify-space-between align-center py-3">
       <h3 class="font-weight-medium text-light-gray-2" style="font-size: 20px">
-        الإشعارات
+        {{ t("dashboard.home.notifications.title") }}
       </h3>
       <div class="me-4 bg-pri-light rounded-xl px-3 py-1 cursor-pointer">
         <span class="font-weight-medium text-primary" style="font-size: 14px">
-          تميز الكل كمقروئة
+          {{ t("dashboard.home.notifications.button") }}
         </span>
       </div>
     </section>
