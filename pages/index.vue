@@ -371,6 +371,7 @@ const { mobile } = useDisplay();
     </v-container>
   </div>
 </template>
+
 <style scoped lang="scss">
 .wrapper {
   overflow-x: hidden;

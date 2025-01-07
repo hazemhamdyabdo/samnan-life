@@ -100,6 +100,16 @@ export default {
     },
     rights: "جميع الحقوق محفوظة",
   },
+  login: {
+    title: "تسجيل الدخول",
+    welcome_back: "مرحبا بعودتك!",
+    button: "تسجيل الدخول",
+    no_account: "ليس لديك حساب ؟",
+    register: "انشاء حساب جديد",
+    forget_password: "نسيت كلمة المرور ؟",
+    password: "كلمة المرور",
+    phone: "رقم الهاتف",
+  },
   buttons: {
     subscribe_now: "اشترك الآن",
     read_my_story: "اقرأ قصتي",

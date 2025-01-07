@@ -45,12 +45,12 @@ const handleLogin = async () => {
       </v-col>
       <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
-          <SvgIcon name="logo" />
-          <SvgIcon name="title" />
+          <AppSvgIcon name="logo" />
+          <AppSvgIcon name="title" />
         </div>
         <div>
-          <h3 class="font-weight-medium">تسجيل الدخول</h3>
-          <span>مرحبا بعودتك!</span>
+          <h3 class="font-weight-medium">{{ $t("login.title") }}</h3>
+          <span>{{ $t("login.welcome_back") }}</span>
         </div>
         <v-form fast-fail ref="formRef" @submit.prevent>
           <v-row>
@@ -76,7 +76,7 @@ const handleLogin = async () => {
                   variant="outlined"
                   base-color="border-light"
                   density="comfortable"
-                  placeholder="رقم الهاتف"
+                  :placeholder="$t('login.phone')"
                   hide-spin-buttons
                 />
               </div>
@@ -91,7 +91,7 @@ const handleLogin = async () => {
                 v-model="loginDetails.password"
                 variant="outlined"
                 density="comfortable"
-                placeholder="كلمة المرور"
+                :placeholder="$t('login.password')"
               >
                 <template #append-inner>
                   <div
@@ -111,7 +111,7 @@ const handleLogin = async () => {
                 to="/forget-password"
                 class="text-primary font-weight-bold"
               >
-                نسيت كلمة المرور ؟
+                {{ $t("login.forget_password") }}
               </NuxtLink>
             </v-col>
             <v-col cols="12" sm="12" class="pt-0">
@@ -124,14 +124,16 @@ const handleLogin = async () => {
                 block
                 size="50"
                 rounded="lg"
-                >تسجيل الدخول</v-btn
+                >{{ $t("login.button") }}</v-btn
               >
             </v-col>
             <v-col cols="12" sm="12" class="text-center pt-0">
               <p>
-                ليس لديك حساب ؟
-                <NuxtLink to="/register" class="text-primary font-weight-bold"
-                  >انشاء حساب جديد</NuxtLink
+                {{ $t("login.no_account") }}
+                <NuxtLink
+                  to="/register"
+                  class="text-primary font-weight-bold"
+                  >{{ $t("login.register") }}</NuxtLink
                 >
               </p>
             </v-col>
