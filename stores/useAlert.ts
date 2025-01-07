@@ -2,19 +2,21 @@ import { defineStore } from "pinia";
 
 export const useAlertStore = defineStore("alert", () => {
   const alert = ref(false)
-  const alertMessage = ref('')
-  const alertType = ref('')
+  const alertMessage = ref<string>()
+  const alertType = ref<'success' | 'error'>()
 
-  const showSuccess = (message: string) => {
-    alertType.value = 'success';
+  const showAlert = (type: 'success' | 'error', message: string) => {
+    alertType.value = type;
     alertMessage.value = message;
     alert.value = true;
   };
 
+  const showSuccess = (message: string) => {
+    showAlert('success', message);
+  };
+
   const showError = (message: string) => {
-    alertType.value = 'error';
-    alertMessage.value = message;
-    alert.value = true;
+    showAlert('error', message);
   };
 
   return {
