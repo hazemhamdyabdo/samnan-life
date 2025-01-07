@@ -25,22 +25,24 @@ const handleSubmit = async () => {
 <template>
   <div>
     <div class="mb-4">
-      <h3 class="font-weight-medium">انشاء حساب جديد</h3>
-      <span>الامر يجتاج من خطوتين فقط!</span>
+      <h3 class="font-weight-medium">
+        {{ $t("register.header") }}
+      </h3>
+      <span>{{ $t("register.steps") }}</span>
     </div>
     <v-form fast-fail ref="formRef" @submit.prevent>
       <v-row>
         <v-col cols="6" sm="12" class="d-flex ga-4 pb-0">
           <v-text-field
             variant="outlined"
-            placeholder="الاسم الاول"
+            :placeholder="$t('register.fields.first_name')"
             :rules="[rules.required, rules.minLength(3)]"
             base-color="border-light"
             density="comfortable"
             v-model="registerDetails.first_name"
           />
           <v-text-field
-            placeholder="الاسم الاحير"
+            :placeholder="$t('register.fields.last_name')"
             base-color="border-light"
             density="comfortable"
             :rules="[rules.required, rules.minLength(3)]"
@@ -67,7 +69,7 @@ const handleSubmit = async () => {
               variant="outlined"
               base-color="border-light"
               density="comfortable"
-              placeholder="رقم الهاتف"
+              :placeholder="$t('register.fields.phone_number')"
               v-model="registerDetails.phone"
             />
           </div>
@@ -75,7 +77,7 @@ const handleSubmit = async () => {
         <v-col cols="6" sm="12" class="pb-0">
           <v-text-field
             :type="isInputOneShow ? 'text' : 'password'"
-            placeholder="كلمة المرور الجديدة"
+            :placeholder="$t('register.fields.new_password')"
             :rules="[rules.required, rules.minLength(8)]"
             base-color="border-light"
             density="comfortable"
@@ -97,7 +99,7 @@ const handleSubmit = async () => {
         <v-col cols="6" sm="12" class="pb-0">
           <v-text-field
             :type="isInputTwoShow ? 'text' : 'password'"
-            placeholder="كلمة المرور مجددا"
+            :placeholder="$t('register.fields.confirm_password')"
             base-color="border-light"
             :rules="[
               rules.required,
@@ -132,15 +134,15 @@ const handleSubmit = async () => {
             block
             size="50"
             rounded="lg"
-            >انشئ حساب جديد</v-btn
+            >{{ $t("login.register") }}</v-btn
           >
         </v-col>
         <v-col cols="12" sm="12" class="text-center pt-0">
           <p>
-            ليس لديك حساب ؟
-            <NuxtLink to="/login" class="text-primary font-weight-bold"
-              >تسجيل الدخول</NuxtLink
-            >
+            {{ $t("register.no_account") }}
+            <NuxtLink to="/login" class="text-primary font-weight-bold">{{
+              $t("register.login")
+            }}</NuxtLink>
           </p>
         </v-col>
       </v-row>

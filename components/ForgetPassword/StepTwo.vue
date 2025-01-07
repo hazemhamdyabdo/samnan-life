@@ -33,10 +33,9 @@ onMounted(() => {
     <h3>
       {{ title }}
     </h3>
-    <span
-      >قم بادخال الرمز المكون من 4 ارقام الذي قمنا بارساله على رقم الهاتف 0000
-      00 0000</span
-    >
+    <span>
+      {{ $t("forget_password.otp_instructions") }}
+    </span>
   </div>
   <v-row>
     <v-col cols="6" sm="12">
@@ -58,7 +57,7 @@ onMounted(() => {
         block
         size="50"
         rounded="lg"
-        >ارسل الرمز مرة اخرى</v-btn
+        >{{ $t("forget_password.resend_otp") }}</v-btn
       >
     </v-col>
   </v-row>

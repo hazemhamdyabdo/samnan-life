@@ -14,15 +14,15 @@ const handleSubmit = async () => {
     await validate();
     emits("change:step-one");
   } catch (error) {
-    alert(error);
+    // alert(error);
   }
 };
 </script>
 
 <template>
   <div>
-    <h3 class="font-weight-medium">نسيت كلمة السر</h3>
-    <span>قم بادخال بريدك الالكتروني لاستعادة الحساب</span>
+    <h3 class="font-weight-medium">{{ $t("forget_password.title") }}</h3>
+    <span>{{ $t("forget_password.instructions") }}</span>
   </div>
   <v-form fast-fail ref="formRef" @submit.prevent>
     <v-row>
@@ -48,7 +48,7 @@ const handleSubmit = async () => {
             base-color="border-light"
             :rules="[rules.required, rules.phoneNumber]"
             density="comfortable"
-            placeholder="رقم الهاتف"
+            :placeholder="$t('login.phone')"
             hide-spin-buttons
           />
         </div>
@@ -63,14 +63,14 @@ const handleSubmit = async () => {
           block
           size="50"
           rounded="lg"
-          >إرسال</v-btn
+          >{{ $t("forget_password.button") }}</v-btn
         >
       </v-col>
       <v-col cols="12" sm="12" class="text-center pt-0">
         <p>
-          <NuxtLink to="/login" class="text-primary font-weight-bold"
-            >العودة لتسجيل الدخول</NuxtLink
-          >
+          <NuxtLink to="/login" class="text-primary font-weight-bold">{{
+            $t("forget_password.back_to_login")
+          }}</NuxtLink>
         </p>
       </v-col>
     </v-row>

@@ -89,8 +89,8 @@ const handleResendOTP = () => {
       </v-col>
       <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
-          <SvgIcon name="logo" />
-          <SvgIcon name="title" />
+          <AppSvgIcon name="logo" />
+          <AppSvgIcon name="title" />
         </div>
         <component
           :is="forgetPasswordSteps[currentStep]"

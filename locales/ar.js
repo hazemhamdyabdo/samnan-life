@@ -110,6 +110,36 @@ export default {
     password: "كلمة المرور",
     phone: "رقم الهاتف",
   },
+  forget_password: {
+    title: "نسيت كلمة السر",
+    instructions: "قم بادخال بريدك الالكتروني لاستعادة الحساب",
+    back_to_login: "العودة لتسجيل الدخول",
+    button: "إرسال",
+    otp_instructions:
+      "قم بادخال الرمز المكون من 4 ارقام الذي قمنا بارساله على رقم الهاتف 0000 00 0000",
+    resend_otp: "ارسل الرمز مرة اخرى",
+    confirm_password: "تأكيد كلمة المرور",
+    new_password: {
+      title: "كلمة السر الجديدة",
+      instructions:
+        "قم بادخال كلمة المرور الجديدة مرتين ثم ستتمكن من فتح الحساب",
+      button: "حفظ",
+    },
+  },
+  register: {
+    title: "توثيق حسابك",
+    header: "انشاء حساب جديد",
+    steps: "الامر يحتاج خطوتين فقط!",
+    fields: {
+      first_name: "الاسم الاول",
+      last_name: "الاسم الاخير",
+      phone_number: "رقم الهاتف",
+      new_password: "كلمة المرور الجديدة",
+      confirm_password: "كلمة المرور مجددا",
+    },
+    no_account: "ليس لديك حساب ؟",
+    login: "تسجيل الدخول",
+  },
   buttons: {
     subscribe_now: "اشترك الآن",
     read_my_story: "اقرأ قصتي",

@@ -20,8 +20,10 @@ const handleSubmit = async () => {
 
 <template>
   <div>
-    <h3 class="font-weight-medium">كلمة السر الجديدة</h3>
-    <span>قم بادخال كلمة المرور الجديدة مرتين ثم ستتمكن من فتح الحساب</span>
+    <h3 class="font-weight-medium">
+      {{ $t("forget_password.new_password.title") }}
+    </h3>
+    <span>{{ $t("forget_password.new_password.instructions") }}</span>
   </div>
   <v-form fast-fail ref="formRef" @submit.prevent>
     <v-row>
@@ -35,7 +37,7 @@ const handleSubmit = async () => {
           base-color="border-light"
           variant="outlined"
           density="comfortable"
-          placeholder="كلمة المرور الجديدة"
+          :placeholder="$t('forget_password.new_password.title')"
         >
           <template #append-inner>
             <div
@@ -59,7 +61,7 @@ const handleSubmit = async () => {
           rounded="lg"
           variant="outlined"
           density="comfortable"
-          placeholder="كلمة المرور مجددا"
+          :placeholder="$t('forget_password.confirm_password')"
           :rules="[
             rules.required,
             rules.confirmPassword(
@@ -89,7 +91,7 @@ const handleSubmit = async () => {
           block
           size="50"
           rounded="lg"
-          >حفظ</v-btn
+          >{{ $t("forget_password.new_password.button") }}</v-btn
         >
       </v-col>
     </v-row>
