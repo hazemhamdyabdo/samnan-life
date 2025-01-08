@@ -10,17 +10,16 @@ import Logout from "~/components/Settings/Logout.vue";
 
 const selectedComponent = ref("profile");
 
+const components = {
+  profile: Profile,
+  language: Language,
+  addresses: Addresses,
+  support: Support,
+  products: Products,
+  notifications: Notifications,
+  logout: Logout,
+};
 const currentComponent = computed(() => {
-  const components = {
-    profile: Profile,
-    language: Language,
-    addresses: Addresses,
-    support: Support,
-    products: Products,
-    notifications: Notifications,
-    logout: Logout,
-  };
-
   // @ts-ignore
   return components[selectedComponent.value];
 });
