@@ -27,11 +27,11 @@ const currentComponent = computed(() => {
 <template>
   <section class="py-0">
     <v-row>
-      <v-col cols="3" class="pt-0">
+      <v-col cols="3" style="min-height: calc(100vh - 100px)" class="pt-0">
         <CardMenu v-model:selectedCard="selectedComponent" />
       </v-col>
-      <v-col cols="9" class="pt-0">
-        <v-card rounded="xl" height="100%" class="pa-4">
+      <v-col cols="9" style="min-height: calc(100vh - 100px)" class="pt-0">
+        <v-card rounded="xl" height="100%" class="pa-4" elevation="2">
           <component :is="currentComponent" />
         </v-card>
       </v-col>

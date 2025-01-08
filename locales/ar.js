@@ -175,6 +175,17 @@ export default {
           logout: "تسجيل الخروج",
         },
       },
+      profile: {
+        my_profile: "الملف الشخصي",
+        first_name: "الاسم الاول",
+        last_name: "الاسم الاخير",
+        email: "البريد الالكتروني",
+        phone: "رقم الهاتف",
+        change_phone: "تغيير رقم الهاتف",
+        change_password: "تغيير كلمة المرور",
+        save_changes: "حفظ التعديلات",
+        delete_account: "حذف الحساب",
+      },
     },
   },
   buttons: {

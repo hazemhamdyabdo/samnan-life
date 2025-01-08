@@ -49,7 +49,7 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
     elevation="2"
     rounded="xl"
     border="sm black"
-    style="height: calc(100vh - 150px)"
+    height="100%"
   >
     <v-card-title>
       <h6 class="text-16">{{ $t("dashboard.settings.card.title") }}</h6>

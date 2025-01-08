@@ -9,7 +9,7 @@ import SideBar from "~/components/common/SideBar.vue";
       <v-container fluid>
         <!-- APP NAV -->
         <NavBar />
-        <SideBar>
+        <SideBar style="min-height: calc(100vh - 80px)">
           <slot></slot>
         </SideBar>
       </v-container>

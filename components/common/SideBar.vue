@@ -2,13 +2,7 @@
 
 <template>
   <v-layout>
-    <v-card
-      style="height: calc(100vh - 150px)"
-      elevation="2"
-      min-width="100"
-      class="mt-4 mb-4 rounded-xl"
-      app
-    >
+    <v-card elevation="2" min-width="100" class="mt-4 mb-4 rounded-xl" app>
       <v-list
         density="compact"
         nav
