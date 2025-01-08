@@ -15,7 +15,7 @@ const details = ref({
       {{ t("dashboard.settings.profile.my_profile") }}
     </h3>
   </div>
-  <div class="px-4 mb-2">
+  <div class="px-4 mb-8">
     <v-avatar
       size="100"
       color="primary"
