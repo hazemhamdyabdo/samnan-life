@@ -25,7 +25,7 @@ const currentComponent = computed(() => {
 });
 </script>
 <template>
-  <section class="py-0">
+  <section>
     <v-row>
       <v-col cols="3" style="min-height: calc(100vh - 100px)" class="pt-0">
         <CardMenu v-model:selectedCard="selectedComponent" />

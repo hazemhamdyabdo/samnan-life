@@ -90,13 +90,13 @@ const details = ref({
     ></v-col>
   </v-row>
   <section class="d-flex flex-column ga-4 py-4">
-    <div class="d-flex align-center ga-2">
+    <div class="d-flex align-center ga-2 cursor-pointer">
       <AppSvgIcon name="call" />
       <p class="text-primary font-weight-medium">
         {{ t("dashboard.settings.profile.change_phone") }}
       </p>
     </div>
-    <div class="d-flex align-center ga-2">
+    <div class="d-flex align-center ga-2 cursor-pointer">
       <AppSvgIcon name="lock" />
       <p class="font-weight-medium text-primary">
         {{ t("dashboard.settings.profile.change_password") }}
@@ -108,7 +108,7 @@ const details = ref({
       t("dashboard.settings.profile.save_changes")
     }}</v-btn>
   </div>
-  <div class="d-flex align-center ga-2 mt-4">
+  <div class="d-flex align-center ga-2 mt-4 cursor-pointer">
     <AppSvgIcon name="profile-delete" />
     <p class="font-weight-medium text-gray-500">
       {{ t("dashboard.settings.profile.delete_account") }}

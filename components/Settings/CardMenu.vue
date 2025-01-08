@@ -37,6 +37,7 @@ const items = [
     name: "logout",
   },
 ];
+const isNotificationActive = ref(true);
 const selectedCard = defineModel("selectedCard", { type: String });
 const selectCard = (item: { name: string; title: string; icon: string }) => {
   selectedCard.value = item.name;
@@ -71,10 +72,23 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
         "
         @click="selectCard(item)"
       >
-        <div class="d-flex ga-2">
+        <div v-if="item.name !== 'notifications'" class="d-flex ga-2">
           <AppSvgIcon :name="item.icon" />
           <span class="text-16">{{ item.title }}</span>
         </div>
+        <section v-else class="d-flex ga-2 align-center justify-space-between">
+          <div class="d-flex ga-2">
+            <AppSvgIcon :name="item.icon" />
+            <span class="text-16">{{ item.title }}</span>
+          </div>
+          <v-switch
+            v-model="isNotificationActive"
+            color="primary"
+            density="compact"
+            class="pe-4"
+            hide-details
+          ></v-switch>
+        </section>
       </v-list-item>
     </v-list>
   </v-card>
