@@ -69,11 +69,8 @@ const details = ref({
       <v-text-field
         v-model="details.phone_number"
         :label="t('dashboard.settings.profile.phone')"
-        variant="outlined"
         color="#E2E2E2"
-        base-color="#E2E2E2"
         bg-color="#E2E2E2"
-        rounded="xl"
         disabled
         hide-details
       ></v-text-field

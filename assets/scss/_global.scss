@@ -34,15 +34,27 @@ a body,
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h5 {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
 }
 
 h2.heading {
@@ -50,7 +62,21 @@ h2.heading {
   text-align: center;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
+}
+
+.v-btn {
+  text-transform: none !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+.radius-16 {
+  border-radius: 16px !important;
+}
+
+.v-field__outline {
+  border-radius: 16px !important;
 }

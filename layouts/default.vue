@@ -9,10 +9,27 @@ import SideBar from "~/components/common/SideBar.vue";
       <v-container fluid>
         <!-- APP NAV -->
         <NavBar />
-        <SideBar style="min-height: calc(100vh - 80px)">
-          <slot></slot>
-        </SideBar>
+        <v-row class="mt-4">
+          <v-col cols="12" sm="2" lg="1">
+            <SideBar class="sticky"> </SideBar>
+          </v-col>
+          <v-col>
+            <slot></slot>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </v-app>
 </template>
+
+<style>
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+  @media (min-width: 960px) {
+    min-height: calc(100vh - 20px);
+  }
+}
+</style>

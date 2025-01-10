@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { getFormattedDate } = useFormatDate();
+const { dateAndTime } = useDateTimeFormate();
 const { t } = useI18n();
 
 const notificationCards = [
@@ -61,7 +61,7 @@ const notificationCards = [
         </div>
         <v-spacer />
         <p class="text-grey-300" style="font-size: 12px">
-          {{ getFormattedDate(card.created_at) }}
+          {{ dateAndTime(card.created_at) }}
         </p>
       </v-card>
     </section>
