@@ -1,20 +1,14 @@
 <script setup lang="ts">
-import OTP from "../app/OTP.vue";
-
 defineProps<{
-  title: string;
   isLoading: boolean;
 }>();
 const emits = defineEmits(["resend:otp", "verify:otp"]);
-const countdownLimit = 60;
-
-const timeLeft = ref(countdownLimit);
-
 const otp = defineModel("otp", {
   type: String,
   required: true,
 });
 
+const timeLeft = ref(60);
 const countdown = computed(() => {
   const minutes = Math.floor(timeLeft.value / 60);
   const seconds = timeLeft.value % 60;
@@ -31,20 +25,32 @@ onMounted(() => {
   }, 1000);
 });
 </script>
-
 <template>
   <div>
-    <h3>
-      {{ title }}
-    </h3>
-    <span>
-      {{ $t("forget_password.otp_instructions") }}
-    </span>
+    <v-otp-input
+      dir="ltr"
+      :length="4"
+      rounded="xl"
+      @finish="emits('verify:otp')"
+      v-model="otp"
+    />
+    <p class="text-primary text-center font-weight-bold mb-4">
+      {{ countdown }}
+    </p>
   </div>
-  <OTP
-    v-model:otp="otp"
-    :isLoading="isLoading"
-    @resend:otp="emits('resend:otp')"
-    @verify:otp="emits('verify:otp')"
-  />
+  <div class="pt-0">
+    <v-btn
+      @click="emits('resend:otp')"
+      :loading="isLoading"
+      color="primary"
+      round
+      block
+      size="50"
+      rounded="lg"
+      >{{ $t("forget_password.resend_otp") }}</v-btn
+    >
+  </div>
+  <!-- </v-row> -->
 </template>
+
+<style scoped></style>

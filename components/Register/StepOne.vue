@@ -59,7 +59,7 @@ const handleSubmit = async () => {
               height="50"
               class="d-flex align-center border border-opacity-25 ga-2 px-4 cursor-auto"
             >
-              <SvgIcon name="SA" />
+              <AppSvgIcon name="SA" />
               <p>+966</p>
             </v-card>
             <v-text-field

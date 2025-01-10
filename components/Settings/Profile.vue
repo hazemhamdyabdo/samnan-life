@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n();
+
+const emits = defineEmits(["change-action"]);
 const details = ref({
   prefix: "+966",
   first_name: "Ahmed",
@@ -90,13 +92,19 @@ const details = ref({
     ></v-col>
   </v-row>
   <section class="d-flex flex-column ga-4 py-4">
-    <div class="d-flex align-center ga-2 cursor-pointer">
+    <div
+      class="d-flex align-center ga-2 cursor-pointer"
+      @click="emits('change-action', 'Phone')"
+    >
       <AppSvgIcon name="call" />
       <p class="text-primary font-weight-medium">
         {{ t("dashboard.settings.profile.change_phone") }}
       </p>
     </div>
-    <div class="d-flex align-center ga-2 cursor-pointer">
+    <div
+      class="d-flex align-center ga-2 cursor-pointer"
+      @click="emits('change-action', 'Password')"
+    >
       <AppSvgIcon name="lock" />
       <p class="font-weight-medium text-primary">
         {{ t("dashboard.settings.profile.change_password") }}

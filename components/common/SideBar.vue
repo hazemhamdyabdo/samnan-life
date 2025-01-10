@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <v-layout>
     <v-card elevation="2" min-width="100" class="mt-4 mb-4 rounded-xl" app>
@@ -55,7 +53,7 @@
           </NuxtLink>
           <p
             :class="`${
-              $route.path === '/dashboard/settings'
+              $route.path.includes('settings')
                 ? 'text-primary font-weight-bold'
                 : 'text-grey-300'
             }`"

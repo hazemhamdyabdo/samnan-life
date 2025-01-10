@@ -4,32 +4,32 @@ const items = [
   {
     title: t("dashboard.settings.card.items.profile"),
     icon: "profile-circle",
-    name: "profile",
+    name: "/dashboard/settings",
   },
   {
     title: t("dashboard.settings.card.items.language"),
     icon: "language-square",
-    name: "language",
+    name: "/dashboard/settings/language",
   },
   {
     title: t("dashboard.settings.card.items.addresses"),
     icon: "location",
-    name: "addresses",
+    name: "/dashboard/settings/addresses",
   },
   {
     title: t("dashboard.settings.card.items.products"),
     icon: "box-1",
-    name: "products",
+    name: "/dashboard/settings/products",
   },
   {
     title: t("dashboard.settings.card.items.support_help"),
     icon: "24-support",
-    name: "support",
+    name: "/dashboard/settings/support",
   },
   {
     title: t("dashboard.settings.card.items.notifications"),
     icon: "notification-bing",
-    name: "notifications",
+    name: "/dashboard/settings/notifications",
   },
   {
     title: t("dashboard.settings.card.items.logout"),
@@ -38,10 +38,6 @@ const items = [
   },
 ];
 const isNotificationActive = ref(true);
-const selectedCard = defineModel("selectedCard", { type: String });
-const selectCard = (item: { name: string; title: string; icon: string }) => {
-  selectedCard.value = item.name;
-};
 </script>
 
 <template>
@@ -61,16 +57,16 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
       nav
       class="d-flex flex-column justify-space-between py-4 ga-2"
     >
-      <v-list-item
+      <NuxtLink
         v-for="item in items"
         :key="item.title"
-        class="py-0"
+        class="pa-4"
         :class="
-          selectedCard === item.name
+          $route.path === item.name
             ? 'bg-pri-light text-primary font-weight-medium rounded-lg'
             : 'text-grey-400'
         "
-        @click="selectCard(item)"
+        :to="item.name === 'logout' ? '/' : item.name"
       >
         <div v-if="item.name !== 'notifications'" class="d-flex ga-2">
           <AppSvgIcon :name="item.icon" />
@@ -89,7 +85,7 @@ const selectCard = (item: { name: string; title: string; icon: string }) => {
             hide-details
           ></v-switch>
         </section>
-      </v-list-item>
+      </NuxtLink>
     </v-list>
   </v-card>
 </template>

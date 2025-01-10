@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <h1>Language</h1>
+  <h1>addresses</h1>
 </template>
 
 <style scoped></style>

@@ -7,6 +7,9 @@ html {
 }
 
 
+.v-field__outline {
+  border-radius: 16px !important;
+}
 body {
   background: rgba(var(--v-theme-theme-background), 1);
 }

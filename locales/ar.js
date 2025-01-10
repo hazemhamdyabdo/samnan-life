@@ -185,8 +185,37 @@ export default {
         change_password: "تغيير كلمة المرور",
         save_changes: "حفظ التعديلات",
         delete_account: "حذف الحساب",
+        update_phone: {
+          header: "تغيير رقم الهاتف",
+          edit_title: "تعديل رقم الهاتف",
+          instruction: "قم بإدخال رقم هاتفك",
+        },
+        update_password: {
+          header: "تغيير كلمة السر",
+          edit_title: "تعديل كلمة المرور",
+          instruction: "ادخل كلمة المرور الحالية ثم الجديدة مرتين",
+          current_password: "كلمة المرور الحالية",
+          confirm_password: "كلمة المرور الجديدة مجددا",
+        },
+      },
+      verification: {
+        email: "للبريد الالكتروني",
+        message: "قم بادخال الرمز الذي ارسل",
+        phone: "لهاتفك",
+        email_content:
+          "قم بادخال الرمز المكون من 4 ارقام الذي قمنا بارساله على بريدك الالكتروني ",
+        phone_content:
+          "قم بادخال الرمز المكون من 4 ارقام الذي قمنا بارساله على رقم الهاتف",
+        changed: "تم تغيير",
+        successfully: "بنجاح",
+        added: "تم اضافة",
+        to: "الى",
+        changed_password: "تم تغيير كلمة المرور الخاصة بك بنجاج",
       },
     },
+    ok: "حسنا",
+    send: "ارسال",
+    save: "حفظ",
   },
   buttons: {
     subscribe_now: "اشترك الآن",
