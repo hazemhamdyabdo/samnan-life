@@ -3,6 +3,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import { VDateInput } from "vuetify/labs/VDateInput";
 
 const theme = {
   options: { customProperties: true },
@@ -30,14 +31,8 @@ const theme = {
         "border-light-200": "#CECECE",
         "light-gray": "#C3C3C3",
         "light-gray-2": "#454545",
-      },
-    },
-    dark: {
-      colors: {
-        background: "#030F07",
-        "theme-text": "#A0A7A1",
-        "background-200": "#07180C",
-        "theme-white": "#07180C",
+        "disabled-gray": "#EFEFEF",
+        error: "#EF233C",
       },
     },
   },
@@ -49,16 +44,23 @@ export default defineNuxtPlugin((app) => {
     // ... your configuration
     ssr: true,
     theme,
-    components,
+    components: {
+      VDateInput,
+    },
     directives,
     defaults: {
       VTextField: {
         minHeight: "60px",
         rounded: "lg",
         variant: "outlined",
+        color: "primary",
+        hideDetails: "auto",
+        baseColor: "border-light",
       },
       VBtn: {
         elevation: 0,
+        rounded: "lg",
+        height: "50px",
       },
     },
   });
