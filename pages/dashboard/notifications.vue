@@ -6,22 +6,22 @@ const notificationCards = [
   {
     title: "حالة الصيانة",
     description: "تم اتمام عملية الصيانة بنجاح يرجى مراحعة جدولك",
-    created_at: Date.now() + 10000,
+    created_at: new Date(Date.now() + 10000),
   },
   {
     title: "حالة الصيانة",
     description: "تم اتمام عملية الصيانة بنجاح يرجى مراحعة جدولك",
-    created_at: Date.now() + 20000,
+    created_at: new Date(Date.now() + 20000),
   },
   {
     title: "حالة الصيانة",
     description: "تم اتمام عملية الصيانة بنجاح يرجى مراحعة جدولك",
-    created_at: Date.now() + 30000,
+    created_at: new Date(Date.now() + 30000),
   },
   {
     title: "حالة الصيانة",
     description: "تم اتمام عملية الصيانة بنجاح يرجى مراحعة جدولك",
-    created_at: Date.now() + 40000,
+    created_at: new Date(Date.now() + 40000),
   },
 ];
 </script>

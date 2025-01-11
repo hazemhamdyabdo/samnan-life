@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
-const { formatToDateString } = useDateTimeFormate();
+const { dateAndTime  } = useDateTimeFormate();
 
 const cards = [
   {
@@ -123,7 +123,7 @@ const operationLogs = [
                 {{ log.title }}
               </h5>
               <p class="text-grey-300" style="font-size: 12px">
-                {{ formatToDateString(log.created_at) }}
+                {{ dateAndTime (log.created_at) }}
               </p>
             </div>
             <v-spacer />

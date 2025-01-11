@@ -1,5 +1,5 @@
-export function useDateTimeFormate(locale: string) {
-  function formatToTimeString(dateTime: string) {
+export function useDateTimeFormate(locale: string = "en") {
+  function formatToTimeString(dateTime: Date) {
     if (!dateTime) return;
     const time = new Date(dateTime).toLocaleTimeString(locale, {
       hour: "numeric",
@@ -14,7 +14,7 @@ export function useDateTimeFormate(locale: string) {
     return time;
   }
 
-  function formatToDateString(dateTime: string) {
+  function formatToDateString(dateTime: Date) {
     if (!dateTime) return;
 
     const date = new Date(dateTime);
@@ -36,7 +36,7 @@ export function useDateTimeFormate(locale: string) {
     return formattedDate;
   }
 
-  function dateAndTime(dateTime: string, type = "both") {
+  function dateAndTime(dateTime: Date, type = "both") {
     if (!dateTime) return;
 
     const date = formatToDateString(dateTime);

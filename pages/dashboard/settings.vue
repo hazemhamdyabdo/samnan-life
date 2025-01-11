@@ -8,7 +8,7 @@ import CardMenu from "@/components/Settings/CardMenu.vue";
         <CardMenu />
       </v-col>
       <v-col cols="9">
-        <v-card rounded="xl" height="100%" class="pa-4" elevation="2">
+        <v-card rounded="xl" class="pa-4" elevation="2">
           <NuxtPage />
         </v-card>
       </v-col>
