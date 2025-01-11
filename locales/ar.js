@@ -206,6 +206,37 @@ export default {
         english: "الانجليزية",
       },
 
+      addresses: {
+        header: "العناوين",
+        address_list: "قائمة عناويني",
+        description:
+          "إليك قائمة العناوين الخاصة بك. يمكنك حذف عنوان أو تعديله أو إضافة عنوان جديد",
+        add_new_address: "إضافة عنوان جديد",
+        edit: "تعديل",
+        delete: "حذف",
+        address_example: {
+          first: "المنزل الأول",
+          second: "المنزل الثاني",
+        },
+        confirm_delete: {
+          header: "حذف العنوان",
+          message: "هل أنت متأكد من رغبتك في حذف العنوان؟",
+          confirm: "نعم، احذفه",
+        },
+        location_placeholder: "الرياض، حي الفيصلية، منزل 144",
+        add_address: {
+          header: "إضافة عنوان جديد",
+          instructions:
+            "قم بتحديد العنوان على الخريطة وإضافة اسم لذلك العنوان مثل: المنزل - العمل - منزل العائلة ...",
+          city: "المدينة",
+          address_name: "اسم العنوان",
+          street_or_neighborhood: "عنوان الشارع / الحي",
+          short_address: "العنوان الوطني أو العنوان المختصر",
+          directions: "معرفة الكيفية",
+          address_details_placeholder: "تفاصيل العنوان...",
+        },
+      },
+
       verification: {
         email: "للبريد الالكتروني",
         message: "قم بادخال الرمز الذي ارسل",
