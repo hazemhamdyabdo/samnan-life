@@ -1,25 +1,27 @@
 <script setup lang="ts">
-const modelValue = defineModel("modelValue");
+const dialog = defineModel("dialog", {
+  type: Boolean,
+  default: false,
+});
 defineEmits(["submit"]);
 
-defineProps({
-  title: String,
-  icon: String,
-  text: String,
-  okText: String,
-  isDelete: {
-    type: Boolean,
-    default: false,
-  },
-});
+withDefaults(
+  defineProps<{
+    title: string;
+    icon: string;
+    text: string;
+    okText?: string;
+    isDelete?: boolean;
+  }>(),
+  {
+    isDelete: false,
+    okText: "buttons.ok",
+  }
+);
 </script>
 
 <template>
-  <v-dialog
-    v-model="modelValue"
-    @click:outside="$emit('update:modelValue', false)"
-    max-width="500"
-  >
+  <v-dialog v-model="dialog" @click:outside="dialog = false" max-width="500">
     <v-card class="px-2" rounded="xl">
       <v-card-title class="border-b">
         <h3>{{ title }}</h3>
@@ -27,7 +29,7 @@ defineProps({
       <v-card-text>
         <AppSvgIcon v-if="icon" :name="icon" class="mb-2" />
         <span>{{ text }}</span>
-        <div>
+        <div v-if="$slots.default">
           <slot></slot>
         </div>
       </v-card-text>
@@ -36,7 +38,7 @@ defineProps({
         <v-spacer></v-spacer>
 
         <v-btn
-          @click="modelValue = false"
+          @click="dialog = false"
           color="pri-light"
           class="text-primary radius-16"
           height="50px"
@@ -54,11 +56,9 @@ defineProps({
           rounded="false"
           min-width="100px"
           @click="$emit('submit')"
-          :text="okText || $t('buttons.ok')"
+          :text="$t(okText)"
         ></v-btn>
       </div>
     </v-card>
   </v-dialog>
 </template>
-
-<style lang="scss" scoped></style>

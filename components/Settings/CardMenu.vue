@@ -46,7 +46,7 @@ const isNotificationActive = ref(true);
     elevation="2"
     rounded="xl"
     border="sm black"
-    height="100%"
+    style="min-height: 100vh"
   >
     <v-card-title>
       <h6 class="text-16">{{ $t("dashboard.settings.card.title") }}</h6>

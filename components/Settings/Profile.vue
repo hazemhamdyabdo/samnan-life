@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppModal from "~/components/app/Modal.vue";
 const { t } = useI18n();
 
 const emits = defineEmits(["change-action"]);
@@ -9,6 +10,8 @@ const details = ref({
   email: "ahmed@example.com",
   phone_number: "597875665",
 });
+
+const dialog = ref(false);
 </script>
 
 <template>
@@ -113,10 +116,20 @@ const details = ref({
       t("dashboard.settings.profile.save_changes")
     }}</v-btn>
   </div>
-  <div class="d-flex align-center ga-2 mt-4 cursor-pointer">
+  <div
+    @click="dialog = true"
+    class="d-flex align-center ga-2 mt-4 cursor-pointer"
+  >
     <AppSvgIcon name="profile-delete" />
     <p class="font-weight-medium text-gray-500">
       {{ t("dashboard.settings.profile.delete_account") }}
     </p>
   </div>
+
+  <AppModal
+    v-model:dialog="dialog"
+    title="تسجيل الخروج"
+    icon="logout"
+    text="هل انت متأكد من رغبتك في تسجيل الخروج ؟"
+  />
 </template>

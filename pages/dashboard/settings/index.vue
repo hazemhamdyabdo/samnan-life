@@ -21,7 +21,7 @@ const currentComponentView = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div style="min-height: calc(100vh - 20px)">
     <component :is="currentComponentView" @change-action="changeComponent" />
   </div>
 </template>

@@ -100,7 +100,13 @@ const handleClick = async () => {
               :type="isInputThreeShow ? 'text' : 'password'"
               label=""
               v-model="passwordUpdates.confirmPassword"
-              :rules="[rules.required, rules.minLength(8)]"
+              :rules="[
+                rules.required,
+                rules.confirmPassword(
+                  passwordUpdates.confirmPassword,
+                  passwordUpdates.newPassword
+                ),
+              ]"
               rounded="lg"
               base-color="border-light"
               variant="outlined"

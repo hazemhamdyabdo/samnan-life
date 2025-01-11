@@ -1,36 +1,41 @@
-<script setup>
+<script setup lang="ts">
 import { defineAsyncComponent, ref, computed } from "vue";
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  size: {
-    type: String,
-    default: "lg",
-  },
-  color: {
-    type: String,
-  },
-  hoverColor: {
-    type: String,
-  },
-  readOnly: {
-    type: Boolean,
-    default: false,
-  },
+const props = withDefaults(
+  defineProps<{
+    name: string;
+    size?: string | number;
+    color?: string;
+    readOnly?: boolean;
+    filled?: boolean;
+  }>(),
+  {
+    size: "md",
+    readOnly: false,
+    filled: true,
+  }
+);
+const sizeMap: Record<string, number> = {
+  sm: 24,
+  md: 32,
+  lg: 40,
+  xl: 48,
+};
+const componentStyle = computed(() => {
+  const sizeValue =
+    typeof props.size === "string" ? sizeMap[props.size] : props.size;
+  const dimension = sizeValue ?? sizeMap.md;
+
+  return {
+    display: "block",
+    cursor: props.readOnly ? "not-allowed" : "pointer",
+    width: `${dimension}px`,
+    height: `${dimension}px`,
+  };
 });
 
-const hovering = ref(false);
-
-const componentStyle = computed(() => ({
-  display: "block",
-  cursor: props.readOnly ? "not-allowed" : "pointer",
-}));
-
-const dynamicComponent = defineAsyncComponent(() =>
-  import(`~/public/icons/${props.name}.svg`)
+const dynamicComponent = defineAsyncComponent(
+  () => import(`~/public/icons/${props.name}.svg`)
 );
 </script>
 
@@ -38,9 +43,8 @@ const dynamicComponent = defineAsyncComponent(() =>
   <component
     :is="dynamicComponent"
     :style="componentStyle"
-    filled
+    :filled
+    :size="'lg'"
     :fontControlled="false"
-    @mouseover="hovering = true"
-    @mouseleave="hovering = false"
   />
 </template>
