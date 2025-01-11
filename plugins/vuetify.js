@@ -32,6 +32,7 @@ const theme = {
         "light-gray": "#C3C3C3",
         "light-gray-2": "#454545",
         "disabled-gray": "#EFEFEF",
+        "grey-900": "#292929",
         error: "#EF233C",
       },
     },

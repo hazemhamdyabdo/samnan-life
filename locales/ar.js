@@ -198,6 +198,14 @@ export default {
           confirm_password: "كلمة المرور الجديدة مجددا",
         },
       },
+      language: {
+        header: "اللغة",
+        change_language: "تغيير اللغة",
+        select_app_language: "قم باختيار لغة التطبيق",
+        arabic: "العربية",
+        english: "الانجليزية",
+      },
+
       verification: {
         email: "للبريد الالكتروني",
         message: "قم بادخال الرمز الذي ارسل",
