@@ -4,13 +4,13 @@ import { defineAsyncComponent, ref, computed } from "vue";
 const props = withDefaults(
   defineProps<{
     name: string;
-    size?: string | number;
+    size?: "sm" | "md" | "lg" | "xl" | number;
     color?: string;
     readOnly?: boolean;
     filled?: boolean;
   }>(),
   {
-    size: "md",
+    size: "sm",
     readOnly: false,
     filled: true,
   }
