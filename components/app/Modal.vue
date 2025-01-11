@@ -12,10 +12,12 @@ withDefaults(
     text: string;
     okText?: string;
     isDelete?: boolean;
+    size?: "sm" | "md" | "lg" | "xl" | string | number;
   }>(),
   {
     isDelete: false,
     okText: "buttons.ok",
+    size: "md",
   }
 );
 </script>
@@ -24,12 +26,12 @@ withDefaults(
   <v-dialog v-model="dialog" @click:outside="dialog = false" max-width="500">
     <v-card class="px-2" rounded="xl">
       <v-card-title class="border-b">
-        <h3>{{ title }}</h3>
+        <h3 class="font-weight-medium">{{ title }}</h3>
       </v-card-title>
       <v-card-text>
-        <AppSvgIcon v-if="icon" :name="icon" class="mb-2" />
+        <AppSvgIcon v-if="icon" :name="icon" class="mb-2" :size />
         <span>{{ text }}</span>
-        <div v-if="$slots.default">
+        <div v-if="$slots.default" class="mt-4">
           <slot></slot>
         </div>
       </v-card-text>

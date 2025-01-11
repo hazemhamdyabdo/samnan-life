@@ -3,6 +3,9 @@ import AppModal from "~/components/app/Modal.vue";
 const { t } = useI18n();
 
 const emits = defineEmits(["change-action"]);
+
+const isInputShow = ref(false);
+const password = ref("");
 const details = ref({
   prefix: "+966",
   first_name: "Ahmed",
@@ -128,8 +131,23 @@ const dialog = ref(false);
 
   <AppModal
     v-model:dialog="dialog"
-    title="تسجيل الخروج"
-    icon="logout"
-    text="هل انت متأكد من رغبتك في تسجيل الخروج ؟"
-  />
+    :title="t('dashboard.modal.delete_account')"
+    icon="trash"
+    isDelete
+    :text="t('dashboard.modal.confirm_delete_password')"
+    :ok-text="'dashboard.modal.delete_account_btn'"
+  >
+    <v-text-field
+      v-model="password"
+      :label="t('dashboard.settings.profile.update_password.current_password')"
+      :type="isInputShow ? 'text' : 'password'"
+    >
+      <template #append-inner>
+        <div class="cursor-pointer" @click="isInputShow = !isInputShow">
+          <v-icon color="border-light" v-if="!isInputShow">mdi-eye-off</v-icon>
+          <v-icon color="border-light" v-else>mdi-eye</v-icon>
+        </div>
+      </template>
+    </v-text-field>
+  </AppModal>
 </template>

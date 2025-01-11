@@ -213,10 +213,19 @@ export default {
         changed_password: "تم تغيير كلمة المرور الخاصة بك بنجاج",
       },
     },
+    modal: {
+      logout: "تسجيل الخروج",
+      logout_confirm: "هل انت متأكد من رغبتك في تسجيل الخروج ؟",
+      delete_account: "حذف الحساب",
+      delete_account_confirm: "هل انت متأكد من رغبتك في حذف الحساب ؟",
+      delete_account_btn: "نعم, احذفه",
+      confirm_delete_password: "قم بادخال كلمة المرور لتأكيد حذف الحساب",
+    },
     ok: "حسنا",
     send: "ارسال",
     save: "حفظ",
   },
+
   buttons: {
     subscribe_now: "اشترك الآن",
     read_my_story: "اقرأ قصتي",

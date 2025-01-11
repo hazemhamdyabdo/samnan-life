@@ -38,6 +38,8 @@ const items = [
   },
 ];
 const isNotificationActive = ref(true);
+
+const showSignOutDialog = ref(false);
 </script>
 
 <template>
@@ -66,13 +68,28 @@ const isNotificationActive = ref(true);
             ? 'bg-pri-light text-primary font-weight-medium rounded-lg'
             : 'text-grey-400'
         "
-        :to="item.name === 'logout' ? '/' : item.name"
+        :to="item.name === 'logout' ? '' : item.name"
       >
-        <div v-if="item.name !== 'notifications'" class="d-flex ga-2">
+        <div
+          v-if="!item.name.includes('notifications') && item.name !== 'logout'"
+          class="d-flex ga-2"
+        >
           <AppSvgIcon :name="item.icon" />
           <span class="text-16">{{ item.title }}</span>
         </div>
-        <section v-else class="d-flex ga-2 align-center justify-space-between">
+        <div
+          @click="showSignOutDialog = true"
+          v-else-if="item.name == 'logout'"
+          class="d-flex ga-2 cursor-pointer"
+        >
+          <AppSvgIcon :name="item.icon" />
+          <span class="text-16">{{ item.title }}</span>
+        </div>
+
+        <section
+          v-else-if="item.name.includes('notifications')"
+          class="d-flex ga-2 align-center justify-space-between"
+        >
           <div class="d-flex ga-2">
             <AppSvgIcon :name="item.icon" />
             <span class="text-16">{{ item.title }}</span>
@@ -88,6 +105,11 @@ const isNotificationActive = ref(true);
       </NuxtLink>
     </v-list>
   </v-card>
-</template>
 
-<style scoped></style>
+  <AppModal
+    v-model:dialog="showSignOutDialog"
+    :title="t('dashboard.modal.logout')"
+    icon="logout"
+    :text="t('dashboard.modal.logout_confirm')"
+  />
+</template>
