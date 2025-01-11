@@ -44,13 +44,13 @@ const { mobile } = useDisplay();
           </p>
           <div class="d-flex ga-4 flex-wrap">
             <v-img
-              src="../assets/icons/play-store.svg"
+              src="/icons/play-store.svg"
               alt="play-store btn"
               class="cursor-pointer"
               max-width="150"
             />
             <v-img
-              src="../assets/icons/app-store.svg"
+              src="/icons/app-store.svg"
               alt="app-store btn"
               class="cursor-pointer"
               max-width="150"
@@ -58,7 +58,7 @@ const { mobile } = useDisplay();
           </div>
         </v-col>
         <v-col cols="12" md="5">
-          <v-img src="../assets/icons/mobile-app-hero.svg" alt="app image" />
+          <v-img src="/icons/mobile-app-hero.svg" alt="app image" />
         </v-col>
       </v-row>
 
@@ -92,10 +92,7 @@ const { mobile } = useDisplay();
         </v-col>
 
         <v-col cols="12" md="5" sm="12">
-          <v-img
-            src="../assets/icons/engaged-user.svg"
-            alt="engaged user image"
-          />
+          <v-img src="/icons/engaged-user.svg" alt="engaged user image" />
         </v-col>
       </v-row>
 
@@ -171,7 +168,7 @@ const { mobile } = useDisplay();
               mobile ? ' margin-right: -2rem; padding: 0; width: 90%; ' : ''
             }`"
           >
-            <img src="../assets/icons/app-capabillities.svg" alt=" app image" />
+            <img src="/icons/app-capabillities.svg" alt=" app image" />
           </v-col>
 
           <v-col
@@ -248,7 +245,7 @@ const { mobile } = useDisplay();
 
         <v-col cols="12" md="5" sm="12">
           <v-img
-            src="../assets/icons/mobile-overview.svg"
+            src="/icons/mobile-overview.svg"
             alt="mobile overview image"
             aspect-ratio="16/9"
           />
@@ -277,11 +274,7 @@ const { mobile } = useDisplay();
           </p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
-          <v-img
-            src="../assets/icons/sa-map.svg"
-            alt="sa map image"
-            class="w-100"
-          />
+          <v-img src="/icons/sa-map.svg" alt="sa map image" class="w-100" />
         </v-col>
       </v-row>
 
@@ -301,13 +294,13 @@ const { mobile } = useDisplay();
           <p class="text-header">{{ $t("landing.app.download_prompt") }}</p>
           <div class="d-flex ga-4 flex-wrap">
             <v-img
-              src="../assets/icons/play-store.svg"
+              src="/icons/play-store.svg"
               alt="play-store btn"
               class="cursor-pointer"
               max-width="150"
             />
             <v-img
-              src="../assets/icons/app-store.svg"
+              src="/icons/app-store.svg"
               alt="app-store btn"
               class="cursor-pointer"
               max-width="150"
@@ -315,10 +308,7 @@ const { mobile } = useDisplay();
           </div>
         </v-col>
         <v-col cols="12" md="5" sm="12" class="pb-0 mb-0">
-          <v-img
-            src="../assets/icons/mobile-interface.svg"
-            alt="mobile interface"
-          />
+          <v-img src="/icons/mobile-interface.svg" alt="mobile interface" />
         </v-col>
       </v-row>
     </v-main>
@@ -346,12 +336,12 @@ const { mobile } = useDisplay();
     </nav>
     <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
       <img
-        src="../assets/icons/play-store.svg"
+        src="/icons/play-store.svg"
         alt="play-store btn"
         class="cursor-pointer"
       />
       <img
-        src="../assets/icons/app-store.svg"
+        src="/icons/app-store.svg"
         alt="app-store btn"
         class="cursor-pointer"
       />
