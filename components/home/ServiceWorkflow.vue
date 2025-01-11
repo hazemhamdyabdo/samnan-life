@@ -43,7 +43,7 @@ const { mobile } = useDisplay();
           md="4"
           class="d-flex flex-column align-center mt-6 ga-2 position-relative"
         >
-          <AppSvgIcon name="arrow-up" class="arrow-up" />
+          <AppSvgIcon name="arrow-up" class="arrow-up" :size="120" />
           <div class="mb-1">
             <span class="text-white bg-primary py-2 px-4 rounded-circle"
               >1</span
@@ -62,7 +62,12 @@ const { mobile } = useDisplay();
           md="4"
           class="d-flex flex-column align-center mt-6 ga-2 position-relative"
         >
-          <AppSvgIcon v-if="!mobile" name="arrow-down" class="arrow-down" />
+          <AppSvgIcon
+            v-if="!mobile"
+            name="arrow-down"
+            class="arrow-down"
+            :size="120"
+          />
 
           <div class="mb-1">
             <span class="text-white bg-primary py-2 px-4 rounded-circle"

@@ -16,8 +16,8 @@ const { mobile } = useDisplay();
       <!-- Navigation -->
       <nav class="d-flex align-center justify-space-between">
         <div class="d-flex ga-2 align-center">
-          <AppSvgIcon name="logo" />
-          <AppSvgIcon name="title" />
+          <AppSvgIcon name="logo" size="lg" />
+          <AppSvgIcon name="title" :size="60" />
         </div>
 
         <NavigationMobile v-if="mobile" />
@@ -232,7 +232,7 @@ const { mobile } = useDisplay();
             </v-chip>
           </div>
 
-          <h4 class="text-secondary text-3xl font-medium">
+          <h4 class="text-secondary text-24 font-medium">
             {{ $t("landing.store.title") }}
           </h4>
           <p class="text-color-text">
@@ -330,8 +330,8 @@ const { mobile } = useDisplay();
     style="border-top: 1px solid #223f99"
   >
     <div class="d-flex justify-center align-center ga-2">
-      <AppSvgIcon name="logo" />
-      <AppSvgIcon name="title" />
+      <AppSvgIcon name="logo" size="lg" />
+      <AppSvgIcon name="title" :size="60" />
     </div>
     <nav
       class="d-flex flex-wrap flex-row-reverse justify-center ga-6 w-33 text-gray-800"

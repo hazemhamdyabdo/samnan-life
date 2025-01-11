@@ -6,8 +6,8 @@
         <v-card class="mt-4" rounded="lg" elevation="2">
           <v-card-text>
             <div class="d-flex justify-center align-center ga-2">
-              <AppSvgIcon name="logo" />
-              <AppSvgIcon name="title" />
+              <AppSvgIcon name="logo" size="lg" />
+              <AppSvgIcon name="title" :size="60" />
             </div>
 
             <!-- details -->

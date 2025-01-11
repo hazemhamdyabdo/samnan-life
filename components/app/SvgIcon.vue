@@ -4,7 +4,7 @@ import { defineAsyncComponent, ref, computed } from "vue";
 const props = withDefaults(
   defineProps<{
     name: string;
-    size?: "sm" | "md" | "lg" | "xl" | number;
+    size?: "sm" | "md" | "lg" | "xl" | string | number;
     color?: string;
     readOnly?: boolean;
     filled?: boolean;

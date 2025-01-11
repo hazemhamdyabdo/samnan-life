@@ -45,8 +45,8 @@ const handleLogin = async () => {
       </v-col>
       <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
-          <AppSvgIcon name="logo" />
-          <AppSvgIcon name="title" />
+          <AppSvgIcon name="logo" size="lg" />
+          <AppSvgIcon name="title" :size="60" />
         </div>
         <div>
           <h3 class="font-weight-medium">{{ $t("login.title") }}</h3>
