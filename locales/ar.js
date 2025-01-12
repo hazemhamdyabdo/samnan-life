@@ -246,6 +246,17 @@ export default {
         },
       },
 
+      products: {
+        header: "منتجاتي",
+        product_list_title: "قائمة منتجاتي",
+        product_list_description:
+          "إليك قائمة المنتجات الخاصة بك، يمكنك حذف منتج أو إضافة منتج من منتجات متجرنا",
+        add_new_product: "إضافة منتج جديد",
+        delete_product: "حذف المنتج",
+        confirm_delete: "هل أنت متأكد من رغبتك في حذف المنتج؟",
+        add_product: "اضافة منتج",
+      },
+
       verification: {
         email: "للبريد الالكتروني",
         message: "قم بادخال الرمز الذي ارسل",

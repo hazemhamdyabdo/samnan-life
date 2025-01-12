@@ -43,7 +43,7 @@ defineExpose({
               class="thumbnail-container"
               @click="playVideo"
             >
-              <img
+              <v-img
                 :src="thumbnailUrl"
                 :alt="
                   $t(

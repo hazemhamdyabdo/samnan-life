@@ -11,8 +11,8 @@ const componentsMap = {
 
 const currentComponent = ref("Addresses");
 
-const changeComponent = (value: string) => {
-  currentComponent.value = value;
+const changeComponent = (newComponent: string) => {
+  currentComponent.value = newComponent;
 };
 
 const currentComponentView = computed(() => {

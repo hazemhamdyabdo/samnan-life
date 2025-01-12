@@ -54,7 +54,7 @@ const addresses = computed(() => {
     <div class="d-flex mt-8 w-33">
       <span
         @click="emits('change-component', 'NewAddress')"
-        class="text-primary cursor-pointer font-weight-regular"
+        class="text-primary cursor-pointer font-weight-medium"
       >
         <v-icon class="me-1" color="primary" size="md">mdi-plus</v-icon>
         {{ $t("dashboard.settings.addresses.add_new_address") }}

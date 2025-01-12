@@ -26,7 +26,7 @@ const handleClick = async () => {
         {{ $t("dashboard.settings.profile.update_phone.instruction") }}
       </p>
     </v-col>
-    <v-col cols="4" class="pb-0">
+    <v-col cols="6" class="pb-0">
       <v-form ref="formRef" fast-fail @submit.prevent class="d-flex ga-2">
         <v-card
           rounded="lg"
