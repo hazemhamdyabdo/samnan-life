@@ -72,7 +72,7 @@ const handleOpenDialog = () => {
       </v-col>
       <v-col cols="6" class="d-flex mt-8">
         <v-btn color="primary" type="submit" round block size="50">{{
-          $t("dashboard.save")
+          $t("dashboard.settings.addresses.add_address.save_address")
         }}</v-btn>
       </v-col>
     </v-row>
