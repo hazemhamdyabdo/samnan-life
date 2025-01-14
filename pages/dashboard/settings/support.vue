@@ -49,5 +49,3 @@ const { t } = useI18n();
     </v-row>
   </section>
 </template>
-
-<style scoped></style>
