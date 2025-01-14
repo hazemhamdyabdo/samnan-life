@@ -4,11 +4,11 @@ import CardMenu from "@/components/Settings/CardMenu.vue";
 <template>
   <section>
     <v-row>
-      <v-col cols="3">
+      <v-col cols="3" sm="2" lg="3">
         <CardMenu />
       </v-col>
       <v-col cols="9">
-        <v-card rounded="xl" class="pa-4" elevation="2">
+        <v-card rounded="xl" class="pa-4" elevation="2" height="100%">
           <NuxtPage />
         </v-card>
       </v-col>

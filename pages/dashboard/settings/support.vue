@@ -2,7 +2,7 @@
 const { t } = useI18n();
 </script>
 <template>
-  <section style="min-height: calc(100vh - 30px)">
+  <section>
     <section class="mb-8">
       <h3 class="text-20 text-header">
         {{ t("dashboard.settings.support.title") }}

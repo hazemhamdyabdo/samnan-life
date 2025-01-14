@@ -18,7 +18,7 @@ const products = [
 </script>
 
 <template>
-  <section style="min-height: calc(100vh - 90px)">
+  <section>
     <section>
       <h4 class="text-20 text-grey-900">
         {{ t("dashboard.settings.products.product_list_title") }}

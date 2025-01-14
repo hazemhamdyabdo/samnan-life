@@ -43,13 +43,7 @@ const showSignOutDialog = ref(false);
 </script>
 
 <template>
-  <v-card
-    class="pa-2"
-    elevation="2"
-    rounded="xl"
-    border="sm black"
-    style="min-height: 100vh"
-  >
+  <v-card class="pa-2 sticky" elevation="2" rounded="xl" border="sm black">
     <v-card-title>
       <h6 class="text-16">{{ $t("dashboard.settings.card.title") }}</h6>
     </v-card-title>

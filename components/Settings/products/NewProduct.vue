@@ -11,10 +11,7 @@ const showFilterDialog = () => {
 </script>
 
 <template>
-  <section
-    class="d-flex flex-column ga-12"
-    style="min-height: calc(100vh - 90px)"
-  >
+  <section class="d-flex flex-column ga-12">
     <section class="d-flex ga-2 justify-space-between">
       <h4 class="text-20 text-grey-900">
         {{ t("dashboard.settings.products.add_product") }}

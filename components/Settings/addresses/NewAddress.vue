@@ -10,7 +10,7 @@ const handleOpenDialog = () => {
 </script>
 
 <template>
-  <section style="min-height: calc(100vh - 90px)">
+  <section>
     <section>
       <h4 class="text-20 text-grey-900">
         {{ t("dashboard.settings.addresses.add_address.header") }}
