@@ -267,6 +267,19 @@ export default {
         },
       },
 
+      support: {
+        title: "المساعدة و الدعم",
+        subtitle: "نحن هنا للمساعدة",
+        topic: "الموضوع",
+        details: "التفاصيل",
+        placeholder: {
+          details: "يرجى الإفصاح عن تفاصيل مشكلتك",
+        },
+        button: {
+          submit: "إرسال",
+        },
+      },
+
       verification: {
         email: "للبريد الالكتروني",
         message: "قم بادخال الرمز الذي ارسل",

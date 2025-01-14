@@ -34,6 +34,7 @@ const theme = {
         "disabled-gray": "#EFEFEF",
         "grey-900": "#292929",
         error: "#EF233C",
+        "grey-600": "#585858",
       },
     },
   },
