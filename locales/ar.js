@@ -255,6 +255,16 @@ export default {
         delete_product: "حذف المنتج",
         confirm_delete: "هل أنت متأكد من رغبتك في حذف المنتج؟",
         add_product: "اضافة منتج",
+        filters: {
+          title: "تنقية المنتجات",
+          subtitle: "قم بتنقية النتائج لسرعة الوصول للمنتج",
+          categories: "اصناف المنتجات",
+          all: "الكل",
+          buttons: {
+            save: "حفظ",
+            back: "العودة",
+          },
+        },
       },
 
       verification: {

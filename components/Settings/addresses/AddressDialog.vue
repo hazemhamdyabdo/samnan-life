@@ -35,7 +35,7 @@ defineExpose({
 <template>
   <v-container>
     <v-dialog max-width="650" v-model="dialog">
-      <template #default="{ isActive }">
+      <template #default>
         <v-card>
           <section>
             <div

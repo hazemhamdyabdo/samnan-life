@@ -1,10 +1,21 @@
 <script setup lang="ts">
+import ProductCard from "./ProductCard.vue";
+import ProductFilterDialog from "./ProductFilterDialog.vue";
+
 const { t } = useI18n();
+const filterDialog = ref();
+
+const showFilterDialog = () => {
+  filterDialog.value.showDialog();
+};
 </script>
 
 <template>
-  <section style="min-height: calc(100vh - 90px)">
-    <section class="mt-8 d-flex ga-2 justify-space-between">
+  <section
+    class="d-flex flex-column ga-12"
+    style="min-height: calc(100vh - 90px)"
+  >
+    <section class="d-flex ga-2 justify-space-between">
       <h4 class="text-20 text-grey-900">
         {{ t("dashboard.settings.products.add_product") }}
       </h4>
@@ -20,17 +31,27 @@ const { t } = useI18n();
           width="300px"
         >
         </v-text-field>
-        <v-btn color="primary" height="42" size="small" rounded="lg">
+        <v-btn
+          @click="showFilterDialog"
+          color="primary"
+          height="42"
+          size="small"
+          rounded="lg"
+        >
           <AppSvgIcon name="filter" />
         </v-btn>
       </div>
     </section>
-    <div class="d-flex mt-8 w-50">
+
+    <section class="d-flex flex-wrap ga-4 justify-space-between">
+      <ProductCard v-for="i in 10" />
+    </section>
+
+    <div class="d-flex w-50">
       <v-btn color="primary" type="submit" round block size="50">{{
         $t("dashboard.save")
       }}</v-btn>
     </div>
   </section>
+  <ProductFilterDialog ref="filterDialog" />
 </template>
-
-<style scoped></style>
