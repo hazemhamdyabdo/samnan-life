@@ -7,7 +7,13 @@ const { showSuccess } = useAlertStore();
 const { t } = useI18n();
 const settingsStore = useSettingsStore();
 const { allAddresses } = storeToRefs(settingsStore);
-const { fetchAllAddresses, createAddress, deleteAddress } = settingsStore;
+const {
+  fetchAllAddresses,
+  createAddress,
+  deleteAddress,
+  getSingleAddress,
+  updateAddress,
+} = settingsStore;
 
 const componentsMap = {
   Addresses,
@@ -23,12 +29,21 @@ const currentComponentView = computed(() => {
   return componentsMap[currentComponent.value];
 });
 
+const addressDetails = ref<Address>({
+  name: "",
+  city_id: null,
+  district_id: null,
+  street: "",
+  latitude: null,
+  longitude: null,
+  national_address: "",
+  details: "",
+});
 const isLoadingNewAddress = ref(false);
 const addNewAddress = async (newAddress: Address) => {
   isLoadingNewAddress.value = true;
   try {
-    await createAddress(newAddress);
-    await fetchAllAddresses();
+    await Promise.all([createAddress(newAddress), fetchAllAddresses()]);
     changeComponent("Addresses");
     showSuccess("تمت اضافة العنوان بنجاح");
   } catch (error) {
@@ -46,12 +61,35 @@ const handleOpenDialog = (addressId: number) => {
 };
 const handleDeleteAddress = async () => {
   try {
-    await deleteAddress(deletedAddressId.value as number);
-    await fetchAllAddresses();
+    await Promise.all([
+      deleteAddress(deletedAddressId.value as number),
+      fetchAllAddresses(),
+    ]);
     showSuccess("تم حذف العنوان بنجاح");
     deleteDialog.value = false;
   } catch (error) {
     console.log(error);
+  }
+};
+
+const handleEditAddress = async (addressId: number) => {
+  addressDetails.value = (await getSingleAddress(addressId)) as Address;
+  changeComponent("NewAddress");
+};
+
+const handleUpdateAddress = async () => {
+  isLoadingNewAddress.value = true;
+  try {
+    await Promise.all([
+      updateAddress(addressDetails.value),
+      fetchAllAddresses(),
+    ]);
+    changeComponent("Addresses");
+    showSuccess("تم تحديث العنوان بنجاح");
+  } catch (error) {
+    console.error("Error updating address:", error);
+  } finally {
+    isLoadingNewAddress.value = false;
   }
 };
 
@@ -70,8 +108,11 @@ onMounted(async () => {
     :is="currentComponentView"
     :addresses="allAddresses"
     :isLoading="isLoadingNewAddress"
+    v-model:addressDetails="addressDetails"
     @open:delete-dialog="handleOpenDialog"
     @add:new-address="addNewAddress"
+    @edit-address="handleEditAddress"
+    @update:address="handleUpdateAddress"
     @change-component="changeComponent"
   />
 

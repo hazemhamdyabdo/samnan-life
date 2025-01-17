@@ -21,6 +21,7 @@ interface AddressData {
 }
 
 interface Address {
+  id?: number;
   name: string;
   city_id: number | string | null;
   district_id: number | null;

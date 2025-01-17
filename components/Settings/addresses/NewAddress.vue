@@ -10,21 +10,16 @@ const { fetchAllCities, fetchAllDistricts } = settingsStore;
 
 const emits = defineEmits<{
   (e: "add:new-address", value: Address): void;
+  (e: "update:address", value: number): void;
 }>();
 
 defineProps<{
   isLoading: boolean;
 }>();
 
-const addressDetails = reactive<Address>({
-  name: "",
-  city_id: null,
-  district_id: null,
-  street: "",
-  latitude: null,
-  longitude: null,
-  national_address: "",
-  details: "",
+const addressDetails = defineModel("addressDetails", {
+  required: true,
+  type: Object as PropType<Address>,
 });
 
 const addressDialog = ref();
@@ -35,9 +30,9 @@ const handleOpenDialog = () => {
 const isDistrictLoafing = ref(false);
 const getDistrict = async () => {
   isDistrictLoafing.value = true;
-  if (addressDetails.city_id) {
-    addressDetails.district_id = null;
-    await fetchAllDistricts(+addressDetails.city_id);
+  if (addressDetails.value.city_id) {
+    addressDetails.value.district_id = null;
+    await fetchAllDistricts(+addressDetails.value.city_id);
   }
   isDistrictLoafing.value = false;
 };
@@ -45,15 +40,28 @@ const getDistrict = async () => {
 const emitAddressDetails = async () => {
   try {
     await validate();
-    emits("add:new-address", {
-      ...addressDetails,
-      street: addressDetails.national_address, // TODO: change this after knowing where to get street
-    });
+    if (!addressDetails.value.id) {
+      emits("add:new-address", {
+        ...addressDetails.value,
+        street: addressDetails.value.national_address, // TODO: change this after knowing where to get street
+      });
+    } else {
+      emits("update:address", addressDetails.value.id);
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
+watch(
+  () => addressDetails.value.city_id,
+  () => {
+    if (addressDetails.value.city_id) {
+      fetchAllDistricts(+addressDetails.value.city_id);
+    }
+  },
+  { immediate: true }
+);
 onMounted(async () => {
   await fetchAllCities();
 });
@@ -86,10 +94,10 @@ onMounted(async () => {
             :items="allCities"
             item-title="name"
             item-value="id"
-            @update:model-value="getDistrict"
             :label="t('dashboard.settings.addresses.add_address.city')"
             :rules="[rules.required]"
             variant="outlined"
+            @update:model-value="getDistrict"
           />
         </v-col>
 
@@ -151,7 +159,11 @@ onMounted(async () => {
             block
             @click="emitAddressDetails"
             >{{
-              $t("dashboard.settings.addresses.add_address.save_address")
+              $t(
+                `dashboard.settings.addresses.add_address.${
+                  addressDetails.id ? "update" : "save"
+                }_address`
+              )
             }}</v-btn
           >
         </v-col>

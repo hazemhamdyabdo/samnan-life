@@ -43,6 +43,22 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
 
+  const getSingleAddress = async (id: number): Promise<AddressData | undefined> => {
+    const { data } = await useAPI<AddressResponse>(`/addresses/${id}`)
+    return data.value?.data
+  }
+
+  const updateAddress = async (address: Address): Promise<void> => {
+    const { error } = await useAPI<AddressResponse>(`/addresses/${address.id}`, {
+      method: 'PUT',
+      body: address,
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+  }
+
   return {
     allAddresses,
     fetchAllAddresses,
@@ -51,6 +67,8 @@ export const useSettingsStore = defineStore('settings', () => {
     districts,
     fetchAllDistricts,
     createAddress,
-    deleteAddress
+    deleteAddress,
+    getSingleAddress,
+    updateAddress
   }
 })
