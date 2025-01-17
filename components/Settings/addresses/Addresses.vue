@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import type { AddressResponse, AddressData } from "~/types/settings";
+
 const { t } = useI18n();
 
-const emits = defineEmits<{ (e: "change-component", value: string): void }>();
+const emits = defineEmits<{
+  (e: "change-component", value: string): void;
+  (e: "delete-address", value: number): void;
+  (e: "edit-address", value: number): void;
+}>();
+
+const props = defineProps<{
+  addresses: AddressData[];
+}>();
+
 const dialog = ref(false);
 const addresses = computed(() => {
   return [
@@ -16,6 +27,12 @@ const addresses = computed(() => {
       address: t("dashboard.settings.addresses.location_placeholder"),
     },
   ];
+});
+
+watchEffect(() => {
+  console.log("====================================");
+  console.log(props.addresses);
+  console.log("====================================");
 });
 </script>
 <template>
@@ -41,11 +58,15 @@ const addresses = computed(() => {
           </p>
         </div>
         <div class="d-flex ga-4 ms-auto">
-          <AppSvgIcon name="edit" class="cursor-pointer" />
           <AppSvgIcon
-            @click="dialog = true"
+            name="edit"
+            class="cursor-pointer"
+            @click="emits('edit-address', address.id)"
+          />
+          <AppSvgIcon
             name="trash-outline"
             class="cursor-pointer"
+            @click="dialog = true"
           />
         </div>
       </div>
@@ -68,5 +89,5 @@ const addresses = computed(() => {
     isDelete
     :text="t('dashboard.settings.addresses.confirm_delete.message')"
     :ok-text="'dashboard.modal.delete_account_btn'"
-  ></AppModal>
+  />
 </template>

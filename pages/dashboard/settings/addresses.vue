@@ -3,6 +3,9 @@ import Addresses from "~/components/Settings/addresses/Addresses.vue";
 import NewAddress from "~/components/Settings/addresses/NewAddress.vue";
 
 const { t } = useI18n();
+const settingsStore = useSettingsStore();
+const { allAddresses } = storeToRefs(settingsStore);
+const { fetchAllAddresses } = settingsStore;
 
 const componentsMap = {
   Addresses,
@@ -19,6 +22,10 @@ const currentComponentView = computed(() => {
   // @ts-ignore
   return componentsMap[currentComponent.value];
 });
+
+onMounted(async () => {
+  await fetchAllAddresses();
+});
 </script>
 
 <template>
@@ -27,5 +34,9 @@ const currentComponentView = computed(() => {
       {{ t("dashboard.settings.addresses.header") }}
     </h3>
   </section>
-  <component :is="currentComponentView" @change-component="changeComponent" />
+  <component
+    :is="currentComponentView"
+    :addresses="allAddresses"
+    @change-component="changeComponent"
+  />
 </template>
