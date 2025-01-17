@@ -13,6 +13,7 @@ withDefaults(
     okText?: string;
     isDelete?: boolean;
     size?: "sm" | "md" | "lg" | "xl" | string | number;
+    isLoading?: boolean;
   }>(),
   {
     isDelete: false,
@@ -58,6 +59,7 @@ withDefaults(
           rounded="false"
           min-width="100px"
           @click="$emit('submit')"
+          :loading="isLoading"
           :text="$t(okText)"
         ></v-btn>
       </div>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+const { showSuccess } = useAlertStore();
 const { t } = useI18n();
+const { logout } = useAuthStore();
 const items = [
   {
     title: t("dashboard.settings.card.items.profile"),
@@ -40,6 +42,16 @@ const items = [
 const isNotificationActive = ref(true);
 
 const showSignOutDialog = ref(false);
+
+const isLoading = ref(false);
+const handleSignOut = async () => {
+  isLoading.value = true;
+  await logout();
+  showSuccess("تم تسجيل الخروج بنجاح");
+  navigateTo("/login");
+  isLoading.value = false;
+  showSignOutDialog.value = false;
+};
 </script>
 
 <template>
@@ -104,5 +116,7 @@ const showSignOutDialog = ref(false);
     :title="t('dashboard.modal.logout')"
     icon="logout"
     :text="t('dashboard.modal.logout_confirm')"
+    :is-loading="isLoading"
+    @submit="handleSignOut"
   />
 </template>

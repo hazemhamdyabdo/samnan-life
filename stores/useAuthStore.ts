@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import type { Customer, UserRegistrationDetails } from "~/types";
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = useCookie<Customer>("user");
-  const token = useCookie<string>("token");
+  const user = useCookie<Customer | null>("user");
+  const token = useCookie<string | null>("token");
   // const isLoggedIn = computed(() => !!user.value && !!token.value);
 
   const setUser = (newUser: Customer) => {
@@ -95,12 +95,26 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  const logout = async () => {
+
+    const { error } = await useAPI("/customer/logout", {
+      method: "POST",
+      watch: false,
+    });
+    if (error.value) {
+      throw new Error(error.value.message);
+    }
+    token.value = null;
+    user.value = null;
+  }
+
   return {
     login,
     register,
     verifyOTP,
     resetPassword,
-    handleForgetPassword
+    handleForgetPassword,
+    logout
   }
 
 })
