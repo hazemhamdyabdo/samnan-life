@@ -20,5 +20,47 @@ interface AddressData {
   id: number;
 }
 
+interface Address {
+  name: string;
+  city_id: number | string | null;
+  district_id: number | null;
+  street: string;
+  latitude?: number | null;
+  longitude?: number | null;
+  national_address: string;
+  details?: string;
+}
 
-export type { AddressResponse, AddressData };
+interface CitiesResponse {
+  status: number;
+  response_code: string;
+  message: string;
+  data: City[];
+}
+
+interface City {
+  id: number;
+  created_at: string | null;
+  updated_at: string | null;
+  name: string;
+}
+
+interface DistrictsResponse {
+  status: number;
+  response_code: string;
+  message: string;
+  data: District[];
+}
+
+interface District {
+  id: number;
+  created_at: string | null;
+  updated_at: string | null;
+  name: string;
+  city_name: string;
+  city: City;
+}
+
+
+
+export type { AddressResponse, AddressData, Address, City, CitiesResponse, DistrictsResponse, District };

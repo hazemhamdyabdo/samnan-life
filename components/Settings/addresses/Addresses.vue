@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AddressResponse, AddressData } from "~/types/settings";
+import type { AddressData } from "~/types/settings";
 
 const { t } = useI18n();
 
@@ -14,26 +14,6 @@ const props = defineProps<{
 }>();
 
 const dialog = ref(false);
-const addresses = computed(() => {
-  return [
-    {
-      id: 1,
-      title: t("dashboard.settings.addresses.address_example.first"),
-      address: t("dashboard.settings.addresses.location_placeholder"),
-    },
-    {
-      id: 2,
-      title: t("dashboard.settings.addresses.address_example.second"),
-      address: t("dashboard.settings.addresses.location_placeholder"),
-    },
-  ];
-});
-
-watchEffect(() => {
-  console.log("====================================");
-  console.log(props.addresses);
-  console.log("====================================");
-});
 </script>
 <template>
   <section>
@@ -51,10 +31,10 @@ watchEffect(() => {
         <AppSvgIcon name="location" />
         <div>
           <p class="font-weight-medium text-header text-14">
-            {{ address.title }}
+            {{ address.name }}
           </p>
           <p class="text-12 text-grey-400">
-            {{ address.address }}
+            {{ address.national_address }}, {{ address.details }}
           </p>
         </div>
         <div class="d-flex ga-4 ms-auto">
