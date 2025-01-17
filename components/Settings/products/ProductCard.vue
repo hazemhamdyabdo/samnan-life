@@ -1,3 +1,22 @@
+<script setup lang="ts">
+defineProps<{
+  productTitle: string;
+  productImage: string;
+  productId: number;
+}>();
+
+const checked = ref(false);
+
+const emits = defineEmits<{
+  (e: "select-product", value: { productId: number; checked: boolean }): void;
+}>();
+
+const selectProduct = (productId: number) => {
+  checked.value = !checked.value;
+  emits("select-product", { productId, checked: checked.value });
+};
+</script>
+
 <template>
   <v-card
     rounded="xl"
@@ -5,16 +24,19 @@
     border="sm black"
     class="pa-4 cursor-pointer position-relative"
     elevation="0"
+    @click="selectProduct(productId)"
   >
     <v-checkbox
+      v-model="checked"
       class="checkbox"
       color="primary"
       density="compact"
       hide-details
     />
+    <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
     <img src="/images/product.png" />
     <p class="text-light-gray-2 text-14 font-weight-bold">
-      دينمو سمنان – 1 حصان
+      {{ productTitle }}
     </p>
   </v-card>
 </template>

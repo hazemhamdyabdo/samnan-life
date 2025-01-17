@@ -1,20 +1,32 @@
 <script setup lang="ts">
+import type { Product } from "~/types/settings";
+
 const { t } = useI18n();
 
-const emits = defineEmits<{ (e: "change-component", value: string): void }>();
+const emits = defineEmits<{
+  (e: "change-component", value: string): void;
+  (e: "delete-product", value: number): void;
+}>();
+
+defineProps<{
+  customerProducts: Product[];
+}>();
 
 const dialog = ref(false);
-const products = [
-  {
-    title: "جهاز تحلية سمنان 5 مراحل",
-  },
-  {
-    title: "جهاز تحلية سمنان 7 مراحل",
-  },
-  {
-    title: "دينمو سمنان – 1 حصان",
-  },
-];
+
+const deletedProductId = ref<number>();
+
+const handleDeleteProduct = (productId: number) => {
+  deletedProductId.value = productId;
+  dialog.value = true;
+};
+
+const handleConfirmDelete = () => {
+  if (deletedProductId.value) {
+    emits("delete-product", deletedProductId.value);
+  }
+  dialog.value = false;
+};
 </script>
 
 <template>
@@ -29,7 +41,8 @@ const products = [
     </section>
 
     <section class="mt-8 d-flex flex-column ga-5">
-      <div class="d-flex ga-2 align-center" v-for="product in products">
+      <div class="d-flex ga-2 align-center" v-for="product in customerProducts">
+        <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
         <v-img
           src="/images/product-img.png"
           class="rounded-circle border border-md pa-2"
@@ -37,12 +50,12 @@ const products = [
         ></v-img>
         <div>
           <p class="font-weight-bold text-header text-14">
-            {{ product.title }}
+            {{ product.name }}
           </p>
         </div>
         <div class="d-flex ga-4 ms-auto">
           <AppSvgIcon
-            @click="dialog = true"
+            @click="handleDeleteProduct(product.id)"
             name="trash-outline"
             class="cursor-pointer"
           />
@@ -68,7 +81,6 @@ const products = [
     isDelete
     :text="t('dashboard.settings.products.confirm_delete')"
     :ok-text="'dashboard.modal.delete_account_btn'"
-  ></AppModal>
+    @submit="handleConfirmDelete"
+  />
 </template>
-
-<style scoped></style>

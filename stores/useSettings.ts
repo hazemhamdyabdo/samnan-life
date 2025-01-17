@@ -1,7 +1,7 @@
-import type { AddressResponse, AddressData, Address, City, CitiesResponse, District, DistrictsResponse } from "~/types/settings"
+import type { AddressResponse, AddressData, Address, City, CitiesResponse, District, DistrictsResponse, Product, ProductResponse } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
-
+  // addresses apis
   const allAddresses = ref<AddressData>()
   const allCities = ref<City[]>()
   const districts = ref<District[]>()
@@ -59,6 +59,43 @@ export const useSettingsStore = defineStore('settings', () => {
     }
   }
 
+
+  // Products apis 
+  const allProducts = ref<Product[]>()
+  const customerProducts = ref<Product[]>()
+
+  const fetchAllProducts = async (): Promise<void> => {
+    const { data } = await useAPI<ProductResponse>('/products')
+    allProducts.value = data.value?.data
+  }
+
+
+  const fetchCustomerProducts = async (): Promise<void> => {
+    const { data } = await useAPI<ProductResponse>('/customer/products')
+    customerProducts.value = data.value?.data
+  }
+
+  const deleteProduct = async (id: number): Promise<void> => {
+    const { error } = await useAPI<ProductResponse>(`/customer/products/${id}`, {
+      method: 'DELETE',
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+  }
+
+  const addProduct = async (productId: number[]): Promise<void> => {
+    const { error } = await useAPI<ProductResponse>(`/customer/products`, {
+      method: 'POST',
+      body: { product_id: productId },
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+  }
+
   return {
     allAddresses,
     fetchAllAddresses,
@@ -69,6 +106,12 @@ export const useSettingsStore = defineStore('settings', () => {
     createAddress,
     deleteAddress,
     getSingleAddress,
-    updateAddress
+    updateAddress,
+    fetchAllProducts,
+    allProducts,
+    deleteProduct,
+    customerProducts,
+    fetchCustomerProducts,
+    addProduct
   }
 })

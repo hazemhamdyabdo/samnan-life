@@ -56,7 +56,7 @@ const showSignOutDialog = ref(false);
       <NuxtLink
         v-for="item in items"
         :key="item.title"
-        class="pa-4"
+        class="pa-2"
         :class="
           $route.path === item.name
             ? 'bg-pri-light text-primary font-weight-medium rounded-lg'
@@ -82,7 +82,7 @@ const showSignOutDialog = ref(false);
 
         <section
           v-else-if="item.name.includes('notifications')"
-          class="d-flex ga-2 align-center justify-space-between"
+          class="d-flex align-center justify-space-between"
         >
           <div class="d-flex ga-2">
             <AppSvgIcon :name="item.icon" />
@@ -92,7 +92,6 @@ const showSignOutDialog = ref(false);
             v-model="isNotificationActive"
             color="primary"
             density="compact"
-            class="pe-4"
             hide-details
           ></v-switch>
         </section>

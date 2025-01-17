@@ -63,5 +63,32 @@ interface District {
 }
 
 
+interface ProductResponse {
+  status: number;
+  response_code: string;
+  message: string;
+  data: Product[];
+}
 
-export type { AddressResponse, AddressData, Address, City, CitiesResponse, DistrictsResponse, District };
+interface Product {
+  id: number;
+  sap_id: string;
+  image: string;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  description: string;
+  category_name: string;
+  category: Category;
+}
+
+interface Category {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
+
+
+
+export type { AddressResponse, AddressData, Address, City, CitiesResponse, DistrictsResponse, District, ProductResponse, Product };

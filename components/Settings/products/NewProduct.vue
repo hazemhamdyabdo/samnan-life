@@ -1,12 +1,57 @@
 <script setup lang="ts">
+import type { Product } from "~/types/settings";
 import ProductCard from "./ProductCard.vue";
 import ProductFilterDialog from "./ProductFilterDialog.vue";
+
+const emits = defineEmits<{
+  (e: "change-component", value: string): void;
+}>();
+defineProps<{
+  products: Product[];
+}>();
+
+const { addProduct } = useSettingsStore();
+const { showSuccess } = useAlertStore();
 
 const { t } = useI18n();
 const filterDialog = ref();
 
 const showFilterDialog = () => {
   filterDialog.value.showDialog();
+};
+
+const selectedProductIds = ref<number[]>([]);
+
+const handleSelectProduct = async ({
+  productId,
+  checked,
+}: {
+  productId: number;
+  checked: boolean;
+}) => {
+  if (checked) {
+    if (!selectedProductIds.value.includes(productId)) {
+      selectedProductIds.value.push(productId);
+    }
+  } else {
+    selectedProductIds.value = selectedProductIds.value.filter(
+      (id) => id !== productId
+    );
+  }
+};
+
+const isLoading = ref(false);
+const handleAddProduct = async () => {
+  isLoading.value = true;
+  try {
+    await addProduct(selectedProductIds.value);
+    showSuccess("تمت العملية بنجاح");
+    emits("change-component", "Products");
+  } catch (e) {
+    console.error(e);
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
@@ -41,13 +86,27 @@ const showFilterDialog = () => {
     </section>
 
     <section class="d-flex flex-wrap ga-4 justify-space-between">
-      <ProductCard v-for="i in 10" />
+      <ProductCard
+        v-for="product in products"
+        :key="product.id"
+        :product-title="product.name"
+        :product-image="product.image"
+        :product-id="product.id"
+        @select-product="handleSelectProduct"
+      />
     </section>
 
     <div class="d-flex w-50">
-      <v-btn color="primary" type="submit" round block size="50">{{
-        $t("dashboard.save")
-      }}</v-btn>
+      <v-btn
+        color="primary"
+        type="submit"
+        round
+        block
+        size="50"
+        :loading="isLoading"
+        @click="handleAddProduct"
+        >{{ $t("dashboard.save") }}</v-btn
+      >
     </div>
   </section>
   <ProductFilterDialog ref="filterDialog" />
