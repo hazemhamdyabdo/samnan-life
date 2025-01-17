@@ -7,7 +7,7 @@ const { showSuccess } = useAlertStore();
 const { t } = useI18n();
 const settingsStore = useSettingsStore();
 const { allAddresses } = storeToRefs(settingsStore);
-const { fetchAllAddresses, createAddress } = settingsStore;
+const { fetchAllAddresses, createAddress, deleteAddress } = settingsStore;
 
 const componentsMap = {
   Addresses,
@@ -38,6 +38,23 @@ const addNewAddress = async (newAddress: Address) => {
   }
 };
 
+const deleteDialog = ref(false);
+const deletedAddressId = ref<number>();
+const handleOpenDialog = (addressId: number) => {
+  deletedAddressId.value = addressId;
+  deleteDialog.value = true;
+};
+const handleDeleteAddress = async () => {
+  try {
+    await deleteAddress(deletedAddressId.value as number);
+    await fetchAllAddresses();
+    showSuccess("تم حذف العنوان بنجاح");
+    deleteDialog.value = false;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 onMounted(async () => {
   await fetchAllAddresses();
 });
@@ -53,7 +70,18 @@ onMounted(async () => {
     :is="currentComponentView"
     :addresses="allAddresses"
     :isLoading="isLoadingNewAddress"
+    @open:delete-dialog="handleOpenDialog"
     @add:new-address="addNewAddress"
     @change-component="changeComponent"
+  />
+
+  <AppModal
+    v-model:dialog="deleteDialog"
+    :title="t('dashboard.settings.addresses.confirm_delete.header')"
+    icon="trash"
+    isDelete
+    :text="t('dashboard.settings.addresses.confirm_delete.message')"
+    :ok-text="'dashboard.modal.delete_account_btn'"
+    @submit="handleDeleteAddress"
   />
 </template>

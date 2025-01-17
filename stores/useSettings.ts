@@ -22,9 +22,19 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
   const createAddress = async (address: Address): Promise<void> => {
-    const { data, error } = await useAPI<AddressResponse>('/addresses', {
+    const { error } = await useAPI<AddressResponse>('/addresses', {
       method: 'POST',
       body: address,
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+  }
+
+  const deleteAddress = async (id: number): Promise<void> => {
+    const { error } = await useAPI<AddressResponse>(`/addresses/${id}`, {
+      method: 'DELETE',
       watch: false
     })
     if (error.value) {
@@ -40,6 +50,7 @@ export const useSettingsStore = defineStore('settings', () => {
     fetchAllCities,
     districts,
     fetchAllDistricts,
-    createAddress
+    createAddress,
+    deleteAddress
   }
 })

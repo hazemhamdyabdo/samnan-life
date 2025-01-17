@@ -4,16 +4,15 @@ import type { AddressData } from "~/types/settings";
 const { t } = useI18n();
 
 const emits = defineEmits<{
+  (e: "open:delete-dialog", value: number): void;
   (e: "change-component", value: string): void;
   (e: "delete-address", value: number): void;
   (e: "edit-address", value: number): void;
 }>();
 
-const props = defineProps<{
+defineProps<{
   addresses: AddressData[];
 }>();
-
-const dialog = ref(false);
 </script>
 <template>
   <section>
@@ -46,7 +45,7 @@ const dialog = ref(false);
           <AppSvgIcon
             name="trash-outline"
             class="cursor-pointer"
-            @click="dialog = true"
+            @click="emits('open:delete-dialog', address.id)"
           />
         </div>
       </div>
@@ -62,12 +61,4 @@ const dialog = ref(false);
       </span>
     </div>
   </section>
-  <AppModal
-    v-model:dialog="dialog"
-    :title="t('dashboard.settings.addresses.confirm_delete.header')"
-    icon="trash"
-    isDelete
-    :text="t('dashboard.settings.addresses.confirm_delete.message')"
-    :ok-text="'dashboard.modal.delete_account_btn'"
-  />
 </template>
