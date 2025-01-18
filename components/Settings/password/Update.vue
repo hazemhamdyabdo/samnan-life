@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const emits = defineEmits<{ (e: "change-component", value: string): void }>();
+defineProps<{
+  isLoading: boolean;
+}>();
+const emits = defineEmits<{ (e: "update:password", value: string): void }>();
 
 const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
@@ -7,16 +10,14 @@ const isInputThreeShow = ref(false);
 
 const { formRef, rules, validate } = useFormValidation();
 
-const passwordUpdates = reactive({
-  CurrentPassword: "",
-  newPassword: "",
-  confirmPassword: "",
+const passwordUpdates = defineModel("password", {
+  type: Object,
 });
 
 const handleClick = async () => {
   try {
     await validate();
-    emits("change-component", "SuccessVerification");
+    emits("update:password", "SuccessVerification");
   } catch (error) {
     console.error("Form validation failed:", error);
   }
@@ -43,7 +44,7 @@ const handleClick = async () => {
             <v-text-field
               :type="isInputOneShow ? 'text' : 'password'"
               label=""
-              v-model="passwordUpdates.CurrentPassword"
+              v-model="passwordUpdates.current_password"
               :rules="[rules.required, rules.minLength(8)]"
               rounded="lg"
               base-color="border-light"
@@ -74,7 +75,7 @@ const handleClick = async () => {
             <v-text-field
               :type="isInputTwoShow ? 'text' : 'password'"
               label=""
-              v-model="passwordUpdates.newPassword"
+              v-model="passwordUpdates.password"
               :rules="[rules.required, rules.minLength(8)]"
               rounded="lg"
               base-color="border-light"
@@ -99,12 +100,12 @@ const handleClick = async () => {
             <v-text-field
               :type="isInputThreeShow ? 'text' : 'password'"
               label=""
-              v-model="passwordUpdates.confirmPassword"
+              v-model="passwordUpdates.confirm_password"
               :rules="[
                 rules.required,
                 rules.confirmPassword(
-                  passwordUpdates.confirmPassword,
-                  passwordUpdates.newPassword
+                  passwordUpdates.confirm_password,
+                  passwordUpdates.password
                 ),
               ]"
               rounded="lg"
@@ -134,6 +135,7 @@ const handleClick = async () => {
         <v-col cols="4">
           <v-btn
             @click="handleClick"
+            :loading="isLoading"
             color="primary"
             type="submit"
             round

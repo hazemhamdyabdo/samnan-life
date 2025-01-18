@@ -90,4 +90,10 @@ interface UpdateProfileRequest {
   email: string;
 }
 
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest };
+interface ChangePasswordRequest {
+  phone: string;
+  current_password: string;
+  password: string;
+  confirm_password: string;
+}
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest };

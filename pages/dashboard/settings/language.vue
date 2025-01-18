@@ -2,6 +2,8 @@
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+
+const selectedLang = ref("ar");
 </script>
 
 <template>
@@ -20,7 +22,7 @@ const { t } = useI18n();
       </p>
     </section>
     <section class="mt-8">
-      <v-radio-group>
+      <v-radio-group v-model="selectedLang">
         <v-radio color="primary" value="ar" class="mb-4">
           <template v-slot:label>
             <AppSvgIcon name="AR" size="lg" class="me-2" />

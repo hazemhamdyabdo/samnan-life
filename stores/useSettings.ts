@@ -1,4 +1,4 @@
-import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest } from "~/types/settings"
+import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
   // profile
@@ -18,11 +18,19 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
   const updatePhone = async (phone: string) => {
-    const { error } = await useAPI<ApiResponse<CustomerData>>('customer/update-phone', {
+    const { error } = await useAPI<ApiResponse<CustomerData>>('/customer/update-phone', {
       method: "PUT",
       body: {
         phone
       },
+      watch: false
+    })
+  }
+
+  const changePassword = async (passwordUpdates: ChangePasswordRequest) => {
+    const { error } = await useAPI("/customer/change-password", {
+      method: "POST",
+      body: passwordUpdates,
       watch: false
     })
   }
@@ -142,6 +150,7 @@ export const useSettingsStore = defineStore('settings', () => {
     customerData,
     getCustomerData,
     updateProfile,
-    updatePhone
+    updatePhone,
+    changePassword
   }
 })
