@@ -9,8 +9,14 @@ const emits = defineEmits<{
 }>();
 
 defineProps<{
-  customerProducts: Product[];
+  // customerProducts: Product[];
 }>();
+
+const { showSuccess } = useAlertStore();
+const settingsStore = useSettingsStore();
+const { customerProducts } = storeToRefs(settingsStore);
+const { fetchAllProducts, deleteProduct, fetchCustomerProducts } =
+  settingsStore;
 
 const dialog = ref(false);
 
@@ -21,12 +27,17 @@ const handleDeleteProduct = (productId: number) => {
   dialog.value = true;
 };
 
-const handleConfirmDelete = () => {
-  if (deletedProductId.value) {
-    emits("delete-product", deletedProductId.value);
-  }
+const handleConfirmDelete = async () => {
+  await deleteProduct(deletedProductId.value);
+  await fetchCustomerProducts();
+  showSuccess("تم حذف المنتج بنجاح");
   dialog.value = false;
 };
+
+onMounted(async () => {
+  // await fetchAllProducts();
+  await fetchCustomerProducts();
+});
 </script>
 
 <template>

@@ -1,43 +1,53 @@
 <script setup lang="ts">
 defineProps<{
-  productTitle: string;
-  productImage: string;
-  productId: number;
+  // productTitle: string;
+  // productImage: string;
+  // productId: number;
+  products: any;
 }>();
 
 const checked = ref(false);
 
 const emits = defineEmits<{
-  (e: "select-product", value: { productId: number; checked: boolean }): void;
+  (e: "select-product", value: number | null): void;
 }>();
 
-const selectProduct = (productId: number) => {
-  checked.value = !checked.value;
-  emits("select-product", { productId, checked: checked.value });
+const selectedProductId = ref(null);
+const selectProduct = (productId: any) => {
+  if (selectedProductId.value === productId) {
+    selectedProductId.value = null;
+  } else {
+    selectedProductId.value = productId;
+  }
+  emits("select-product", selectedProductId.value);
 };
 </script>
 
 <template>
-  <v-card
-    rounded="xl"
-    border="sm black"
-    class="pa-4 cursor-pointer position-relative"
-    elevation="0"
-    @click="selectProduct(productId)"
-  >
-    <v-checkbox
-      v-model="checked"
-      class="checkbox"
-      color="primary"
-      density="compact"
-      hide-details
-    />
-    <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
-    <img src="/images/product.png" />
-    <p class="text-light-gray-2 text-14 font-weight-bold">
-      {{ productTitle }}
-    </p>
-  </v-card>
+  <v-row>
+    <v-col v-for="product in products" :key="product.id">
+      <v-card
+        rounded="xl"
+        border="sm black"
+        class="pa-4 cursor-pointer position-relative"
+        elevation="0"
+        @click="selectProduct(product.id)"
+      >
+        <v-checkbox
+          v-model="selectedProductId"
+          :value="product.id"
+          class="checkbox"
+          color="primary"
+          density="compact"
+          hide-details
+        />
+        <img src="/images/product.png" />
+        <p class="text-light-gray-2 text-14 font-weight-bold">
+          {{ product.name }}
+        </p>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <style scoped>

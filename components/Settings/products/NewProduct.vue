@@ -12,6 +12,10 @@ defineProps<{
 
 const { addProduct } = useSettingsStore();
 const { showSuccess } = useAlertStore();
+const settingsStore = useSettingsStore();
+const { allProducts, customerProducts } = storeToRefs(settingsStore);
+const { fetchAllProducts, deleteProduct, fetchCustomerProducts } =
+  settingsStore;
 
 const { t } = useI18n();
 const filterDialog = ref();
@@ -20,31 +24,18 @@ const showFilterDialog = () => {
   filterDialog.value.showDialog();
 };
 
-const selectedProductIds = ref<number[]>([]);
+const selectedProductId = ref<number>();
 
-const handleSelectProduct = async ({
-  productId,
-  checked,
-}: {
-  productId: number;
-  checked: boolean;
-}) => {
-  if (checked) {
-    if (!selectedProductIds.value.includes(productId)) {
-      selectedProductIds.value.push(productId);
-    }
-  } else {
-    selectedProductIds.value = selectedProductIds.value.filter(
-      (id) => id !== productId
-    );
-  }
+const handleSelectProduct = async (productId: number) => {
+  selectedProductId.value = productId;
 };
 
 const isLoading = ref(false);
 const handleAddProduct = async () => {
   isLoading.value = true;
   try {
-    await addProduct(selectedProductIds.value[0]);
+    // @ts-ignore
+    await addProduct(selectedProductId.value);
     showSuccess("تمت العملية بنجاح");
     emits("change-component", "Products");
   } catch (e) {
@@ -53,6 +44,10 @@ const handleAddProduct = async () => {
     isLoading.value = false;
   }
 };
+onMounted(async () => {
+  await fetchAllProducts();
+  // await fetchCustomerProducts();
+});
 </script>
 
 <template>
@@ -85,16 +80,10 @@ const handleAddProduct = async () => {
       </div>
     </section>
 
-    <v-row>
-      <v-col v-for="product in products" :key="product.id">
-        <ProductCard
-          :product-title="product.name"
-          :product-image="product.image"
-          :product-id="product.id"
-          @select-product="handleSelectProduct"
-        />
-      </v-col>
-    </v-row>
+    <ProductCard
+      :products="allProducts"
+      @select-product="handleSelectProduct"
+    />
 
     <div class="d-flex w-50">
       <v-btn
