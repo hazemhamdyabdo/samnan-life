@@ -2,11 +2,9 @@
 import Products from "~/components/Settings/products/Products.vue";
 import NewProduct from "~/components/Settings/products/NewProduct.vue";
 
-const { showSuccess } = useAlertStore();
 const { t } = useI18n();
 const settingsStore = useSettingsStore();
 const { allProducts, customerProducts } = storeToRefs(settingsStore);
-const { fetchAllProducts, deleteProduct } = settingsStore;
 
 const componentMap = {
   Products,
@@ -28,12 +26,7 @@ const currentComponentView = computed(() => {
       {{ t("dashboard.settings.products.header") }}
     </h3>
   </section>
-  <component
-    :is="currentComponentView"
-    :customer-products="customerProducts"
-    :products="allProducts"
-    @change-component="changeComponent"
-  />
+  <component :is="currentComponentView" @change-component="changeComponent" />
 </template>
 
 <style scoped></style>

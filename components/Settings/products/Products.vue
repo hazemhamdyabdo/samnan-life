@@ -28,7 +28,7 @@ const handleDeleteProduct = (productId: number) => {
 };
 
 const handleConfirmDelete = async () => {
-  await deleteProduct(deletedProductId.value);
+  await deleteProduct(deletedProductId.value as number);
   await fetchCustomerProducts();
   showSuccess("تم حذف المنتج بنجاح");
   dialog.value = false;
