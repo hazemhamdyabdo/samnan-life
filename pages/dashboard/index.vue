@@ -1,21 +1,21 @@
 <script setup lang="ts">
 const { t } = useI18n();
-const { dateAndTime  } = useDateTimeFormate();
+const { dateAndTime } = useDateTimeFormate();
 
 const cards = [
   {
     title: t("dashboard.home.cards.new_device"),
-    link: "/new-device",
+    link: "/dashboard/operations/new-installation",
     image: "new-device",
   },
   {
     title: t("dashboard.home.cards.urgent_maintenance"),
-    link: "/",
+    link: "/dashboard/operations/order-maintenance/emergency_maintenance",
     image: "urgent-maintenance",
   },
   {
     title: t("dashboard.home.cards.regular_maintenance"),
-    link: "/",
+    link: "/dashboard/operations/order-maintenance/regular_maintenance",
     image: "regular-maintenance",
   },
 ];
@@ -81,7 +81,9 @@ const operationLogs = [
 
     <section class="d-flex justify-space-between align-center ga-6 py-3">
       <v-card
-        v-for="card in cards"
+        v-for="(card, index) in cards"
+        :key="index"
+        :to="card.link"
         class="d-flex align-center justify-space-between ga-4 flex-grow-1 cursor-pointer"
         border="sm black"
         rounded="lg"
@@ -123,7 +125,7 @@ const operationLogs = [
                 {{ log.title }}
               </h5>
               <p class="text-grey-300" style="font-size: 12px">
-                {{ dateAndTime (log.created_at) }}
+                {{ dateAndTime(log.created_at) }}
               </p>
             </div>
             <v-spacer />

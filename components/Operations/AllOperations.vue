@@ -53,6 +53,7 @@ const panel = ref(0);
                 <h5>{{ $t("operations.location") }}</h5>
                 <v-spacer></v-spacer>
                 <nuxt-link
+                  :to="localePath('/dashboard/operations/track-order')"
                   class="text-primary align-center text-12 d-flex ga-3"
                 >
                   <AppSvgIcon name="map" />

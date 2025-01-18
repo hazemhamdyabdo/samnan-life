@@ -6,7 +6,6 @@ html {
   border-radius: 16px;
 }
 
-
 .v-field__outline {
   border-radius: 16px !important;
 }
@@ -56,6 +55,11 @@ h5 {
   font-style: normal;
   font-weight: 400;
 }
+h6 {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+}
 
 h2.heading {
   margin-bottom: 60px;
@@ -77,6 +81,7 @@ a {
   border-radius: 16px !important;
 }
 
+.v-btn,
 .v-field__outline {
   border-radius: 16px !important;
 }
