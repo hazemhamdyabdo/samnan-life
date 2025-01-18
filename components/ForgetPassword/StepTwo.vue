@@ -1,34 +1,18 @@
 <script setup lang="ts">
 import OTP from "../app/OTP.vue";
+import StepThree from "~/components/ForgetPassword/StepThree.vue";
 
 defineProps<{
   title: string;
   isLoading: boolean;
+  reset: boolean;
+  number: string;
 }>();
-const emits = defineEmits(["resend:otp", "verify:otp"]);
-const countdownLimit = 60;
-
-const timeLeft = ref(countdownLimit);
-
+const emits = defineEmits(["resend:otp", "verify:otp", "change:step-three"]);
+const passwordUpdates = defineModel("passwordUpdates");
 const otp = defineModel("otp", {
   type: String,
   required: true,
-});
-
-const countdown = computed(() => {
-  const minutes = Math.floor(timeLeft.value / 60);
-  const seconds = timeLeft.value % 60;
-  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-});
-
-onMounted(() => {
-  const countdownInterval = setInterval(() => {
-    if (timeLeft.value > 0) {
-      timeLeft.value -= 1;
-    } else {
-      clearInterval(countdownInterval);
-    }
-  }, 1000);
 });
 </script>
 
@@ -39,12 +23,17 @@ onMounted(() => {
     </h3>
     <span>
       {{ $t("forget_password.otp_instructions") }}
+      {{ number }}
     </span>
   </div>
   <OTP
     v-model:otp="otp"
     :isLoading="isLoading"
+    :reset
     @resend:otp="emits('resend:otp')"
-    @verify:otp="emits('verify:otp')"
+  />
+  <StepThree
+    v-model:passwordUpdates="passwordUpdates"
+    @change:step-three="emits('change:step-three')"
   />
 </template>

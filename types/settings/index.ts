@@ -1,8 +1,8 @@
-interface AddressResponse {
+interface ApiResponse<T> {
   status: number;
   response_code: string;
   message: string;
-  data: AddressData;
+  data: T;
 }
 
 interface AddressData {
@@ -32,25 +32,12 @@ interface Address {
   details?: string;
 }
 
-interface CitiesResponse {
-  status: number;
-  response_code: string;
-  message: string;
-  data: City[];
-}
 
 interface City {
   id: number;
   created_at: string | null;
   updated_at: string | null;
   name: string;
-}
-
-interface DistrictsResponse {
-  status: number;
-  response_code: string;
-  message: string;
-  data: District[];
 }
 
 interface District {
@@ -62,13 +49,6 @@ interface District {
   city: City;
 }
 
-
-interface ProductResponse {
-  status: number;
-  response_code: string;
-  message: string;
-  data: Product[];
-}
 
 interface Product {
   id: number;
@@ -90,5 +70,17 @@ interface Category {
 }
 
 
+interface CustomerData {
+  id: number;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string | null;
+  otp: string;
+  authorized: number;
+  activated: number;
+  created_at: string;
+  updated_at: string;
+}
 
-export type { AddressResponse, AddressData, Address, City, CitiesResponse, DistrictsResponse, District, ProductResponse, Product };
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData };

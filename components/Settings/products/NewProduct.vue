@@ -85,16 +85,16 @@ const handleAddProduct = async () => {
       </div>
     </section>
 
-    <section class="d-flex flex-wrap ga-4 justify-space-between">
-      <ProductCard
-        v-for="product in products"
-        :key="product.id"
-        :product-title="product.name"
-        :product-image="product.image"
-        :product-id="product.id"
-        @select-product="handleSelectProduct"
-      />
-    </section>
+    <v-row>
+      <v-col v-for="product in products" :key="product.id">
+        <ProductCard
+          :product-title="product.name"
+          :product-image="product.image"
+          :product-id="product.id"
+          @select-product="handleSelectProduct"
+        />
+      </v-col>
+    </v-row>
 
     <div class="d-flex w-50">
       <v-btn

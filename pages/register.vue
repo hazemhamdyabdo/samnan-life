@@ -7,7 +7,8 @@ import type { UserRegistrationDetails } from "~/types";
 import StepOne from "~/components/Register/StepOne.vue";
 import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 
-const { register, verifyOTP } = useAuthStore();
+const { register, verifyOTP, handleForgetPassword } = useAuthStore();
+const { showSuccess } = useAlertStore();
 const currentStep = ref(0);
 const steps = ref([StepOne, StepTwo]);
 const isLoading = ref(false);
@@ -47,8 +48,19 @@ const handleOTPStep = async () => {
   }
 };
 
+const reset = ref(false);
 const handleResendOTP = async () => {
-  // @TODO: Ask for resend OTP api
+  isLoading.value = true;
+  try {
+    await handleForgetPassword(registerDetails.phone);
+    showSuccess("OTP has been resent");
+    reset.value = true;
+  } catch (error) {
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
@@ -74,6 +86,8 @@ const handleResendOTP = async () => {
           :is="steps[currentStep]"
           :isLoading="isLoading"
           :title="$t('register.title')"
+          :reset="reset"
+          :number="registerDetails.phone"
           v-model:registerDetails="registerDetails"
           v-model:otp="otp"
           @change:step-one="handleRegisterStep"

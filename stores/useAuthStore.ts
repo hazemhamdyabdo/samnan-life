@@ -66,14 +66,15 @@ export const useAuthStore = defineStore('auth', () => {
   }: {
     phoneNumber: string;
     otp: string;
-    passwordUpdates: { password: string; confirm_password: string };
+    passwordUpdates: { current_password: string; password: string; confirm_password: string };
   }) => {
     const { data, error } = await useAPI("/customer/reset-password", {
       method: "POST",
       body: {
         phone: phoneNumber,
-        otp: otp,
-        password: passwordUpdates.password,
+        otp,
+        password: passwordUpdates.current_password,
+        // new_password: passwordUpdates.password,
         confirm_password: passwordUpdates.confirm_password,
       },
       watch: false,
