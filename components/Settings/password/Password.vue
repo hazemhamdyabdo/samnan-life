@@ -21,19 +21,20 @@ const currentComponentView = computed(() => {
   return components[currentComponent.value];
 });
 
-const passwordUpdates = reactive({
-  phone: customerData.value!.phone,
-  current_password: "",
-  password: "",
-  confirm_password: "",
-});
+// const passwordUpdates = ref({
+//   phone: customerData.value!.phone,
+//   current_password: "",
+//   password: "",
+//   confirm_password: "",
+//   // otp: customerData.value!.otp,
+// });
 
 const isLoading = ref(false);
-const handleUpdatePassword = async (nextStep: string) => {
+const handleUpdatePassword = async (nextStep: string, passwordUpdates: any) => {
   isLoading.value = true;
   try {
     await changePassword(passwordUpdates);
-    changeComponent(nextStep);
+    // changeComponent(nextStep);
     showSuccess("Password has been changed");
   } catch (error) {
     console.log(error);
@@ -48,8 +49,9 @@ const handleUpdatePassword = async (nextStep: string) => {
     :title="$t('dashboard.settings.profile.update_password.header')"
     :success-message="$t('dashboard.settings.verification.changed_password')"
     :isLoading="isLoading"
-    v-model:password="passwordUpdates"
+    :customer-data="customerData"
     @update:password="handleUpdatePassword"
     @change-action="emits('change-action', $event)"
   />
+  <!-- v-model:password="passwordUpdates" -->
 </template>

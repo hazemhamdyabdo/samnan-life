@@ -1,8 +1,11 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   isLoading: boolean;
+  customerData: any;
 }>();
-const emits = defineEmits<{ (e: "update:password", value: string): void }>();
+const emits = defineEmits<{
+  (e: "update:password", value: string, data: any): void;
+}>();
 
 const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
@@ -10,14 +13,18 @@ const isInputThreeShow = ref(false);
 
 const { formRef, rules, validate } = useFormValidation();
 
-const passwordUpdates = defineModel("password", {
-  type: Object,
+const passwordUpdates = ref({
+  phone: props.customerData.phone,
+  current_password: "",
+  password: "",
+  confirm_password: "",
+  // otp: props.customerData.otp,
 });
 
 const handleClick = async () => {
   try {
     await validate();
-    emits("update:password", "SuccessVerification");
+    emits("update:password", "SuccessVerification", passwordUpdates.value);
   } catch (error) {
     console.error("Form validation failed:", error);
   }

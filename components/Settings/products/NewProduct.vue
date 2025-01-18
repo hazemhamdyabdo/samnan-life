@@ -44,7 +44,7 @@ const isLoading = ref(false);
 const handleAddProduct = async () => {
   isLoading.value = true;
   try {
-    await addProduct(selectedProductIds.value);
+    await addProduct(selectedProductIds.value[0]);
     showSuccess("تمت العملية بنجاح");
     emits("change-component", "Products");
   } catch (e) {

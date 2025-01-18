@@ -41,7 +41,7 @@ const otp = ref("");
 const handleOTPStep = async (newStep: string) => {
   isLoading.value = true;
   try {
-    verifyOTP(otp.value, phoneNumber.value);
+    // verifyOTP(otp.value, phoneNumber.value);
     changeComponent(newStep);
   } catch (error) {
     console.log(error);

@@ -33,6 +33,9 @@ export const useSettingsStore = defineStore('settings', () => {
       body: passwordUpdates,
       watch: false
     })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
   }
 
   // addresses apis
@@ -119,7 +122,7 @@ export const useSettingsStore = defineStore('settings', () => {
     }
   }
 
-  const addProduct = async (productId: number[]): Promise<void> => {
+  const addProduct = async (productId: number): Promise<void> => {
     const { error } = await useAPI<ApiResponse<Product[]>>(`/customer/products`, {
       method: 'POST',
       body: { product_id: productId },
