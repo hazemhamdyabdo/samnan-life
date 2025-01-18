@@ -5,10 +5,15 @@ defineProps<{
   receiver: string;
   content: string;
   target?: string;
+  isLoading: boolean;
+  reset: boolean;
 }>();
 
-const otp = ref("");
-const isLoading = ref(false);
+const emits = defineEmits(["resend:otp", "verify:otp"]);
+const otp = defineModel("otp", {
+  type: String,
+  required: true,
+});
 </script>
 <template>
   <v-row class="px-4 d-flex flex-column">
@@ -26,9 +31,10 @@ const isLoading = ref(false);
     <v-col cols="4">
       <OTP
         v-model:otp="otp"
+        :reset="reset"
         :isLoading="isLoading"
-        @resend:otp="$emit('resend:otp')"
-        @verify:otp="$emit('verify:otp')"
+        @resend:otp="emits('resend:otp')"
+        @verify:otp="emits('verify:otp', 'SuccessVerification')"
       />
     </v-col>
   </v-row>

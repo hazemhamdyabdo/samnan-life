@@ -1,13 +1,16 @@
 <script setup lang="ts">
 const { formRef, rules, validate } = useFormValidation();
 
-const emits = defineEmits(["change-component"]);
-const phoneNumber = ref("");
+defineProps<{
+  isLoading: boolean;
+}>();
+const emits = defineEmits(["change-component", "submit:phone-number"]);
+const phoneNumber = defineModel("phone-number");
 
 const handleClick = async () => {
   try {
     await validate();
-    emits("change-component", "OTPVerification");
+    emits("submit:phone-number", "OTPVerification");
   } catch (error) {
     console.error("Form validation failed:", error);
   }
@@ -54,6 +57,7 @@ const handleClick = async () => {
     <v-col cols="4">
       <v-btn
         @click="handleClick"
+        :loading="isLoading"
         color="primary"
         type="submit"
         round

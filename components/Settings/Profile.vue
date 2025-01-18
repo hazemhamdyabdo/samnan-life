@@ -1,20 +1,51 @@
 <script setup lang="ts">
 import AppModal from "~/components/app/Modal.vue";
+import type { UpdateProfileRequest } from "~/types/settings";
+
+const settingsStore = useSettingsStore();
+const { getCustomerData, updateProfile } = settingsStore;
+const { customerData } = storeToRefs(settingsStore);
 const { t } = useI18n();
+const { showSuccess } = useAlertStore();
 
 const emits = defineEmits(["change-action"]);
 
 const isInputShow = ref(false);
 const password = ref("");
-const details = ref({
-  prefix: "+966",
-  first_name: "Ahmed",
-  last_name: "Ali",
-  email: "ahmed@example.com",
-  phone_number: "597875665",
-});
+const details = ref({}) as Ref<{
+  first_name: string;
+  last_name?: string;
+  email?: string | null;
+  phone_number: string;
+}>;
+
+const isLoading = ref(false);
+const saveNewData = async () => {
+  isLoading.value = true;
+  try {
+    await updateProfile(details.value as UpdateProfileRequest);
+    getCustomerData();
+    showSuccess("تم تحديث البيانات بنجاح");
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
 const dialog = ref(false);
+onMounted(async () => {
+  await getCustomerData();
+
+  if (customerData.value) {
+    details.value = {
+      first_name: customerData.value.first_name,
+      last_name: customerData.value?.last_name,
+      email: customerData.value?.email,
+      phone_number: customerData.value?.phone,
+    };
+  }
+});
 </script>
 
 <template>
@@ -57,7 +88,7 @@ const dialog = ref(false);
     </v-col>
     <v-col cols="2" class="pa-4">
       <v-text-field
-        v-model="details.prefix"
+        value="+966"
         label=""
         variant="outlined"
         color="#E2E2E2"
@@ -115,9 +146,16 @@ const dialog = ref(false);
     </div>
   </section>
   <div class="mt-2">
-    <v-btn width="30%" color="primary" height="50" rounded="xl">{{
-      t("dashboard.settings.profile.save_changes")
-    }}</v-btn>
+    <v-btn
+      width="30%"
+      color="primary"
+      height="50"
+      rounded="xl"
+      :loading="isLoading"
+      @click="saveNewData"
+    >
+      {{ t("dashboard.settings.profile.save_changes") }}</v-btn
+    >
   </div>
   <div
     @click="dialog = true"

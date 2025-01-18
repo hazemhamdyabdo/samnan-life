@@ -83,4 +83,11 @@ interface CustomerData {
   updated_at: string;
 }
 
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData };
+
+interface UpdateProfileRequest {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest };
