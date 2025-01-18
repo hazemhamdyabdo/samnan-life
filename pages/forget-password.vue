@@ -8,6 +8,7 @@ import StepTwo from "~/components/ForgetPassword/StepTwo.vue";
 import StepThree from "~/components/ForgetPassword/StepThree.vue";
 
 const { verifyOTP, resetPassword, handleForgetPassword } = useAuthStore();
+const { showSuccess } = useAlertStore();
 
 const forgetPasswordSteps = ref([StepOne, StepTwo, StepThree]);
 const phoneNumber = ref("");
@@ -46,6 +47,7 @@ const handleOTPStep = async () => {
 };
 
 const passwordUpdates = ref({
+  current_password: "",
   password: "",
   confirm_password: "",
 });
@@ -59,7 +61,8 @@ const handlePasswordStep = async () => {
       otp: otp.value,
       passwordUpdates: passwordUpdates.value,
     });
-    alert("Password Updated");
+    showSuccess("Password Updated");
+    navigateTo("/login");
     // @TODO: navigate to login page
   } catch (error) {
     // handle UI changes
@@ -69,8 +72,19 @@ const handlePasswordStep = async () => {
   }
 };
 
-const handleResendOTP = () => {
-  // @TODO: Ask for resend OTP api
+const reset = ref(false);
+const handleResendOTP = async () => {
+  isLoading.value = true;
+  try {
+    await handleForgetPassword(phoneNumber.value);
+    showSuccess("OTP has been resent");
+    reset.value = true;
+  } catch (error) {
+    // handle UI changes
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
@@ -95,6 +109,8 @@ const handleResendOTP = () => {
         <component
           :is="forgetPasswordSteps[currentStep]"
           :isLoading="isLoading"
+          :reset="reset"
+          :number="phoneNumber"
           v-model:phoneNumber="phoneNumber"
           v-model:otp="otp"
           v-model:passwordUpdates="passwordUpdates"

@@ -20,7 +20,6 @@ const selectProduct = (productId: number) => {
 <template>
   <v-card
     rounded="xl"
-    width="fit-content"
     border="sm black"
     class="pa-4 cursor-pointer position-relative"
     elevation="0"

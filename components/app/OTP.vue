@@ -1,6 +1,7 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   isLoading: boolean;
+  reset: boolean;
 }>();
 const emits = defineEmits(["resend:otp", "verify:otp"]);
 const otp = defineModel("otp", {
@@ -13,6 +14,12 @@ const countdown = computed(() => {
   const minutes = Math.floor(timeLeft.value / 60);
   const seconds = timeLeft.value % 60;
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+});
+
+watchEffect(() => {
+  if (props.reset) {
+    timeLeft.value = 60;
+  }
 });
 
 onMounted(() => {
