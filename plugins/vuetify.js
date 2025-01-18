@@ -4,7 +4,6 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { VDateInput } from "vuetify/labs/VDateInput";
-
 const theme = {
   options: { customProperties: true },
   defaultTheme: "light",
@@ -16,6 +15,7 @@ const theme = {
         "background-200": "#E8E8EF",
         "theme-white": "#fff",
         primary: "#223F99",
+        "primary-dark": "#20419C",
         "grey-300": "#959595",
         "grey-400": "#818181",
         header: "#353535",
@@ -35,6 +35,7 @@ const theme = {
         "grey-900": "#292929",
         error: "#EF233C",
         "grey-600": "#585858",
+        success: "#08C230",
       },
     },
   },
@@ -59,9 +60,16 @@ export default defineNuxtPlugin((app) => {
         hideDetails: "auto",
         baseColor: "border-light",
       },
+      VTextarea: {
+        minHeight: "60px",
+        rounded: "lg",
+        variant: "outlined",
+        color: "primary",
+        hideDetails: "auto",
+        baseColor: "border-light",
+      },
       VBtn: {
         elevation: 0,
-        rounded: "lg",
         height: "50px",
       },
     },
