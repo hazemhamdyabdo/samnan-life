@@ -41,10 +41,7 @@ const emitAddressDetails = async () => {
   try {
     await validate();
     if (!addressDetails.value.id) {
-      emits("add:new-address", {
-        ...addressDetails.value,
-        street: addressDetails.value.national_address, // TODO: change this after knowing where to get street
-      });
+      emits("add:new-address", addressDetails.value);
     } else {
       emits("update:address", addressDetails.value.id);
     }
@@ -115,6 +112,15 @@ onMounted(async () => {
             :loading="isDistrictLoafing"
             :rules="[rules.required]"
             variant="outlined"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+            v-model="addressDetails.street"
+            :rules="[rules.required]"
+            :label="
+              t('dashboard.settings.addresses.add_address.address_street')
+            "
           />
         </v-col>
 
