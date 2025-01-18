@@ -1,28 +1,35 @@
-import type { AddressResponse, AddressData, Address, City, CitiesResponse, District, DistrictsResponse, Product, ProductResponse } from "~/types/settings"
+import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
+  const customerData = ref<CustomerData>()
+
+  const getCustomerData = async () => {
+    const { data } = await useAPI<ApiResponse<CustomerData>>('/customer')
+    customerData.value = data.value?.data
+  }
+
   // addresses apis
   const allAddresses = ref<AddressData>()
   const allCities = ref<City[]>()
   const districts = ref<District[]>()
 
   const fetchAllAddresses = async (): Promise<void> => {
-    const { data } = await useAPI<AddressResponse>('/addresses')
+    const { data } = await useAPI<ApiResponse<AddressData>>('/addresses')
     allAddresses.value = data.value?.data
   }
 
   const fetchAllCities = async (): Promise<void> => {
-    const { data } = await useAPI<CitiesResponse>('/cities')
+    const { data } = await useAPI<ApiResponse<City[]>>('/cities')
     allCities.value = data.value?.data
   }
 
   const fetchAllDistricts = async (cityId: number): Promise<void> => {
-    const { data } = await useAPI<DistrictsResponse>(`/cities/${cityId}/districts`)
+    const { data } = await useAPI<ApiResponse<District[]>>(`/cities/${cityId}/districts`)
     districts.value = data.value?.data
   }
 
   const createAddress = async (address: Address): Promise<void> => {
-    const { error } = await useAPI<AddressResponse>('/addresses', {
+    const { error } = await useAPI<ApiResponse<AddressData>>('/addresses', {
       method: 'POST',
       body: address,
       watch: false
@@ -33,7 +40,7 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
   const deleteAddress = async (id: number): Promise<void> => {
-    const { error } = await useAPI<AddressResponse>(`/addresses/${id}`, {
+    const { error } = await useAPI<ApiResponse<AddressData>>(`/addresses/${id}`, {
       method: 'DELETE',
       watch: false
     })
@@ -44,12 +51,12 @@ export const useSettingsStore = defineStore('settings', () => {
 
 
   const getSingleAddress = async (id: number): Promise<AddressData | undefined> => {
-    const { data } = await useAPI<AddressResponse>(`/addresses/${id}`)
+    const { data } = await useAPI<ApiResponse<AddressData>>(`/addresses/${id}`)
     return data.value?.data
   }
 
   const updateAddress = async (address: Address): Promise<void> => {
-    const { error } = await useAPI<AddressResponse>(`/addresses/${address.id}`, {
+    const { error } = await useAPI<ApiResponse<AddressData>>(`/addresses/${address.id}`, {
       method: 'PUT',
       body: address,
       watch: false
@@ -65,18 +72,18 @@ export const useSettingsStore = defineStore('settings', () => {
   const customerProducts = ref<Product[]>()
 
   const fetchAllProducts = async (): Promise<void> => {
-    const { data } = await useAPI<ProductResponse>('/products')
+    const { data } = await useAPI<ApiResponse<Product[]>>('/products')
     allProducts.value = data.value?.data
   }
 
 
   const fetchCustomerProducts = async (): Promise<void> => {
-    const { data } = await useAPI<ProductResponse>('/customer/products')
+    const { data } = await useAPI<ApiResponse<Product[]>>('/customer/products')
     customerProducts.value = data.value?.data
   }
 
   const deleteProduct = async (id: number): Promise<void> => {
-    const { error } = await useAPI<ProductResponse>(`/customer/products/${id}`, {
+    const { error } = await useAPI<ApiResponse<Product[]>>(`/customer/products/${id}`, {
       method: 'DELETE',
       watch: false
     })
@@ -86,7 +93,7 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
   const addProduct = async (productId: number[]): Promise<void> => {
-    const { error } = await useAPI<ProductResponse>(`/customer/products`, {
+    const { error } = await useAPI<ApiResponse<Product[]>>(`/customer/products`, {
       method: 'POST',
       body: { product_id: productId },
       watch: false
@@ -112,6 +119,8 @@ export const useSettingsStore = defineStore('settings', () => {
     deleteProduct,
     customerProducts,
     fetchCustomerProducts,
-    addProduct
+    addProduct,
+    customerData,
+    getCustomerData
   }
 })
