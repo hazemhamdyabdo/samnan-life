@@ -14,6 +14,15 @@ const otp = defineModel("otp", {
   type: String,
   required: true,
 });
+
+const route = useRoute();
+const isRegister = computed(() => route.path.includes("register"));
+
+const handleVerifyOTP = () => {
+  if (isRegister.value) {
+    emits("verify:otp");
+  }
+};
 </script>
 
 <template>
@@ -30,9 +39,11 @@ const otp = defineModel("otp", {
     v-model:otp="otp"
     :isLoading="isLoading"
     :reset
+    @verify:otp="handleVerifyOTP"
     @resend:otp="emits('resend:otp')"
   />
   <StepThree
+    v-if="!isRegister"
     v-model:passwordUpdates="passwordUpdates"
     @change:step-three="emits('change:step-three')"
   />
