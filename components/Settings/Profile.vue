@@ -2,6 +2,7 @@
 import AppModal from "~/components/app/Modal.vue";
 import type { UpdateProfileRequest } from "~/types/settings";
 
+const { deleteAccount } = useAuthStore();
 const settingsStore = useSettingsStore();
 const { getCustomerData, updateProfile } = settingsStore;
 const { customerData } = storeToRefs(settingsStore);
@@ -10,8 +11,16 @@ const { showSuccess } = useAlertStore();
 
 const emits = defineEmits(["change-action"]);
 
-const isInputShow = ref(false);
-const password = ref("");
+const fullName = computed(() => {
+  if (customerData.value?.first_name && customerData.value.last_name)
+    return customerData.value?.first_name + " " + customerData.value?.last_name;
+});
+const nameShortcuts = computed(() => {
+  const names = fullName.value?.split(" ");
+  if (names?.length) {
+    return names[0][0] + names[1][0];
+  }
+});
 const details = ref({}) as Ref<{
   first_name: string;
   last_name?: string;
@@ -34,6 +43,23 @@ const saveNewData = async () => {
 };
 
 const dialog = ref(false);
+
+const isInputShow = ref(false);
+const accountPassword = ref();
+const isDeleteAccLoading = ref(false);
+const handleDeleteAccount = async () => {
+  isDeleteAccLoading.value = true;
+  try {
+    await deleteAccount(accountPassword.value);
+    navigateTo("/login");
+    dialog.value = false;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    isDeleteAccLoading.value = false;
+  }
+};
+
 onMounted(async () => {
   await getCustomerData();
 
@@ -60,10 +86,12 @@ onMounted(async () => {
       color="primary"
       class="mx-auto text-white font-weight-medium text-40"
     >
-      AA
+      {{ nameShortcuts ?? "oo" }}
     </v-avatar>
 
-    <p class="text-24 text-header font-weight-medium">Ahmed Ali</p>
+    <p class="text-24 text-header font-weight-medium">
+      {{ fullName ?? "Loading" }}
+    </p>
   </div>
   <v-row>
     <v-col cols="6" class="pa-4">
@@ -174,9 +202,11 @@ onMounted(async () => {
     isDelete
     :text="t('dashboard.modal.confirm_delete_password')"
     :ok-text="'dashboard.modal.delete_account_btn'"
+    :is-loading="isDeleteAccLoading"
+    @submit="handleDeleteAccount"
   >
     <v-text-field
-      v-model="password"
+      v-model="accountPassword"
       :label="t('dashboard.settings.profile.update_password.current_password')"
       :type="isInputShow ? 'text' : 'password'"
     >

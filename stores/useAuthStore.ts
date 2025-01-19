@@ -109,13 +109,27 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null;
   }
 
+  const deleteAccount = async (password: string) => {
+    const { error } = await useAPI("/customer/remove", {
+      method: "DELETE",
+      body: { password },
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+    token.value = null;
+    user.value = null;
+  }
+
   return {
     login,
     register,
     verifyOTP,
     resetPassword,
     handleForgetPassword,
-    logout
+    logout,
+    deleteAccount
   }
 
 })

@@ -45,7 +45,6 @@ const handleAddProduct = async () => {
 };
 onMounted(async () => {
   await fetchAllProducts();
-  // await fetchCustomerProducts();
 });
 </script>
 

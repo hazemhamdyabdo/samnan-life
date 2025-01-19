@@ -154,6 +154,6 @@ export const useSettingsStore = defineStore('settings', () => {
     getCustomerData,
     updateProfile,
     updatePhone,
-    changePassword
+    changePassword,
   }
 })

@@ -1,12 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  // productTitle: string;
-  // productImage: string;
-  // productId: number;
   products: any;
 }>();
-
-const checked = ref(false);
 
 const emits = defineEmits<{
   (e: "select-product", value: number | null): void;
