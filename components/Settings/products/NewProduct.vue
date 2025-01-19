@@ -13,9 +13,8 @@ defineProps<{
 const { addProduct } = useSettingsStore();
 const { showSuccess } = useAlertStore();
 const settingsStore = useSettingsStore();
-const { allProducts, customerProducts } = storeToRefs(settingsStore);
-const { fetchAllProducts, deleteProduct, fetchCustomerProducts } =
-  settingsStore;
+const { allProducts } = storeToRefs(settingsStore);
+const { fetchAllProducts } = settingsStore;
 
 const { t } = useI18n();
 const filterDialog = ref();
