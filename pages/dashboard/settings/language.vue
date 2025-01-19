@@ -25,7 +25,8 @@ const selectedLang = ref("ar");
       <v-radio-group v-model="selectedLang">
         <v-radio color="primary" value="ar" class="mb-4">
           <template v-slot:label>
-            <AppSvgIcon name="AR" size="lg" class="me-2" />
+            <!-- <AppSvgIcon name="AR" size="lg" class="me-2" /> -->
+            <img src="/icons/ar.png" width="42" class="me-2" />
             <p>{{ t("dashboard.settings.language.arabic") }}</p>
           </template>
         </v-radio>
