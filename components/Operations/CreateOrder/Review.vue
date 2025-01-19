@@ -1,5 +1,11 @@
+<script setup>
+const { confirmOrder } = useMaintainStore();
+const { orderData } = storeToRefs(useMaintainStore());
+</script>
+
 <template>
   <div>
+    {{ orderData }}
     <h3 class="mt-10">{{ $t("operations.order_summary") }}</h3>
     <h5 class="mt-2">{{ $t("operations.order_summary_desc") }}</h5>
 
@@ -46,7 +52,5 @@
     </v-btn>
   </div>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped></style>

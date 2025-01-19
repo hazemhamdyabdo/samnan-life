@@ -33,9 +33,11 @@
 </template>
 
 <script setup>
+const emit = defineEmits(["upload"]);
 const images = ref([]);
 const onFileChange = (e) => {
   const files = e.target.files;
+  emit("upload", files);
   if (files.length) {
     //preview images
     for (let i = 0; i < files.length; i++) {

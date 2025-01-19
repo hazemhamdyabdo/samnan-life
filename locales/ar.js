@@ -410,5 +410,6 @@ export default {
     no_last_maintenance: "لم اقم بصيانة الجهاز من قبل",
     ur_problem:
       "اخبرنا عن المشكلة التي تعاني منها مع جهازك بالتفصيل قدر الامكان...",
+    emergency_maintenance: "صيانة عاجلة",
   },
 };

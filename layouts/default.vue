@@ -6,6 +6,8 @@ import SideBar from "~/components/common/SideBar.vue";
 <template>
   <v-app>
     <v-main>
+      <NuxtLoadingIndicator />
+
       <v-container fluid>
         <!-- APP NAV -->
         <NavBar />

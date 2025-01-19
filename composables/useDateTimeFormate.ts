@@ -53,6 +53,25 @@ export function useDateTimeFormate(locale: string = "en") {
         return `${date} \u2022 ${time}`; // \u2022 is the bullet character
     }
   }
+  function momentLikeDate(date, time) {
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+    let day = date.getDate().toString().padStart(2, "0");
 
-  return { formatToTimeString, formatToDateString, dateAndTime };
+    if (time) {
+      let hours = time.getHours().toString().padStart(2, "0");
+      let minutes = time.getMinutes().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    return `${year}-${month}-${day}`;
+  }
+
+  return {
+    formatToTimeString,
+    formatToDateString,
+    dateAndTime,
+    momentLikeDate,
+  };
 }

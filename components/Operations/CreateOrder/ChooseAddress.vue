@@ -2,15 +2,27 @@
   <div>
     <h3 class="mt-10">{{ $t("operations.client_location") }}</h3>
     <h5 class="mt-2">{{ $t("operations.client_location_desc") }}</h5>
-    <v-radio-group column class="mt-5">
-      <v-radio v-for="i in 3" :key="i" color="primary" :value="i" class="mt-3">
+    <v-radio-group
+      column
+      class="mt-5"
+      @update:modelValue="$emit('update:address', $event)"
+      v-model="chosenAdress"
+      :rules="[rules.required]"
+    >
+      <v-radio
+        v-for="address in addresses"
+        :key="address.id"
+        color="primary"
+        :value="address.id"
+        class="mt-3"
+      >
         <template v-slot:label>
           <div class="d-flex align-center ga-2">
             <AppSvgIcon name="location" />
             <div>
-              <h3 class="text-gray-500">المنزل الاول</h3>
+              <h3 class="text-gray-500">{{ address.name }}</h3>
               <p class="text-12 mt-1 text-caption date">
-                الرياض, حي الجلالة, منزل 144
+                {{ address.national_address }}, {{ address.street }}
               </p>
             </div>
           </div>
@@ -27,6 +39,13 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const { rules } = useFormValidation();
+
+defineProps(["addresses"]);
+defineEmits(["update:address"]);
+
+const chosenAdress = ref("");
+</script>
 
 <style lang="scss" scoped></style>

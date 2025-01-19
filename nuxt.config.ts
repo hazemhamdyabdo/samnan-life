@@ -4,7 +4,8 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  ssr: false,
+  ssr: true,
+  // spaLoadingTemplate: true,
   css: ["~/assets/scss/main.scss"],
   modules: [
     "@nuxtjs/i18n",
