@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const { dateAndTime } = useDateTimeFormate();
+const dashboardStore = useDashboardStore();
+const { fetchSlides } = dashboardStore;
+const { slides } = storeToRefs(dashboardStore);
 
 const cards = [
   {
@@ -52,6 +55,8 @@ const operationLogs = [
     icon: "sm-urgent-maintenance",
   },
 ];
+
+await fetchSlides();
 </script>
 <template>
   <div>
@@ -75,7 +80,14 @@ const operationLogs = [
             <v-icon color="white" @click="props.onClick">mdi-arrow-left</v-icon>
           </div>
         </template>
-        <v-carousel-item v-for="i in 3" src="/images/dashboard-panner.png" />
+        <v-carousel-item
+          v-for="slide in slides"
+          :src="slide.image_url"
+          max
+          max-height="400"
+          cover
+          rounded="xl"
+        />
       </v-carousel>
     </header>
 

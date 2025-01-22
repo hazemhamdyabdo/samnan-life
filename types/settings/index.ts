@@ -96,4 +96,13 @@ interface ChangePasswordRequest {
   password: string;
   confirm_password: string;
 }
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest };
+interface Slider {
+  id: number;
+  link: string;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  image_url: string;
+}
+
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider };
