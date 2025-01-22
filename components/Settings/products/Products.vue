@@ -8,15 +8,10 @@ const emits = defineEmits<{
   (e: "delete-product", value: number): void;
 }>();
 
-defineProps<{
-  // customerProducts: Product[];
-}>();
-
 const { showSuccess } = useAlertStore();
 const settingsStore = useSettingsStore();
 const { customerProducts } = storeToRefs(settingsStore);
-const { fetchAllProducts, deleteProduct, fetchCustomerProducts } =
-  settingsStore;
+const { deleteProduct, fetchCustomerProducts } = settingsStore;
 
 const dialog = ref(false);
 
@@ -34,10 +29,7 @@ const handleConfirmDelete = async () => {
   dialog.value = false;
 };
 
-onMounted(async () => {
-  // await fetchAllProducts();
-  await fetchCustomerProducts();
-});
+await fetchCustomerProducts();
 </script>
 
 <template>
@@ -55,7 +47,7 @@ onMounted(async () => {
       <div class="d-flex ga-2 align-center" v-for="product in customerProducts">
         <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
         <v-img
-          src="/images/product-img.png"
+          :src="product.image_url"
           class="rounded-circle border border-md pa-2"
           max-width="55"
         ></v-img>

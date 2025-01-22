@@ -93,9 +93,9 @@ const handleUpdateAddress = async () => {
   }
 };
 
-onMounted(async () => {
-  await fetchAllAddresses();
-});
+// onMounted(async () => {
+//   await fetchAllAddresses();
+// });
 </script>
 
 <template>

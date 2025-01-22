@@ -36,7 +36,7 @@ const selectProduct = (productId: any) => {
           density="compact"
           hide-details
         />
-        <img src="/images/product.png" />
+        <v-img :src="product.image_url" max-width="100%" />
         <p class="text-light-gray-2 text-14 font-weight-bold">
           {{ product.name }}
         </p>

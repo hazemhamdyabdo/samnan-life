@@ -59,10 +59,8 @@ const handleDeleteAccount = async () => {
     isDeleteAccLoading.value = false;
   }
 };
-
+await getCustomerData();
 onMounted(async () => {
-  await getCustomerData();
-
   if (customerData.value) {
     details.value = {
       first_name: customerData.value.first_name,

@@ -3,8 +3,6 @@ import Products from "~/components/Settings/products/Products.vue";
 import NewProduct from "~/components/Settings/products/NewProduct.vue";
 
 const { t } = useI18n();
-const settingsStore = useSettingsStore();
-const { allProducts, customerProducts } = storeToRefs(settingsStore);
 
 const componentMap = {
   Products,
@@ -28,5 +26,3 @@ const currentComponentView = computed(() => {
   </section>
   <component :is="currentComponentView" @change-component="changeComponent" />
 </template>
-
-<style scoped></style>

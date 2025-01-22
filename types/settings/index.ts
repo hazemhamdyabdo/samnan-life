@@ -53,7 +53,7 @@ interface District {
 interface Product {
   id: number;
   sap_id: string;
-  image: string;
+  image_url: string;
   created_at: string;
   updated_at: string;
   name: string;

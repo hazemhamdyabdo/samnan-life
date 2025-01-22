@@ -43,9 +43,8 @@ const handleAddProduct = async () => {
     isLoading.value = false;
   }
 };
-onMounted(async () => {
-  await fetchAllProducts();
-});
+
+await fetchAllProducts();
 </script>
 
 <template>
