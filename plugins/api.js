@@ -4,15 +4,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   const api = $fetch.create({
     baseURL: "https://app.rezeqstore.com/api/v1/",
     onRequest({ request, options, error }) {
-      options.headers = {
-        ...options.headers,
-        Accept: "application/json",
-      };
+      options.headers.set("Accept", "application/json");
+
       if (token.value) {
-        options.headers = {
-          ...options.headers,
-          Authorization: `Bearer ${token.value}`,
-        };
+        options.headers.set("Authorization", `Bearer ${token.value}`);
       }
     },
     async onResponseError({ response }) {

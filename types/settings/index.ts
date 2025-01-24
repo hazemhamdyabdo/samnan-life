@@ -96,6 +96,7 @@ interface ChangePasswordRequest {
   password: string;
   confirm_password: string;
 }
+
 interface Slider {
   id: number;
   link: string;
@@ -105,4 +106,45 @@ interface Slider {
   image_url: string;
 }
 
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider };
+interface TranslatedStep {
+  step_icon: string;
+  step_title: string;
+  step_description: string;
+}
+
+interface TranslatedService {
+  service_title: string;
+  service_description: string;
+}
+
+
+interface LandingData {
+  id: number;
+  store_url: string;
+  app_store_url: string;
+  google_play_url: string;
+  social: string | null;
+  created_at: string;
+  updated_at: string;
+  main_title: string;
+  main_description: string;
+  feature_title: string;
+  feature_description: string;
+  store_title: string;
+  store_description: string;
+  download_title: string;
+  translated_steps: TranslatedStep[];
+  translated_services: TranslatedService[];
+  main_image_url: string;
+  logo_url: string;
+  feature_image_url: string;
+  services_image_url: string;
+  store_image_url: string;
+  map_image_url: string;
+  download_image_url: string;
+  translated_rights: string | null;
+}
+
+
+
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider, LandingData };

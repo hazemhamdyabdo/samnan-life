@@ -1,6 +1,8 @@
 <script setup>
 import { useDisplay } from "vuetify";
 
+defineProps(["steps"]);
+
 const { mobile } = useDisplay();
 </script>
 
@@ -17,10 +19,12 @@ const { mobile } = useDisplay();
           <span class="text-white bg-primary py-2 px-4 rounded-circle">1</span>
         </div>
         <h3 class="text-tertiary font-weight-medium">
-          {{ $t("landing.workflow.items.easy_request.title") }}
+          {{ steps[0].step_title }}
+          <!-- {{ $t("landing.workflow.items.easy_request.title") }} -->
         </h3>
         <p class="text-body font-weight-medium">
-          {{ $t("landing.workflow.items.easy_request.description") }}
+          {{ steps[0].step_description }}
+          <!-- {{ $t("landing.workflow.items.easy_request.description") }} -->
         </p>
       </v-col>
 
@@ -29,10 +33,12 @@ const { mobile } = useDisplay();
           <span class="text-white bg-primary py-2 px-4 rounded-circle">2</span>
         </div>
         <h3 class="text-tertiary font-weight-medium">
-          {{ $t("landing.workflow.items.high_quality_service.title") }}
+          {{ steps[1].step_title }}
+          <!-- {{ $t("landing.workflow.items.high_quality_service.title") }} -->
         </h3>
         <p class="text-body font-weight-medium">
-          {{ $t("landing.workflow.items.high_quality_service.description") }}
+          {{ steps[1].step_description }}
+          <!-- {{ $t("landing.workflow.items.high_quality_service.description") }} -->
         </p>
       </v-col>
 
@@ -50,10 +56,12 @@ const { mobile } = useDisplay();
             >
           </div>
           <h3 class="text-tertiary font-weight-medium">
-            {{ $t("landing.workflow.items.easy_request.title") }}
+            {{ steps[0].step_title }}
+            <!-- {{ $t("landing.workflow.items.easy_request.title") }} -->
           </h3>
           <p class="text-body font-weight-medium">
-            {{ $t("landing.workflow.items.easy_request.description") }}
+            {{ steps[0].step_description }}
+            <!-- {{ $t("landing.workflow.items.easy_request.description") }} -->
           </p>
         </v-col>
 
@@ -75,10 +83,12 @@ const { mobile } = useDisplay();
             >
           </div>
           <h3 class="text-tertiary font-weight-medium">
-            {{ $t("landing.workflow.items.continuous_support.title") }}
+            {{ steps[2].step_title }}
+            <!-- {{ $t("landing.workflow.items.continuous_support.title") }} -->
           </h3>
           <p class="text-body font-weight-medium">
-            {{ $t("landing.workflow.items.continuous_support.description") }}
+            {{ steps[2].step_description }}
+            <!-- {{ $t("landing.workflow.items.continuous_support.description") }} -->
           </p>
         </v-col>
       </v-row>

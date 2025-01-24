@@ -7,7 +7,12 @@ import NavigationMobile from "~/components/home/NavigationMobile.vue";
 import DesktopNavigation from "~/components/home/DesktopNavigation.vue";
 import { useDisplay } from "vuetify";
 
+const dashboardStore = useDashboardStore();
+const { landingContent } = storeToRefs(dashboardStore);
+const { fetchLandingContent } = dashboardStore;
 const { mobile } = useDisplay();
+
+await fetchLandingContent();
 </script>
 
 <template>
@@ -35,7 +40,10 @@ const { mobile } = useDisplay();
           md="6"
           class="text-right text-header d-flex flex-column ga-4 w-50"
         >
-          <h2 v-html="$t('landing.header.title')" style="font-size: 45px"></h2>
+          <!-- <h2 v-html="$t('landing.header.title')" style="font-size: 45px"></h2> -->
+          <h2 style="font-size: 45px">
+            {{ landingContent.download_title }}
+          </h2>
           <p class="text-gray-gray-500 w-75" style="font-size: 18px">
             {{ $t("landing.header.description") }}
           </p>
@@ -43,18 +51,22 @@ const { mobile } = useDisplay();
             {{ $t("landing.header.download_prompt") }}
           </p>
           <div class="d-flex ga-4 flex-wrap">
-            <v-img
-              src="/icons/play-store.svg"
-              alt="play-store btn"
-              class="cursor-pointer"
-              max-width="150"
-            />
-            <v-img
-              src="/icons/app-store.svg"
-              alt="app-store btn"
-              class="cursor-pointer"
-              max-width="150"
-            />
+            <NuxtLink :to="landingContent.google_play_url" target="_blank">
+              <img
+                src="/icons/play-store.svg"
+                alt="play-store btn"
+                class="cursor-pointer"
+                style="max-width: 150px"
+              />
+            </NuxtLink>
+            <NuxtLink :to="landingContent.app_store_url" target="_blank">
+              <img
+                src="/icons/app-store.svg"
+                alt="app-store btn"
+                class="cursor-pointer"
+                style="max-width: 150px"
+              />
+            </NuxtLink>
           </div>
         </v-col>
         <v-col cols="12" md="5">
@@ -81,24 +93,30 @@ const { mobile } = useDisplay();
           </div>
 
           <h3 class="text-secondary font-weight-medium" style="font-size: 45px">
-            {{ $t("landing.about_us.title") }}
+            <!-- {{ $t("landing.about_us.title") }} -->
+            {{ landingContent.feature_title }}
           </h3>
           <span class="text-body">
-            {{ $t("landing.about_us.description1") }}
+            <!-- {{ $t("landing.about_us.description1") }} -->
+            {{ landingContent.feature_description }}
           </span>
-          <span class="text-body">
+          <!-- <span class="text-body">
             {{ $t("landing.about_us.description2") }}
-          </span>
+          </span> -->
         </v-col>
 
         <v-col cols="12" md="5" sm="12">
           <v-img src="/icons/engaged-user.svg" alt="engaged user image" />
+          <!-- <v-img
+            :src="landingContent.feature_image_url"
+            alt="engaged user image"
+          /> -->
         </v-col>
       </v-row>
 
       <!-- Flow -->
       <v-row class="d-flex justify-center align-center ga-16">
-        <HomeServiceWorkflow />
+        <HomeServiceWorkflow :steps="landingContent.translated_steps" />
       </v-row>
 
       <!-- Services -->
@@ -140,12 +158,14 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                {{ $t("landing.services.items.periodic_maintenance.title") }}
+                <!-- {{ $t("landing.services.items.periodic_maintenance.title") }} -->
+                {{ landingContent.translated_services[0].service_title }}
               </h3>
               <p class="text-body">
-                {{
+                <!-- {{
                   $t("landing.services.items.periodic_maintenance.description")
-                }}
+                }} -->
+                {{ landingContent.translated_services[0].service_description }}
               </p>
             </div>
             <div>
@@ -153,10 +173,12 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                {{ $t("landing.services.items.support_payment.title") }}
+                <!-- {{ $t("landing.services.items.support_payment.title") }} -->
+                {{ landingContent.translated_services[1].service_title }}
               </h3>
               <p class="text-body">
-                {{ $t("landing.services.items.support_payment.description") }}
+                <!-- {{ $t("landing.services.items.support_payment.description") }} -->
+                {{ landingContent.translated_services[1].service_description }}
               </p>
             </div>
           </v-col>
@@ -183,10 +205,12 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                {{ $t("landing.services.items.new_installation.title") }}
+                <!-- {{ $t("landing.services.items.new_installation.title") }} -->
+                {{ landingContent.translated_services[2].service_title }}
               </h3>
               <p class="text-body">
-                {{ $t("landing.services.items.new_installation.description") }}
+                <!-- {{ $t("landing.services.items.new_installation.description") }} -->
+                {{ landingContent.translated_services[2].service_description }}
               </p>
             </div>
             <div>
@@ -194,12 +218,11 @@ const { mobile } = useDisplay();
                 class="text-gray-800 font-weight-meduim"
                 style="font-size: 20px"
               >
-                {{ $t("landing.services.items.urgent_maintenance.title") }}
+                <!-- {{ $t("landing.services.items.urgent_maintenance.title") }} -->
+                {{ landingContent.translated_services[3].service_title }}
               </h3>
               <p class="text-body">
-                {{
-                  $t("landing.services.items.urgent_maintenance.description")
-                }}
+                {{ landingContent.translated_services[3].service_description }}
               </p>
             </div>
           </v-col>
@@ -230,16 +253,20 @@ const { mobile } = useDisplay();
           </div>
 
           <h4 class="text-secondary text-24 font-medium">
-            {{ $t("landing.store.title") }}
+            <!-- {{ $t("landing.store.title") }} -->
+            {{ landingContent.store_title }}
           </h4>
           <p class="text-color-text">
-            {{ $t("landing.store.description") }}
+            <!-- {{ $t("landing.store.description") }} -->
+            {{ landingContent.store_description }}
           </p>
 
           <div>
-            <v-btn color="primary" class="rounded-lg w-50" size="large">
-              {{ $t("landing.store.button") }}
-            </v-btn>
+            <NuxtLink :to="landingContent.store_url" target="_blank">
+              <v-btn color="primary" class="rounded-lg w-50" size="large">
+                {{ $t("landing.store.button") }}
+              </v-btn>
+            </NuxtLink>
           </div>
         </v-col>
 
@@ -249,6 +276,15 @@ const { mobile } = useDisplay();
             alt="mobile overview image"
             aspect-ratio="16/9"
           />
+          <!-- <v-img
+            :src="landingContent.store_image_url"
+            alt="mobile overview image"
+            aspect-ratio="16/9"
+            max-width="400px"
+            class="w-full"
+            lazy-loading
+          lazy-src="https://placehold.co/600x400"
+          /> -->
         </v-col>
       </v-row>
 
@@ -274,7 +310,12 @@ const { mobile } = useDisplay();
           </p>
         </v-col>
         <v-col cols="12" class="d-flex justify-center align-center">
-          <v-img src="/icons/sa-map.svg" alt="sa map image" class="w-100" />
+          <!-- <v-img src="/icons/sa-map.svg" alt="sa map image" class="w-100" /> -->
+          <v-img
+            :src="landingContent.map_image_url"
+            alt="sa map image"
+            class="w-100"
+          />
         </v-col>
       </v-row>
 
@@ -289,22 +330,27 @@ const { mobile } = useDisplay();
           class="d-flex flex-column ga-4 w-50"
         >
           <h4 class="text-secondary font-weight-medium" style="font-size: 32px">
-            {{ $t("landing.app.title") }}
+            <!-- {{ $t("landing.app.title") }} -->
+            {{ landingContent.download_title }}
           </h4>
           <p class="text-header">{{ $t("landing.app.download_prompt") }}</p>
           <div class="d-flex ga-4 flex-wrap">
-            <v-img
-              src="/icons/play-store.svg"
-              alt="play-store btn"
-              class="cursor-pointer"
-              max-width="150"
-            />
-            <v-img
-              src="/icons/app-store.svg"
-              alt="app-store btn"
-              class="cursor-pointer"
-              max-width="150"
-            />
+            <NuxtLink :to="landingContent.google_play_url" target="_blank">
+              <img
+                src="/icons/play-store.svg"
+                alt="play-store btn"
+                class="cursor-pointer"
+                style="max-width: 150px"
+              />
+            </NuxtLink>
+            <NuxtLink :to="landingContent.app_store_url" target="_blank">
+              <img
+                src="/icons/app-store.svg"
+                alt="app-store btn"
+                class="cursor-pointer"
+                style="max-width: 150px"
+              />
+            </NuxtLink>
           </div>
         </v-col>
         <v-col cols="12" md="5" sm="12" class="pb-0 mb-0">
@@ -335,16 +381,22 @@ const { mobile } = useDisplay();
       <a href="#">{{ $t("landing.footer.links.privacy") }}</a>
     </nav>
     <div :class="`d-flex ${mobile ? 'flex-column justify-center' : ''} ga-4`">
-      <img
-        src="/icons/play-store.svg"
-        alt="play-store btn"
-        class="cursor-pointer"
-      />
-      <img
-        src="/icons/app-store.svg"
-        alt="app-store btn"
-        class="cursor-pointer"
-      />
+      <NuxtLink :to="landingContent.google_play_url" target="_blank">
+        <img
+          src="/icons/play-store.svg"
+          alt="play-store btn"
+          class="cursor-pointer"
+          style="max-width: 150px"
+        />
+      </NuxtLink>
+      <NuxtLink :to="landingContent.app_store_url" target="_blank">
+        <img
+          src="/icons/app-store.svg"
+          alt="app-store btn"
+          class="cursor-pointer"
+          style="max-width: 150px"
+        />
+      </NuxtLink>
     </div>
   </footer>
 
