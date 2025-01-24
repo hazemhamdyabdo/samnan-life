@@ -77,7 +77,7 @@ onMounted(async () => {
 
     <v-form ref="formRef" @submit.prevent>
       <v-row class="mt-8">
-        <v-col cols="6">
+        <v-col cols="12" lg="6">
           <v-text-field
             v-model="addressDetails.name"
             :rules="[rules.required]"
@@ -85,7 +85,7 @@ onMounted(async () => {
           />
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" lg="6">
           <v-select
             v-model="addressDetails.city_id"
             :items="allCities"
@@ -98,7 +98,7 @@ onMounted(async () => {
           />
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" lg="6">
           <v-select
             v-model="addressDetails.district_id"
             :items="districts"
@@ -114,7 +114,7 @@ onMounted(async () => {
             variant="outlined"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" lg="6">
           <v-text-field
             v-model="addressDetails.street"
             :rules="[rules.required]"
@@ -124,7 +124,7 @@ onMounted(async () => {
           />
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" lg="6">
           <v-text-field
             v-model="addressDetails.national_address"
             :rules="[rules.required]"

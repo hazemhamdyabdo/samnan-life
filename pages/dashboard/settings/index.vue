@@ -21,7 +21,7 @@ const currentComponentView = computed(() => {
 </script>
 
 <template>
-  <div>
+  <v-row class="ps-4 pb-4">
     <component :is="currentComponentView" @change-action="changeComponent" />
-  </div>
+  </v-row>
 </template>

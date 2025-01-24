@@ -73,26 +73,26 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="mb-8 px-4">
+  <v-col cols="12">
     <h3 class="text-20 text-header">
       {{ t("dashboard.settings.profile.my_profile") }}
     </h3>
-  </div>
-  <div class="px-4 mb-8">
+  </v-col>
+  <v-col cols="12" class="mb-4">
     <v-avatar
       size="100"
       color="primary"
       class="mx-auto text-white font-weight-medium text-40"
     >
-      {{ nameShortcuts ?? "oo" }}
+      {{ nameShortcuts }}
     </v-avatar>
 
-    <p class="text-24 text-header font-weight-medium">
-      {{ fullName ?? "Loading" }}
+    <p class="text-24 text-header font-weight-medium mt-4">
+      {{ fullName }}
     </p>
-  </div>
+  </v-col>
   <v-row>
-    <v-col cols="6" class="pa-4">
+    <v-col cols="12" lg="6" class="pa-4">
       <v-text-field
         v-model="details.first_name"
         :label="t('dashboard.settings.profile.first_name')"
@@ -102,7 +102,7 @@ onMounted(async () => {
         hide-details
       ></v-text-field>
     </v-col>
-    <v-col cols="6" class="pa-4">
+    <v-col cols="12" lg="6" class="pa-4">
       <v-text-field
         v-model="details.last_name"
         :label="t('dashboard.settings.profile.last_name')"
@@ -112,7 +112,7 @@ onMounted(async () => {
         hide-details
       ></v-text-field>
     </v-col>
-    <v-col cols="2" class="pa-4">
+    <v-col cols="4" lg="2" class="pa-4">
       <v-text-field
         value="+966"
         label=""
@@ -130,7 +130,7 @@ onMounted(async () => {
         </template>
       </v-text-field>
     </v-col>
-    <v-col cols="5" class="pa-4">
+    <v-col cols="8" lg="5" class="pa-4">
       <v-text-field
         v-model="details.phone_number"
         :label="t('dashboard.settings.profile.phone')"
@@ -140,7 +140,7 @@ onMounted(async () => {
         hide-details
       ></v-text-field
     ></v-col>
-    <v-col cols="5" class="pa-4">
+    <v-col cols="12" lg="5" class="pa-4">
       <v-text-field
         v-model="details.email"
         :label="t('dashboard.settings.profile.email')"
@@ -151,8 +151,10 @@ onMounted(async () => {
       ></v-text-field
     ></v-col>
   </v-row>
-  <section class="d-flex flex-column ga-4 py-4">
-    <div
+
+  <v-row>
+    <v-col
+      cols="12"
       class="d-flex align-center ga-2 cursor-pointer"
       @click="emits('change-action', 'Phone')"
     >
@@ -160,8 +162,9 @@ onMounted(async () => {
       <p class="text-primary font-weight-medium">
         {{ t("dashboard.settings.profile.change_phone") }}
       </p>
-    </div>
-    <div
+    </v-col>
+    <v-col
+      cols="12"
       class="d-flex align-center ga-2 cursor-pointer"
       @click="emits('change-action', 'Password')"
     >
@@ -169,29 +172,29 @@ onMounted(async () => {
       <p class="font-weight-medium text-primary">
         {{ t("dashboard.settings.profile.change_password") }}
       </p>
-    </div>
-  </section>
-  <div class="mt-2">
-    <v-btn
-      width="30%"
-      color="primary"
-      height="50"
-      rounded="xl"
-      :loading="isLoading"
-      @click="saveNewData"
+    </v-col>
+    <v-col cols="12" lg="6">
+      <v-btn
+        block
+        color="primary"
+        rounded="xl"
+        :loading="isLoading"
+        @click="saveNewData"
+      >
+        {{ t("dashboard.settings.profile.save_changes") }}</v-btn
+      >
+    </v-col>
+    <v-col
+      cols="12"
+      @click="dialog = true"
+      class="d-flex align-center ga-2 cursor-pointer"
     >
-      {{ t("dashboard.settings.profile.save_changes") }}</v-btn
-    >
-  </div>
-  <div
-    @click="dialog = true"
-    class="d-flex align-center ga-2 mt-4 cursor-pointer"
-  >
-    <AppSvgIcon name="profile-delete" />
-    <p class="font-weight-medium text-gray-500">
-      {{ t("dashboard.settings.profile.delete_account") }}
-    </p>
-  </div>
+      <AppSvgIcon name="profile-delete" />
+      <p class="font-weight-medium text-gray-500">
+        {{ t("dashboard.settings.profile.delete_account") }}
+      </p>
+    </v-col>
+  </v-row>
 
   <AppModal
     v-model:dialog="dialog"

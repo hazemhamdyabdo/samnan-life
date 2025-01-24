@@ -51,22 +51,24 @@ const handleOTPStep = async (newStep: string) => {
 };
 </script>
 <template>
-  <component
-    :is="currentComponentView"
-    :title="$t('dashboard.settings.profile.update_phone.header')"
-    :receiver="$t('dashboard.settings.verification.phone')"
-    :content="$t('dashboard.settings.verification.phone_content')"
-    :target="phoneNumber"
-    v-model:phone-number="phoneNumber"
-    v-model:otp="otp"
-    :isLoading="isLoading"
-    :reset="reset"
-    @change-component="changeComponent"
-    @submit:phone-number="handlePhoneStep"
-    @change-action="emits('change-action', $event)"
-    @verify:otp="handleOTPStep"
-    @resend:otp="handlePhoneStep"
-  />
+  <v-col>
+    <component
+      :is="currentComponentView"
+      :title="$t('dashboard.settings.profile.update_phone.header')"
+      :receiver="$t('dashboard.settings.verification.phone')"
+      :content="$t('dashboard.settings.verification.phone_content')"
+      :target="phoneNumber"
+      v-model:phone-number="phoneNumber"
+      v-model:otp="otp"
+      :isLoading="isLoading"
+      :reset="reset"
+      @change-component="changeComponent"
+      @submit:phone-number="handlePhoneStep"
+      @change-action="emits('change-action', $event)"
+      @verify:otp="handleOTPStep"
+      @resend:otp="handlePhoneStep"
+    />
+  </v-col>
 </template>
 
 <style scoped></style>

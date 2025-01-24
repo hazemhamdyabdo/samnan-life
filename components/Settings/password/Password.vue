@@ -44,6 +44,7 @@ const handleUpdatePassword = async (nextStep: string, passwordUpdates: any) => {
 };
 </script>
 <template>
+  <v-col>
   <component
     :is="currentComponentView"
     :title="$t('dashboard.settings.profile.update_password.header')"
@@ -53,5 +54,6 @@ const handleUpdatePassword = async (nextStep: string, passwordUpdates: any) => {
     @update:password="handleUpdatePassword"
     @change-action="emits('change-action', $event)"
   />
+  </v-col>
   <!-- v-model:password="passwordUpdates" -->
 </template>
