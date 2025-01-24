@@ -74,7 +74,13 @@ const handleSignOut = async () => {
             ? 'bg-pri-light text-primary font-weight-medium rounded-lg'
             : 'text-grey-400'
         "
-        :to="item.name === 'logout' ? '' : item.name"
+        :to="
+          item.name === 'logout'
+            ? ''
+            : item.name.includes('notifications')
+            ? ''
+            : item.name
+        "
       >
         <div
           v-if="!item.name.includes('notifications') && item.name !== 'logout'"
@@ -94,7 +100,8 @@ const handleSignOut = async () => {
 
         <section
           v-else-if="item.name.includes('notifications')"
-          class="d-flex align-center justify-space-between"
+          class="d-flex align-center justify-space-between cursor-pointer"
+          @click="isNotificationActive = !isNotificationActive"
         >
           <div class="d-flex ga-2">
             <AppSvgIcon :name="item.icon" />
