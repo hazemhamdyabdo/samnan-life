@@ -5,10 +5,10 @@ import Rates from "~/components/Technical/Rates.vue";
 </script>
 <template>
   <v-row>
-    <v-col cols="3">
+    <v-col cols="4">
       <DoneRequestsChart />
     </v-col>
-    <v-col cols="6">
+    <v-col cols="5">
       <AllRequestsChart />
     </v-col>
     <v-col cols="3">
