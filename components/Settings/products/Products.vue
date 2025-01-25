@@ -46,11 +46,9 @@ await fetchCustomerProducts();
     <section class="mt-8 d-flex flex-column ga-5">
       <div class="d-flex ga-2 align-center" v-for="product in customerProducts">
         <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
-        <v-img
-          :src="product.image_url"
-          class="rounded-circle border border-md pa-2"
-          max-width="55"
-        ></v-img>
+        <div class="rounded-circle border border-md pa-2">
+          <v-img :src="product.image_url" class="pa-5" width="100%"></v-img>
+        </div>
         <div>
           <p class="font-weight-bold text-header text-14">
             {{ product.name }}

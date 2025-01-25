@@ -6,9 +6,6 @@ import ProductFilterDialog from "./ProductFilterDialog.vue";
 const emits = defineEmits<{
   (e: "change-component", value: string): void;
 }>();
-defineProps<{
-  products: Product[];
-}>();
 
 const { addProduct } = useSettingsStore();
 const { showSuccess } = useAlertStore();

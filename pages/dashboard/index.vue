@@ -3,7 +3,6 @@ const { t } = useI18n();
 const { dateAndTime } = useDateTimeFormate();
 const dashboardStore = useDashboardStore();
 const { fetchSlides } = dashboardStore;
-const { slides } = storeToRefs(dashboardStore);
 
 const cards = [
   {
@@ -56,12 +55,17 @@ const operationLogs = [
   },
 ];
 
-await fetchSlides();
+const {
+  data: {
+    value: { data: slides },
+  },
+} = await fetchSlides();
+// slides.value = data.value?.data;
 </script>
 <template>
   <div>
     <header>
-      <v-carousel height="100%" hide-delimiter-background>
+      <v-carousel min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
           <div
             class="pa-2 rounded-circle"
@@ -83,8 +87,7 @@ await fetchSlides();
         <v-carousel-item
           v-for="slide in slides"
           :src="slide.image_url"
-          max
-          max-height="400"
+          min-width="100%"
           cover
           rounded="xl"
         />
