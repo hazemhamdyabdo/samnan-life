@@ -63,12 +63,9 @@ const chartOptions = {
   tooltip: {
     pointFormat: "<b>{point.percentage:.0f}%</b>",
   },
-  legend: {
-    // enabled: false,
-  },
   plotOptions: {
     series: {
-      allowPointSelect: true,
+      // allowPointSelect: true,
       cursor: "pointer",
       borderRadius: 8,
       dataLabels: [
