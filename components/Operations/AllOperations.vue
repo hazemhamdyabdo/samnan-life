@@ -3,10 +3,35 @@ const { formatToDateString } = useDateTimeFormate("ar");
 const getStatus = useStatus();
 const props = defineProps(["operations"]);
 const panel = ref();
+const cancelLoading = ref(false);
+const { cancelOrder } = useMaintainStore();
+const showModal = ref(false);
+const id = ref(null);
+const cancel = async () => {
+  try {
+    cancelLoading.value = true;
+    await cancelOrder(id.value);
+  } catch (error) {
+    throw error;
+  } finally {
+    showModal.value = false;
+    cancelLoading.value = false;
+  }
+};
 </script>
 
 <template>
   <div>
+    <app-modal
+      :title="$t('operations.cancel_order')"
+      :text="$t('operations.cancel_order_desc')"
+      icon="box-remove"
+      v-model:model-value="showModal"
+      isDelete
+      :is-loading="cancelLoading"
+      @submit="cancel"
+    ></app-modal>
+
     <div class="d-flex align-center ga-2">
       <h2>
         {{ $t("operations.all_operations") }}
@@ -73,7 +98,9 @@ const panel = ref();
                 <h5>{{ $t("operations.location") }}</h5>
                 <v-spacer></v-spacer>
                 <nuxt-link
-                  :to="localePath('/dashboard/operations/track-order')"
+                  :to="
+                    localePath('/dashboard/operations/track-order/' + item.id)
+                  "
                   class="text-primary align-center text-12 d-flex ga-3"
                 >
                   <AppSvgIcon name="map" />
@@ -145,6 +172,19 @@ const panel = ref();
                   <h5>{{ item?.technician?.phone }}</h5>
                 </div>
               </div>
+
+              <v-btn
+                @click="
+                  showModal = true;
+                  id = item.id;
+                "
+                variant="text"
+                color="error"
+                class="mt-7"
+              >
+                <v-icon>mdi-delete-outline</v-icon>
+                {{ $t("operations.cancel_order") }}
+              </v-btn>
 
               <!-- payment details -->
               <v-divider class="mt-7"></v-divider>

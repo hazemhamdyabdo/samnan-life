@@ -1,9 +1,10 @@
 <script setup>
 const { t } = useI18n();
+const { getAllOrders } = useMaintainStore();
 const { dateAndTime } = useDateTimeFormate();
 const dashboardStore = useDashboardStore();
 const { fetchSlides } = dashboardStore;
-
+const allOperations = ref([]);
 const cards = [
   {
     title: t("dashboard.home.cards.new_device"),
@@ -60,7 +61,9 @@ const {
     value: { data: slides },
   },
 } = await fetchSlides();
-// slides.value = data.value?.data;
+
+const { data } = await getAllOrders();
+allOperations.value = data.value?.data.data;
 </script>
 <template>
   <div>
@@ -119,12 +122,16 @@ const {
         {{ t("dashboard.home.operations_logs") }}
       </p>
       <v-spacer />
-      <p class="text-grey-300" style="font-size: 12px">
+      <p
+        @click="$router.push('/dashboard/operations')"
+        class="text-grey-300"
+        style="font-size: 12px"
+      >
         {{ t("dashboard.home.show_all") }}
       </p>
     </div>
     <section class="py-3">
-      <operations-all-operations />
+      <operations-all-operations :operations="allOperations" />
     </section>
   </div>
 </template>

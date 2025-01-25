@@ -22,6 +22,21 @@ const statuses = [
   "canceled",
 ];
 
+const setType = (type) => {
+  if (filters.value.types.includes(type)) {
+    filters.value.types = filters.value.types.filter((t) => t !== type);
+  } else {
+    filters.value.types.push(type);
+  }
+};
+
+const setStatus = (status) => {
+  if (filters.value.statuses.includes(status)) {
+    filters.value.statuses = filters.value.statuses.filter((s) => s !== status);
+  } else {
+    filters.value.statuses.push(status);
+  }
+};
 watch(
   () => filters.value,
   () => {
@@ -44,14 +59,14 @@ watch(
       <h3 class="text-16 font-weight-medium">{{ $t("operations.type") }}</h3>
       <div class="d-flex ga-2 flex-wrap mt-4 align-center">
         <v-btn
-          @click="filters.types = ''"
+          @click="filters.types = []"
           :color="filters.types === '' ? 'primary' : 'disabled-gray'"
           rounded
         >
           {{ $t("buttons.all") }}
         </v-btn>
         <v-btn
-          @click="filters.types.push(type)"
+          @click="setType(type)"
           v-for="type in types"
           :key="type"
           :color="filters.types.includes(type) ? 'primary' : 'disabled-gray'"
@@ -66,14 +81,14 @@ watch(
       <h3 class="text-16 font-weight-medium">{{ $t("operations.status") }}</h3>
       <div class="d-flex ga-2 flex-wrap mt-4 align-center">
         <v-btn
-          @click="filters.statuses = ''"
+          @click="filters.statuses = []"
           :color="filters.statuses === '' ? 'primary' : 'disabled-gray'"
           rounded
         >
           {{ $t("buttons.all") }}
         </v-btn>
         <v-btn
-          @click="filters.statuses.push(status)"
+          @click="setStatus(status)"
           v-for="status in statuses"
           :key="status"
           :color="
@@ -103,6 +118,8 @@ watch(
         rounded="xl"
         multiple="range"
         v-model="filters.date"
+        clearable
+        @click:clear="emit('filter')"
       />
     </v-card-text>
   </v-card>

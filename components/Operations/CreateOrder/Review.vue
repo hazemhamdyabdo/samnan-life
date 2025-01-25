@@ -94,7 +94,7 @@ orderData.value = data.value?.data;
       width="100%"
       color="primary"
       class="mt-5"
-      :to="localePath('/dashboard/operations')"
+      :to="localePath('/dashboard/track-order/' + orderData?.id)"
     >
       {{ $t("buttons.ok") }}
     </v-btn>

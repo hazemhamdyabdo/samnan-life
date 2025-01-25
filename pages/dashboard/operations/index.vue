@@ -2,10 +2,8 @@
 const { getAllOrders } = useMaintainStore();
 const allOperations = ref([]);
 const filters = ref({
-  types: [],
-  statuses: [],
-  start_date: null,
-  end_date: null,
+  "types[]": [],
+  "statuses[]": [],
 });
 
 const { momentLikeDate } = useDateTimeFormate();
@@ -20,6 +18,9 @@ const setFilter = async (filter) => {
     delete filters.value.start_date;
     delete filters.value.end_date;
   }
+
+  filters.value["types[]"] = filter.types;
+  filters.value["statuses[]"] = filter.statuses;
 };
 
 const { data, status } = await getAllOrders(filters.value);
@@ -27,21 +28,22 @@ watch(
   () => data.value,
   () => {
     allOperations.value = data.value?.data.data;
-    console.log(data.value);
   },
-  { deep: true }
+  { deep: true, immediate: true }
 );
-
-console.log(data.value);
 </script>
 <template>
   <v-row>
-    {{ status }}
     <v-col lg="4" md="5" cols="12">
       <operations-filters @filter="setFilter" class="h-100" />
     </v-col>
     <v-col lg="8" md="7" cols="12">
-      <operations-all-operations :operations="allOperations" />
+      <v-skeleton-loader
+        class="radius-16"
+        v-if="status === 'pending'"
+        type="list-item-two-line, list-item-two-line, list-item-two-line"
+      ></v-skeleton-loader>
+      <operations-all-operations v-else :operations="allOperations" />
     </v-col>
   </v-row>
 </template>

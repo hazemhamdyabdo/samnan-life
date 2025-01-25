@@ -57,6 +57,11 @@ export const useMaintainStore = defineStore("maintain", () => {
     });
   };
 
+  const cancelOrder = (id: number) => {
+    return useAPI(`/maintenance-request/${id}/cancel`, {
+      method: "POST",
+    });
+  };
   return {
     createOrder,
     getAvailableSlot,
@@ -64,5 +69,6 @@ export const useMaintainStore = defineStore("maintain", () => {
     orderData,
     getSingleOrder,
     getAllOrders,
+    cancelOrder,
   };
 });
