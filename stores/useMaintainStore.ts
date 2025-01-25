@@ -13,9 +13,10 @@ export const useMaintainStore = defineStore("maintain", () => {
       );
     }
 
+    const formData = useFormData(request);
     const { data, error } = await useAPI("/maintenance-request", {
       method: "POST",
-      body: request,
+      body: formData,
       watch: false,
     });
 
@@ -36,24 +37,32 @@ export const useMaintainStore = defineStore("maintain", () => {
     });
   };
 
-  const confirmOrder = async ({
-    request_id,
-    slot_id,
-  }: {
-    request_id: number;
-    slot_id: number;
-  }) => {
-    const { data, error } = await useAPI("/maintenance-request/assign", {
+  const confirmOrder = (slot_id: number) => {
+    return useAPI("/maintenance-request/assign", {
       method: "POST",
       body: {
-        request_id,
+        request_id: orderData.value.id,
         slot_id,
       },
     });
-
-    if (error.value) {
-      throw new Error(error.value.message);
-    }
   };
-  return { createOrder, getAvailableSlot, confirmOrder, orderData };
+
+  const getSingleOrder = () => {
+    return useAPI(`/maintenance-request/${orderData.value.id}`);
+  };
+
+  const getAllOrders = (params: any) => {
+    return useAPI("/maintenance-requests", {
+      params,
+    });
+  };
+
+  return {
+    createOrder,
+    getAvailableSlot,
+    confirmOrder,
+    orderData,
+    getSingleOrder,
+    getAllOrders,
+  };
 });

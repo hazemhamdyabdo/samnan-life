@@ -26,7 +26,9 @@ export function useDateTimeFormate(locale: string = "en") {
     }).format(date);
 
     // Check for iPhone/Safari user agent
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator?.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(
+      navigator?.userAgent
+    );
 
     // Remove comma only in Safari (which includes iPhones)
     if (isSafari && locale === "ar") {

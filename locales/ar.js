@@ -411,6 +411,16 @@ export default {
     ur_problem:
       "اخبرنا عن المشكلة التي تعاني منها مع جهازك بالتفصيل قدر الامكان...",
     emergency_maintenance: "صيانة عاجلة",
+    new_installation: "تركيب جديد",
+    tech_info: "بيانات الفني",
+    problem_summary: "ملخص عن المشكلة",
+    pending: "قيد الانتظار",
+    technician_assigned: "تم تخصيص الفني",
+    technician_on_the_way: "الفني في الطريق",
+    in_progress: "قيد التنفيذ",
+    waiting_for_payment: "في انتظار للدفع",
+    completed: "ناجحة",
+    canceled: "ملغية",
   },
   technical: {
     rates: "التقييمات",

@@ -18,8 +18,7 @@
         v-if="step === 2"
         @next="step = 3"
       />
-      <operations-create-order-review v-if="step === 3" @next="step = 4" />
-      <operations-create-order-success v-if="step === 4" />
+      <operations-create-order-review v-if="step === 3" />
     </v-card-text>
   </v-card>
 </template>
@@ -45,6 +44,6 @@ const { allProducts, allAddresses } = storeToRefs(settingsStore);
 const step = ref(1);
 const { fetchAllProducts, fetchAllAddresses } = settingsStore;
 
-await fetchAllProducts();
-await fetchAllAddresses();
+fetchAllProducts();
+fetchAllAddresses();
 </script>
