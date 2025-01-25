@@ -36,6 +36,7 @@ const theme = {
         error: "#EF233C",
         "grey-600": "#585858",
         success: "#08C230",
+        "dark-slate-gray": "#414D55",
       },
     },
   },
