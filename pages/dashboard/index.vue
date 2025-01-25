@@ -2,7 +2,8 @@
 const { t } = useI18n();
 const { dateAndTime } = useDateTimeFormate();
 const dashboardStore = useDashboardStore();
-const slides = ref([]);
+const { fetchSlides } = dashboardStore;
+
 const cards = [
   {
     title: t("dashboard.home.cards.new_device"),
@@ -54,13 +55,17 @@ const operationLogs = [
   },
 ];
 
-const { data } = await dashboardStore.fetchSlides();
-slides.value = data.value?.data;
+const {
+  data: {
+    value: { data: slides },
+  },
+} = await fetchSlides();
+// slides.value = data.value?.data;
 </script>
 <template>
   <div>
     <header>
-      <v-carousel height="100%" hide-delimiter-background>
+      <v-carousel min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
           <div
             class="pa-2 rounded-circle"
@@ -82,8 +87,7 @@ slides.value = data.value?.data;
         <v-carousel-item
           v-for="slide in slides"
           :src="slide.image_url"
-          max
-          max-height="400"
+          min-width="100%"
           cover
           rounded="xl"
         />

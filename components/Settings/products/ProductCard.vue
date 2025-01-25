@@ -4,16 +4,17 @@ defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: "select-product", value: number | null): void;
+  (e: "select-product", value: number): Promise<void>;
 }>();
 
-const selectedProductId = ref(null);
-const selectProduct = (productId: any) => {
+const selectedProductId = ref<number | null>(null);
+const selectProduct = (productId: number) => {
   if (selectedProductId.value === productId) {
     selectedProductId.value = null;
   } else {
     selectedProductId.value = productId;
   }
+  // @ts-ignore
   emits("select-product", selectedProductId.value);
 };
 </script>
