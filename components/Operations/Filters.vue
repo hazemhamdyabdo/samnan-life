@@ -1,11 +1,34 @@
 <script setup>
+const emit = defineEmits(["filter"]);
 const filters = ref({
-  type: 0,
+  types: [],
+  statuses: [],
+  date: null,
 });
 
-const setType = (type) => {
-  filters.value.type = type;
-};
+const types = [
+  "new_installation",
+  "regular_maintenance",
+  "emergency_maintenance",
+];
+
+const statuses = [
+  "pending",
+  "technician_assigned",
+  "technician_on_the_way",
+  "in_progress",
+  "waiting_for_payment",
+  "completed",
+  "canceled",
+];
+
+watch(
+  () => filters.value,
+  () => {
+    emit("filter", filters.value);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -21,20 +44,20 @@ const setType = (type) => {
       <h3 class="text-16 font-weight-medium">{{ $t("operations.type") }}</h3>
       <div class="d-flex ga-2 flex-wrap mt-4 align-center">
         <v-btn
-          @click="setType(0)"
-          :color="filters.type === 0 ? 'primary' : 'disabled-gray'"
+          @click="filters.types = ''"
+          :color="filters.types === '' ? 'primary' : 'disabled-gray'"
           rounded
         >
           {{ $t("buttons.all") }}
         </v-btn>
         <v-btn
-          @click="setType(i)"
-          v-for="i in 5"
-          :key="i"
-          :color="filters.type === i ? 'primary' : 'disabled-gray'"
+          @click="filters.types.push(type)"
+          v-for="type in types"
+          :key="type"
+          :color="filters.types.includes(type) ? 'primary' : 'disabled-gray'"
           rounded
         >
-          {{ i }}
+          {{ $t(`operations.${type}`) }}
         </v-btn>
       </div>
     </v-card-text>
@@ -43,20 +66,22 @@ const setType = (type) => {
       <h3 class="text-16 font-weight-medium">{{ $t("operations.status") }}</h3>
       <div class="d-flex ga-2 flex-wrap mt-4 align-center">
         <v-btn
-          @click="setType(0)"
-          :color="filters.type === 0 ? 'primary' : 'disabled-gray'"
+          @click="filters.statuses = ''"
+          :color="filters.statuses === '' ? 'primary' : 'disabled-gray'"
           rounded
         >
           {{ $t("buttons.all") }}
         </v-btn>
         <v-btn
-          @click="setType(i)"
-          v-for="i in 5"
-          :key="i"
-          :color="filters.type === i ? 'primary' : 'disabled-gray'"
+          @click="filters.statuses.push(status)"
+          v-for="status in statuses"
+          :key="status"
+          :color="
+            filters.statuses.includes(status) ? 'primary' : 'disabled-gray'
+          "
           rounded
         >
-          {{ i }}
+          {{ $t(`operations.${status}`) }}
         </v-btn>
       </div>
     </v-card-text>
@@ -76,6 +101,8 @@ const setType = (type) => {
         prepend-icon=""
         append-inner-icon="mdi-calendar-outline"
         rounded="xl"
+        multiple="range"
+        v-model="filters.date"
       />
     </v-card-text>
   </v-card>

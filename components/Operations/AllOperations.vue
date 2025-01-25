@@ -1,5 +1,8 @@
 <script setup>
-const panel = ref(0);
+const { formatToDateString } = useDateTimeFormate("ar");
+const getStatus = useStatus();
+const props = defineProps(["operations"]);
+const panel = ref();
 </script>
 
 <template>
@@ -8,7 +11,7 @@ const panel = ref(0);
       <h2>
         {{ $t("operations.all_operations") }}
       </h2>
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer>
       <v-text-field
         bg-color="disabled-gray"
         density="compact"
@@ -21,31 +24,48 @@ const panel = ref(0);
       </v-text-field>
       <v-btn color="primary" height="42" size="small" rounded="lg">
         <AppSvgIcon name="filter" />
-      </v-btn>
+      </v-btn> -->
     </div>
     <v-expansion-panels v-model="panel" class="mt-5">
       <v-row>
-        <v-col cols="12" v-for="i in 2" :key="i">
+        <v-col cols="12" v-for="item in operations" :key="item.id">
           <v-expansion-panel class="border radius-16" elevation="0">
             <v-expansion-panel-title>
               <div class="d-flex align-center ga-2">
-                <v-avatar size="48" color="surface-variant"></v-avatar>
+                <v-avatar
+                  v-if="item?.products?.length"
+                  size="48"
+                  color="primary"
+                >
+                  <v-img :src="item?.products[0]?.image_url"></v-img>
+                </v-avatar>
                 <div>
-                  <h3>صيانة عاجلة</h3>
-                  <p class="text-12 mt-2 text-caption date">
-                    8 oct 2024 10:32 PM
+                  <h3>{{ $t("operations." + item.type) }}</h3>
+                  <p v-if="item.slot" class="text-12 mt-2 text-caption date">
+                    {{
+                      formatToDateString(item.slot.date) + " " + item.slot.time
+                    }}
                   </p>
                 </div>
               </div>
               <v-spacer></v-spacer>
-              <v-chip color="success">{{ "\u2022" }} ناجحة </v-chip>
+              <v-chip :color="getStatus(item.current_status?.status)"
+                >{{ "\u2022" }}
+                {{ $t(`operations.${item.current_status?.status}`) }}
+              </v-chip>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <!-- Details -->
               <h5>{{ $t("operations.devices_to_maintain") }}</h5>
-              <div class="d-flex mt-3 ga-2">
-                <v-avatar size="22" color="surface-variant"></v-avatar>
-                <h5 class="text-gray-500">جهاز تحلية سمنان 5 مراحل</h5>
+              <div
+                v-for="product in item.products"
+                :key="product.id"
+                class="d-flex mt-3 ga-2"
+              >
+                <v-avatar size="22" color="primary">
+                  <v-img :src="product.image_url"></v-img>
+                </v-avatar>
+                <h5 class="text-gray-500">{{ product.name }}</h5>
               </div>
 
               <!-- track -->
@@ -65,32 +85,48 @@ const panel = ref(0);
               <div class="d-flex align-center ga-2">
                 <AppSvgIcon name="location-blue" />
                 <div>
-                  <h5 class="text-gray-500">المنزل الاول</h5>
+                  <h5 class="text-gray-500">
+                    {{ item.address?.national_address }}
+                  </h5>
                   <p class="text-12 mt-2 text-caption date">
-                    الرياض, حي الجلالة, منزل 144
+                    {{ item.address.name }}, {{ item.address?.street }}
                   </p>
                 </div>
               </div>
 
               <!-- description -->
-              <div class="mt-7">
+              <div v-if="item.problem_description" class="mt-7">
                 <h5>{{ $t("operations.problem") }}</h5>
                 <p class="text-12 text-gray-500">
-                  تم تقديم طلب لصيانة جهاز تحلية المياه بسبب تسرب المياه من
-                  الجهاز
+                  {{ item.problem_description }}
                 </p>
               </div>
 
+              <div
+                class="d-flex mt-2 align-center ga-2 flex-wrap"
+                v-if="item?.photos?.length"
+              >
+                <v-img
+                  color="primary"
+                  height="60px"
+                  width="100%"
+                  max-width="60px"
+                  class="rounded-16"
+                  v-for="img in item?.photos"
+                  :key="img"
+                  :src="img"
+                ></v-img>
+              </div>
               <!-- maintain date -->
-              <div class="mt-7">
+              <div class="mt-7" v-if="item?.slot">
                 <h5 class="mb-3">{{ $t("operations.maintain_date") }}</h5>
                 <div class="d-flex align-center ga-3">
                   <AppSvgIcon name="calendar" />
-                  <h5>السبت 2024-05-12</h5>
+                  <h5>{{ formatToDateString(item?.slot?.date) }}</h5>
                 </div>
                 <div class="d-flex align-center ga-3 mt-2">
                   <AppSvgIcon name="clock" />
-                  <h5>12:30 PM</h5>
+                  <h5>{{ item?.slot?.time }}</h5>
                 </div>
               </div>
 
@@ -99,11 +135,14 @@ const panel = ref(0);
                 <h5 class="mb-3">{{ $t("operations.maintainer") }}</h5>
                 <div class="d-flex align-center ga-3">
                   <AppSvgIcon name="user" />
-                  <h5>احمد علي</h5>
+                  <h5>
+                    {{ item?.technician?.first_name }}
+                    {{ item?.technician?.last_name }}
+                  </h5>
                 </div>
                 <div class="d-flex align-center ga-3 mt-2">
                   <AppSvgIcon name="call" />
-                  <h5>+966 000 000 0000</h5>
+                  <h5>{{ item?.technician?.phone }}</h5>
                 </div>
               </div>
 

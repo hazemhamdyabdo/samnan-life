@@ -11,7 +11,7 @@ defineProps(["products", "addresses"]);
 const form = ref<CreateRequest>({
   type: useRoute().params.type,
   products: [],
-  photo: [],
+  photos: [],
   last_maintenance_date: null,
   problem_description: "",
   address_id: null,
@@ -27,6 +27,10 @@ const submit = async () => {
   } finally {
     btnLoading.value = false;
   }
+};
+
+const setPhotos = (photos: File[]) => {
+  form.value.photos = photos;
 };
 </script>
 
@@ -46,7 +50,7 @@ const submit = async () => {
     >
       <template v-slot:label>
         <div class="d-flex align-center ga-2">
-          <v-avatar size="38" color="red">
+          <v-avatar size="38" color="primary">
             <v-img alt="John" :src="product.image_url"></v-img>
           </v-avatar>
           <h4>{{ product.name }}</h4>
@@ -100,7 +104,7 @@ const submit = async () => {
         />
       </v-col>
       <v-col>
-        <AppPhotoUploader @upload="form.photo = $event" />
+        <AppPhotoUploader @upload="setPhotos" />
       </v-col>
     </v-row>
 

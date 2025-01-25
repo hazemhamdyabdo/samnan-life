@@ -1,10 +1,8 @@
-<script setup lang="ts">
+<script setup>
 const { t } = useI18n();
 const { dateAndTime } = useDateTimeFormate();
 const dashboardStore = useDashboardStore();
-const { fetchSlides } = dashboardStore;
-const { slides } = storeToRefs(dashboardStore);
-
+const slides = ref([]);
 const cards = [
   {
     title: t("dashboard.home.cards.new_device"),
@@ -56,7 +54,8 @@ const operationLogs = [
   },
 ];
 
-await fetchSlides();
+const { data } = await dashboardStore.fetchSlides();
+slides.value = data.value?.data;
 </script>
 <template>
   <div>
@@ -121,41 +120,7 @@ await fetchSlides();
       </p>
     </div>
     <section class="py-3">
-      <v-expansion-panels v-for="log in operationLogs" elevation="0">
-        <v-expansion-panel class="mb-4 border-sm" rounded="xl">
-          <v-expansion-panel-title>
-            <template v-slot:actions>
-              <v-icon color="primary" icon="mdi-chevron-down"></v-icon>
-            </template>
-            <img
-              :src="`/images/${log.icon}.svg`"
-              :alt="`${log.title} image`"
-              class="me-2"
-            />
-            <div class="d-flex flex-column ga-2">
-              <h5 style="font-size: 14px" class="text-light-gray-2">
-                {{ log.title }}
-              </h5>
-              <p class="text-grey-300" style="font-size: 12px">
-                {{ dateAndTime(log.created_at) }}
-              </p>
-            </div>
-            <v-spacer />
-            <v-chip color="success" class="me-4">
-              <v-icon
-                start
-                size="x-small"
-                :color="log.status === 'ناجحه' ? 'success' : 'error'"
-                >mdi-circle</v-icon
-              >
-              <span class="font-weight-medium">
-                {{ log.status }}
-              </span>
-            </v-chip>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text> Some content </v-expansion-panel-text>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      <operations-all-operations />
     </section>
   </div>
 </template>

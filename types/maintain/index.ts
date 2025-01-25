@@ -9,5 +9,5 @@ export interface CreateRequest {
   problem_description?: string;
   last_maintenance_date?: string;
   address_id: number | null;
-  photo: File[];
+  photos: File[];
 }

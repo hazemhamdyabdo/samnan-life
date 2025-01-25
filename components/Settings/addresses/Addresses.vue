@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { AddressData } from "~/types/settings";
-const settingsStore = useSettingsStore();
-const { fetchAllAddresses } = settingsStore;
 
 const { t } = useI18n();
 
@@ -15,8 +13,6 @@ const emits = defineEmits<{
 defineProps<{
   addresses: AddressData[];
 }>();
-
-await fetchAllAddresses();
 </script>
 <template>
   <section>
