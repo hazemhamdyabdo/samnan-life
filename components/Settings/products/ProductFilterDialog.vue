@@ -1,34 +1,14 @@
 <script setup lang="ts">
+import type { Category } from "~/types/settings";
+
 const { t } = useI18n();
 
-const categoriesList = [
-  "الكل",
-  "ستانلس ستيل",
-  "مضخات ذكية",
-  "مضخات منزلية",
-  "المضخات (دينمو)",
-  "حديد الزهر",
-  "التجهيزات الصحية",
-  "أجهزة التحلية",
-  "الرادات",
-  "تصنيع الخزانات",
-  "سوفتنر",
-  "فلاتر مركزية",
-  "غرف التفاوير",
-  "غرف العزل",
-  "مضخات السباحة",
-  "أجهزة الضغط",
-  "مستلزمات السباحة",
-  "قطع الصيانة الدورية",
-  "فلاتر الضغط",
-  "خزانات الماء",
-  "المسابح",
-  "السخانات",
-];
+defineProps<{
+  categoriesList: Category[];
+}>();
 
-const selectedCategories = ref<string[]>([]);
-const selectCategory = (category: string) => {
-  console.log(category);
+const selectedCategories = ref<Category[]>([]);
+const selectCategory = (category: Category) => {
   if (selectedCategories.value.includes(category)) {
     selectedCategories.value = selectedCategories.value.filter(
       (item) => item !== category
@@ -72,10 +52,10 @@ defineExpose({
             selectedCategories.includes(category) ? 'primary' : 'disabled-gray'
           "
           elevation="0"
-          :key="category"
+          :key="category.id"
           @click="selectCategory(category)"
         >
-          {{ category }}
+          {{ category.name }}
         </v-chip>
       </div>
     </section>

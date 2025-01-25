@@ -1,4 +1,4 @@
-import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest } from "~/types/settings"
+import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Category } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
   // profile
@@ -133,6 +133,10 @@ export const useSettingsStore = defineStore('settings', () => {
     }
   }
 
+  const fetchCategories = async () => {
+    return useAPI<ApiResponse<Category[]>>('/categories')
+  }
+
   return {
     allAddresses,
     fetchAllAddresses,
@@ -155,5 +159,6 @@ export const useSettingsStore = defineStore('settings', () => {
     updateProfile,
     updatePhone,
     changePassword,
+    fetchCategories
   }
 })

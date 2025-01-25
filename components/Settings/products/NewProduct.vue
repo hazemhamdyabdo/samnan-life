@@ -11,7 +11,7 @@ const { addProduct } = useSettingsStore();
 const { showSuccess } = useAlertStore();
 const settingsStore = useSettingsStore();
 const { allProducts } = storeToRefs(settingsStore);
-const { fetchAllProducts } = settingsStore;
+const { fetchAllProducts, fetchCategories } = settingsStore;
 
 const { t } = useI18n();
 const filterDialog = ref();
@@ -42,6 +42,11 @@ const handleAddProduct = async () => {
 };
 
 await fetchAllProducts();
+
+const categoriesList = ref();
+onMounted(async () => {
+  categoriesList.value = (await fetchCategories()).data.value?.data;
+});
 </script>
 
 <template>
@@ -92,5 +97,5 @@ await fetchAllProducts();
       >
     </div>
   </section>
-  <ProductFilterDialog ref="filterDialog" />
+  <ProductFilterDialog ref="filterDialog" :categoriesList />
 </template>

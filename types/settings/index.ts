@@ -145,6 +145,12 @@ interface LandingData {
   translated_rights: string | null;
 }
 
+interface Category {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
 
 
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider, LandingData };
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider, LandingData, Category };
