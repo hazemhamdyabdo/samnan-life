@@ -3,6 +3,8 @@ export default defineNuxtRouteMiddleware((to) => {
   if (
     !token.value &&
     to.path !== "/login" &&
+    to.path !== "/technical/login" &&
+    to.path !== "/technical/forget-password" &&
     to.path !== "/register" &&
     to.path !== "/forget-password" &&
     to.path !== "/reset-password" &&

@@ -1,5 +1,5 @@
 <template>
-  <auth-login />
+  <auth-forget-password technichian />
 </template>
 
 <script setup>
@@ -7,5 +7,3 @@ definePageMeta({
   layout: "auth",
 });
 </script>
-
-<style lang="scss" scoped></style>

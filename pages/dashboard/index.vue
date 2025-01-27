@@ -66,7 +66,7 @@ const { data } = await getAllOrders();
 allOperations.value = data.value?.data.data;
 </script>
 <template>
-  <div>
+  <div v-if="!loading">
     <header>
       <v-carousel min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
@@ -134,4 +134,9 @@ allOperations.value = data.value?.data.data;
       <operations-all-operations :operations="allOperations" />
     </section>
   </div>
+  <v-skeleton-loader
+    v-else
+    class="radius-16"
+    type="image, list-item-two-line, list-item-two-line, list-item-two-line"
+  ></v-skeleton-loader>
 </template>

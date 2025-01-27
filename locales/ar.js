@@ -423,6 +423,7 @@ export default {
     canceled: "ملغية",
     cancel_order: "الغاء الطلب",
     cancel_order_desc: "هل انت متأكد من رغبتك في الغاء الطلب ؟",
+    no_operations: "لا يوجد عمليات لعرضها",
   },
   technical: {
     rates: "التقييمات",

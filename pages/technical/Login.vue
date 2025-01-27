@@ -1,5 +1,5 @@
 <template>
-  <auth-login />
+  <auth-login technichian />
 </template>
 
 <script setup>

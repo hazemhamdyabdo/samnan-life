@@ -65,19 +65,17 @@ const handleResendOTP = async () => {
 </script>
 
 <template>
-  <v-container fluid>
-    <v-row class="justify-space-between align-center">
-      <v-col cols="12" sm="12" md="4">
+  <div class="wrapper d-flex align-center">
+    <v-row class="align-center align-center h-100">
+      <v-col class="d-none d-md-block h-100" cols="12" md="6">
         <v-img
           src="../assets/imgs/image 3.png"
           alt="Responsive Image"
           class="rounded-xl"
-          min-width="40vw"
-          min-height="90vh"
-          contain
+          cover
         />
       </v-col>
-      <v-col cols="12" sm="6" md="5" class="d-flex flex-column ga-6">
+      <v-col cols="12" md="6" class="d-flex flex-column ga-6">
         <div class="d-flex ga-2 align-center">
           <AppSvgIcon name="logo" size="lg" />
           <AppSvgIcon name="title" :size="60" />
@@ -96,5 +94,12 @@ const handleResendOTP = async () => {
         />
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.wrapper {
+  height: 100vh;
+  padding: 20px;
+}
+</style>

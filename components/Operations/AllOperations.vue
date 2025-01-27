@@ -51,7 +51,7 @@ const cancel = async () => {
         <AppSvgIcon name="filter" />
       </v-btn> -->
     </div>
-    <v-expansion-panels v-model="panel" class="mt-5">
+    <v-expansion-panels v-if="operations.length" v-model="panel" class="mt-5">
       <v-row>
         <v-col cols="12" v-for="item in operations" :key="item.id">
           <v-expansion-panel class="border radius-16" elevation="0">
@@ -230,6 +230,10 @@ const cancel = async () => {
         </v-col>
       </v-row>
     </v-expansion-panels>
+
+    <h2 class="text-center mt-5" v-else>
+      {{ $t("operations.no_operations") }}
+    </h2>
   </div>
 </template>
 

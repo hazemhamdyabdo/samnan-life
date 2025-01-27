@@ -1,31 +1,39 @@
 import { defineStore } from "pinia";
 import type { Customer, UserRegistrationDetails } from "~/types";
 
-export const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore("auth", () => {
   const user = useCookie<Customer | null>("user");
   const token = useCookie<string | null>("token");
   // const isLoggedIn = computed(() => !!user.value && !!token.value);
 
   const setUser = (newUser: Customer) => {
     user.value = newUser;
-  }
+  };
 
   const setToken = (newToken: string) => {
     token.value = newToken;
-  }
+  };
 
-  const login = async ({ phone, password }: { phone: string, password: string }) => {
-    const { data, error } = await useAPI("/customer/login", {
-      method: "POST",
-      body: { phone, password },
-    });
+  const login = async (
+    { phone, password }: { phone: string; password: string },
+    technichian: boolean
+  ) => {
+    const { data, error } = await useAPI(
+      `/${technichian ? "technician" : "customer"}/login`,
+      {
+        method: "POST",
+        body: { phone, password },
+      }
+    );
     if (error.value) {
       throw error.value;
     }
-    const response = data.value as { data: { token: string, customer: Customer } };
+    const response = data.value as {
+      data: { token: string; customer: Customer };
+    };
     setToken(response.data.token);
     setUser(response.data.customer);
-  }
+  };
 
   const register = async (registerDetails: UserRegistrationDetails) => {
     const { error } = await useAPI("/customer/register", {
@@ -37,9 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (error.value) {
       throw new Error(error.value.message);
     }
-
   };
-
 
   const verifyOTP = async (otp: string, phone: string) => {
     const { data, error } = await useAPI("/customer/verify-otp", {
@@ -54,7 +60,9 @@ export const useAuthStore = defineStore('auth', () => {
     if (error.value) {
       throw new Error(error.value.message);
     }
-    const response = data.value as { data: { token: string, customer: Customer } };
+    const response = data.value as {
+      data: { token: string; customer: Customer };
+    };
     setToken(response.data.token);
     setUser(response.data.customer);
   };
@@ -66,7 +74,11 @@ export const useAuthStore = defineStore('auth', () => {
   }: {
     phoneNumber: string;
     otp: string;
-    passwordUpdates: { current_password: string; password: string; confirm_password: string };
+    passwordUpdates: {
+      current_password: string;
+      password: string;
+      confirm_password: string;
+    };
   }) => {
     const { data, error } = await useAPI("/customer/reset-password", {
       method: "POST",
@@ -97,7 +109,6 @@ export const useAuthStore = defineStore('auth', () => {
   };
 
   const logout = async () => {
-
     const { error } = await useAPI("/customer/logout", {
       method: "POST",
       watch: false,
@@ -107,20 +118,20 @@ export const useAuthStore = defineStore('auth', () => {
     }
     token.value = null;
     user.value = null;
-  }
+  };
 
   const deleteAccount = async (password: string) => {
     const { error } = await useAPI("/customer/remove", {
       method: "DELETE",
       body: { password },
-      watch: false
-    })
+      watch: false,
+    });
     if (error.value) {
-      throw new Error(error.value.message)
+      throw new Error(error.value.message);
     }
     token.value = null;
     user.value = null;
-  }
+  };
 
   return {
     login,
@@ -129,7 +140,6 @@ export const useAuthStore = defineStore('auth', () => {
     resetPassword,
     handleForgetPassword,
     logout,
-    deleteAccount
-  }
-
-})
+    deleteAccount,
+  };
+});
