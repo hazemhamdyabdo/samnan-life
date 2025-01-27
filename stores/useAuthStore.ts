@@ -4,7 +4,7 @@ import type { Customer, UserRegistrationDetails } from "~/types";
 export const useAuthStore = defineStore("auth", () => {
   const user = useCookie<Customer | null>("user");
   const token = useCookie<string | null>("token");
-  // const isLoggedIn = computed(() => !!user.value && !!token.value);
+  const isTechnician = useCookie<boolean | null>("isTechnician");
 
   const setUser = (newUser: Customer) => {
     user.value = newUser;
@@ -14,10 +14,15 @@ export const useAuthStore = defineStore("auth", () => {
     token.value = newToken;
   };
 
+  const setTechnician = (newToken: boolean) => {
+    isTechnician.value = newToken;
+  }
+
   const login = async (
     { phone, password }: { phone: string; password: string },
     technichian: boolean
   ) => {
+    setTechnician(technichian);
     const { data, error } = await useAPI(
       `/${technichian ? "technician" : "customer"}/login`,
       {
@@ -32,7 +37,8 @@ export const useAuthStore = defineStore("auth", () => {
       data: { token: string; customer: Customer };
     };
     setToken(response.data.token);
-    setUser(response.data.customer);
+    // @ts-ignore
+    setUser(response.data[isTechnician.value ? "technician" : "customer"]);
   };
 
   const register = async (registerDetails: UserRegistrationDetails) => {

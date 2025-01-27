@@ -28,7 +28,7 @@ const handleLogin = async () => {
     await validate();
     await login(loginDetails, props.technichian);
     showSuccess("تم تسجيل الدخول بنجاح");
-    navigateTo("/dashboard");
+    navigateTo(`/${props.technichian ? "technical/dashboard" : "dashboard"}`);
   } catch (error) {
     // handle ui changes
   } finally {
