@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Product } from "~/types/settings";
 
+const { isTechnician } = storeToRefs(useAuthStore());
 const { t } = useI18n();
 
 const emits = defineEmits<{
@@ -54,7 +55,7 @@ await fetchCustomerProducts();
             {{ product.name }}
           </p>
         </div>
-        <div class="d-flex ga-4 ms-auto">
+        <div v-if="!isTechnician" class="d-flex ga-4 ms-auto">
           <AppSvgIcon
             @click="handleDeleteProduct(product.id)"
             name="trash-outline"
@@ -64,7 +65,7 @@ await fetchCustomerProducts();
       </div>
     </section>
 
-    <div class="d-flex mt-8 w-33">
+    <div v-if="!isTechnician" class="d-flex mt-8 w-33">
       <span
         @click="emits('change-component', 'NewProduct')"
         class="text-primary cursor-pointer font-weight-medium"
