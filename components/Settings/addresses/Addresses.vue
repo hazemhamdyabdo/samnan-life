@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { AddressData } from "~/types/settings";
 
+const { isTechnician } = storeToRefs(useAuthStore());
 const { t } = useI18n();
 
 const emits = defineEmits<{
@@ -36,7 +37,7 @@ defineProps<{
             {{ address.national_address }}, {{ address.details }}
           </p>
         </div>
-        <div class="d-flex ga-4 ms-auto">
+        <div class="d-flex ga-4 ms-auto" v-if="!isTechnician">
           <AppSvgIcon
             name="edit"
             class="cursor-pointer"
@@ -51,7 +52,7 @@ defineProps<{
       </div>
     </section>
 
-    <div class="d-flex mt-8 w-33">
+    <div class="d-flex mt-8 w-33" v-if="!isTechnician">
       <span
         @click="emits('change-component', 'NewAddress')"
         class="text-primary cursor-pointer font-weight-medium"

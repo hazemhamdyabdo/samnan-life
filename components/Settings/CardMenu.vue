@@ -35,7 +35,7 @@ const items = computed(() => [
         {
           title: t("dashboard.settings.card.items.address_title"),
           icon: "location",
-          name: "/dashboard/settings/invoices",
+          name: "/dashboard/settings/addresses",
         },
       ]
     : [

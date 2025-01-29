@@ -93,6 +93,7 @@ const handleUpdateAddress = async () => {
   }
 };
 
+await fetchAllAddresses();
 // onMounted(async () => {
 //   await fetchAllAddresses();
 // });
