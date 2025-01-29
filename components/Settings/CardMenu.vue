@@ -1,8 +1,10 @@
 <script setup lang="ts">
+const { isTechnician } = storeToRefs(useAuthStore());
 const { showSuccess } = useAlertStore();
 const { t } = useI18n();
 const { logout } = useAuthStore();
-const items = [
+
+const items = computed(() => [
   {
     title: t("dashboard.settings.card.items.profile"),
     icon: "profile-circle",
@@ -13,16 +15,57 @@ const items = [
     icon: "language-square",
     name: "/dashboard/settings/language",
   },
-  {
-    title: t("dashboard.settings.card.items.addresses"),
-    icon: "location",
-    name: "/dashboard/settings/addresses",
-  },
-  {
-    title: t("dashboard.settings.card.items.products"),
-    icon: "box-1",
-    name: "/dashboard/settings/products",
-  },
+  ...(isTechnician.value
+    ? [
+        {
+          title: t("dashboard.settings.card.items.products_specialized_in"),
+          icon: "box-1",
+          name: "/dashboard/settings/products",
+        },
+      ]
+    : [
+        {
+          title: t("dashboard.settings.card.items.products"),
+          icon: "box-1",
+          name: "/dashboard/settings/products",
+        },
+      ]),
+  ...(isTechnician.value
+    ? [
+        {
+          title: t("dashboard.settings.card.items.address_title"),
+          icon: "location",
+          name: "/dashboard/settings/invoices",
+        },
+      ]
+    : [
+        {
+          title: t("dashboard.settings.card.items.addresses"),
+          icon: "location",
+          name: "/dashboard/settings/addresses",
+        },
+      ]),
+
+  ...(isTechnician.value
+    ? [
+        {
+          title: t("dashboard.settings.card.items.coverage_area"),
+          icon: "routing-icon",
+          name: "/dashboard/settings/routing",
+        },
+        {
+          title: t("dashboard.settings.card.items.working_hours"),
+          icon: "brifecase-timer",
+          name: "/dashboard/settings/working-hours",
+        },
+        {
+          title: t("dashboard.settings.card.items.invoices"),
+          icon: "document-normal",
+          name: "/dashboard/settings/invoices",
+        },
+      ]
+    : []),
+
   {
     title: t("dashboard.settings.card.items.support_help"),
     icon: "24-support",
@@ -38,7 +81,8 @@ const items = [
     icon: "logout",
     name: "logout",
   },
-];
+]);
+
 const isNotificationActive = ref(true);
 
 const showSignOutDialog = ref(false);

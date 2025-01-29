@@ -147,5 +147,6 @@ export const useAuthStore = defineStore("auth", () => {
     handleForgetPassword,
     logout,
     deleteAccount,
+    isTechnician,
   };
 });

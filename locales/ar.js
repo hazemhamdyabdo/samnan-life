@@ -174,6 +174,11 @@ export default {
           support_help: "الدعم والمساعدة",
           notifications: "استقبال الإشعارات",
           logout: "تسجيل الخروج",
+          products_specialized_in: "المنتجات المختص بها",
+          address_title: "عنواني",
+          coverage_area: "نطاق التغطية",
+          working_hours: "مواعيد العمل",
+          invoices: "الفواتير",
         },
       },
       profile: {
