@@ -186,6 +186,7 @@ export default {
         first_name: "الاسم الاول",
         last_name: "الاسم الاخير",
         email: "البريد الالكتروني",
+        id: "الرقم التعريفي",
         phone: "رقم الهاتف",
         change_phone: "تغيير رقم الهاتف",
         change_password: "تغيير كلمة المرور",

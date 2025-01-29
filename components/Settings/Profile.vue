@@ -2,6 +2,7 @@
 import AppModal from "~/components/app/Modal.vue";
 import type { UpdateProfileRequest } from "~/types/settings";
 
+const { isTechnician } = storeToRefs(useAuthStore());
 const { deleteAccount } = useAuthStore();
 const settingsStore = useSettingsStore();
 const { getCustomerData, updateProfile } = settingsStore;
@@ -26,6 +27,7 @@ const details = ref({}) as Ref<{
   last_name?: string;
   email?: string | null;
   phone_number: string;
+  id?: number;
 }>;
 
 const isLoading = ref(false);
@@ -67,30 +69,34 @@ onMounted(async () => {
       last_name: customerData.value?.last_name,
       email: customerData.value?.email,
       phone_number: customerData.value?.phone,
+      id: customerData.value?.id,
     };
   }
 });
 </script>
 
 <template>
-  <v-col cols="12">
-    <h3 class="text-20 text-header">
-      {{ t("dashboard.settings.profile.my_profile") }}
-    </h3>
-  </v-col>
-  <v-col cols="12" class="mb-4">
-    <v-avatar
-      size="100"
-      color="primary"
-      class="mx-auto text-white font-weight-medium text-40"
-    >
-      {{ nameShortcuts }}
-    </v-avatar>
+  <v-row>
+    <v-col cols="12">
+      <h3 class="text-20 text-header">
+        {{ t("dashboard.settings.profile.my_profile") }}
+      </h3>
+    </v-col>
+    <v-col cols="12" class="mb-4">
+      <v-avatar
+        size="100"
+        color="primary"
+        class="mx-auto text-white font-weight-medium text-40"
+      >
+        {{ nameShortcuts }}
+      </v-avatar>
 
-    <p class="text-24 text-header font-weight-medium mt-4">
-      {{ fullName }}
-    </p>
-  </v-col>
+      <p class="text-24 text-header font-weight-medium mt-4">
+        {{ fullName }}
+      </p>
+    </v-col>
+  </v-row>
+
   <v-row>
     <v-col cols="12" lg="6" class="pa-4">
       <v-text-field
@@ -102,7 +108,7 @@ onMounted(async () => {
         hide-details
       ></v-text-field>
     </v-col>
-    <v-col cols="12" lg="6" class="pa-4">
+    <v-col cols="12" :lg="isTechnician ? 3 : 6" class="pa-4">
       <v-text-field
         v-model="details.last_name"
         :label="t('dashboard.settings.profile.last_name')"
@@ -111,6 +117,26 @@ onMounted(async () => {
         rounded="xl"
         hide-details
       ></v-text-field>
+    </v-col>
+    <v-col v-if="isTechnician" cols="4" lg="3" class="pa-4">
+      <v-text-field
+        v-model="details.id"
+        :label="t('dashboard.settings.profile.id')"
+        variant="outlined"
+        color="#E2E2E2"
+        disabled
+        base-color="#E2E2E2"
+        bg-color="#E2E2E2"
+        rounded="xl"
+        hide-details
+        class="cursor-pointer"
+      >
+        <template #append-inner>
+          <v-icon color="primary" class="cursor-pointer"
+            >mdi-content-copy</v-icon
+          >
+        </template>
+      </v-text-field>
     </v-col>
     <v-col cols="4" lg="2" class="pa-4">
       <v-text-field
@@ -152,49 +178,51 @@ onMounted(async () => {
     ></v-col>
   </v-row>
 
-  <v-row>
-    <v-col
-      cols="12"
-      class="d-flex align-center ga-2 cursor-pointer"
-      @click="emits('change-action', 'Phone')"
+  <!-- <v-row> -->
+  <v-col
+    v-if="!isTechnician"
+    cols="12"
+    class="d-flex align-center ga-2 cursor-pointer"
+    @click="emits('change-action', 'Phone')"
+  >
+    <AppSvgIcon name="call" />
+    <p class="text-primary font-weight-medium">
+      {{ t("dashboard.settings.profile.change_phone") }}
+    </p>
+  </v-col>
+  <v-col
+    cols="12"
+    class="d-flex align-center ga-2 cursor-pointer"
+    @click="emits('change-action', 'Password')"
+  >
+    <AppSvgIcon name="lock" />
+    <p class="font-weight-medium text-primary">
+      {{ t("dashboard.settings.profile.change_password") }}
+    </p>
+  </v-col>
+  <v-col cols="12" lg="6" v-if="!isTechnician">
+    <v-btn
+      block
+      color="primary"
+      rounded="xl"
+      :loading="isLoading"
+      @click="saveNewData"
     >
-      <AppSvgIcon name="call" />
-      <p class="text-primary font-weight-medium">
-        {{ t("dashboard.settings.profile.change_phone") }}
-      </p>
-    </v-col>
-    <v-col
-      cols="12"
-      class="d-flex align-center ga-2 cursor-pointer"
-      @click="emits('change-action', 'Password')"
+      {{ t("dashboard.settings.profile.save_changes") }}</v-btn
     >
-      <AppSvgIcon name="lock" />
-      <p class="font-weight-medium text-primary">
-        {{ t("dashboard.settings.profile.change_password") }}
-      </p>
-    </v-col>
-    <v-col cols="12" lg="6">
-      <v-btn
-        block
-        color="primary"
-        rounded="xl"
-        :loading="isLoading"
-        @click="saveNewData"
-      >
-        {{ t("dashboard.settings.profile.save_changes") }}</v-btn
-      >
-    </v-col>
-    <v-col
-      cols="12"
-      @click="dialog = true"
-      class="d-flex align-center ga-2 cursor-pointer"
-    >
-      <AppSvgIcon name="profile-delete" />
-      <p class="font-weight-medium text-gray-500">
-        {{ t("dashboard.settings.profile.delete_account") }}
-      </p>
-    </v-col>
-  </v-row>
+  </v-col>
+  <v-col
+    v-if="!isTechnician"
+    cols="12"
+    @click="dialog = true"
+    class="d-flex align-center ga-2 cursor-pointer"
+  >
+    <AppSvgIcon name="profile-delete" />
+    <p class="font-weight-medium text-gray-500">
+      {{ t("dashboard.settings.profile.delete_account") }}
+    </p>
+  </v-col>
+  <!-- </v-row> -->
 
   <AppModal
     v-model:dialog="dialog"

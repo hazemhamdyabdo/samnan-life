@@ -1,11 +1,12 @@
 import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Category } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
+  const { isTechnician } = storeToRefs(useAuthStore());
   // profile
   const customerData = ref<CustomerData>()
 
   const getCustomerData = async () => {
-    const { data } = await useAPI<ApiResponse<CustomerData>>('/customer')
+    const { data } = await useAPI<ApiResponse<CustomerData>>(`/${isTechnician.value ? 'technician' : 'customer'}`)
     customerData.value = data.value?.data
   }
 
@@ -28,7 +29,7 @@ export const useSettingsStore = defineStore('settings', () => {
   }
 
   const changePassword = async (passwordUpdates: ChangePasswordRequest) => {
-    const { error } = await useAPI("/customer/change-password", {
+    const { error } = await useAPI(`/${isTechnician.value ? 'technician' : 'customer'}/change-password`, {
       method: "POST",
       body: passwordUpdates,
       watch: false
