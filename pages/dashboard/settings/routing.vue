@@ -1,6 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n();
+</script>
 <template>
-  <div>routing</div>
+  <section>
+    <h4 class="text-20 text-grey-900">
+      {{ t("dashboard.settings.graphic_scope_covered") }}
+    </h4>
+
+    <section class="mt-8">
+      <div>
+        <div class="d-flex ga-1">
+          <AppSvgIcon name="location" :filled="false" class="text-primary" />
+          <p class="font-weight-medium">الرياض</p>
+        </div>
+        <ul class="city-list ps-12">
+          <li class="mt-2">حي الجلالة</li>
+          <li class="mt-2">حي الجلالة</li>
+          <li class="mt-2">حي الجلالة</li>
+          <li class="mt-2">حي الجلالة</li>
+        </ul>
+      </div>
+    </section>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.city-list {
+  list-style-type: ". ";
+}
+</style>
