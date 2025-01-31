@@ -303,6 +303,8 @@ export default {
         to: "الى",
         changed_password: "تم تغيير كلمة المرور الخاصة بك بنجاج",
       },
+      graphic_scope_covered: "النطاق الغرافي المغطى",
+      my_working_hours: "مواعيد العمل الخاصه بي",
     },
     modal: {
       logout: "تسجيل الخروج",

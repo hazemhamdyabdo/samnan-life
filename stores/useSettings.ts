@@ -1,7 +1,7 @@
 import type { AddressData, Address, City, ApiResponse, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Category } from "~/types/settings"
 
 export const useSettingsStore = defineStore('settings', () => {
-  const { isTechnician } = storeToRefs(useAuthStore());
+  const { isTechnician, user } = storeToRefs(useAuthStore());
   // profile
   const customerData = ref<CustomerData>()
 
@@ -138,6 +138,24 @@ export const useSettingsStore = defineStore('settings', () => {
     return useAPI<ApiResponse<Category[]>>('/categories')
   }
 
+  // help and support 
+
+  const sendSupportForm = async (supportForm: { subject: string, details: string }) => {
+    const { error } = await useAPI('/support-form', {
+      method: 'POST',
+      body: {
+        user_id: user.value?.id,
+        user_type: isTechnician.value ? 'technician' : 'customer',
+        platform: 'web',
+        ...supportForm
+      },
+      watch: false
+    })
+    if (error.value) {
+      throw new Error(error.value.message)
+    }
+  }
+
   return {
     allAddresses,
     fetchAllAddresses,
@@ -160,6 +178,7 @@ export const useSettingsStore = defineStore('settings', () => {
     updateProfile,
     updatePhone,
     changePassword,
-    fetchCategories
+    fetchCategories,
+    sendSupportForm
   }
 })

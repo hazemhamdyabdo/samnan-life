@@ -148,5 +148,6 @@ export const useAuthStore = defineStore("auth", () => {
     logout,
     deleteAccount,
     isTechnician,
+    user
   };
 });

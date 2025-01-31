@@ -152,5 +152,13 @@ interface Category {
   name: string;
 }
 
+interface SupportForm {
+  user_id: string;
+  subject: string;
+  details: string;
+  user_type: "technician" | "customer";
+  platform: "app" | "web";
+}
 
-export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider, LandingData, Category };
+
+export type { ApiResponse, AddressData, Address, City, District, Product, CustomerData, UpdateProfileRequest, ChangePasswordRequest, Slider, LandingData, Category, SupportForm };

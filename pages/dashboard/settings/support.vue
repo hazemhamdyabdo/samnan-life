@@ -1,5 +1,31 @@
 <script setup lang="ts">
+const settingsStore = useSettingsStore();
+
 const { t } = useI18n();
+const { sendSupportForm } = settingsStore;
+const { showSuccess } = useAlertStore();
+
+const supportForm = ref({
+  subject: "",
+  details: "",
+});
+
+const isLoading = ref(false);
+const handleSupportFom = async () => {
+  isLoading.value = true;
+  try {
+    await sendSupportForm(supportForm.value);
+    supportForm.value = {
+      subject: "",
+      details: "",
+    };
+    showSuccess("تم ارسال الطلب بنجاح");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 <template>
   <section>
@@ -19,15 +45,15 @@ const { t } = useI18n();
 
     <v-row class="mt-8">
       <v-col cols="6">
-        <v-select
-          :items="['Item 1', 'Item 2', 'Item 3', 'Item 4']"
+        <v-text-field
+          v-model="supportForm.subject"
           :label="t('dashboard.settings.support.topic')"
           required
-          variant="outlined"
         />
       </v-col>
       <v-col cols="12">
         <v-textarea
+          v-model="supportForm.details"
           :label="t('dashboard.settings.support.details')"
           color="primary"
           row-height="25"
@@ -42,9 +68,16 @@ const { t } = useI18n();
       </v-col>
 
       <v-col cols="6" class="d-flex mt-8">
-        <v-btn color="primary" type="submit" round block size="50">{{
-          $t("dashboard.settings.support.button.submit")
-        }}</v-btn>
+        <v-btn
+          @click="handleSupportFom"
+          :loading="isLoading"
+          color="primary"
+          type="submit"
+          round
+          block
+          size="50"
+          >{{ $t("dashboard.settings.support.button.submit") }}</v-btn
+        >
       </v-col>
     </v-row>
   </section>
