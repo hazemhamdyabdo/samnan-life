@@ -1,3 +1,16 @@
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    showActions: boolean;
+  }>(),
+  {
+    showActions: true,
+  }
+);
+
+const showModal = ref(false);
+</script>
+
 <template>
   <div>
     <v-card flat rounded="xl" class="border bill-view">
@@ -86,7 +99,7 @@
               </div>
             </div>
 
-            <div class="d-flex ga-2 mt-5">
+            <div v-if="showActions" class="d-flex ga-2 mt-5">
               <v-btn
                 @click="showModal = true"
                 color="primary"
@@ -118,10 +131,6 @@
     ></app-modal>
   </div>
 </template>
-
-<script setup>
-const showModal = ref(false);
-</script>
 
 <style lang="scss" scoped>
 .bill-view {

@@ -16,5 +16,9 @@ const currentComponentView = computed(() => {
 });
 </script>
 <template>
-  <component :is="currentComponentView" @change-component="changeComponent" />
+  <component
+    :is="currentComponentView"
+    :showActions="false"
+    @change-component="changeComponent"
+  />
 </template>
