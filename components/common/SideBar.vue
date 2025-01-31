@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { isTechnician } = storeToRefs(useAuthStore());
+</script>
+
 <template>
   <v-card elevation="2" min-width="60" class="rounded-xl" app>
     <v-list
@@ -8,7 +12,7 @@
     >
       <div class="d-flex flex-column ga-1 justify-center align-center">
         <NuxtLink
-          to="/dashboard"
+          :to="isTechnician ? '/technical/dashboard' : '/dashboard'"
           class="px-3 py-3 rounded-lg"
           active-class="bg-pri-light"
         >

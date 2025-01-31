@@ -4,9 +4,11 @@
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Highcharts from "highcharts";
+import { useTechnicianStore } from "~/stores/useTechnician";
 
+const { chartDataCompletedRequests } = storeToRefs(useTechnicianStore());
 const { t } = useI18n();
 
 const chartOptions = {
@@ -15,7 +17,7 @@ const chartOptions = {
     custom: {},
     events: {
       render() {
-        const chart = this,
+        const chart: any = this,
           series = chart.series[0];
         let customLabel = chart.options.chart.custom.label;
 
@@ -23,7 +25,7 @@ const chartOptions = {
           customLabel = chart.options.chart.custom.label = chart.renderer
             .label(
               `
-              <strong> 212 </strong>
+              <strong> ${chartDataCompletedRequests.value.allRequests} </strong>
               <br />
               <span style="font-size: 12px;"> طلب </span>
               `
@@ -94,12 +96,12 @@ const chartOptions = {
       data: [
         {
           name: "ناجحة ",
-          y: 23.9,
+          y: chartDataCompletedRequests.value.completedRequests,
           color: "#33cc33",
         },
         {
-          name: "فاشلة",
-          y: 12.6,
+          name: "الغير مكتملة",
+          y: chartDataCompletedRequests.value.ongoingRequests,
           color: "#ff0000",
         },
       ],

@@ -1,6 +1,14 @@
 <script setup>
 import NavBar from "~/components/common/NavBar.vue";
 import SideBar from "~/components/common/SideBar.vue";
+import { useTechnicianStore } from "~/stores/useTechnician";
+
+const { getTechnicianData } = useTechnicianStore();
+const { isTechnician } = storeToRefs(useAuthStore());
+
+onMounted(() => {
+  isTechnician.value && getTechnicianData();
+});
 </script>
 
 <template>
