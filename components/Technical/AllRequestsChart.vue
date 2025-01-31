@@ -4,13 +4,19 @@
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Highcharts from "highcharts";
+import { useTechnicianStore } from "~/stores/useTechnician";
+
+const { chartDataAllRequests } = storeToRefs(useTechnicianStore());
+const chart: any = ref(null);
 
 const chartOptions = {
   chart: {
     type: "pie",
-    custom: {},
+    custom: {
+      label: null,
+    },
     events: {
       render() {
         const chart = this,
@@ -21,7 +27,7 @@ const chartOptions = {
           customLabel = chart.options.chart.custom.label = chart.renderer
             .label(
               `
-              <strong> 212 </strong>
+              <strong> ${chartDataAllRequests.value.allRequests} </strong>
               <br />
               <span style="font-size: 12px;"> طلب </span>               
               `
@@ -93,28 +99,36 @@ const chartOptions = {
       name: "الطلبات",
       colorByPoint: true,
       innerSize: "90%",
-      data: [
-        {
-          name: "صيانة عاجلة: ",
-          y: 43,
-          color: "#FFCA29",
-        },
-        {
-          name: "تركيب جديد:",
-          y: 105,
-          color: "#20419C",
-        },
-        {
-          name: "صيانة دورية:",
-          y: 24,
-          color: "#34D196",
-        },
-      ],
+      data: chartDataAllRequests.value.typeOfRequests.map((item) => ({
+        name: item.type,
+        y: item.count,
+      })),
     },
   ],
 };
 
 onMounted(() => {
-  Highcharts.chart("requests-chart", chartOptions);
+  chart.value = Highcharts.chart("requests-chart", chartOptions);
+});
+
+watch(chartDataAllRequests, (newValue) => {
+  if (chart.value) {
+    chart.value.series[0].setData(
+      newValue.typeOfRequests.map((item) => ({
+        name: item.type,
+        y: item.count,
+      }))
+    );
+  }
+  const customLabel = chart.value.options.chart.custom.label;
+  if (customLabel) {
+    customLabel.attr({
+      text: `
+        <strong> ${newValue.allRequests} </strong>
+        <br />
+        <span style="font-size: 12px;"> طلب </span>
+      `,
+    });
+  }
 });
 </script>
