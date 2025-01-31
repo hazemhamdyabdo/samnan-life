@@ -23,39 +23,6 @@ const cards = [
   },
 ];
 
-const operationLogs = [
-  {
-    title: "صيانة عاجلة",
-    created_at: new Date(),
-    status: "ناجحه",
-    icon: "sm-urgent-maintenance",
-  },
-  {
-    title: "صيانة دورية",
-    created_at: new Date(),
-    status: "ناجحه",
-    icon: "sm-urgent-maintenance",
-  },
-  {
-    title: "صيانة عاجلة",
-    created_at: new Date(),
-    status: "ناجحه",
-    icon: "sm-urgent-maintenance",
-  },
-  {
-    title: "صيانة دورية",
-    created_at: new Date(),
-    status: "ناجحه",
-    icon: "sm-urgent-maintenance",
-  },
-  {
-    title: "صيانة دورية",
-    created_at: new Date(),
-    status: "ناجحه",
-    icon: "sm-urgent-maintenance",
-  },
-];
-
 const {
   data: {
     value: { data: slides },

@@ -1,6 +1,20 @@
-<script setup lang="ts"></script>
-<template>
-  <div>invoices</div>
-</template>
+<script setup lang="ts">
+import Invoices from "~/components/Settings/invoices/Invoices.vue";
+import viewBill from "../operations/view-bill.vue";
+const componentMap = {
+  Invoices,
+  viewBill,
+};
 
-<style scoped></style>
+const currentComponent = ref("Invoices");
+const changeComponent = (newComponent: string) => {
+  currentComponent.value = newComponent;
+};
+const currentComponentView = computed(() => {
+  // @ts-ignore
+  return componentMap[currentComponent.value];
+});
+</script>
+<template>
+  <component :is="currentComponentView" @change-component="changeComponent" />
+</template>

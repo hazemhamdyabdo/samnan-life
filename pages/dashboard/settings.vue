@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import CardMenu from "@/components/Settings/CardMenu.vue";
+
+const route = useRoute();
+console.log("====================================");
+console.log(route);
+console.log("====================================");
 </script>
 <template>
   <section>
@@ -8,9 +13,16 @@ import CardMenu from "@/components/Settings/CardMenu.vue";
         <CardMenu />
       </v-col>
       <v-col cols="12" lg="9">
-        <v-card rounded="xl" class="pa-4" elevation="2" height="100%">
+        <v-card
+          v-if="route.path !== '/dashboard/settings/invoices'"
+          rounded="xl"
+          class="pa-4"
+          elevation="2"
+          height="100%"
+        >
           <NuxtPage />
         </v-card>
+        <NuxtPage />
       </v-col>
     </v-row>
   </section>
