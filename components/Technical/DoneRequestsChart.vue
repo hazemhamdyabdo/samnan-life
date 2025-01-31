@@ -10,11 +10,14 @@ import { useTechnicianStore } from "~/stores/useTechnician";
 
 const { chartDataCompletedRequests } = storeToRefs(useTechnicianStore());
 const { t } = useI18n();
+const chart: any = ref(null);
 
 const chartOptions = {
   chart: {
     type: "pie",
-    custom: {},
+    custom: {
+      label: null,
+    },
     events: {
       render() {
         const chart: any = this,
@@ -67,7 +70,6 @@ const chartOptions = {
   },
   plotOptions: {
     series: {
-      // allowPointSelect: true,
       cursor: "pointer",
       borderRadius: 8,
       dataLabels: [
@@ -110,6 +112,39 @@ const chartOptions = {
 };
 
 onMounted(() => {
-  Highcharts.chart("chart-container", chartOptions);
+  // @ts-ignore
+  chart.value = Highcharts.chart("chart-container", chartOptions);
 });
+
+watch(
+  chartDataCompletedRequests,
+  (newValue) => {
+    if (chart.value) {
+      chart.value.series[0].setData([
+        {
+          name: "ناجحة ",
+          y: newValue.completedRequests,
+          color: "#33cc33",
+        },
+        {
+          name: "الغير مكتملة",
+          y: newValue.ongoingRequests,
+          color: "#ff0000",
+        },
+      ]);
+
+      const customLabel = chart.value.options.chart.custom.label;
+      if (customLabel) {
+        customLabel.attr({
+          text: `
+          <strong> ${newValue.allRequests} </strong>
+          <br />
+          <span style="font-size: 12px;"> طلب </span>
+        `,
+        });
+      }
+    }
+  },
+  { deep: true }
+);
 </script>
