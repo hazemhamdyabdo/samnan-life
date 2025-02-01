@@ -8,11 +8,7 @@ export const useDashboardStore = defineStore("dashboard", () => {
   };
 
   const fetchLandingContent = async () => {
-    const { data, error } = await useAPI<ApiResponse<LandingData>>("/landing", {
-      headers: {
-        "Accept-Language": "ar",
-      },
-    });
+    const { data, error } = await useAPI<ApiResponse<LandingData>>("/landing");
     landingContent.value = data.value?.data;
     if (error.value) {
       throw new Error(error.value.message);

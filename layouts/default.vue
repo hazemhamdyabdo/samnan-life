@@ -7,9 +7,6 @@ const { getTechnicianData } = useTechnicianStore();
 const { isTechnician } = storeToRefs(useAuthStore());
 
 onMounted(() => {
-  console.log("====================================");
-  console.log("isTechnician", isTechnician.value);
-  console.log("====================================");
   isTechnician.value && getTechnicianData();
 });
 </script>

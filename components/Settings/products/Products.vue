@@ -2,6 +2,7 @@
 import type { Product } from "~/types/settings";
 
 const { isTechnician } = storeToRefs(useAuthStore());
+const { technicianProducts } = storeToRefs(useTechnicianStore());
 const { t } = useI18n();
 
 const emits = defineEmits<{
@@ -17,12 +18,10 @@ const { deleteProduct, fetchCustomerProducts } = settingsStore;
 const dialog = ref(false);
 
 const deletedProductId = ref<number>();
-
 const handleDeleteProduct = (productId: number) => {
   deletedProductId.value = productId;
   dialog.value = true;
 };
-
 const handleConfirmDelete = async () => {
   await deleteProduct(deletedProductId.value as number);
   await fetchCustomerProducts();
@@ -30,7 +29,13 @@ const handleConfirmDelete = async () => {
   dialog.value = false;
 };
 
-await fetchCustomerProducts();
+if (!isTechnician.value) {
+  await fetchCustomerProducts();
+}
+
+const products = computed(() => {
+  return isTechnician.value ? technicianProducts.value : customerProducts.value;
+});
 </script>
 
 <template>
@@ -45,7 +50,7 @@ await fetchCustomerProducts();
     </section>
 
     <section class="mt-8 d-flex flex-column ga-5">
-      <div class="d-flex ga-2 align-center" v-for="product in customerProducts">
+      <div class="d-flex ga-2 align-center" v-for="product in products">
         <!-- :src="`https://app.rezeqstore.com/public/storage/${product.image}`" -->
         <div class="rounded-circle border border-md pa-2">
           <v-img :src="product.image_url" class="pa-5" width="100%"></v-img>

@@ -32,13 +32,7 @@ const items = computed(() => [
         },
       ]),
   ...(isTechnician.value
-    ? [
-        {
-          title: t("dashboard.settings.card.items.address_title"),
-          icon: "location",
-          name: "/dashboard/settings/addresses",
-        },
-      ]
+    ? []
     : [
         {
           title: t("dashboard.settings.card.items.addresses"),

@@ -2,9 +2,6 @@
 import CardMenu from "@/components/Settings/CardMenu.vue";
 
 const route = useRoute();
-console.log("====================================");
-console.log(route);
-console.log("====================================");
 </script>
 <template>
   <section>
@@ -22,7 +19,7 @@ console.log("====================================");
         >
           <NuxtPage />
         </v-card>
-        <NuxtPage />
+        <NuxtPage v-else />
       </v-col>
     </v-row>
   </section>

@@ -10,16 +10,15 @@ const { t } = useI18n();
     </h4>
 
     <section class="mt-8">
-      <div>
+      <div v-for="district in coverDistricts" :key="district.id">
         <div class="d-flex ga-1">
           <AppSvgIcon name="location" :filled="false" class="text-primary" />
-          <p class="font-weight-medium">الرياض</p>
+          <p class="font-weight-medium">{{ district.city_name }}</p>
         </div>
         <ul class="city-list ps-12">
-          <li class="mt-2">حي الجلالة</li>
-          <li class="mt-2">حي الجلالة</li>
-          <li class="mt-2">حي الجلالة</li>
-          <li class="mt-2">حي الجلالة</li>
+          <li class="mt-2">
+            {{ district.name }}
+          </li>
         </ul>
       </div>
     </section>
