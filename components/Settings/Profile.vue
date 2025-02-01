@@ -12,6 +12,8 @@ const { showSuccess } = useAlertStore();
 
 const emits = defineEmits(["change-action"]);
 
+const source = ref("Copy account number");
+
 const fullName = computed(() => {
   if (customerData.value?.first_name && customerData.value.last_name)
     return customerData.value?.first_name + " " + customerData.value?.last_name;
@@ -61,6 +63,17 @@ const handleDeleteAccount = async () => {
     isDeleteAccLoading.value = false;
   }
 };
+
+const copyToClipboard = (id: number) => {
+  const el = document.createElement("textarea");
+  el.value = id.toString();
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+  showSuccess("تم نسخ الرقم");
+};
+
 await getCustomerData();
 onMounted(async () => {
   if (customerData.value) {
@@ -118,7 +131,13 @@ onMounted(async () => {
         hide-details
       ></v-text-field>
     </v-col>
-    <v-col v-if="isTechnician" cols="4" lg="3" class="pa-4">
+    <v-col
+      v-if="isTechnician"
+      cols="4"
+      lg="3"
+      class="pa-4 cursor-pointer"
+      @click="copyToClipboard(details.id)"
+    >
       <v-text-field
         v-model="details.id"
         :label="t('dashboard.settings.profile.id')"

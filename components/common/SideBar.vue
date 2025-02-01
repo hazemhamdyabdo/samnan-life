@@ -28,7 +28,10 @@ const { isTechnician } = storeToRefs(useAuthStore());
           {{ $t("dashboard.sidebar.home") }}
         </p>
       </div>
-      <div class="d-flex flex-column ga-1 justify-center align-center">
+      <div
+        v-if="!isTechnician"
+        class="d-flex flex-column ga-1 justify-center align-center"
+      >
         <NuxtLink
           to="/dashboard/operations"
           class="px-3 py-3 rounded-lg"
