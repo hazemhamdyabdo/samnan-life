@@ -12,8 +12,6 @@ const { showSuccess } = useAlertStore();
 
 const emits = defineEmits(["change-action"]);
 
-const source = ref("Copy account number");
-
 const fullName = computed(() => {
   if (customerData.value?.first_name && customerData.value.last_name)
     return customerData.value?.first_name + " " + customerData.value?.last_name;
@@ -64,7 +62,8 @@ const handleDeleteAccount = async () => {
   }
 };
 
-const copyToClipboard = (id: number) => {
+const copyToClipboard = (id: number | undefined) => {
+  if (!id) return;
   const el = document.createElement("textarea");
   el.value = id.toString();
   document.body.appendChild(el);
@@ -89,26 +88,24 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-row>
-    <v-col cols="12">
-      <h3 class="text-20 text-header">
-        {{ t("dashboard.settings.profile.my_profile") }}
-      </h3>
-    </v-col>
-    <v-col cols="12" class="mb-4">
-      <v-avatar
-        size="100"
-        color="primary"
-        class="mx-auto text-white font-weight-medium text-40"
-      >
-        {{ nameShortcuts }}
-      </v-avatar>
+  <v-col cols="12">
+    <h3 class="text-20 text-header">
+      {{ t("dashboard.settings.profile.my_profile") }}
+    </h3>
+  </v-col>
+  <v-col cols="12" class="mb-4">
+    <v-avatar
+      size="100"
+      color="primary"
+      class="mx-auto text-white font-weight-medium text-40"
+    >
+      {{ nameShortcuts }}
+    </v-avatar>
 
-      <p class="text-24 text-header font-weight-medium mt-4">
-        {{ fullName }}
-      </p>
-    </v-col>
-  </v-row>
+    <p class="text-24 text-header font-weight-medium mt-4">
+      {{ fullName }}
+    </p>
+  </v-col>
 
   <v-row>
     <v-col cols="12" lg="6" class="pa-4">
