@@ -13,7 +13,7 @@ export const useTechnicianStore = defineStore('technician', (): {
 
 
   const getTechnicianData = async () => {
-    const { data } = await useAPI<TechnicianResponse>(`/technician`)
+    const { data } = await useAPI<TechnicianResponse>(`/technician/requests-summary`)
     technicianProducts.value = data.value?.data.technician.products
     coverDistricts.value = data.value?.data.technician.districts
     chartDataAllRequests.value = {

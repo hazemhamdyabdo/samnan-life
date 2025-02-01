@@ -19,7 +19,7 @@ const chartOptions = {
     },
     events: {
       render() {
-        const chart = this,
+        const chart: any = this,
           series = chart.series[0];
         let customLabel = chart.options.chart.custom.label;
 
@@ -67,7 +67,7 @@ const chartOptions = {
     pointFormat: "<b>{point.percentage:.0f}%</b>",
   },
   legend: {
-    labelFormatter() {
+    labelFormatter(): string {
       return `${this.name} <strong>${this.y}</strong>`;
     },
   },
@@ -99,7 +99,7 @@ const chartOptions = {
       name: "الطلبات",
       colorByPoint: true,
       innerSize: "90%",
-      data: chartDataAllRequests.value.typeOfRequests.map((item) => ({
+      data: chartDataAllRequests.value.typeOfRequests?.map((item) => ({
         name: item.type,
         y: item.count,
       })),

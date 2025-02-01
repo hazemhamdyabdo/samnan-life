@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useTechnicianStore } from "~/stores/useTechnician";
+const { coverDistricts } = storeToRefs(useTechnicianStore());
 const { t } = useI18n();
 </script>
 <template>

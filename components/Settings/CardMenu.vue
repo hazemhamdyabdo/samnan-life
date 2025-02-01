@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const { isTechnician } = storeToRefs(useAuthStore());
 const { showSuccess } = useAlertStore();
 const { t } = useI18n();
-const { logout } = useAuthStore();
+const authStore = useAuthStore();
+const { logout } = authStore;
+const { isTechnician } = storeToRefs(authStore);
 
 const items = computed(() => [
   {
@@ -92,7 +93,7 @@ const handleSignOut = async () => {
   isLoading.value = true;
   await logout();
   showSuccess("تم تسجيل الخروج بنجاح");
-  navigateTo("/login");
+  navigateTo(`${isTechnician.value ? "/technical" : ""}/login`);
   isLoading.value = false;
   showSignOutDialog.value = false;
 };
