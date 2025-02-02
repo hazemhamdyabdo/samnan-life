@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import type { InvoiceInterface } from "@/types/technician";
 withDefaults(
   defineProps<{
     showActions: boolean;
+    invoiceDetails: InvoiceInterface;
   }>(),
   {
     showActions: true,
   }
 );
 
+const { t, locale } = useI18n();
+const { formatToDateString } = useDateTimeFormate(locale.value);
 const showModal = ref(false);
 </script>
 
@@ -15,7 +19,7 @@ const showModal = ref(false);
   <div>
     <v-card flat rounded="xl" class="border bill-view">
       <v-card-text>
-        <h2 class="">{{ $t("operations.view_bill") }}</h2>
+        <h2 class="">{{ t("operations.view_bill") }}</h2>
         <v-card class="mt-4" rounded="lg" elevation="2">
           <v-card-text>
             <div class="d-flex justify-center align-center ga-2">
@@ -25,34 +29,49 @@ const showModal = ref(false);
 
             <!-- details -->
             <div class="mt-10 bill-details">
-              <div class="item">
-                <div class="label">{{ $t("operations.bill_number") }}</div>
-                <div class="value">123456</div>
+              <div class="item" v-if="invoiceDetails.invoice_number">
+                <div class="label">{{ t("operations.bill_number") }}</div>
+                <div class="value">{{ invoiceDetails.invoice_number }}</div>
               </div>
               <div class="item">
-                <div class="label">{{ $t("operations.client_name") }}</div>
-                <div class="value">Ahmed Ali</div>
+                <div class="label">{{ t("operations.client_name") }}</div>
+                <div class="value">{{ invoiceDetails.customerName }}</div>
               </div>
               <div class="item">
-                <div class="label">{{ $t("operations.order_type") }}</div>
-                <div class="value">صيانة عاجلة</div>
+                <div class="label">{{ t("operations.order_type") }}</div>
+                <div class="value">
+                  {{ t("operations." + invoiceDetails.type) }}
+                </div>
               </div>
               <div class="item">
-                <div class="label">{{ $t("operations.device") }}</div>
-                <div class="value">جهاز تحلية سمنان 5 مراحل</div>
+                <div class="label">{{ t("operations.device") }}</div>
+                <div class="value">{{ invoiceDetails.productName }}</div>
               </div>
               <div class="item">
-                <div class="label">{{ $t("operations.location") }}:</div>
-                <div class="value">الرياض - حي الجلالة - منزل 144</div>
+                <div class="label">{{ t("operations.location") }}:</div>
+                <div class="value">
+                  {{ invoiceDetails.address.name }},
+                  {{ invoiceDetails.address?.street }} ,{{
+                    invoiceDetails.address?.national_address
+                  }}
+                </div>
               </div>
               <div class="item">
-                <div class="label">{{ $t("operations.day") }}:</div>
-                <div class="value">31 Dec 2022</div>
+                <div class="label">{{ t("operations.day") }}</div>
+                <div class="value">
+                  {{
+                    formatToDateString(invoiceDetails.date) +
+                    " " +
+                    invoiceDetails.time
+                  }}
+                </div>
               </div>
-              <div class="item">
-                <div class="label">{{ $t("operations.time") }}:</div>
-                <div class="value">04:32PM</div>
-              </div>
+              <!-- <div class="item">
+                <div class="label">{{ t("operations.time") }}:</div>
+                <div class="value">
+                  {{ formatToDateString(invoiceDetails.time) }}
+                </div>
+              </div> -->
             </div>
 
             <!-- table details -->
@@ -63,39 +82,29 @@ const showModal = ref(false);
                 <div class="cell">الكمية</div>
                 <div class="cell">المحموع</div>
               </div>
-              <div class="row">
-                <div class="cell">صامولة ماتور 5 سم</div>
-                <div class="cell">12 ر.س</div>
+              <div class="row" v-for="item in invoiceDetails.service">
+                <div class="cell">{{ item.name }}</div>
+                <div class="cell">{{ item.price }} ر.س</div>
                 <div class="cell">1</div>
-                <div class="cell">12 ر.س</div>
-              </div>
-              <div class="row">
-                <div class="cell">صامولة ماتور 5 سم</div>
-                <div class="cell">12 ر.س</div>
-                <div class="cell">1</div>
-                <div class="cell">12 ر.س</div>
-              </div>
-              <div class="row">
-                <div class="cell">صامولة ماتور 5 سم</div>
-                <div class="cell">12 ر.س</div>
-                <div class="cell">1</div>
-                <div class="cell">12 ر.س</div>
+                <div class="cell">{{ item.price }} ر.س</div>
               </div>
             </div>
 
             <!-- payment details -->
             <div>
               <div class="d-flex align-center justify-space-between mb-2">
-                <h5>{{ $t("operations.payment_method") }}</h5>
-                <h5>العميل لم يختر بعد</h5>
+                <h5>{{ t("operations.payment_method") }}</h5>
+                <h5>{{ invoiceDetails.payment_method }}</h5>
               </div>
               <div class="d-flex align-center justify-space-between mb-2">
-                <h5>{{ $t("operations.payment_status") }}</h5>
-                <h5 class="text-warning">في انتظار الدفع</h5>
+                <h5>{{ t("operations.payment_status") }}</h5>
+                <h5 class="text-warning">{{ invoiceDetails.status }}</h5>
               </div>
               <div class="d-flex align-center justify-space-between">
-                <h4 class="font-weight-medium">{{ $t("operations.total") }}</h4>
-                <h4 class="font-weight-medium">162.00 ر.س</h4>
+                <h4 class="font-weight-medium">{{ t("operations.total") }}</h4>
+                <h4 class="font-weight-medium">
+                  {{ invoiceDetails.total }} ر.س
+                </h4>
               </div>
             </div>
 
@@ -106,7 +115,7 @@ const showModal = ref(false);
                 class="flex-grow-1 text-14"
               >
                 <AppSvgIcon name="wallet" />
-                {{ $t("operations.cash") }}
+                {{ t("operations.cash") }}
               </v-btn>
 
               <v-btn
@@ -115,7 +124,7 @@ const showModal = ref(false);
                 class="text-primary flex-grow-1 text-14"
               >
                 <AppSvgIcon name="card-pos" />
-                {{ $t("operations.oniline_pay") }}
+                {{ t("operations.oniline_pay") }}
               </v-btn>
             </div>
           </v-card-text>
