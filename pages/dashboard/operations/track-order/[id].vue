@@ -91,11 +91,19 @@ const order = ref(null);
 
 const currentStatus = ref(null);
 const statuses = [
+  // "pending",
+  // "technician_assigned",
+  // "technician_on_the_way",
+  // "in_progress",
+  // "waiting_for_payment",
+  // "completed",
+  // "canceled",
   "pending",
   "technician_assigned",
   "technician_on_the_way",
   "in_progress",
   "waiting_for_payment",
+  "waiting_for_technician_confirm_payment",
   "completed",
   "canceled",
 ];
@@ -130,7 +138,7 @@ const steps = ref([
 const { data } = await useAPI(`/maintenance-request/${useRoute().params.id}`);
 order.value = data.value?.data;
 
-currentStatus.value = order?.current_status?.status;
+currentStatus.value = order.value?.current_status?.status;
 
 watch(
   () => currentStatus.value,

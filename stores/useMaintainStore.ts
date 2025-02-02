@@ -2,7 +2,14 @@ import { defineStore } from "pinia";
 import type { CreateRequest } from "~/types/maintain/index";
 
 export const useMaintainStore = defineStore("maintain", () => {
+  const { $api } = useNuxtApp();
+  const { isTechnician } = storeToRefs(useAuthStore());
   const orderData = ref<any>(null);
+  const pagination = ref({
+    currentPage: 1,
+    lastPage: 1,
+  });
+
   const createOrder = async (request: CreateRequest) => {
     const { momentLikeDate } = useDateTimeFormate();
     if (request.type === "emergency_maintenance") {
@@ -52,9 +59,21 @@ export const useMaintainStore = defineStore("maintain", () => {
   };
 
   const getAllOrders = (params: any) => {
-    return useAPI("/maintenance-requests", {
-      params,
-    });
+    return useAsyncData(() =>
+      $api(isTechnician ? "/technician/requests" : "/maintenance-requests", {
+        query: {
+          ...params,
+          per_page: 5,
+          page: pagination.value.currentPage,
+        },
+        onResponse: ({ response }) => {
+          pagination.value = {
+            currentPage: response._data.data.current_page,
+            lastPage: response._data.data.last_page,
+          };
+        },
+      })
+    );
   };
 
   const cancelOrder = (id: number) => {
@@ -70,5 +89,6 @@ export const useMaintainStore = defineStore("maintain", () => {
     getSingleOrder,
     getAllOrders,
     cancelOrder,
+    pagination,
   };
 });

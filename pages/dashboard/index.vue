@@ -33,7 +33,7 @@ const { data } = await getAllOrders();
 allOperations.value = data.value?.data.data;
 </script>
 <template>
-  <div v-if="!loading">
+  <div v-if="status != 'pending'">
     <header>
       <v-carousel min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
@@ -56,6 +56,7 @@ allOperations.value = data.value?.data.data;
         </template>
         <v-carousel-item
           v-for="slide in slides"
+          :key="slide.id"
           :src="slide.image_url"
           min-width="100%"
           cover
@@ -89,13 +90,13 @@ allOperations.value = data.value?.data.data;
         {{ t("dashboard.home.operations_logs") }}
       </p>
       <v-spacer />
-      <p
-        @click="$router.push('/dashboard/operations')"
+      <nuxt-link
+        :to="localePath('/dashboard/operations')"
         class="text-grey-300"
         style="font-size: 12px"
       >
         {{ t("dashboard.home.show_all") }}
-      </p>
+      </nuxt-link>
     </div>
     <section class="py-3">
       <operations-all-operations :operations="allOperations" />

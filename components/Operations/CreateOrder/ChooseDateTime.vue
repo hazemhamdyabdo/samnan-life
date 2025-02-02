@@ -1,8 +1,14 @@
 <script setup>
+defineProps({
+  popUp: {
+    type: Boolean,
+    default: false,
+  },
+});
 const { getAvailableSlot, confirmOrder } = useMaintainStore();
 
 const btnLoading = ref(false);
-const emit = defineEmits(["next"]);
+const emit = defineEmits(["next", "closeModal"]);
 const chosenDate = ref(null);
 const times = ref([]);
 const chosenTime = ref(null);
@@ -20,8 +26,8 @@ const submitSlot = async () => {
   try {
     btnLoading.value = true;
     const { data } = await confirmOrder(chosenTime.value);
-    console.log(data.value);
     emit("next");
+    emit("closeModal");
   } finally {
     btnLoading.value = false;
   }
@@ -37,8 +43,10 @@ watch(
 </script>
 <template>
   <v-form>
-    <h3>{{ $t("operations.choose_date_time") }}</h3>
-    <h5 class="mt-2">{{ $t("operations.choose_date_time_desc") }}</h5>
+    <div v-if="!popUp">
+      <h3>{{ $t("operations.choose_date_time") }}</h3>
+      <h5 class="mt-2">{{ $t("operations.choose_date_time_desc") }}</h5>
+    </div>
     <v-row>
       <v-col cols="12">
         <v-date-input
@@ -75,6 +83,7 @@ watch(
       </v-col>
     </v-row>
     <v-btn
+      v-if="!popUp"
       :loading="btnLoading"
       :disabled="btnLoading || !chosenTime"
       @click="submitSlot()"
@@ -86,6 +95,33 @@ watch(
       {{ $t("buttons.next") }}
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
+
+    <div v-else class="d-flex ga-2">
+      <v-spacer></v-spacer>
+      <v-btn
+        @click="$emit('closeModal')"
+        color="pri-light"
+        class="text-primary radius-16"
+        height="50px"
+        size="small"
+        rounded="false"
+        min-width="100px"
+        :text="$t('buttons.back')"
+      ></v-btn>
+
+      <v-btn
+        :color="'primary'"
+        class="radius-16"
+        height="50px"
+        size="small"
+        rounded="false"
+        min-width="100px"
+        :loading="btnLoading"
+        :disabled="btnLoading || !chosenTime"
+        @click="submitSlot()"
+        :text="$t('buttons.ok')"
+      ></v-btn>
+    </div>
   </v-form>
 </template>
 

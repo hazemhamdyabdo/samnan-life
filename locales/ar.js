@@ -328,6 +328,7 @@ export default {
     ok: "حسنا",
     next: "التالي",
     confirm_order: "تأكيد ارسال الطلب",
+    load_more: "تحميل المزيد",
   },
   headings: {
     articles: "المقالات",
@@ -432,6 +433,10 @@ export default {
     cancel_order: "الغاء الطلب",
     cancel_order_desc: "هل انت متأكد من رغبتك في الغاء الطلب ؟",
     no_operations: "لا يوجد عمليات لعرضها",
+    edit_order: "تعديل الطلب",
+    choose_new_time: "اختر الموعد الجديد للزيارة",
+    show_map: "عرض الخريطة",
+    on_my_way: "في الطريق",
   },
   technical: {
     rates: "التقييمات",

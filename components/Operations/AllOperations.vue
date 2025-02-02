@@ -1,12 +1,18 @@
 <script setup>
+const emit = defineEmits(["refresh"]);
+const { isTechnician } = storeToRefs(useAuthStore());
+const { onMyWay, inProgress } = useTechnicianStore();
+const { cancelOrder } = useMaintainStore();
 const { formatToDateString } = useDateTimeFormate("ar");
 const getStatus = useStatus();
 const props = defineProps(["operations"]);
 const panel = ref();
 const cancelLoading = ref(false);
-const { cancelOrder } = useMaintainStore();
+const { orderData } = storeToRefs(useMaintainStore());
 const showModal = ref(false);
+const showEditOrderModal = ref(false);
 const id = ref(null);
+const onWayLoading = ref(false);
 const cancel = async () => {
   try {
     cancelLoading.value = true;
@@ -18,6 +24,42 @@ const cancel = async () => {
     cancelLoading.value = false;
   }
 };
+
+const showAction = (status) => {
+  if (
+    status === "technician_assigned" ||
+    status === "technician_on_the_way" ||
+    status === "in_progress"
+  ) {
+    return true;
+  }
+};
+
+const statusText = (status) => {
+  if (status === "technician_assigned") {
+    return "operations.on_my_way";
+  } else if (status === "technician_on_the_way") {
+    return "operations.in_progress";
+  } else {
+    return "operations.waiting_for_payment";
+  }
+};
+const changeStatus = async (item) => {
+  try {
+    onWayLoading.value = true;
+    if (item?.current_status?.status === "technician_assigned") {
+      await onMyWay(item.id);
+      emit("refresh");
+    } else if (item?.current_status?.status === "technician_on_the_way") {
+      await inProgress(item.id);
+      emit("refresh");
+    }
+  } catch (error) {
+    throw error;
+  } finally {
+    onWayLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -26,30 +68,33 @@ const cancel = async () => {
       :title="$t('operations.cancel_order')"
       :text="$t('operations.cancel_order_desc')"
       icon="box-remove"
-      v-model:model-value="showModal"
+      v-model:dialog="showModal"
       isDelete
       :is-loading="cancelLoading"
       @submit="cancel"
     ></app-modal>
 
+    <app-modal
+      :title="$t('operations.edit_order')"
+      :text="$t('operations.choose_new_time')"
+      icon="calendar-edit"
+      v-model:dialog="showEditOrderModal"
+      :is-loading="cancelLoading"
+      hide-actions
+      @submit="cancel"
+    >
+      <template #default>
+        <operations-create-order-choose-date-time
+          popUp
+          @closeModal="showEditOrderModal = false"
+        />
+      </template>
+    </app-modal>
+
     <div class="d-flex align-center ga-2">
       <h2>
         {{ $t("operations.all_operations") }}
       </h2>
-      <!-- <v-spacer></v-spacer>
-      <v-text-field
-        bg-color="disabled-gray"
-        density="compact"
-        flat
-        variant="solo"
-        :placeholder="$t('operations.search')"
-        height="42px"
-        hide-details
-      >
-      </v-text-field>
-      <v-btn color="primary" height="42" size="small" rounded="lg">
-        <AppSvgIcon name="filter" />
-      </v-btn> -->
     </div>
     <v-expansion-panels v-if="operations.length" v-model="panel" class="mt-5">
       <v-row>
@@ -81,134 +126,45 @@ const cancel = async () => {
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <!-- Details -->
-              <h5>{{ $t("operations.devices_to_maintain") }}</h5>
-              <div
-                v-for="product in item.products"
-                :key="product.id"
-                class="d-flex mt-3 ga-2"
-              >
-                <v-avatar size="22" color="primary">
-                  <v-img :src="product.image_url"></v-img>
-                </v-avatar>
-                <h5 class="text-gray-500">{{ product.name }}</h5>
-              </div>
-
-              <!-- track -->
-              <div class="d-flex mt-7 align-center">
-                <h5>{{ $t("operations.location") }}</h5>
-                <v-spacer></v-spacer>
-                <nuxt-link
-                  :to="
-                    localePath('/dashboard/operations/track-order/' + item.id)
-                  "
-                  class="text-primary align-center text-12 d-flex ga-3"
-                >
-                  <AppSvgIcon name="map" />
-                  <span>{{ $t("operations.track") }}</span>
-                </nuxt-link>
-              </div>
-
-              <!-- location -->
-              <div class="d-flex align-center ga-2">
-                <AppSvgIcon name="location-blue" />
-                <div>
-                  <h5 class="text-gray-500">
-                    {{ item.address?.national_address }}
-                  </h5>
-                  <p class="text-12 mt-2 text-caption date">
-                    {{ item.address.name }}, {{ item.address?.street }}
-                  </p>
-                </div>
-              </div>
-
-              <!-- description -->
-              <div v-if="item.problem_description" class="mt-7">
-                <h5>{{ $t("operations.problem") }}</h5>
-                <p class="text-12 text-gray-500">
-                  {{ item.problem_description }}
-                </p>
-              </div>
-
-              <div
-                class="d-flex mt-2 align-center ga-2 flex-wrap"
-                v-if="item?.photos?.length"
-              >
-                <v-img
-                  color="primary"
-                  height="60px"
-                  width="100%"
-                  max-width="60px"
-                  class="rounded-16"
-                  v-for="img in item?.photos"
-                  :key="img"
-                  :src="img"
-                ></v-img>
-              </div>
-              <!-- maintain date -->
-              <div class="mt-7" v-if="item?.slot">
-                <h5 class="mb-3">{{ $t("operations.maintain_date") }}</h5>
-                <div class="d-flex align-center ga-3">
-                  <AppSvgIcon name="calendar" />
-                  <h5>{{ formatToDateString(item?.slot?.date) }}</h5>
-                </div>
-                <div class="d-flex align-center ga-3 mt-2">
-                  <AppSvgIcon name="clock" />
-                  <h5>{{ item?.slot?.time }}</h5>
-                </div>
-              </div>
-
-              <!-- maintainer details -->
-              <div class="mt-7">
-                <h5 class="mb-3">{{ $t("operations.maintainer") }}</h5>
-                <div class="d-flex align-center ga-3">
-                  <AppSvgIcon name="user" />
-                  <h5>
-                    {{ item?.technician?.first_name }}
-                    {{ item?.technician?.last_name }}
-                  </h5>
-                </div>
-                <div class="d-flex align-center ga-3 mt-2">
-                  <AppSvgIcon name="call" />
-                  <h5>{{ item?.technician?.phone }}</h5>
-                </div>
-              </div>
-
-              <v-btn
-                @click="
-                  showModal = true;
+              <operations-tech-request v-if="isTechnician" :item="item" />
+              <operations-client-request
+                @delete="
                   id = item.id;
+                  showModal = true;
                 "
-                variant="text"
-                color="error"
-                class="mt-7"
-              >
-                <v-icon>mdi-delete-outline</v-icon>
-                {{ $t("operations.cancel_order") }}
-              </v-btn>
+                @edit="
+                  showEditOrderModal = true;
+                  orderData = { id: item.id };
+                "
+                v-else
+                :item="item"
+              />
 
               <!-- payment details -->
-              <v-divider class="mt-7"></v-divider>
-              <div class="mt-7">
-                <div class="d-flex align-center">
-                  <h5 class="text-14">
-                    {{ $t("operations.payment_details") }}
-                  </h5>
-                  <v-spacer></v-spacer>
-                  <nuxt-link
-                    class="text-primary text-12 d-flex align-center ga-3"
-                    :to="localePath('/dashboard/operations/view-bill')"
-                  >
-                    <AppSvgIcon name="document-normal" />
-                    <span>{{ $t("operations.view_bill") }}</span>
-                  </nuxt-link>
-                </div>
+              <div v-if="item?.invoice">
+                <v-divider class="mt-7"></v-divider>
+                <div class="mt-7">
+                  <div class="d-flex align-center">
+                    <h5 class="text-14">
+                      {{ $t("operations.payment_details") }}
+                    </h5>
+                    <v-spacer></v-spacer>
+                    <nuxt-link
+                      class="text-primary text-12 d-flex align-center ga-3"
+                      :to="localePath('/dashboard/operations/view-bill')"
+                    >
+                      <AppSvgIcon name="document-normal" />
+                      <span>{{ $t("operations.view_bill") }}</span>
+                    </nuxt-link>
+                  </div>
 
-                <div class="d-flex align-center ga-3 mt-2">
-                  <h5 class="text-14">
-                    {{ $t("operations.total") }}
-                  </h5>
-                  <v-spacer></v-spacer>
-                  <h5 class="text-14">162.00 ر.س</h5>
+                  <div class="d-flex align-center ga-3 mt-2">
+                    <h5 class="text-14">
+                      {{ $t("operations.total") }}
+                    </h5>
+                    <v-spacer></v-spacer>
+                    <h5 class="text-14">{{ item?.invoice.total }} ر.س</h5>
+                  </div>
                 </div>
               </div>
 
@@ -225,6 +181,17 @@ const cancel = async () => {
                 <h5>خدمة ممتازة و سرعة استجابة, تجربة رائعة شكرا لكم</h5>
                 <div class="date text-12">10 Oct 2024, 10:32 PM</div>
               </div>
+              <v-btn
+                v-if="isTechnician && showAction(item?.current_status?.status)"
+                :loading="onWayLoading"
+                :disabled="onWayLoading"
+                @click="changeStatus(item)"
+                color="primary"
+                block
+                class="mt-7"
+              >
+                {{ $t(statusText(item?.current_status?.status)) }}
+              </v-btn>
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-col>

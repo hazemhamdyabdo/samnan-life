@@ -14,11 +14,13 @@ withDefaults(
     isDelete?: boolean;
     size?: "sm" | "md" | "lg" | "xl" | string | number;
     isLoading?: boolean;
+    hideActions?: boolean;
   }>(),
   {
     isDelete: false,
     okText: "buttons.ok",
     size: "md",
+    hideActions: false,
   }
 );
 </script>
@@ -37,7 +39,7 @@ withDefaults(
         </div>
       </v-card-text>
 
-      <div class="d-flex pa-3 ga-3">
+      <div class="d-flex pa-3 ga-3" v-if="!hideActions">
         <v-spacer></v-spacer>
 
         <v-btn
