@@ -238,4 +238,19 @@ interface Link {
   active: boolean;
 }
 
-export type { TechnicianResponse, Product, District, Technician, MaintenanceRequest, RequestsByType, RequestsByStatus, AllRequests, RequestStatus, AllRequestsResponse };
+interface InvoiceInterface {
+  id: number
+  invoice_number: string | null;
+  customerName: string | null;
+  productName: string;
+  type: string;
+  address: Address;
+  time: string;
+  date: string;
+  status: string | undefined;
+  service: { name: string; price: number }[] | undefined;
+  payment_method: string | undefined;
+  total: number | undefined;
+}
+
+export type { TechnicianResponse, Product, District, Technician, MaintenanceRequest, RequestsByType, RequestsByStatus, AllRequests, RequestStatus, AllRequestsResponse, InvoiceInterface };

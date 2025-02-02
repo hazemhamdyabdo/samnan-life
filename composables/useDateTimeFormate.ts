@@ -14,7 +14,7 @@ export function useDateTimeFormate(locale: string = "en") {
     return time;
   }
 
-  function formatToDateString(dateTime: Date) {
+  function formatToDateString(dateTime: Date | string) {
     if (!dateTime) return;
 
     const date = new Date(dateTime);
