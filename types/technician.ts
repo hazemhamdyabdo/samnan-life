@@ -12,8 +12,8 @@ interface Technician {
   manager_id: number;
   created_at: string;
   updated_at: string;
-  districts: District[];
-  products: Product[];
+  districts?: District[];
+  products?: Product[];
 }
 
 interface District {
@@ -83,33 +83,87 @@ interface MaintenanceRequest {
   deleted_at: string | null;
   current_status: RequestStatus;
   customer: null;
-  address: {
-    id: number;
-    customer_id: number;
-    name: string;
-    city_id: number;
-    district_id: number;
-    street: string;
-    national_address: string;
-    details: string;
-    latitude: string;
-    longitude: string;
-    created_at: string;
-    updated_at: string;
-  };
+  technician: Technician;
+  address: Address;
   products: Product[];
   statuses: RequestStatus[];
-  slot: {
-    id: number;
-    technician_id: number;
-    date: string;
-    time: string;
-    is_booked: number;
-    created_at: string;
-    updated_at: string;
-  };
+  invoice?: Invoice;
+  slot: Slot
 }
 
+interface Address {
+  id: number;
+  customer_id: number;
+  name: string;
+  city_id: number;
+  district_id: number;
+  street: string;
+  national_address: string;
+  details: string;
+  latitude: string;
+  longitude: string;
+  created_at: string;
+  updated_at: string;
+}
+interface Slot {
+  id: number;
+  technician_id: number;
+  date: string;
+  time: string;
+  is_booked: number;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Invoice {
+  id: number;
+  maintenance_request_id: number;
+  total: number;
+  payment_method: string;
+  status: string;
+  payment_details: null;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+  services: Service[];
+  spare_parts: SparePart[];
+}
+
+interface Service {
+  id: number;
+  image: string;
+  is_active: number;
+  price: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  description: string;
+  image_url: string;
+  pivot: ServicePivot;
+}
+
+interface ServicePivot {
+  invoice_id: number;
+  service_id: number;
+}
+
+interface SparePart {
+  id: number;
+  sap_id: string;
+  price: number;
+  stock: number;
+  image_url: string;
+  name: string;
+  description: string;
+  pivot: SparePartPivot;
+}
+
+interface SparePartPivot {
+  invoice_id: number;
+  spare_part_id: number;
+  quantity: number;
+  price: string;
+}
 interface RequestsByType {
   type: string;
   count: number;
@@ -157,4 +211,31 @@ interface TechnicianResponse {
   };
 }
 
-export type { TechnicianResponse, Product, District, Technician, MaintenanceRequest, RequestsByType, RequestsByStatus, AllRequests, RequestStatus };
+interface AllRequestsResponse {
+  status: number;
+  response_code: string;
+  message: string;
+  data: MaintenanceRequestData;
+}
+interface MaintenanceRequestData {
+  current_page: number;
+  data: MaintenanceRequest[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: Link[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
+interface Link {
+  url: string | null;
+  label: string;
+  active: boolean;
+}
+
+export type { TechnicianResponse, Product, District, Technician, MaintenanceRequest, RequestsByType, RequestsByStatus, AllRequests, RequestStatus, AllRequestsResponse };
