@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { InvoiceInterface } from "@/types/technician";
-
-defineProps<{
-  invoicesInterface: InvoiceInterface[];
-}>();
+const technicianStore = useTechnicianStore();
+const { getTechnicianAllRequests } = technicianStore;
+const { invoiceInterface } = storeToRefs(technicianStore);
 const emit = defineEmits<{
   (e: "change-component", value: string, id: number): void;
 }>();
@@ -11,6 +9,8 @@ const emit = defineEmits<{
 const { t, locale } = useI18n();
 const { formatToDateString } = useDateTimeFormate(locale.value);
 const getStatus = useStatus();
+
+await getTechnicianAllRequests();
 </script>
 <template>
   <section class="d-flex align-center ga-2">
@@ -21,7 +21,7 @@ const getStatus = useStatus();
 
   <section class="mt-4 d-flex flex-column ga-6">
     <v-card
-      v-for="invoice in invoicesInterface"
+      v-for="invoice in invoiceInterface"
       class="pa-4 cursor-pointer"
       elevation="0"
       rounded="xl"

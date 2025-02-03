@@ -2,7 +2,6 @@
 import Invoices from "~/components/Settings/invoices/Invoices.vue";
 import viewBill from "../operations/view-bill.vue";
 const technicianStore = useTechnicianStore();
-const { getTechnicianAllRequests, invoiceInterface } = technicianStore;
 const { selectedInvoiceId, currentInvoiceDetails } =
   storeToRefs(technicianStore);
 const componentMap = {
@@ -19,15 +18,19 @@ const currentComponentView = computed(() => {
   // @ts-ignore
   return componentMap[currentComponent.value];
 });
-
-await getTechnicianAllRequests();
+const iewBillProps = computed(() => {
+  if (currentComponent.value === "viewBill") {
+    return {
+      showActions: false,
+      invoiceDetails: currentInvoiceDetails.value,
+    };
+  }
+});
 </script>
 <template>
   <component
     :is="currentComponentView"
-    :showActions="false"
-    :invoicesInterface="invoiceInterface"
-    :invoiceDetails="currentInvoiceDetails"
+    v-bind="iewBillProps"
     @change-component="changeComponent"
   />
 </template>
