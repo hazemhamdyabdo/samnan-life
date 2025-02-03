@@ -2,6 +2,9 @@
 import AllRequestsChart from "~/components/Technical/AllRequestsChart.vue";
 import DoneRequestsChart from "~/components/Technical/DoneRequestsChart.vue";
 import Rates from "~/components/Technical/Rates.vue";
+const technicianStore = useTechnicianStore();
+const { getTechnicianData } = technicianStore;
+await getTechnicianData();
 </script>
 <template>
   <v-row>
