@@ -32,7 +32,7 @@ const handleSubmit = async () => {
     </div>
     <v-form fast-fail ref="formRef" @submit.prevent>
       <v-row>
-        <v-col cols="6" sm="12" class="d-flex ga-4 pb-0">
+        <v-col cols="12" class="d-flex ga-4 pb-0">
           <v-text-field
             variant="outlined"
             :placeholder="$t('register.fields.first_name')"
@@ -49,7 +49,7 @@ const handleSubmit = async () => {
             v-model="registerDetails.last_name"
           />
         </v-col>
-        <v-col cols="6" sm="12" class="pb-0">
+        <v-col cols="12" class="pb-0">
           <div class="d-flex ga-2">
             <v-card
               rounded="lg"
@@ -74,7 +74,7 @@ const handleSubmit = async () => {
             />
           </div>
         </v-col>
-        <v-col cols="6" sm="12" class="pb-0">
+        <v-col cols="12" class="pb-0">
           <v-text-field
             :type="isInputOneShow ? 'text' : 'password'"
             :placeholder="$t('register.fields.new_password')"
@@ -96,7 +96,7 @@ const handleSubmit = async () => {
             </template>
           </v-text-field>
         </v-col>
-        <v-col cols="6" sm="12" class="pb-0">
+        <v-col cols="12" class="pb-0">
           <v-text-field
             :type="isInputTwoShow ? 'text' : 'password'"
             :placeholder="$t('register.fields.confirm_password')"

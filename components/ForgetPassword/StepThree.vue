@@ -4,7 +4,6 @@ import { useFormValidation } from "~/composables/useFormValidation";
 const { formRef, rules, validate } = useFormValidation();
 const emits = defineEmits(["change:step-three"]);
 
-const isInputOneShow = ref(false);
 const isInputTwoShow = ref(false);
 const isInputThreeShow = ref(false);
 const passwordUpdates = defineModel("passwordUpdates");
@@ -28,31 +27,6 @@ const handleSubmit = async () => {
   </div>
   <v-form fast-fail ref="formRef" @submit.prevent>
     <v-row class="mt-2">
-      <!-- <v-col cols="6" sm="12" class="pt-0"> -->
-      <!-- <v-text-field
-          :type="isInputOneShow ? 'text' : 'password'"
-          label=""
-          v-model="passwordUpdates.current_password"
-          :rules="[rules.required, rules.minLength(8)]"
-          rounded="lg"
-          base-color="border-light"
-          variant="outlined"
-          density="comfortable"
-          :placeholder="$t('forget_password.current_password')"
-        >
-          <template #append-inner>
-            <div
-              class="cursor-pointer"
-              @click="isInputOneShow = !isInputOneShow"
-            >
-              <v-icon color="border-light" v-if="!isInputOneShow"
-                >mdi-eye-off</v-icon
-              >
-              <v-icon color="border-light" v-else>mdi-eye</v-icon>
-            </div>
-          </template>
-        </v-text-field>
-      </v-col> -->
       <v-col cols="12" class="pt-0">
         <v-text-field
           :type="isInputTwoShow ? 'text' : 'password'"
