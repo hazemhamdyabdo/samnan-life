@@ -27,7 +27,7 @@ const handleSubmit = async () => {
     <span>{{ $t("forget_password.new_password.instructions") }}</span>
   </div>
   <v-form fast-fail ref="formRef" @submit.prevent>
-    <v-row>
+    <v-row class="mt-2">
       <!-- <v-col cols="6" sm="12" class="pt-0"> -->
       <!-- <v-text-field
           :type="isInputOneShow ? 'text' : 'password'"
@@ -53,7 +53,7 @@ const handleSubmit = async () => {
           </template>
         </v-text-field>
       </v-col> -->
-      <v-col cols="6" sm="12" class="pt-0">
+      <v-col cols="12" class="pt-0">
         <v-text-field
           :type="isInputTwoShow ? 'text' : 'password'"
           label=""
@@ -78,7 +78,7 @@ const handleSubmit = async () => {
           </template>
         </v-text-field>
       </v-col>
-      <v-col cols="6" sm="12" class="pt-0">
+      <v-col cols="12" class="pt-0">
         <v-text-field
           label=""
           :type="isInputThreeShow ? 'text' : 'password'"

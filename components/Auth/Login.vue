@@ -60,7 +60,7 @@ const handleLogin = async () => {
           </div>
           <v-form fast-fail ref="formRef" @submit.prevent>
             <v-row>
-              <v-col cols="6" sm="12">
+              <v-col cols="12">
                 <div class="d-flex ga-2">
                   <v-card
                     rounded="lg"
@@ -87,7 +87,7 @@ const handleLogin = async () => {
                   />
                 </div>
               </v-col>
-              <v-col cols="6" sm="12" class="pt-0">
+              <v-col cols="12" class="pt-0">
                 <v-text-field
                   label=""
                   :type="isPasswordShow ? 'text' : 'password'"
