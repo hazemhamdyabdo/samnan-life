@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useTechnicianStore } from "~/stores/useTechnician";
 const technicianStore = useTechnicianStore();
-// const { getTechnicianData } = technicianStore;
 const { coverDistricts } = storeToRefs(technicianStore);
-// await getTechnicianData();
 const { t } = useI18n();
 </script>
 <template>

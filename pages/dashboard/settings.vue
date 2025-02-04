@@ -2,9 +2,12 @@
 import CardMenu from "@/components/Settings/CardMenu.vue";
 
 const route = useRoute();
+const { isTechnician } = storeToRefs(useAuthStore());
 const technicianStore = useTechnicianStore();
-const { getTechnicianData } = technicianStore;
-await getTechnicianData();
+if (isTechnician.value) {
+  const { getTechnicianData } = technicianStore;
+  await getTechnicianData();
+}
 </script>
 <template>
   <section>

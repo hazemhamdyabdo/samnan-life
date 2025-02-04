@@ -2,9 +2,13 @@
 import AllRequestsChart from "~/components/Technical/AllRequestsChart.vue";
 import DoneRequestsChart from "~/components/Technical/DoneRequestsChart.vue";
 import Rates from "~/components/Technical/Rates.vue";
+const { isTechnician } = storeToRefs(useAuthStore());
 const technicianStore = useTechnicianStore();
-const { getTechnicianData } = technicianStore;
-await getTechnicianData();
+
+if (isTechnician.value) {
+  const { getTechnicianData } = technicianStore;
+  await getTechnicianData();
+}
 </script>
 <template>
   <v-row>
