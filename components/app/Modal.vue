@@ -8,7 +8,7 @@ defineEmits(["submit"]);
 withDefaults(
   defineProps<{
     title: string;
-    icon: string;
+    icon?: string;
     text: string;
     okText?: string;
     isDelete?: boolean;

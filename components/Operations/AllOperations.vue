@@ -13,6 +13,8 @@ const showModal = ref(false);
 const showEditOrderModal = ref(false);
 const id = ref(null);
 const onWayLoading = ref(false);
+const showPayment = ref(false);
+const chosenOrder = ref(null);
 const cancel = async () => {
   try {
     cancelLoading.value = true;
@@ -53,6 +55,9 @@ const changeStatus = async (item) => {
     } else if (item?.current_status?.status === "technician_on_the_way") {
       await inProgress(item.id);
       emit("refresh");
+    } else if (item?.current_status?.status === "in_progress") {
+      chosenOrder.value = item.id;
+      showPayment.value = true;
     }
   } catch (error) {
     throw error;
@@ -64,6 +69,13 @@ const changeStatus = async (item) => {
 
 <template>
   <div>
+    <operations-enter-payment
+      v-if="showPayment"
+      v-model="showPayment"
+      :id="chosenOrder"
+      @refresh="emit('refresh')"
+    />
+
     <app-modal
       :title="$t('operations.cancel_order')"
       :text="$t('operations.cancel_order_desc')"
@@ -151,7 +163,11 @@ const changeStatus = async (item) => {
                     <v-spacer></v-spacer>
                     <nuxt-link
                       class="text-primary text-12 d-flex align-center ga-3"
-                      :to="localePath('/dashboard/operations/view-bill')"
+                      :to="
+                        localePath(
+                          '/dashboard/operations/order-bill/' + item.id
+                        )
+                      "
                     >
                       <AppSvgIcon name="document-normal" />
                       <span>{{ $t("operations.view_bill") }}</span>

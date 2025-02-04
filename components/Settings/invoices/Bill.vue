@@ -107,26 +107,6 @@ const showModal = ref(false);
                 </h4>
               </div>
             </div>
-
-            <div v-if="showActions" class="d-flex ga-2 mt-5">
-              <v-btn
-                @click="showModal = true"
-                color="primary"
-                class="flex-grow-1 text-14"
-              >
-                <AppSvgIcon name="wallet" />
-                {{ t("operations.cash") }}
-              </v-btn>
-
-              <v-btn
-                :to="localePath('/dashboard/operations/online-pay')"
-                color="pri-light"
-                class="text-primary flex-grow-1 text-14"
-              >
-                <AppSvgIcon name="card-pos" />
-                {{ t("operations.oniline_pay") }}
-              </v-btn>
-            </div>
           </v-card-text>
         </v-card>
       </v-card-text>

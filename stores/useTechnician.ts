@@ -20,6 +20,9 @@ export const useTechnicianStore = defineStore(
     currentInvoiceDetails: ComputedRef<any>;
     onMyWay: (id: number) => Promise<unknown>;
     inProgress: (id: number) => Promise<unknown>;
+    getServices: () => Promise<any>;
+    getSpareParts: () => Promise<any>;
+    waitPayment: (id: number, data: any) => Promise<unknown>;
   } => {
     const chartDataAllRequests = ref({});
     const chartDataCompletedRequests = ref({});
@@ -113,6 +116,27 @@ export const useTechnicianStore = defineStore(
       invoices.value = data.value?.data.data;
     };
 
+    const getServices = (): Promise<any> => {
+      return useAPI(`/services`);
+    };
+
+    const getSpareParts = (): Promise<any> => {
+      return useAPI(`/spare-parts`);
+    };
+
+    const waitPayment = (id: number, data: any) => {
+      return useAPI(`maintenance-request/${id}/set-waiting-for-payment`, {
+        method: "POST",
+        body: data,
+      });
+    };
+
+    const confirmCash = (id: number, data: any) => {
+      return useAPI(`/maintenance-request/${id}/confirm-cash-payment`, {
+        method: "POST",
+        body: data,
+      });
+    };
     return {
       chartDataAllRequests,
       chartDataCompletedRequests,
@@ -125,6 +149,10 @@ export const useTechnicianStore = defineStore(
       currentInvoiceDetails,
       onMyWay,
       inProgress,
+      getServices,
+      getSpareParts,
+      waitPayment,
+      confirmCash,
     };
   }
 );

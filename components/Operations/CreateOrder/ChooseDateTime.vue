@@ -65,7 +65,7 @@ watch(
         />
       </v-col>
       <v-col cols="12">
-        <div v-if="times.length" class="d-flex">
+        <div v-if="times.length" class="d-flex flex-wrap ga-2">
           <v-btn
             class="mx-1"
             v-for="slot in times"
@@ -73,7 +73,7 @@ watch(
             :key="slot.id"
             :color="chosenTime == slot.id ? 'primary' : 'disabled-gray'"
             height="32px"
-            size="x-small"
+            size="small"
             @click="chosenTime = slot.id"
           >
             {{ slot.time }}

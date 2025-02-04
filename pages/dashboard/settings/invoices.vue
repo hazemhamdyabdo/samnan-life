@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Invoices from "~/components/Settings/invoices/Invoices.vue";
-import viewBill from "../operations/view-bill.vue";
+import viewBill from "~/components/Settings/invoices/Bill.vue";
 const technicianStore = useTechnicianStore();
 const { selectedInvoiceId, currentInvoiceDetails } =
   storeToRefs(technicianStore);

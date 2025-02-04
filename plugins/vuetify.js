@@ -4,6 +4,7 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { VDateInput } from "vuetify/labs/VDateInput";
+import { VNumberInput } from "vuetify/labs/VNumberInput";
 const theme = {
   options: { customProperties: true },
   defaultTheme: "light",
@@ -50,10 +51,27 @@ export default defineNuxtPlugin((app) => {
     theme,
     components: {
       VDateInput,
+      VNumberInput,
     },
     directives,
     defaults: {
+      VNumberInput: {
+        minHeight: "60px",
+        rounded: "lg",
+        variant: "outlined",
+        color: "primary",
+        hideDetails: "auto",
+        baseColor: "border-light",
+      },
       VTextField: {
+        minHeight: "60px",
+        rounded: "lg",
+        variant: "outlined",
+        color: "primary",
+        hideDetails: "auto",
+        baseColor: "border-light",
+      },
+      VSelect: {
         minHeight: "60px",
         rounded: "lg",
         variant: "outlined",

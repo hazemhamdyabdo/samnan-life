@@ -12,7 +12,7 @@ const { momentLikeDate } = useDateTimeFormate();
 
 const setFilter = async (filter) => {
   filtering.value = true;
-
+  pagination.value.currentPage = 1;
   if (filter.date) {
     filters.value.start_date = momentLikeDate(filter.date[0]);
     filters.value.end_date = momentLikeDate(

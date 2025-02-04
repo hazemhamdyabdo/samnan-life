@@ -3,7 +3,7 @@ import type { CreateRequest } from "~/types/maintain/index";
 
 export const useMaintainStore = defineStore("maintain", () => {
   const { $api } = useNuxtApp();
-  const { isTechnician } = storeToRefs(useAuthStore());
+  const isTechnician = useCookie<boolean | null>("isTechnician");
   const orderData = ref<any>(null);
   const pagination = ref({
     currentPage: 1,
@@ -54,31 +54,43 @@ export const useMaintainStore = defineStore("maintain", () => {
     });
   };
 
-  const getSingleOrder = () => {
-    return useAPI(`/maintenance-request/${orderData.value.id}`);
+  const getSingleOrder = (id: number) => {
+    return useAPI(`/maintenance-request/${id ? id : orderData.value.id}`);
   };
 
   const getAllOrders = (params: any) => {
     return useAsyncData(() =>
-      $api(isTechnician ? "/technician/requests" : "/maintenance-requests", {
-        query: {
-          ...params,
-          per_page: 5,
-          page: pagination.value.currentPage,
-        },
-        onResponse: ({ response }) => {
-          pagination.value = {
-            currentPage: response._data.data.current_page,
-            lastPage: response._data.data.last_page,
-          };
-        },
-      })
+      $api(
+        isTechnician.value ? "/technician/requests" : "/maintenance-requests",
+        {
+          query: {
+            ...params,
+            per_page: 5,
+            page: pagination.value.currentPage,
+          },
+          onResponse: ({ response }) => {
+            pagination.value = {
+              currentPage: response._data.data.current_page,
+              lastPage: response._data.data.last_page,
+            };
+          },
+        }
+      )
     );
   };
 
   const cancelOrder = (id: number) => {
     return useAPI(`/maintenance-request/${id}/cancel`, {
       method: "POST",
+    });
+  };
+
+  const setPayMethod = (id: number, method: string) => {
+    return useAPI(`/maintenance-request/${id}/set-payment-method`, {
+      method: "POST",
+      body: {
+        payment_method: method,
+      },
     });
   };
   return {
@@ -90,5 +102,6 @@ export const useMaintainStore = defineStore("maintain", () => {
     getAllOrders,
     cancelOrder,
     pagination,
+    setPayMethod,
   };
 });

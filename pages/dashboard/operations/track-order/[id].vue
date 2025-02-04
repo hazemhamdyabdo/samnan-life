@@ -2,7 +2,7 @@
   <v-card rounded="xl" class="track-order h-100">
     <v-card-text>
       <h2>{{ $t("operations.track_order") }}</h2>
-      <div v-if="stepper != 6">
+      <div v-if="stepper != 7">
         <v-stepper flat bg-color="transparent" v-model="stepper">
           <v-stepper-header>
             <template v-for="step in steps" :key="step.id">
@@ -91,19 +91,11 @@ const order = ref(null);
 
 const currentStatus = ref(null);
 const statuses = [
-  // "pending",
-  // "technician_assigned",
-  // "technician_on_the_way",
-  // "in_progress",
-  // "waiting_for_payment",
-  // "completed",
-  // "canceled",
   "pending",
   "technician_assigned",
   "technician_on_the_way",
   "in_progress",
   "waiting_for_payment",
-  "waiting_for_technician_confirm_payment",
   "completed",
   "canceled",
 ];
@@ -115,22 +107,26 @@ const steps = ref([
   },
   {
     id: 2,
-    status: "technician_on_the_way", // depend on backend status
+    status: "technician_assigned", // depend on backend status
   },
   {
     id: 3,
-    status: "in_progress", // depend on backend status
+    status: "technician_on_the_way", // depend on backend status
   },
   {
     id: 4,
-    status: "waiting_for_payment", // depend on backend status
+    status: "in_progress", // depend on backend status
   },
   {
     id: 5,
-    status: "completed", // depend on backend status
+    status: "waiting_for_payment", // depend on backend status
   },
   {
     id: 6,
+    status: "completed", // depend on backend status
+  },
+  {
+    id: 7,
     status: "canceled", // depend on backend status
   },
 ]);
@@ -148,7 +144,7 @@ watch(
     });
 
     if (index !== -1) {
-      stepper.value = index;
+      stepper.value = index + 1;
     }
   },
   { immediate: true }
