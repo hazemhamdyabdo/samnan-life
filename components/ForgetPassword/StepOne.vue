@@ -25,8 +25,8 @@ const handleSubmit = async () => {
     <span>{{ $t("forget_password.instructions") }}</span>
   </div>
   <v-form fast-fail ref="formRef" @submit.prevent>
-    <v-row>
-      <v-col cols="6" sm="12">
+    <v-row class="mt-2">
+      <v-col cols="12">
         <div class="d-flex ga-2">
           <v-card
             rounded="lg"
