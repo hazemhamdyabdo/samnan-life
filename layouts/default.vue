@@ -23,7 +23,7 @@ onMounted(() => {
           <v-col cols="12" sm="2" lg="1">
             <SideBar class="sticky"> </SideBar>
           </v-col>
-          <v-col>
+          <v-col col="12" sm="10" lg="11">
             <slot></slot>
           </v-col>
         </v-row>

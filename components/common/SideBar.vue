@@ -46,6 +46,28 @@ const { isTechnician } = storeToRefs(useAuthStore());
           {{ $t("dashboard.sidebar.operations") }}
         </p>
       </div>
+      <div
+        v-if="isTechnician"
+        class="d-flex flex-column ga-1 justify-center align-center"
+      >
+        <NuxtLink
+          to="/dashboard/my-appointments"
+          class="px-3 py-3 rounded-lg"
+          active-class="bg-pri-light"
+        >
+          <AppSvgIcon name="calendar-grey" />
+        </NuxtLink>
+        <p
+          :class="`${
+            $route.path === '/dashboard/my-appointments'
+              ? 'text-primary font-weight-bold'
+              : 'text-grey-300'
+          }`"
+        >
+          {{ $t("dashboard.sidebar.my_appointments") }}
+        </p>
+      </div>
+
       <div class="d-flex flex-column ga-1 justify-center align-center">
         <NuxtLink
           to="/dashboard/settings"

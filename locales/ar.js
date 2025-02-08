@@ -149,6 +149,7 @@ export default {
       home: "الرئيسية",
       operations: "العمليات",
       settings: "الاعدادات",
+      my_appointments: "مواعيدي",
     },
     home: {
       cards: {
