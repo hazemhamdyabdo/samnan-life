@@ -35,7 +35,13 @@ const showModal = ref(false);
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.client_name") }}</div>
-                <div class="value">{{ invoiceDetails.customerName }}</div>
+                <div class="value">
+                  {{
+                    invoiceDetails.customerName?.first_name +
+                    " " +
+                    invoiceDetails.customerName?.last_name
+                  }}
+                </div>
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.order_type") }}</div>

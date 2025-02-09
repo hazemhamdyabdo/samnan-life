@@ -130,7 +130,7 @@ onMounted(async () => {
     </v-col>
     <v-col
       v-if="isTechnician"
-      cols="4"
+      cols="12"
       lg="3"
       class="pa-4 cursor-pointer"
       @click="copyToClipboard(details.id)"

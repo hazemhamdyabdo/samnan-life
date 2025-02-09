@@ -241,7 +241,7 @@ interface Link {
 interface InvoiceInterface {
   id: number
   invoice_number: string | null;
-  customerName: string | null;
+  customerName: string | null | any;
   productName: string;
   type: string;
   address: Address;

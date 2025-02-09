@@ -8,6 +8,7 @@
 import Highcharts from "highcharts";
 import { useTechnicianStore } from "~/stores/useTechnician";
 
+const { t } = useI18n();
 const { chartDataAllRequests } = storeToRefs(useTechnicianStore());
 const chart: any = ref(null);
 
@@ -115,7 +116,7 @@ watch(chartDataAllRequests, (newValue) => {
   if (chart.value) {
     chart.value.series[0].setData(
       newValue.typeOfRequests.map((item) => ({
-        name: item.type,
+        name: t("operations." + item.type),
         y: item.count,
       }))
     );
