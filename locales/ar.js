@@ -330,6 +330,7 @@ export default {
     next: "التالي",
     confirm_order: "تأكيد ارسال الطلب",
     load_more: "تحميل المزيد",
+    send: "ارسال",
   },
   headings: {
     articles: "المقالات",
@@ -458,6 +459,9 @@ export default {
     confirm_pay_cash: "تاكيد الدفع نقدا",
     confirm_pay_cash_desc: "برجاء تاكيد استلام المبلغ من العميل. شكرا لك",
     note: "ملاحظة",
+    rate: "تقييم الخدمة",
+    rate_desc: "برجاء تفييم الخدمة و تحدث عن رأيك بكل صراحة",
+    feedback_care: "رأيك يهمنا...",
   },
   technical: {
     rates: "التقييمات",

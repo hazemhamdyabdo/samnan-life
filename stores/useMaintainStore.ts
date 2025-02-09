@@ -93,6 +93,13 @@ export const useMaintainStore = defineStore("maintain", () => {
       },
     });
   };
+
+  const sendFeedback = (id: number, data: any) => {
+    return useAPI(`/maintenance-request/${id}/submit-feedback`, {
+      method: "POST",
+      body: data,
+    });
+  };
   return {
     createOrder,
     getAvailableSlot,
@@ -103,5 +110,6 @@ export const useMaintainStore = defineStore("maintain", () => {
     cancelOrder,
     pagination,
     setPayMethod,
+    sendFeedback,
   };
 });

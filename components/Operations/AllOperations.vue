@@ -15,6 +15,7 @@ const id = ref(null);
 const onWayLoading = ref(false);
 const showPayment = ref(false);
 const chosenOrder = ref(null);
+
 const cancel = async () => {
   try {
     cancelLoading.value = true;
@@ -186,16 +187,22 @@ const changeStatus = async (item) => {
 
               <!-- review -->
               <v-divider class="mt-7"></v-divider>
-              <div class="mt-7">
+              <div v-if="item.feedback" class="mt-7">
                 <div class="d-flex align-center ga-2">
-                  <h5>Ahmed Ali</h5>
+                  <h5>
+                    {{
+                      item.customer.first_name + " " + item.customer.last_name
+                    }}
+                  </h5>
                   <span class="d-flex align-center text-14">
-                    5.0
+                    {{ item.feedback?.rating }}
                     <v-icon color="#FFD33C">mdi-star</v-icon>
                   </span>
                 </div>
-                <h5>خدمة ممتازة و سرعة استجابة, تجربة رائعة شكرا لكم</h5>
-                <div class="date text-12">10 Oct 2024, 10:32 PM</div>
+                <h5>{{ item.feedback?.feedback_text }}</h5>
+                <div class="date text-12">
+                  {{ formatToDateString(item.feedback?.updated_at) }}
+                </div>
               </div>
               <v-btn
                 v-if="isTechnician && showAction(item?.current_status?.status)"
@@ -208,6 +215,12 @@ const changeStatus = async (item) => {
               >
                 {{ $t(statusText(item?.current_status?.status)) }}
               </v-btn>
+              <operations-feedback
+                :id="item.id"
+                v-if="
+                  !isTechnician && item?.current_status?.status == 'completed'
+                "
+              />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-col>
