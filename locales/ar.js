@@ -196,7 +196,7 @@ export default {
         update_phone: {
           header: "تغيير رقم الهاتف",
           edit_title: "تعديل رقم الهاتف",
-          instruction: "قم بإدخال رقم هاتفك",
+          instruction: "قم بإدخال رقم الهاتف الجديد",
         },
         update_password: {
           header: "تغيير كلمة السر",

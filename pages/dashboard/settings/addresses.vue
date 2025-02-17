@@ -13,6 +13,7 @@ const {
   deleteAddress,
   getSingleAddress,
   updateAddress,
+  // allAddresses,
 } = settingsStore;
 
 const componentsMap = {
@@ -43,7 +44,8 @@ const isLoadingNewAddress = ref(false);
 const addNewAddress = async (newAddress: Address) => {
   isLoadingNewAddress.value = true;
   try {
-    await Promise.all([createAddress(newAddress), fetchAllAddresses()]);
+    await createAddress(newAddress);
+    await fetchAllAddresses();
     changeComponent("Addresses");
     showSuccess("تمت اضافة العنوان بنجاح");
   } catch (error) {
@@ -61,11 +63,8 @@ const handleOpenDialog = (addressId: number) => {
 };
 const handleDeleteAddress = async () => {
   try {
-    await Promise.all([
-      deleteAddress(deletedAddressId.value as number),
-      fetchAllAddresses(),
-    ]);
-    showSuccess("تم حذف العنوان بنجاح");
+    await deleteAddress(deletedAddressId.value as number);
+    await fetchAllAddresses(), showSuccess("تم حذف العنوان بنجاح");
     deleteDialog.value = false;
   } catch (error) {
     console.log(error);
@@ -80,10 +79,8 @@ const handleEditAddress = async (addressId: number) => {
 const handleUpdateAddress = async () => {
   isLoadingNewAddress.value = true;
   try {
-    await Promise.all([
-      updateAddress(addressDetails.value),
-      fetchAllAddresses(),
-    ]);
+    await updateAddress(addressDetails.value);
+    await fetchAllAddresses();
     changeComponent("Addresses");
     showSuccess("تم تحديث العنوان بنجاح");
   } catch (error) {
@@ -92,6 +89,10 @@ const handleUpdateAddress = async () => {
     isLoadingNewAddress.value = false;
   }
 };
+
+watchEffect(async () => {
+  console.log(allAddresses.value);
+});
 
 await fetchAllAddresses();
 // onMounted(async () => {
