@@ -13,6 +13,7 @@ const {
   deleteAddress,
   getSingleAddress,
   updateAddress,
+  // allAddresses,
 } = settingsStore;
 
 const componentsMap = {
@@ -89,6 +90,10 @@ const handleUpdateAddress = async () => {
     isLoadingNewAddress.value = false;
   }
 };
+
+watchEffect(async () => {
+  console.log(allAddresses.value);
+});
 
 await fetchAllAddresses();
 // onMounted(async () => {
