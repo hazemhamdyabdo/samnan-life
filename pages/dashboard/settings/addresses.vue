@@ -43,7 +43,8 @@ const isLoadingNewAddress = ref(false);
 const addNewAddress = async (newAddress: Address) => {
   isLoadingNewAddress.value = true;
   try {
-    await Promise.all([createAddress(newAddress), fetchAllAddresses()]);
+    await createAddress(newAddress);
+    await fetchAllAddresses();
     changeComponent("Addresses");
     showSuccess("تمت اضافة العنوان بنجاح");
   } catch (error) {
