@@ -89,7 +89,12 @@
         <h5>{{ item?.technician?.phone }}</h5>
       </div>
     </div>
-    <div v-if="item?.current_status.status == 'pending'">
+    <div
+      v-if="
+        item?.current_status.status == 'pending' ||
+        item?.current_status.status == 'technician_assigned'
+      "
+    >
       <v-btn @click="$emit('delete')" variant="text" color="error" class="mt-7">
         <v-icon>mdi-delete-outline</v-icon>
         {{ $t("operations.cancel_order") }}

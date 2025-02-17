@@ -46,6 +46,7 @@ const setPhotos = (photos: File[]) => {
       :value="product.id"
       class="mt-3"
       v-model="form.products"
+      :rules="[rules.minLength(1)]"
       hide-details
     >
       <template v-slot:label>

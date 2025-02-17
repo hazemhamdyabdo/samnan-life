@@ -1,7 +1,11 @@
-<script setup lang="ts">
-const { t } = useI18n();
+<script setup>
+const { t, setLocale } = useI18n();
 
 const selectedLang = ref("ar");
+
+const saveLang = () => {
+  setLocale(selectedLang.value);
+};
 </script>
 
 <template>
@@ -37,9 +41,15 @@ const selectedLang = ref("ar");
       </v-radio-group>
     </section>
     <div class="d-flex mt-8 w-33">
-      <v-btn color="primary" type="submit" round block size="50">{{
-        $t("dashboard.save")
-      }}</v-btn>
+      <v-btn
+        @click="saveLang"
+        color="primary"
+        type="submit"
+        round
+        block
+        size="50"
+        >{{ $t("dashboard.save") }}</v-btn
+      >
     </div>
   </section>
 </template>

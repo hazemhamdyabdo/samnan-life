@@ -61,10 +61,8 @@ const handleOpenDialog = (addressId: number) => {
 };
 const handleDeleteAddress = async () => {
   try {
-    await Promise.all([
-      deleteAddress(deletedAddressId.value as number),
-      fetchAllAddresses(),
-    ]);
+    await deleteAddress(deletedAddressId.value as number);
+    await fetchAllAddresses();
     showSuccess("تم حذف العنوان بنجاح");
     deleteDialog.value = false;
   } catch (error) {
@@ -80,10 +78,8 @@ const handleEditAddress = async (addressId: number) => {
 const handleUpdateAddress = async () => {
   isLoadingNewAddress.value = true;
   try {
-    await Promise.all([
-      updateAddress(addressDetails.value),
-      fetchAllAddresses(),
-    ]);
+    await updateAddress(addressDetails.value);
+    await fetchAllAddresses();
     changeComponent("Addresses");
     showSuccess("تم تحديث العنوان بنجاح");
   } catch (error) {

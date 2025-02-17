@@ -29,23 +29,67 @@
         </template>
       </v-radio>
     </v-radio-group>
-    <nuxt-link
+    <v-btn
+      variant="text"
       class="text-primary font-weight-bold d-flex align-center mt-3"
-      :to="localePath('/dashboard/settings/addresses')"
+      @click="dialog = true"
     >
       <v-icon>mdi-plus</v-icon>
       {{ $t("operations.add_address") }}
-    </nuxt-link>
+    </v-btn>
+    <v-dialog v-model="dialog" max-width="800">
+      <v-card color="white" rounded="xl">
+        <v-card-text>
+          <NewAddress
+            :isLoading="isLoadingNewAddress"
+            @add:new-address="addNewAddress"
+            v-model:addressDetails="addressDetails"
+          />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script setup>
+import NewAddress from "~/components/Settings/addresses/NewAddress.vue";
+
 const { rules } = useFormValidation();
+const { showSuccess } = useAlertStore();
+const settingsStore = useSettingsStore();
+const { createAddress, fetchAllAddresses } = settingsStore;
 
+onMounted(() => {});
 defineProps(["addresses"]);
-defineEmits(["update:address"]);
-
+const emit = defineEmits(["update:address", "refresh-adresses"]);
+const dialog = ref(false);
 const chosenAdress = ref("");
+const isLoadingNewAddress = ref(false);
+const addressDetails = ref({
+  name: "",
+  city_id: null,
+  district_id: null,
+  street: "",
+  latitude: null,
+  longitude: null,
+  national_address: "",
+  details: "",
+});
+
+const addNewAddress = async (newAddress) => {
+  isLoadingNewAddress.value = true;
+  try {
+    await createAddress(newAddress);
+    await fetchAllAddresses();
+    showSuccess("تمت اضافة العنوان بنجاح");
+    dialog.value = false;
+    emit("refresh-adresses");
+  } catch (error) {
+    console.error("Error creating address:", error);
+  } finally {
+    isLoadingNewAddress.value = false;
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

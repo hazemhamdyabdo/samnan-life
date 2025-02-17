@@ -18,7 +18,7 @@ const isPasswordShow = ref(false);
 const isLoading = ref(false);
 
 const loginDetails = reactive({
-  phone: props.technichian ? "805682769" : "512345000",
+  phone: props.technichian ? "805682769" : "597875665",
   password: "123456789",
 });
 

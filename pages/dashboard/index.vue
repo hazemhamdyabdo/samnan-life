@@ -29,8 +29,15 @@ const {
   },
 } = await fetchSlides();
 
-const { data } = await getAllOrders();
-allOperations.value = data.value?.data.data;
+const { data, refresh, status } = await getAllOrders();
+
+watch(
+  () => data.value,
+  () => {
+    allOperations.value = data.value?.data.data;
+  },
+  { deep: true, immediate: true }
+);
 </script>
 <template>
   <div v-if="status != 'pending'">
@@ -99,7 +106,10 @@ allOperations.value = data.value?.data.data;
       </nuxt-link>
     </div>
     <section class="py-3">
-      <operations-all-operations :operations="allOperations" />
+      <operations-all-operations
+        @refresh="refresh"
+        :operations="allOperations"
+      />
     </section>
   </div>
   <v-skeleton-loader

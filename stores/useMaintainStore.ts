@@ -3,6 +3,8 @@ import type { CreateRequest } from "~/types/maintain/index";
 
 export const useMaintainStore = defineStore("maintain", () => {
   const { $api } = useNuxtApp();
+  const { showSuccess } = useAlertStore();
+
   const isTechnician = useCookie<boolean | null>("isTechnician");
   const orderData = ref<any>(null);
   const pagination = ref({
@@ -12,7 +14,10 @@ export const useMaintainStore = defineStore("maintain", () => {
 
   const createOrder = async (request: CreateRequest) => {
     const { momentLikeDate } = useDateTimeFormate();
-    if (request.type === "emergency_maintenance") {
+    if (
+      request.type === "emergency_maintenance" ||
+      !request.last_maintenance_date
+    ) {
       delete request.last_maintenance_date;
     } else {
       request.last_maintenance_date = momentLikeDate(
@@ -79,10 +84,13 @@ export const useMaintainStore = defineStore("maintain", () => {
     );
   };
 
-  const cancelOrder = (id: number) => {
-    return useAPI(`/maintenance-request/${id}/cancel`, {
+  const cancelOrder = async (id: number) => {
+    const { data } = await useAPI(`/maintenance-request/${id}/cancel`, {
       method: "POST",
     });
+
+    showSuccess(data.value.message);
+    return data;
   };
 
   const setPayMethod = (id: number, method: string) => {

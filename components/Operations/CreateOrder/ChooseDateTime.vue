@@ -11,11 +11,13 @@ const btnLoading = ref(false);
 const emit = defineEmits(["next", "closeModal"]);
 const chosenDate = ref(null);
 const times = ref([]);
+const isDirty = ref(false);
 const chosenTime = ref(null);
 const getSlots = async () => {
   try {
     btnLoading.value = true;
     const { data } = await getAvailableSlot(chosenDate.value);
+    isDirty.value = true;
     times.value = data.value.data;
   } finally {
     btnLoading.value = false;
@@ -79,7 +81,7 @@ watch(
             {{ slot.time }}
           </v-btn>
         </div>
-        <span v-else>لا يوجد مواعيد متاحة</span>
+        <span v-else-if="isDirty">لا يوجد مواعيد متاحة</span>
       </v-col>
     </v-row>
     <v-btn

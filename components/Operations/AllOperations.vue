@@ -20,6 +20,7 @@ const cancel = async () => {
   try {
     cancelLoading.value = true;
     await cancelOrder(id.value);
+    emit("refresh");
   } catch (error) {
     throw error;
   } finally {

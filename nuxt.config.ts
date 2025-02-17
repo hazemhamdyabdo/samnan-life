@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts", // if you are using custom path, default
     locales: ["ar", "en"], // used in URL path prefix
     defaultLocale: "ar", // default locale of your project for Nuxt pages and routings
-    strategy: "prefix_except_default",
+    strategy: "no_prefix",
   },
   build: {
     transpile: ["vuetify"],

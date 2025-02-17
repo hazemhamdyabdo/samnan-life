@@ -331,6 +331,7 @@ export default {
     confirm_order: "تأكيد ارسال الطلب",
     load_more: "تحميل المزيد",
     send: "ارسال",
+    add: "اضافة",
   },
   headings: {
     articles: "المقالات",
@@ -464,7 +465,7 @@ export default {
     feedback_care: "رأيك يهمنا...",
   },
   technical: {
-    rates: "التقييمات",
-    end_requests: "الطلبات المنتهية",
+    rates: "Ratings",
+    end_requests: "Completed Requests",
   },
 };
