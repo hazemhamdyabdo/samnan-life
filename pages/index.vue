@@ -39,7 +39,7 @@ await fetchLandingContent();
           <v-col
             cols="12"
             md="6"
-            class="text-right text-header d-flex flex-column ga-4 w-50"
+            class="text-start text-header d-flex flex-column ga-4 w-50"
           >
             <!-- <h2 v-html="$t('landing.header.title')" style="font-size: 45px"></h2> -->
             <h2 style="font-size: 45px">
@@ -78,7 +78,7 @@ await fetchLandingContent();
         <!-- About Us -->
         <v-row
           id="about-us"
-          class="d-flex justify-space-between align-center text-right ga-16"
+          class="d-flex justify-space-between align-center text-start ga-16"
           no-gutters
         >
           <v-col cols="12" md="6" sm="12" class="d-flex flex-column ga-4 w-50">
@@ -158,7 +158,7 @@ await fetchLandingContent();
               md="12"
               sm="12"
               xs="12"
-              class="text-right d-flex flex-column ga-16"
+              class="text-start d-flex flex-column ga-16"
             >
               <div>
                 <h3
@@ -209,7 +209,7 @@ await fetchLandingContent();
               md="12"
               sm="12"
               xs="12"
-              class="text-right d-flex flex-column ga-16"
+              class="text-start d-flex flex-column ga-16"
             >
               <div>
                 <h3
@@ -247,7 +247,7 @@ await fetchLandingContent();
         <!-- Store -->
         <v-row
           id="store"
-          class="d-flex justify-space-between align-center text-right ga-16"
+          class="d-flex justify-space-between align-center text-start ga-16"
         >
           <v-col
             lg="6"
@@ -336,7 +336,7 @@ await fetchLandingContent();
 
         <!-- App -->
         <v-row
-          class="d-flex justify-space-between align-center text-right pb-0"
+          class="d-flex justify-space-between align-center text-start pb-0"
         >
           <v-col
             xl="6"

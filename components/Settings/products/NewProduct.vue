@@ -56,7 +56,7 @@ onMounted(async () => {
         {{ t("dashboard.settings.products.add_product") }}
       </h4>
       <div class="d-flex ga-2">
-        <v-text-field
+        <!-- <v-text-field
           bg-color="disabled-gray"
           density="compact"
           flat
@@ -65,8 +65,8 @@ onMounted(async () => {
           height="42px"
           hide-details
           width="300px"
-        >
-        </v-text-field>
+        > -->
+        <!-- </v-text-field> -->
         <v-btn
           @click="showFilterDialog"
           color="primary"
