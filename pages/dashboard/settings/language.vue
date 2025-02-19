@@ -1,7 +1,7 @@
 <script setup>
-const { t, setLocale } = useI18n();
+const { t, setLocale, locale } = useI18n();
 
-const selectedLang = ref("ar");
+const selectedLang = ref(locale.value);
 
 const saveLang = () => {
   setLocale(selectedLang.value);
