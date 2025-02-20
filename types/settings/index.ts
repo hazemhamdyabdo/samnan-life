@@ -30,6 +30,7 @@ interface Address {
   longitude?: number | null;
   national_address: string;
   details?: string;
+
 }
 
 

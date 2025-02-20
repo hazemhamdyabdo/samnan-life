@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/i18n",
     "@pinia/nuxt",
+    '@nuxtjs/leaflet',
     "nuxt-svgo",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {

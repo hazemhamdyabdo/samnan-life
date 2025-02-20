@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Address } from "~/types/settings";
 import AddressDialog from "./AddressDialog.vue";
+import Map from "~/components/app/Map.vue";
 
 const settingsStore = useSettingsStore();
 const { t } = useI18n();
@@ -35,6 +36,11 @@ const getDistrict = async () => {
     await fetchAllDistricts(+addressDetails.value.city_id);
   }
   isDistrictLoafing.value = false;
+};
+
+const handleUpdateLatLng = (event: any) => {
+  addressDetails.value.latitude = event?.lat;
+  addressDetails.value.longitude = event?.lng;
 };
 
 const emitAddressDetails = async () => {
@@ -154,24 +160,34 @@ onMounted(async () => {
             hide-details
           />
         </v-col>
-
-        <v-col cols="6" class="d-flex mt-8">
-          <v-btn
-            color="primary"
-            type="submit"
-            :loading="isLoading"
-            size="50"
-            round
-            block
-            @click="emitAddressDetails"
-            >{{
-              $t(
-                `dashboard.settings.addresses.add_address.${
-                  addressDetails.id ? "update" : "save"
-                }_address`
-              )
-            }}</v-btn
-          >
+        <v-col cols="8">
+          <Map
+            @update:latLng="handleUpdateLatLng"
+            :latLng="[
+              addressDetails?.latitude ?? 24.7136,
+              addressDetails?.longitude ?? 46.6753,
+            ]"
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-col cols="6" class="d-flex mt-8">
+            <v-btn
+              color="primary"
+              type="submit"
+              :loading="isLoading"
+              size="50"
+              round
+              block
+              @click="emitAddressDetails"
+              >{{
+                $t(
+                  `dashboard.settings.addresses.add_address.${
+                    addressDetails.id ? "update" : "save"
+                  }_address`
+                )
+              }}</v-btn
+            >
+          </v-col>
         </v-col>
       </v-row>
     </v-form>
