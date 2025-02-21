@@ -469,4 +469,7 @@ export default {
     rate_desc: "Please rate the service and share your honest opinion",
     feedback_care: "Your feedback matters...",
   },
+  technical: {
+    end_requests: "Completed Requests",
+  },
 };

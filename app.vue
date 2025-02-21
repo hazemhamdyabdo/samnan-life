@@ -1,5 +1,6 @@
 <template>
   <AppAlert />
+  <AppNotificationDialog />
   <v-locale-provider :locale="locale">
     <NuxtLayout>
       <NuxtPage />
@@ -14,7 +15,6 @@ const htmlAttrs = computed(() => ({
   dir: locale.value === "ar" ? "rtl" : "ltr",
 }));
 
-console.log(locale.value, "sssssssssssss");
 useHead({
   htmlAttrs,
 });

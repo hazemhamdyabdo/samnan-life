@@ -3,11 +3,13 @@ import NavBar from "~/components/common/NavBar.vue";
 import SideBar from "~/components/common/SideBar.vue";
 import { useTechnicianStore } from "~/stores/useTechnician";
 
+const { initializeNotification } = useNotification();
 const { getTechnicianData } = useTechnicianStore();
 const { isTechnician } = storeToRefs(useAuthStore());
 
 onMounted(() => {
   isTechnician.value && getTechnicianData();
+  initializeNotification(isTechnician.value ? "technician" : "customer");
 });
 </script>
 

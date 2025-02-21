@@ -319,6 +319,8 @@ export default {
     send: "ارسال",
     save: "حفظ",
   },
+  notifications_permission: "السماح للتنبيهات بالظهور",
+  allow: "السماح",
 
   buttons: {
     subscribe_now: "اشترك الآن",
@@ -465,7 +467,6 @@ export default {
     feedback_care: "رأيك يهمنا...",
   },
   technical: {
-    rates: "Ratings",
-    end_requests: "Completed Requests",
+    end_requests: "الطلبات المكتملة",
   },
 };

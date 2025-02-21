@@ -100,8 +100,8 @@ const chartOptions = {
       name: "الطلبات",
       colorByPoint: true,
       innerSize: "90%",
-      data: chartDataAllRequests.value.typeOfRequests?.map((item) => ({
-        name: item.type,
+      data: chartDataAllRequests.value.typeOfRequests?.map((item: any) => ({
+        name: t("operations." + item.type),
         y: item.count,
       })),
     },
@@ -112,24 +112,30 @@ onMounted(() => {
   chart.value = Highcharts.chart("requests-chart", chartOptions);
 });
 
-watch(chartDataAllRequests, (newValue) => {
-  if (chart.value) {
-    chart.value.series[0].setData(
-      newValue.typeOfRequests.map((item) => ({
-        name: t("operations." + item.type),
-        y: item.count,
-      }))
-    );
-  }
-  const customLabel = chart.value.options.chart.custom.label;
-  if (customLabel) {
-    customLabel.attr({
-      text: `
+watch(
+  chartDataAllRequests,
+  (newValue) => {
+    if (chart.value) {
+      chart.value.series[0].setData(
+        newValue.typeOfRequests.map((item: any) => ({
+          name: t("operations." + item.type),
+          y: item.count,
+        }))
+      );
+    }
+    const customLabel = chart.value.options.chart.custom.label;
+    if (customLabel) {
+      customLabel.attr({
+        text: `
         <strong> ${newValue.allRequests} </strong>
         <br />
         <span style="font-size: 12px;"> طلب </span>
       `,
-    });
+      });
+    }
+  },
+  {
+    deep: true,
   }
-});
+);
 </script>

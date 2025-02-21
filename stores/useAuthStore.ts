@@ -139,6 +139,20 @@ export const useAuthStore = defineStore("auth", () => {
     user.value = null;
   };
 
+
+  const sendFCMToken = async (userType: 'technician' | 'customer', token: string) => {
+    const { error } = await useAPI(`/${userType}/update-fcm-token`, {
+      method: "POST",
+      body: {
+        fcm_token: token,
+      },
+      watch: false,
+    });
+    if (error.value) {
+      throw new Error(error.value.message);
+    }
+  };
+
   return {
     login,
     register,
@@ -148,6 +162,7 @@ export const useAuthStore = defineStore("auth", () => {
     logout,
     deleteAccount,
     isTechnician,
-    user
+    user,
+    sendFCMToken
   };
 });
