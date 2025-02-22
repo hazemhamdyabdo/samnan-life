@@ -103,7 +103,7 @@ export const useTechnicianStore = defineStore(
           address: request?.address,
           time: request?.slot?.time,
           date: request?.slot?.date,
-          status: request?.invoice?.status,
+          status: request?.current_status.status,
           service: request?.invoice?.services.map((service) => ({
             name: service.name,
             price: service.price,

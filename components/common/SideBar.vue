@@ -58,9 +58,9 @@ const { isTechnician } = storeToRefs(useAuthStore());
           <AppSvgIcon name="calendar-grey" />
         </NuxtLink>
         <p
-          :class="`${
+          :class="`text-center ${
             $route.path === '/dashboard/my-appointments'
-              ? 'text-primary font-weight-bold'
+              ? 'text-primary font-weight-bold text-center'
               : 'text-grey-300'
           }`"
         >
