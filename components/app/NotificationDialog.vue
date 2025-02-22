@@ -14,7 +14,7 @@ const { showPermissionDialog, requestPermission } = useNotification();
       <div class="text-center">
         <v-img
           class="mx-auto mb-4"
-          src="~/assets/imgs/success.svg"
+          src="/images/success.svg"
           alt="success"
           width="70"
         />
