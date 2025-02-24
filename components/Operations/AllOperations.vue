@@ -15,6 +15,9 @@ const id = ref(null);
 const onWayLoading = ref(false);
 const showPayment = ref(false);
 const chosenOrder = ref(null);
+const showChangeStatusModal = ref(false);
+const item = ref({});
+const note = ref("");
 
 const cancel = async () => {
   try {
@@ -48,24 +51,58 @@ const statusText = (status) => {
     return "operations.waiting_for_payment";
   }
 };
-const changeStatus = async (item) => {
+
+const changeStatus = async () => {
   try {
     onWayLoading.value = true;
-    if (item?.current_status?.status === "technician_assigned") {
-      await onMyWay(item.id);
+    if (item.value?.current_status?.status === "technician_assigned") {
+      await onMyWay(item.value.id, note.value);
       emit("refresh");
-    } else if (item?.current_status?.status === "technician_on_the_way") {
-      await inProgress(item.id);
-      emit("refresh");
-    } else if (item?.current_status?.status === "in_progress") {
-      chosenOrder.value = item.id;
-      showPayment.value = true;
+    } else if (item.value?.current_status?.status === "technician_on_the_way") {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+
+            const data = {
+              id: item.value.id,
+              note: note.value,
+              lat,
+              long,
+            };
+
+            try {
+              await inProgress(data);
+              emit("refresh");
+            } catch {
+            } finally {
+              submitLoading.value = false;
+            }
+          },
+          (error) => {
+            console.error("Error getting location:", error.message);
+          }
+        );
+      } else {
+        alrt("Geolocation is not supported by this browser.");
+      }
     }
   } catch (error) {
     throw error;
   } finally {
     onWayLoading.value = false;
   }
+};
+
+const showStatusModal = (data) => {
+  if (data?.current_status?.status === "in_progress") {
+    chosenOrder.value = data.id;
+    showPayment.value = true;
+    return;
+  }
+  item.value = data;
+  showChangeStatusModal.value = true;
 };
 </script>
 
@@ -77,7 +114,24 @@ const changeStatus = async (item) => {
       :id="chosenOrder"
       @refresh="emit('refresh')"
     />
-
+    <!-- NOTE: change status  MODAL -->
+    <app-modal
+      :title="$t('operations.change_status')"
+      :text="$t('operations.enter_note')"
+      v-model:dialog="showChangeStatusModal"
+      @submit="changeStatus"
+    >
+      <v-form class="mt-5">
+        <v-textarea
+          hide-details
+          item-title="name"
+          v-model="note"
+          :placeholder="$t('operations.enter_note')"
+          item-value="id"
+          return-object
+        ></v-textarea>
+      </v-form>
+    </app-modal>
     <app-modal
       :title="$t('operations.cancel_order')"
       :text="$t('operations.cancel_order_desc')"
@@ -133,12 +187,24 @@ const changeStatus = async (item) => {
                 </div>
               </div>
               <v-spacer></v-spacer>
+
               <v-chip :color="getStatus(item.current_status?.status)"
                 >{{ "\u2022" }}
                 {{ $t(`operations.${item.current_status?.status}`) }}
               </v-chip>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
+              <div class="d-flex">
+                <v-spacer></v-spacer>
+                <v-btn
+                  variant="flat"
+                  color="primary"
+                  height="40"
+                  :to="localePath(`/dashboard/order/${item.id}`)"
+                >
+                  {{ $t("operations.show_order") }}
+                </v-btn>
+              </div>
               <!-- Details -->
               <operations-tech-request v-if="isTechnician" :item="item" />
               <operations-client-request
@@ -209,7 +275,7 @@ const changeStatus = async (item) => {
                 v-if="isTechnician && showAction(item?.current_status?.status)"
                 :loading="onWayLoading"
                 :disabled="onWayLoading"
-                @click="changeStatus(item)"
+                @click="showStatusModal(item)"
                 color="primary"
                 block
                 class="mt-7"

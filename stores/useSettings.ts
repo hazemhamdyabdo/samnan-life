@@ -15,7 +15,6 @@ export const useSettingsStore = defineStore("settings", () => {
   const { isTechnician, user } = storeToRefs(useAuthStore());
   // profile
   const customerData = ref<CustomerData>();
-
   const getCustomerData = async () => {
     const { data } = await useAPI<ApiResponse<CustomerData>>(
       `/${isTechnician.value ? "technician" : "customer"}`
@@ -195,6 +194,21 @@ export const useSettingsStore = defineStore("settings", () => {
     }
   };
 
+  const fetchAllNotifications = async () => {
+    return useAPI("/notifications");
+  };
+
+  const setAllNotificationsRead = () => {
+    return useAPI("/notifications/read-all", {
+      method: "POST",
+    });
+  };
+
+  const readSingleNotification = (id: any) => {
+    return useAPI(`/notifications/${id}/read`, {
+      method: "POST",
+    });
+  };
   return {
     allAddresses,
     fetchAllAddresses,
@@ -219,5 +233,8 @@ export const useSettingsStore = defineStore("settings", () => {
     changePassword,
     fetchCategories,
     sendSupportForm,
+    fetchAllNotifications,
+    setAllNotificationsRead,
+    readSingleNotification,
   };
 });

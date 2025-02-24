@@ -465,6 +465,11 @@ export default {
     rate: "تقييم الخدمة",
     rate_desc: "برجاء تفييم الخدمة و تحدث عن رأيك بكل صراحة",
     feedback_care: "رأيك يهمنا...",
+    enter_note: "ادخل ملاحظاتك",
+    change_status: "تغيير الحالة",
+    waiting_for_technician_confirm_payment: "في انتظار تاكيد الدفع من الفني",
+    show_order: "عرض الطلب",
+    notifications_read: "تعم تمييز الاشعارات كمقروؤة",
   },
   technical: {
     end_requests: "الطلبات المكتملة",

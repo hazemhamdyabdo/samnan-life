@@ -108,6 +108,67 @@ export const useMaintainStore = defineStore("maintain", () => {
       body: data,
     });
   };
+
+  const sapProducts = ref([
+    {
+      id: 1,
+      sap_id: "33443",
+      name_ar: "اختبار",
+      name_en: "test",
+      description_ar: "fdfd",
+      description_en: "fdfd",
+      image: "01JFNWGKBPCTDWMFE5PKY713WP.png",
+      category_id: 1,
+      created_at: "2024-12-21T22:33:13.000000Z",
+      updated_at: "2024-12-21T22:33:13.000000Z",
+      name: "test",
+      description: "fdfd",
+      category_name: "test",
+      image_url:
+        "https://app.rezeqstore.com/public/storage/01JFNWGKBPCTDWMFE5PKY713WP.png",
+      category: {
+        id: 1,
+        name_ar: "اختبار",
+        name_en: "test",
+        created_at: "2024-12-21T22:31:33.000000Z",
+        updated_at: "2024-12-21T22:31:33.000000Z",
+        name: "test",
+      },
+    },
+    {
+      id: 2,
+      sap_id: "5656",
+      name_ar: "برادة سمنان الذكية",
+      name_en: "Samnan water purifier",
+      description_ar: "برادة سمنان الذكية",
+      description_en:
+        "It provides 300L per day, and can be self-filled by connecting it to a water source.",
+      image: "01JFX9DJRQ4Q5V9AGJRR07CHV6.webp",
+      category_id: 3,
+      created_at: "2024-12-24T19:33:26.000000Z",
+      updated_at: "2024-12-24T19:38:57.000000Z",
+      name: "Samnan water purifier",
+      description:
+        "It provides 300L per day, and can be self-filled by connecting it to a water source.",
+      category_name: "coolers",
+      image_url:
+        "https://app.rezeqstore.com/public/storage/01JFX9DJRQ4Q5V9AGJRR07CHV6.webp",
+      category: {
+        id: 3,
+        name_ar: "البرادات",
+        name_en: "coolers",
+        created_at: "2024-12-24T19:38:17.000000Z",
+        updated_at: "2024-12-24T19:38:17.000000Z",
+        name: "coolers",
+      },
+    },
+  ]);
+  const sapNom = ref("");
+  const getSapOrder = async (id: number) => {
+    const { data } = await useAPI(`/sap-order/${id}`);
+    sapProducts.value = data.value.data;
+    sapNom.value = id;
+  };
   return {
     createOrder,
     getAvailableSlot,
@@ -119,5 +180,8 @@ export const useMaintainStore = defineStore("maintain", () => {
     pagination,
     setPayMethod,
     sendFeedback,
+    getSapOrder,
+    sapProducts,
+    sapNom,
   };
 });

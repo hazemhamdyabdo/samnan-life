@@ -13,8 +13,7 @@
           <h3 class="mt-3">{{ $t("operations.enter_price") }}</h3>
           <h5>{{ $t("operations.enter_price_desc") }}</h5>
           <v-select
-            class="mt-5"
-            max-width="400"
+            class="my-5"
             :items="services"
             v-model="chosenServices"
             multiple
@@ -22,6 +21,10 @@
             :placeholder="$t('operations.choose_service')"
             item-value="id"
           ></v-select>
+          <v-textarea
+            v-model="note"
+            :placeholder="$t('operations.enter_note')"
+          ></v-textarea>
         </div>
 
         <div class="step-one" v-if="currentStep == 1">
@@ -112,7 +115,7 @@ const spares = ref([]);
 const showSpareModal = ref(false);
 const submitLoading = ref(false);
 const allChosenSpares = ref([]);
-
+const note = ref("");
 const dialog = defineModel("dialog", {
   type: Boolean,
   default: false,
@@ -126,24 +129,41 @@ const submit = async () => {
   if (currentStep.value == 0 && chosenServices.value) {
     currentStep.value = 1;
   } else {
-    const spare_parts = allChosenSpares.value.map((spare) => ({
-      id: spare.id,
-      quantity: spare.quantity,
-    }));
-    const data = {
-      services: chosenServices.value.map((id) => ({
-        id,
-      })),
-      spare_parts,
-    };
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
 
-    try {
-      submitLoading.value = true;
-      await waitPayment(props.id, data);
-      emit("refresh");
-    } catch {
-    } finally {
-      submitLoading.value = false;
+          const spare_parts = allChosenSpares.value.map((spare) => ({
+            id: spare.id,
+            quantity: spare.quantity,
+          }));
+          const data = {
+            services: chosenServices.value.map((id) => ({
+              id,
+            })),
+            spare_parts,
+            note: note.value,
+            lat,
+            long,
+          };
+
+          try {
+            submitLoading.value = true;
+            await waitPayment(props.id, data);
+            emit("refresh");
+          } catch {
+          } finally {
+            submitLoading.value = false;
+          }
+        },
+        (error) => {
+          console.error("Error getting location:", error.message);
+        }
+      );
+    } else {
+      alrt("Geolocation is not supported by this browser.");
     }
   }
 };

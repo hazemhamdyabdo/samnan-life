@@ -9,7 +9,7 @@
         }}
       </h2>
       <operations-enter-maintain-info
-        :products="allProducts"
+        :products="customerProducts"
         :addresses="allAddresses"
         v-if="step === 1"
         @next="step = 2"
@@ -39,11 +39,11 @@ definePageMeta({
 });
 
 const settingsStore = useSettingsStore();
-const { allProducts, allAddresses } = storeToRefs(settingsStore);
+const { customerProducts, allAddresses } = storeToRefs(settingsStore);
 
 const step = ref(1);
-const { fetchAllProducts, fetchAllAddresses } = settingsStore;
+const { fetchCustomerProducts, fetchAllAddresses } = settingsStore;
 
-fetchAllProducts();
+fetchCustomerProducts();
 fetchAllAddresses();
 </script>

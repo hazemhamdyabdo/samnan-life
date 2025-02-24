@@ -12,10 +12,54 @@
       <NuxtLink to="/dashboard/notifications">
         <AppSvgIcon name="bell" />
       </NuxtLink>
-      <v-btn color="primary" class="px-4 rounded-lg" size="large">
-        <v-icon class="me-1">mdi-calendar-outline</v-icon>
-        {{ $t("dashboard.nav.button") }}
-      </v-btn>
+      <v-menu v-if="!isTechnician">
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            color="primary"
+            class="px-4 rounded-lg"
+            size="large"
+          >
+            <v-icon class="me-1">mdi-calendar-outline</v-icon>
+            {{ $t("dashboard.nav.button") }}
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            :to="
+              localePath(
+                '/dashboard/operations/order-maintenance/emergency_maintenance'
+              )
+            "
+          >
+            <v-list-item-title>
+              {{ $t("operations.emergency_maintenance") }}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            :to="
+              localePath(
+                '/dashboard/operations/order-maintenance/regular_maintenance'
+              )
+            "
+          >
+            <v-list-item-title>
+              {{ $t("operations.regular_maintenance") }}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            :to="localePath('/dashboard/operations/new-installation')"
+          >
+            <v-list-item-title>
+              {{ $t("operations.new_installation") }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </div>
   </v-card>
 </template>
+
+<script setup>
+const isTechnician = useCookie("isTechnician");
+</script>

@@ -8,8 +8,11 @@
         @next="step = 2"
       />
       <operations-create-order-enter-info v-if="step === 2" @next="step = 3" />
-      <operations-create-order-review v-if="step === 3" @next="step = 4" />
-      <operations-create-order-success v-if="step === 4" />
+      <operations-create-order-choose-date-time
+        v-if="step === 3"
+        @next="step = 4"
+      />
+      <operations-create-order-review v-if="step === 4" @next="step = 5" />
     </v-card-text>
   </v-card>
 </template>

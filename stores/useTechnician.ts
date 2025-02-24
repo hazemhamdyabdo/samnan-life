@@ -46,18 +46,22 @@ export const useTechnicianStore = defineStore(
       };
     };
 
-    const onMyWay = (id: number) => {
+    const onMyWay = (id: number, note: string) => {
       return useAPI(`maintenance-request/${id}/set-on-the-way`, {
         method: "POST",
+        body: {
+          note,
+        },
       });
     };
 
-    const inProgress = (id: number) => {
-      return useAPI(`maintenance-request/${id}/set-in-progress`, {
+    const inProgress = (payload: any) => {
+      return useAPI(`maintenance-request/${payload.id}/set-in-progress`, {
         method: "POST",
         body: {
-          lat: 0,
-          long: 0,
+          lat: payload.lat,
+          long: payload.lat,
+          note: payload.note,
         },
       });
     };
