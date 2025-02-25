@@ -6,17 +6,18 @@ const {
   setAllNotificationsRead,
   readSingleNotification,
 } = useSettingsStore();
+const { notifications } = storeToRefs(useSettingsStore());
 const btlnLoading = ref(false);
 const { showSuccess } = useAlertStore();
 const localePath = useLocalePath();
-const { data } = await fetchAllNotifications();
+await fetchAllNotifications();
 
 const markAllRead = async () => {
   try {
     btlnLoading.value = true;
     await setAllNotificationsRead();
     showSuccess(t("operations.notifications_read"));
-    data.value.data.forEach((item) => {
+    notifications.value.forEach((item) => {
       item.read_at = true;
     });
   } catch (error) {
@@ -34,6 +35,8 @@ const gotToOrder = async (item) => {
     throw new Error(error);
   }
 };
+
+await fetchAllNotifications();
 </script>
 <template>
   <main>
@@ -53,7 +56,7 @@ const gotToOrder = async (item) => {
 
     <section class="py-3">
       <v-card
-        v-for="item in data.data"
+        v-for="item in notifications"
         :key="item.id"
         class="d-flex justify-space-between align-center ga-4 pa-3 mb-4"
         border="sm black"

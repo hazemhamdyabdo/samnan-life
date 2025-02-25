@@ -194,8 +194,11 @@ export const useSettingsStore = defineStore("settings", () => {
     }
   };
 
+  const notifications = ref();
   const fetchAllNotifications = async () => {
-    return useAPI("/notifications");
+    const { data } = await useAPI<ApiResponse<Notification[]>>("/notifications");
+    notifications.value = data.value?.data;
+    return data;
   };
 
   const setAllNotificationsRead = () => {
@@ -236,5 +239,6 @@ export const useSettingsStore = defineStore("settings", () => {
     fetchAllNotifications,
     setAllNotificationsRead,
     readSingleNotification,
+    notifications
   };
 });

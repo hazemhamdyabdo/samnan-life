@@ -336,6 +336,7 @@ export default {
   operations: {
     date_filter: "Date Range",
     filters: "Filter Results",
+    notifications_read: "all notifications read",
     filter_desc: "Filter results to quickly find the required maintenance type",
     type: "Maintenance Type",
     status: "Status",

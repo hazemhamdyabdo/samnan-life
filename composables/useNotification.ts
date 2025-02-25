@@ -1,7 +1,8 @@
-import { getMessaging, getToken } from "firebase/messaging";
-
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { useAlertStore } from "~/stores/useAlert";
 const showPermissionDialog = ref(false);
 export function useNotification() {
+  const { showSuccess } = useAlertStore()
   const { sendFCMToken } = useAuthStore()
   const messaging = ref();
 
@@ -34,7 +35,16 @@ export function useNotification() {
               userType,
               currentToken
             );
-            // console.log(currentToken);
+
+            onMessage(messaging.value, async (payload) => {
+              const { notification } = payload;
+              new Notification(notification?.title, {
+                body: notification?.body,
+                icon: notification?.icon,
+              });
+              showSuccess(notification?.body);
+              await fetchAllNotifications();
+            });
           })
           .catch((err) => {
             console.log("An error occurred while retrieving token. ", err);

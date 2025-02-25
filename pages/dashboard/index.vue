@@ -42,7 +42,7 @@ watch(
 <template>
   <div v-if="status != 'pending'">
     <header>
-      <nuxt-link to="/dashboard/order/176">sddd</nuxt-link>
+      <!-- <nuxt-link to="/dashboard/order/176">sddd</nuxt-link> -->
       <v-carousel min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
           <div
