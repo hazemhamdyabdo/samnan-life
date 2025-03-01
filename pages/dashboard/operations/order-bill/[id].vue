@@ -73,7 +73,11 @@ const confirmCashPay = async () => {
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.client_name") }}</div>
-                <div class="value">{{ order.customerName }}</div>
+                <div class="value">
+                  {{
+                    order.customer.first_name + " " + order.customer.last_name
+                  }}
+                </div>
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.order_type") }}</div>
@@ -83,7 +87,7 @@ const confirmCashPay = async () => {
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.device") }}</div>
-                <div class="value">{{ order.productName }}</div>
+                <div class="value">{{ order.products[0].name }}</div>
               </div>
               <div class="item">
                 <div class="label">{{ t("operations.location") }}:</div>
@@ -120,6 +124,14 @@ const confirmCashPay = async () => {
                 <div class="cell">{{ item.price }} ر.س</div>
                 <div class="cell">1</div>
                 <div class="cell">{{ item.price }} ر.س</div>
+              </div>
+              <div class="row" v-for="item in order.invoice.spare_parts">
+                <div class="cell">{{ item.name }}</div>
+                <div class="cell">{{ item.price }} ر.س</div>
+                <div class="cell">{{ item.pivot.quantity }}</div>
+                <div class="cell">
+                  {{ item.price * item.pivot.quantity }} ر.س
+                </div>
               </div>
             </div>
 

@@ -10,7 +10,14 @@
     <v-spacer />
     <div class="d-flex justify-center align-center ga-6">
       <NuxtLink to="/dashboard/notifications">
-        <AppSvgIcon name="bell" />
+        <v-badge
+          dot
+          location="top start"
+          :color="!isThereUnread ? 'transparent' : 'error'"
+        >
+          <!-- :color="isThereUnread ? 'transparent' : 'error'" -->
+          <v-icon color="primary">mdi-bell-outline</v-icon>
+        </v-badge>
       </NuxtLink>
       <v-menu v-if="!isTechnician">
         <template v-slot:activator="{ props }">
@@ -62,4 +69,9 @@
 
 <script setup>
 const isTechnician = useCookie("isTechnician");
+const { notifications } = storeToRefs(useSettingsStore());
+
+const isThereUnread = computed(() => {
+  return notifications.value.some((item) => !item.read_at);
+});
 </script>

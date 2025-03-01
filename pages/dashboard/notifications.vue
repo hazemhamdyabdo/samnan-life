@@ -1,16 +1,11 @@
 <script setup>
 const { dateAndTime } = useDateTimeFormate();
 const { t } = useI18n();
-const {
-  fetchAllNotifications,
-  setAllNotificationsRead,
-  readSingleNotification,
-} = useSettingsStore();
+const { setAllNotificationsRead, readSingleNotification } = useSettingsStore();
 const { notifications } = storeToRefs(useSettingsStore());
 const btlnLoading = ref(false);
 const { showSuccess } = useAlertStore();
 const localePath = useLocalePath();
-await fetchAllNotifications();
 
 const markAllRead = async () => {
   try {
@@ -35,8 +30,6 @@ const gotToOrder = async (item) => {
     throw new Error(error);
   }
 };
-
-await fetchAllNotifications();
 </script>
 <template>
   <main>

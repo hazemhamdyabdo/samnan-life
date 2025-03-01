@@ -1,11 +1,12 @@
 <script setup>
-import NavBar from "~/components/common/NavBar.vue";
-import SideBar from "~/components/common/SideBar.vue";
 import { useTechnicianStore } from "~/stores/useTechnician";
 
 const { initializeNotification } = useNotification();
 const { getTechnicianData } = useTechnicianStore();
 const { isTechnician } = storeToRefs(useAuthStore());
+const { fetchAllNotifications } = useSettingsStore();
+
+await fetchAllNotifications();
 
 onMounted(() => {
   isTechnician.value && getTechnicianData();
@@ -20,10 +21,10 @@ onMounted(() => {
 
       <v-container fluid>
         <!-- APP NAV -->
-        <NavBar />
+        <CommonNavBar />
         <v-row class="mt-4">
           <v-col cols="12" sm="2" lg="1">
-            <SideBar class="sticky"> </SideBar>
+            <CommonSideBar class="sticky"> </CommonSideBar>
           </v-col>
           <v-col col="12" sm="10" lg="11">
             <slot></slot>
