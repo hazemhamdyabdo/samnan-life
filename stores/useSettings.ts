@@ -132,8 +132,11 @@ export const useSettingsStore = defineStore("settings", () => {
   const allProducts = ref<Product[]>();
   const customerProducts = ref<Product[]>();
 
-  const fetchAllProducts = async (): Promise<void> => {
-    const { data } = await useAPI<ApiResponse<Product[]>>("/products");
+  const fetchAllProducts = async (params?: any): Promise<void> => {
+    const { data } = await useAPI<ApiResponse<Product[]>>("/products", {
+      params,
+      watch: false,
+    });
     allProducts.value = data.value?.data;
   };
 
@@ -156,7 +159,7 @@ export const useSettingsStore = defineStore("settings", () => {
   };
 
   const addProduct = async (productId: number): Promise<void> => {
-    const { error } = await useAPI<ApiResponse<Product[]>>(
+    const { status, error } = await useAPI<ApiResponse<Product[]>>(
       `/customer/products`,
       {
         method: "POST",
@@ -164,6 +167,9 @@ export const useSettingsStore = defineStore("settings", () => {
         watch: false,
       }
     );
+    if (status.value === "success") {
+      await fetchCustomerProducts();
+    }
     if (error.value) {
       throw new Error(error.value.message);
     }
@@ -196,7 +202,9 @@ export const useSettingsStore = defineStore("settings", () => {
 
   const notifications = ref();
   const fetchAllNotifications = async () => {
-    const { data } = await useAPI<ApiResponse<Notification[]>>("/notifications");
+    const { data } = await useAPI<ApiResponse<Notification[]>>(
+      "/notifications"
+    );
     notifications.value = data.value?.data;
     return data;
   };
@@ -239,6 +247,6 @@ export const useSettingsStore = defineStore("settings", () => {
     fetchAllNotifications,
     setAllNotificationsRead,
     readSingleNotification,
-    notifications
+    notifications,
   };
 });

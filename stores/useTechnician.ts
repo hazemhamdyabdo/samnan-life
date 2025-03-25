@@ -141,6 +141,15 @@ export const useTechnicianStore = defineStore(
         body: data,
       });
     };
+
+    const confirmOnline = (id: number) => {
+      return useAPI(`/maintenance-request/${id}/set-payment-method`, {
+        method: "post",
+        body: {
+          payment_method: "online",
+        },
+      });
+    };
     return {
       chartDataAllRequests,
       chartDataCompletedRequests,
@@ -157,6 +166,7 @@ export const useTechnicianStore = defineStore(
       getSpareParts,
       waitPayment,
       confirmCash,
+      confirmOnline,
     };
   }
 );

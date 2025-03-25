@@ -3,10 +3,12 @@
     class="d-flex justify-space-between align-center pa-4 shadow-xl"
     rounded="xl"
   >
-    <div class="d-flex justify-center align-center ga-2">
-      <AppSvgIcon name="logo" size="lg" />
-      <AppSvgIcon name="title" :size="60" />
-    </div>
+    <NuxtLinkLocale to="/">
+      <div class="d-flex justify-center align-center ga-2">
+        <AppSvgIcon name="logo" size="lg" />
+        <AppSvgIcon name="title" :size="60" />
+      </div>
+    </NuxtLinkLocale>
     <v-spacer />
     <div class="d-flex justify-center align-center ga-6">
       <NuxtLink to="/dashboard/notifications">

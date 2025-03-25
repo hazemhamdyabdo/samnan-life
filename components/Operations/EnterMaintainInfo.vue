@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import NewProduct from "~/components/Settings/products/NewProduct.vue";
+
 import type { CreateRequest } from "~/types/maintain/index";
 import { useFormValidation } from "~/composables/useFormValidation";
 const { createOrder } = useMaintainStore();
@@ -8,6 +10,7 @@ const { formRef, rules, validate } = useFormValidation();
 const emit = defineEmits(["next"]);
 defineProps(["products", "addresses"]);
 
+const showNewProductDialog = ref(false);
 const form = ref<CreateRequest>({
   type: useRoute().params.type,
   products: [],
@@ -35,6 +38,20 @@ const setPhotos = (photos: File[]) => {
 </script>
 
 <template>
+  <v-dialog max-width="1000" v-model="showNewProductDialog">
+    <v-card rounded="xl" bg-color="pri-light" min-height="300">
+      <v-card-text>
+        <div class="d-flex mb-5">
+          <v-spacer></v-spacer>
+          <v-icon color="error" @click="showNewProductDialog = false"
+            >mdi-close</v-icon
+          >
+        </div>
+        <NewProduct @change-component="showNewProductDialog = false" />
+      </v-card-text>
+    </v-card>
+  </v-dialog>
+
   <v-form ref="formRef">
     <h3>{{ $t("operations.choose_device") }}</h3>
     <h5 class="mt-2">{{ $t("operations.choose_device_desc") }}</h5>
@@ -59,6 +76,17 @@ const setPhotos = (photos: File[]) => {
       </template>
     </v-checkbox>
 
+    <v-btn
+      variant="text"
+      class="text-primary font-weight-bold d-flex align-center mt-3"
+      @click="showNewProductDialog = true"
+    >
+      <v-icon>mdi-plus</v-icon>
+      {{ $t("operations.add_product") }}
+    </v-btn>
+    <h3 v-if="products.length == 0">
+      {{ $t("operations.no_products") }}
+    </h3>
     <v-divider class="my-5"></v-divider>
 
     <div v-if="form.type == 'regular_maintenance'">

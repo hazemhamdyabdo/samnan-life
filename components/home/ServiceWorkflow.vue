@@ -96,17 +96,29 @@ const { mobile } = useDisplay();
   </v-container>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .arrow-up {
   position: absolute;
   top: -60px;
   left: 8%;
   transform: translateX(-50%);
+  [dir="ltr"] & {
+    left: 74%;
+    bottom: 134px;
+    transform: rotate(-256deg);
+    top: -74px;
+  }
 }
 .arrow-down {
   position: absolute;
   bottom: 100px;
   right: -8%;
   transform: translateX(-50%);
+  [dir="ltr"] & {
+    right: unset;
+    left: -3%;
+    bottom: 134px;
+    transform: rotateY(178deg);
+  }
 }
 </style>

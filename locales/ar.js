@@ -334,12 +334,17 @@ export default {
     load_more: "تحميل المزيد",
     send: "ارسال",
     add: "اضافة",
+    search: "بحث",
   },
   headings: {
     articles: "المقالات",
     podcast: "البودكاست",
   },
   operations: {
+    pay_online: "الدفع اونلاين",
+    are_you_sure_pay_online: "هل انت متاكد من الدفع اونلاين ؟",
+    no_products: "لا يوجد منتجات",
+    add_product: "اضافة منتج",
     date_filter: "نطاق التاريخ",
     filters: "تنقية النتائج",
     filter_desc: "قم بتنقية النتائج لسرعة الوصول نوع الصيانة المطلوبة",

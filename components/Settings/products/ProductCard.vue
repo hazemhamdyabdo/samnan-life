@@ -21,27 +21,40 @@ const selectProduct = (productId: number) => {
 
 <template>
   <v-row>
-    <v-col v-for="product in products" :key="product.id">
+    <v-col
+      v-for="product in products"
+      :key="product.id"
+      cols="12"
+      md="4"
+      lg="3"
+    >
       <v-card
         rounded="xl"
         border="sm black"
-        class="pa-4 cursor-pointer position-relative"
+        class="pa-4 cursor-pointer position-relative h-100"
         elevation="0"
         @click="selectProduct(product.id)"
       >
-        <v-checkbox
-          v-model="selectedProductId"
-          :value="product.id"
-          class="checkbox"
-          color="primary"
-          density="compact"
-          hide-details
-        />
-        <v-img :src="product.image_url" max-width="100%" />
-        <p class="text-light-gray-2 text-14 font-weight-bold">
-          {{ product.name }}
-        </p>
+        <div class="d-flex flex-column h-100 justify-space-between">
+          <v-checkbox
+            v-model="selectedProductId"
+            :value="product.id"
+            class="checkbox"
+            color="primary"
+            density="compact"
+            hide-details
+          />
+          <v-img :src="product.image_url" max-width="100%" />
+          <p class="text-light-gray-2 text-14 font-weight-bold">
+            {{ product.name }}
+          </p>
+        </div>
       </v-card>
+    </v-col>
+    <v-col v-if="!products.length" cols="12">
+      <h3 class="text-center">
+        {{ $t("operations.no_products") }}
+      </h3>
     </v-col>
   </v-row>
 </template>

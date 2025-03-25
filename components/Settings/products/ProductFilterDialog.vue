@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Category } from "~/types/settings";
-
+const emit = defineEmits(["filter"]);
 const { t } = useI18n();
 
 defineProps<{
@@ -24,6 +24,7 @@ const showDialog = () => {
 };
 const closeDialog = () => {
   dialog.value = false;
+  emit("filter", selectedCategories.value);
 };
 
 defineExpose({

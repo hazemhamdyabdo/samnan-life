@@ -17,7 +17,7 @@ await fetchLandingContent();
 
 <template>
   <div>
-    <v-container fluid :class="`py-4 ${mobile ? 'px-0 mx-2' : ''} wrapper`">
+    <v-container fluid class="wrapper">
       <v-main class="d-flex flex-column ga-16">
         <!-- Navigation -->
         <nav class="d-flex align-center justify-space-between">
@@ -153,13 +153,7 @@ await fetchLandingContent();
             class="mx-auto d-flex align-center justify-space-between"
             :class="mobile ? 'ga-16' : ''"
           >
-            <v-col
-              lg="3"
-              md="12"
-              sm="12"
-              xs="12"
-              class="text-start d-flex flex-column ga-16"
-            >
+            <v-col md="3" cols="12" class="text-start d-flex flex-column ga-16">
               <div>
                 <h3
                   class="text-gray-800 font-weight-meduim"
@@ -194,23 +188,15 @@ await fetchLandingContent();
               </div>
             </v-col>
 
-            <v-col
-              xl="4"
-              lg="6"
-              :style="` ${
-                mobile ? ' margin-right: -2rem; padding: 0; width: 90%; ' : ''
-              }`"
-            >
-              <img src="/icons/app-capabillities.svg" alt=" app image" />
+            <v-col cols="12" xl="4" md="4" class="d-flex justify-center">
+              <v-img
+                max-width="300"
+                src="/icons/app-capabillities.svg"
+                alt=" app image"
+              />
             </v-col>
 
-            <v-col
-              lg="3"
-              md="12"
-              sm="12"
-              xs="12"
-              class="text-start d-flex flex-column ga-16"
-            >
+            <v-col md="3" cols="12" class="text-start d-flex flex-column ga-16">
               <div>
                 <h3
                   class="text-gray-800 font-weight-meduim"
@@ -249,13 +235,7 @@ await fetchLandingContent();
           id="store"
           class="d-flex justify-space-between align-center text-start ga-16"
         >
-          <v-col
-            lg="6"
-            md="12"
-            sm="12"
-            xs="12"
-            class="d-flex flex-column ga-4 w-50"
-          >
+          <v-col md="5" cols="12" class="d-flex flex-column ga-4">
             <div>
               <v-chip
                 pill
@@ -285,21 +265,12 @@ await fetchLandingContent();
             </div>
           </v-col>
 
-          <v-col cols="12" md="5" sm="12">
+          <v-col md="5" cols="12" class="d-flex justify-center">
             <v-img
               src="/icons/mobile-overview.svg"
               alt="mobile overview image"
               aspect-ratio="16/9"
             />
-            <!-- <v-img
-            :src="landingContent.store_image_url"
-            alt="mobile overview image"
-            aspect-ratio="16/9"
-            max-width="400px"
-            class="w-full"
-            lazy-loading
-          lazy-src="https://placehold.co/600x400"
-          /> -->
           </v-col>
         </v-row>
 
@@ -325,7 +296,6 @@ await fetchLandingContent();
             </p>
           </v-col>
           <v-col cols="12" class="d-flex justify-center align-center">
-            <!-- <v-img src="/icons/sa-map.svg" alt="sa map image" class="w-100" /> -->
             <v-img
               :src="landingContent.map_image_url"
               alt="sa map image"

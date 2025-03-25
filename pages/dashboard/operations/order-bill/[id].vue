@@ -1,6 +1,6 @@
 <script setup>
 const { getSingleOrder, setPayMethod } = useMaintainStore();
-const { confirmCash } = useTechnicianStore();
+const { confirmCash, confirmOnline } = useTechnicianStore();
 const { t, locale } = useI18n();
 const { formatToDateString } = useDateTimeFormate(locale.value);
 const showModal = ref(false);
@@ -9,6 +9,7 @@ const confirmCashLoading = ref(false);
 const confirmCashModal = ref(false);
 const cashNote = ref("");
 const order = ref(null);
+const showOnlineModal = ref(false);
 
 const { data, error, refresh } = await getSingleOrder(useRoute().params.id);
 order.value = data.value.data;
@@ -49,6 +50,17 @@ const confirmCashPay = async () => {
     );
   } else {
     alrt("Geolocation is not supported by this browser.");
+  }
+};
+
+const onlinePayLoading = ref(false);
+const confirmOnlinePay = async () => {
+  onlinePayLoading.value = true;
+  const { data, status } = await confirmOnline(useRoute().params.id);
+  onlinePayLoading.value = false;
+  if (status.value === "success") {
+    showOnlineModal.value = false;
+    window.location.href = data.value.payment_url;
   }
 };
 </script>
@@ -175,7 +187,7 @@ const confirmCashPay = async () => {
               </v-btn>
 
               <v-btn
-                :to="localePath('/dashboard/operations/online-pay')"
+                @click="showOnlineModal = true"
                 color="pri-light"
                 class="text-primary flex-grow-1 text-14"
               >
@@ -208,6 +220,15 @@ const confirmCashPay = async () => {
       v-model:dialog="showModal"
       :isLoading="submitLoading"
       @submit="submitPayMethod"
+    ></app-modal>
+
+    <app-modal
+      :title="$t('operations.pay_online')"
+      :text="$t('operations.are_you_sure_pay_online')"
+      icon="money-tick"
+      v-model:dialog="showOnlineModal"
+      :isLoading="onlinePayLoading"
+      @submit="confirmOnlinePay"
     ></app-modal>
 
     <app-modal

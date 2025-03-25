@@ -31,6 +31,23 @@ const {
 
 const { data, refresh, status } = await getAllOrders();
 
+const slide = ref(1);
+
+// auto change slide
+onMounted(() => {
+  setInterval(() => {
+    if (slide.value < slides.length - 1) {
+      slide.value += 1;
+    } else {
+      slide.value = 0;
+    }
+  }, 2000);
+});
+
+const openSlide = (slide) => {
+  window.open(slide.link, "_blank");
+};
+
 watch(
   () => data.value,
   () => {
@@ -43,7 +60,7 @@ watch(
   <div v-if="status != 'pending'">
     <header>
       <!-- <nuxt-link to="/dashboard/order/176">sddd</nuxt-link> -->
-      <v-carousel min-height="100%" hide-delimiter-background>
+      <v-carousel v-model="slide" min-height="100%" hide-delimiter-background>
         <template v-slot:prev="{ props }">
           <div
             class="pa-2 rounded-circle"
@@ -63,6 +80,7 @@ watch(
           </div>
         </template>
         <v-carousel-item
+          @click="openSlide(slide)"
           v-for="slide in slides"
           :key="slide.id"
           :src="slide.image_url"
