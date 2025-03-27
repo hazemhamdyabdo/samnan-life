@@ -395,10 +395,27 @@ await fetchLandingContent();
       <v-container fluid class="py-4 d-flex align-center justify-space-between">
         <p class="text-secondary">{{ $t("landing.rights") }}</p>
         <div class="d-flex align-center ga-4">
-          <AppSvgIcon name="facebook" />
-          <AppSvgIcon name="linkedin" />
-          <AppSvgIcon name="twitter" />
-          <AppSvgIcon name="instagram" />
+          <NuxtLink
+            v-for="link in landingContent.social"
+            :to="link.url"
+            external
+            target="_blank"
+          >
+            <AppSvgIcon
+              :name="link.platform"
+              :filled="false"
+              style="color: #a7a7a7"
+            />
+          </NuxtLink>
+          <!-- <NuxtLink>
+            <AppSvgIcon name="linkedin" />
+          </NuxtLink>
+          <NuxtLink>
+            <AppSvgIcon name="x-logo" />
+          </NuxtLink>
+          <NuxtLink>
+            <AppSvgIcon name="instagram" />
+          </NuxtLink> -->
         </div>
       </v-container>
     </div>
